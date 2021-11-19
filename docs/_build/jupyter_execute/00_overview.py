@@ -3,7 +3,7 @@
 
 # # Overview
 
-# Python is great for many reasons. For example, it is: 
+# Python is great for many reasons including: 
 # - High−level.
 # - Clean, readable, and efficient.
 # - Easy and fun to learn.
@@ -18,16 +18,16 @@
 # - Huge number of users.
 # - etc...
 # 
-# However, sometimes it can be slow. Often this isn't an issue. Though when it is, there are ways to speed it up.  
+# However, sometimes it can be slow. Often this isn't an issue. Though when it is, it's useful to know how to speed it up.  
 # 
 # That's what this workshop is all about.
 
 # ## Hang on, don't optimise too early
-# - Trade-offs e.g. complexity, speed, memory, disk, readability, time, effort, etc.
-#     - Check that code is correct (tested, documented).
-#     - Is optimisation needed?
-#     - If yes, optimise code and data.
-#     - If more needed, parallelise.  
+# There are trade-offs when you pursue faster code, for example, it may become more complex, use more memory, become less readable, etc. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:
+# - The code is correct (have you tested it?, does it have documentation?).  
+# - Is optimisation really needed?
+#     - If yes, then optimise code and data.
+#     - If still not enough, then parallelise.  
 # 
 # *Plot idea from [Dask-ML](https://ml.dask.org/).*
 
@@ -73,13 +73,29 @@ with plt.xkcd():
 
 # ## How fast could it go?
 # 
-# - Time-space complexity
-#   - [Big O notation](https://www.bigocheatsheet.com/) where O is the order of operations, O(...).
-#   - Ignores constants and takes the largest order, so O(2n<sup>2</sup> + 3n) would be O(n<sup>2</sup>).
-#   - Important for large number of elements, N.
-#   - Typical case.
-#   - Constant time means per machine operation.
-#   
+# It's useful to know how code speed is measured. Miles per hour? Bits per second?
+# 
+# The speed of code doesn't have specific units like that. For one reason, this is because computers vary a lot.
+# 
+# Instead, it's normally measured in *order of operations (O) per element (n)*.  
+# - This means how many operations are needed as the number the elements gets bigger.  
+# - The order of operations is called [Big O notation](https://www.bigocheatsheet.com/).  
+# - The operations is given as the largest order of a polynomial, ignoring any constants.  
+#     - For example, O(2n<sup>2</sup> + 3n) would just become O(n<sup>2</sup>).  
+# - This becomes important when the number of elements is large.  
+# - It's normally measured for a typical case.  
+# - Constant time means per machine operation.  
+# 
+# A nice example from [Ned Batchelder's](https://www.youtube.com/watch?v=duvZ-2UK0fc) PyCon talk is for counting beans in a jar.
+# - *Method 1*: If you count each bean one by one as you pick it out of the jar, then this would be an O(n) time operation. So for a new jar of beans, you'll have to repeat this operation for *every* bean in the jar. Think of making tally marks for each one.  
+# - *Method 2*: You have a label on the front of the jar, which tells you how many beans are in it. For this method, no matter how many beans are in there, the time of the operation stays the same at O(1).
+
+# ![counting_beans.png](images/counting_beans.png)  
+
+# Memory is measured in the same way.  
+# 
+# Both of these two measurements together represent the *time-space complexity* of your code.  
+# 
 # *Plot idea from [Big O Cheat Sheet](https://www.bigocheatsheet.com/)*.  
 
 # In[2]:

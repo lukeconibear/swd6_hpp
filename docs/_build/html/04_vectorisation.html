@@ -132,6 +132,16 @@
      Compilers
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_parallelisation.html">
+     Parallelisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_GPUs.html">
+     GPUs
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -274,7 +284,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>152 ms ± 3.91 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>154 ms ± 3.34 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -289,7 +299,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>149 ms ± 4 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>152 ms ± 5.19 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -335,7 +345,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>181 ms ± 10 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>182 ms ± 3.21 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -348,7 +358,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>864 µs ± 106 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>911 µs ± 25.1 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -744,10 +754,10 @@ array([[ 0,  1,  2],
        [30, 31, 32]])
 Coordinates:
   * col      (col) int64 0 10 20 30
-  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-1ba37527-6b6a-40c9-9abf-b876aa561aa8' class='xr-array-in' type='checkbox' checked><label for='section-1ba37527-6b6a-40c9-9abf-b876aa561aa8' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
+  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-3d733b2f-4835-45ff-82ce-f8b43cfd4846' class='xr-array-in' type='checkbox' checked><label for='section-3d733b2f-4835-45ff-82ce-f8b43cfd4846' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
        [10, 11, 12],
        [20, 21, 22],
-       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-a3c0f39a-5a6f-46d7-b649-566794869e5d' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a3c0f39a-5a6f-46d7-b649-566794869e5d' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-da62a4b2-e884-4c24-846d-c70352ac00e1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-da62a4b2-e884-4c24-846d-c70352ac00e1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8d671f95-4a59-4f40-b982-073fb51af107' class='xr-var-data-in' type='checkbox'><label for='data-8d671f95-4a59-4f40-b982-073fb51af107' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-8d1b2492-44b8-4e22-ae1d-07e10aa5ea1b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8d1b2492-44b8-4e22-ae1d-07e10aa5ea1b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-77c7b02b-8053-483a-b3f3-f5c06568d9dd' class='xr-var-data-in' type='checkbox'><label for='data-77c7b02b-8053-483a-b3f3-f5c06568d9dd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-39fd6e8c-aa1b-44fb-822c-731cda3fb885' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-39fd6e8c-aa1b-44fb-822c-731cda3fb885' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-8625fe2d-2db5-4a12-921c-703faa0f6cee' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8625fe2d-2db5-4a12-921c-703faa0f6cee' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-01b40d7f-dbc4-43a2-ac8a-e503698cfed4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-01b40d7f-dbc4-43a2-ac8a-e503698cfed4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b0878b63-5399-42b2-ba88-5de5886175da' class='xr-var-data-in' type='checkbox'><label for='data-b0878b63-5399-42b2-ba88-5de5886175da' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-5684366e-b637-4cba-9f4c-f70a13ae0ccf' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5684366e-b637-4cba-9f4c-f70a13ae0ccf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2338c882-bdc6-4926-b58b-3b2df3ff057c' class='xr-var-data-in' type='checkbox'><label for='data-2338c882-bdc6-4926-b58b-3b2df3ff057c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a2bef395-0993-455b-b0fa-fedf15baa8a1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a2bef395-0993-455b-b0fa-fedf15baa8a1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
 </div>

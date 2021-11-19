@@ -7,7 +7,7 @@ Click [here](https://uolr3.leeds.ac.uk/temcatsearch(bD1lbiZjPTUwMA==)/courses.ht
 ## Content
 Over the past few years, Python and the wider Python ecosystem have become invaluable tools in scientific computing and data analytics. As Python is (for the most part) an interpreted language there are complaints that Python code can be quite slow to execute. In this hands-on workshop you will have the opportunity discover and use a set of tools and techniques that can be used to improve the execution speed of your Python code. The workshop will introduce a number of ways to both measure the efficiency of your code and improve it’s speed of execution by introducing strategies for fast and scalable computation with Python.
 
-This workshops tocuhes on:
+This workshop includes:
 - Optimisation
 - Profiling
 - Built-in functions
@@ -25,7 +25,7 @@ We recommend that attendees have a working knowledge of the Unix shell (although
 
 ## Frequency
 This workshop usually runs once each academic year.  
-If you would like a bespoke version of this course run in your department then please [contact us](https://bit.ly/arc-help).  
+If you would like a bespoke version of this course run in your department, then please [contact us](https://bit.ly/arc-help).  
 
 ## Suitability
 Research postgraduate students and above; teaching and lecturing staff.

@@ -271,7 +271,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Python is great for many reasons. For example, it is:</p>
+<p>Python is great for many reasons including:</p>
 <ul class="simple">
 <li><p>High−level.</p></li>
 <li><p>Clean, readable, and efficient.</p></li>
@@ -287,17 +287,17 @@
 <li><p>Huge number of users.</p></li>
 <li><p>etc…</p></li>
 </ul>
-<p>However, sometimes it can be slow. Often this isn’t an issue. Though when it is, there are ways to speed it up.</p>
+<p>However, sometimes it can be slow. Often this isn’t an issue. Though when it is, it’s useful to know how to speed it up.</p>
 <p>That’s what this workshop is all about.</p>
 <div class="section" id="hang-on-don-t-optimise-too-early">
 <h2>Hang on, don’t optimise too early<a class="headerlink" href="#hang-on-don-t-optimise-too-early" title="Permalink to this headline">¶</a></h2>
+<p>There are trade-offs when you pursue faster code, for example, it may become more complex, use more memory, become less readable, etc. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:</p>
 <ul class="simple">
-<li><p>Trade-offs e.g. complexity, speed, memory, disk, readability, time, effort, etc.</p>
+<li><p>The code is correct (have you tested it?, does it have documentation?).</p></li>
+<li><p>Is optimisation really needed?</p>
 <ul>
-<li><p>Check that code is correct (tested, documented).</p></li>
-<li><p>Is optimisation needed?</p></li>
-<li><p>If yes, optimise code and data.</p></li>
-<li><p>If more needed, parallelise.</p></li>
+<li><p>If yes, then optimise code and data.</p></li>
+<li><p>If still not enough, then parallelise.</p></li>
 </ul>
 </li>
 </ul>
@@ -310,21 +310,33 @@
 </div>
 <div class="section" id="how-fast-could-it-go">
 <h2>How fast could it go?<a class="headerlink" href="#how-fast-could-it-go" title="Permalink to this headline">¶</a></h2>
+<p>It’s useful to know how code speed is measured. Miles per hour? Bits per second?</p>
+<p>The speed of code doesn’t have specific units like that. For one reason, this is because computers vary a lot.</p>
+<p>Instead, it’s normally measured in <em>order of operations (O) per element (n)</em>.</p>
 <ul class="simple">
-<li><p>Time-space complexity</p>
+<li><p>This means how many operations are needed as the number the elements gets bigger.</p></li>
+<li><p>The order of operations is called <a class="reference external" href="https://www.bigocheatsheet.com/">Big O notation</a>.</p></li>
+<li><p>The operations is given as the largest order of a polynomial, ignoring any constants.</p>
 <ul>
-<li><p><a class="reference external" href="https://www.bigocheatsheet.com/">Big O notation</a> where O is the order of operations, O(…).</p></li>
-<li><p>Ignores constants and takes the largest order, so O(2n<sup>2</sup> + 3n) would be O(n<sup>2</sup>).</p></li>
-<li><p>Important for large number of elements, N.</p></li>
-<li><p>Typical case.</p></li>
-<li><p>Constant time means per machine operation.</p></li>
+<li><p>For example, O(2n<sup>2</sup> + 3n) would just become O(n<sup>2</sup>).</p></li>
 </ul>
 </li>
+<li><p>This becomes important when the number of elements is large.</p></li>
+<li><p>It’s normally measured for a typical case.</p></li>
+<li><p>Constant time means per machine operation.</p></li>
 </ul>
+<p>A nice example from <a class="reference external" href="https://www.youtube.com/watch?v=duvZ-2UK0fc">Ned Batchelder’s</a> PyCon talk is for counting beans in a jar.</p>
+<ul class="simple">
+<li><p><em>Method 1</em>: If you count each bean one by one as you pick it out of the jar, then this would be an O(n) time operation. So for a new jar of beans, you’ll have to repeat this operation for <em>every</em> bean in the jar. Think of making tally marks for each one.</p></li>
+<li><p><em>Method 2</em>: You have a label on the front of the jar, which tells you how many beans are in it. For this method, no matter how many beans are in there, the time of the operation stays the same at O(1).</p></li>
+</ul>
+<p><img alt="counting_beans.png" src="_images/counting_beans.png" /></p>
+<p>Memory is measured in the same way.</p>
+<p>Both of these two measurements together represent the <em>time-space complexity</em> of your code.</p>
 <p><em>Plot idea from <a class="reference external" href="https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></em>.</p>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/00_overview_5_0.png" src="_images/00_overview_5_0.png" />
+<img alt="_images/00_overview_7_0.png" src="_images/00_overview_7_0.png" />
 </div>
 </div>
 </div>
