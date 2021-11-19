@@ -132,6 +132,16 @@
      Compilers
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_parallelisation.html">
+     Parallelisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_GPUs.html">
+     GPUs
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -263,11 +273,21 @@
      Lazy loading and execution
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#suitable-data-types-for-parallel-computing">
+     Suitable data types for parallel computing
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#algorithms">
    Algorithms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-information">
+   Further information
   </a>
  </li>
 </ul>
@@ -304,7 +324,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.4 µs ± 11.9 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60.5 µs ± 2.03 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -319,7 +339,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.9 µs ± 1.84 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.5 µs ± 2.77 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -360,7 +380,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.06 ms ± 47.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.02 ms ± 27.4 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -376,7 +396,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>214 ns ± 5.69 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>223 ns ± 10.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
 </pre></div>
 </div>
 </div>
@@ -419,7 +439,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.75 ms ± 51.4 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.67 ms ± 42.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -443,7 +463,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.85 µs ± 110 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.82 µs ± 207 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -464,7 +484,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_184908</span><span class="o">/</span><span class="mf">2909400882.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_179338</span><span class="o">/</span><span class="mf">2909400882.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">xr</span><span class="o">.</span><span class="n">tutorial</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;xr&#39; is not defined
@@ -472,6 +492,17 @@
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="suitable-data-types-for-parallel-computing">
+<h3>Suitable data types for parallel computing<a class="headerlink" href="#suitable-data-types-for-parallel-computing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://examples.dask.org/dataframes/01-data-access.html#Write-to-Parquet">Parquet</a> creates efficient tabular data (e.g. dataframes), useful for parallel computing.</p>
+<ul>
+<li><p>Accessed via <a class="reference external" href="https://arrow.apache.org/docs/python/install.html">pyarrow</a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a> creates compressed, chunked, N-dimensional arrays, designed for use in parallel computing.</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="algorithms">
@@ -493,6 +524,11 @@
 </ul>
 </li>
 </ul>
+</div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com">LeetCode</a><br />
+<a class="reference external" href="https://www.algoexpert.io/product">AlgoExpert</a></p>
 </div>
 </div>
 

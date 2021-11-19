@@ -24,7 +24,7 @@ nums = np.arange(1_000_000)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_189910/3280131263.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_181293/3280131263.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;32mfrom[0m [0mnumba[0m [0;32mimport[0m [0mnjit[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;34m[0m[0m
 [0;32m----> 3[0;31m [0mnums[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marange[0m[0;34m([0m[0;36m1_000_000[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m

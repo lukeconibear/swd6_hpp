@@ -14,11 +14,13 @@
 #     - Enables optimisations at run time, especially for numerical tasks with repitition and loops.
 #     - Replaces CPython.
 #     - Faster, though overheads for start-up and memory.
+#     - Helpful when want to speed up numerical opterations in all of code.  
 # - [Numba](http://numba.pydata.org/)
 #   - *Uses JIT compiler on functions.*
 #     - Converts to fast machine code (LLVM).
 #     - Uses decorators around functions.
 #     - Use with the default CPython.
+#     - Helpful when want to speed up numerical opterations in specific functions.  
 #     - Examples for [NumPy](https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html) and [Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#using-numba).
 
 # In[1]:
@@ -66,6 +68,7 @@ get_ipython().run_line_magic('timeit', 'super_function(nums)')
 #   - *Compiles to statically typed C/C++*.
 #   - Use for any amount of code.
 #   - Use with the default CPython.
+#   - Helpful when need static typing.  
 #   - Examples [not using IPython](https://cython.readthedocs.io/en/latest/src/quickstart/build.html#building-a-cython-module-using-setuptools), [NumPy](https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html), [Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html) (example below).
 
 # In[ ]:
@@ -136,4 +139,19 @@ get_ipython().run_cell_magic('cython', '', 'cdef double f(double x) except? -2: 
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
+
+
+# ## Further information
+# [Why is Python slow?](https://youtu.be/I4nkgJdVZFA), Anthony Shaw, PyCon 2020. [CPython Internals](https://realpython.com/products/cpython-internals-book/).
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 

@@ -8,8 +8,11 @@
 # Parallelisation divides a large problem into many smaller ones and solves them *simultaneously*.
 # - *Divides up the time/space complexity across workers.*
 # - Tasks centrally managed by a scheduler.
-# - Multi-processing (cores) - useful for compute-bound problems.
-# - Multi-threading (parts of processes) - useful for memory-bound problems.
+# - Multi-processing (cores)
+#     - Useful for compute-bound problems.
+#     - Don't need to worry about the GIL.  
+# - Multi-threading (parts of processes)
+#     - Useful for memory-bound problems.
 
 # ## Parallelising a Python?
 # 
@@ -20,7 +23,241 @@
 # 
 # These options work well for the CPU cores on your machine, though not really beyond that.  
 
-# ## Moving over to HPC
+# 
+# 
+# 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ## [Dask](https://docs.dask.org/en/latest/)
+# 
+# - Great features.
+# - Helpful documentation.
+# - Familiar API.
+# - Under the hood for many libraries e.g. [xarray](http://xarray.pydata.org/en/stable/dask.html), [iris](https://scitools.org.uk/iris/docs/v2.4.0/userguide/real_and_lazy_data.html), [scikit-learn](https://ml.dask.org/).
+
+# ### [Single machine](https://docs.dask.org/en/latest/setup/single-distributed.html)
+# 
+# See the excellent video from Dask creator, Matthew Rocklin, below.
+
+# In[1]:
+
+
+from IPython.display import IFrame
+IFrame(src='https://www.youtube.com/embed/ods97a5Pzw0', width='560', height='315')
+
+
+# In[2]:
+
+
+from dask.distributed import Client
+client = Client()
+client 
+
+
+# If want multiple threads, then could use keyword arguments in Client instance:
+# ```python
+# client = Client(processes=False, threads_per_worker=4, n_workers=1)
+# ```
+
+# Remember, always need to close down the client at the end:
+# ```python
+# client.close()
+# ```
+
+# ### Dask behind the scenes
+
+# In[3]:
+
+
+ds = xr.open_dataset(
+    '/nfs/a68/shared/earlacoa/wrfout_2015_PM_2_DRY_0.25deg.nc',
+    chunks={'time': 'auto'} # dask chunks
+)
+
+
+# In[ ]:
+
+
+ds.nbytes * (2 ** -30)
+
+
+# In[ ]:
+
+
+get_ipython().run_line_magic('time', 'ds_mean = ds.mean()')
+
+
+# In[ ]:
+
+
+get_ipython().run_line_magic('time', 'ds_mean.compute()')
+
+
+# In[3]:
+
+
+ds.close()
+client.close()
+
+
+# ### [dask.array](https://examples.dask.org/array.html) (NumPy)
+# See the excellent video from Dask creator, Matthew Rocklin, below.
+
+# In[5]:
+
+
+IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
+
+
+# In[ ]:
+
+
+import dask.array as da
+
+
+# In[ ]:
+
+
+my_array = da.random.random(
+    (50_000, 50_000),
+    chunks=(5_000, 5_000) # dask chunks
+)
+result = my_array + my_array.T
+result
+
+
+# In[ ]:
+
+
+result.compute()
+
+
+# In[ ]:
+
+
+client.close()
+
+
+# ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
+# See the excellent video from Dask creator, Matthew Rocklin, below.
+
+# In[6]:
+
+
+IFrame(src='https://www.youtube.com/embed/6qwlDc959b0', width='560', height='315')
+
+
+# In[ ]:
+
+
+import dask
+import dask.dataframe as dd
+
+
+# In[ ]:
+
+
+df = dask.datasets.timeseries()
+df
+
+
+# In[ ]:
+
+
+type(df)
+
+
+# In[ ]:
+
+
+result = df.groupby('name').x.std()
+result
+
+
+# In[ ]:
+
+
+result.visualize()
+
+
+# In[ ]:
+
+
+result_computed = result.compute()
+
+
+# In[ ]:
+
+
+type(result_computed)
+
+
+# In[ ]:
+
+
+client.close()
+
+
+# ### [dask.bag](https://examples.dask.org/bag.html)
+# Iterate over a bag of independent objects (embarrassingly parallel).
+
+# In[ ]:
+
+
+import numpy as np
+import dask.bag as db
+
+
+# In[ ]:
+
+
+nums = np.random.randint(low=0, high=100, size=(5_000_000))
+nums
+
+
+# In[ ]:
+
+
+def weird_function(nums):
+    return chr(nums)
+
+
+# In[ ]:
+
+
+bag = db.from_sequence(nums)
+bag = bag.map(weird_function)
+bag.visualize()
+
+
+# In[ ]:
+
+
+result = bag.compute()
+
+
+# In[ ]:
+
+
+cluster.close()
+
+
+# ### [Dask on HPC](https://docs.dask.org/en/latest/setup/hpc.html)
+# 
+# - Non-interactive
+# - Create/edit the `dask_on_hpc.py` file.
+# - Submit to the queue using `qsub dask_on_hpc.bash`.
 # 
 # If need to share memory across chunks:  
 # - Use [shared memory](https://docs.dask.org/en/latest/shared.html) (commonly OpenMP, Open Multi-Processing).
@@ -30,11 +267,112 @@
 # - Use [message passing interface, MPI](https://docs.dask.org/en/latest/setup/hpc.html?highlight=mpi#using-mpi) (commonly OpenMPI).
 # - `-pe ib np` on ARC4
 
+# ### [Interactive Jupyter/Dask on HPC](https://pangeo.io/setup_guides/hpc.html)
+# See the excellent video from Dask creator, Matthew Rocklin, below.
+# - Create or edit the `~/.config/dask/jobqueue.yaml` file within this repository.
+# - Check the `~/.config/dask/distributed.yaml` file with this repository.
+
+# In[8]:
+
+
+IFrame(src='https://www.youtube.com/embed/FXsgmwpRExM', width='560', height='315')
+
+
+# In[ ]:
+
+
+# in a terminal
+
+# log onto arc4
+ssh ${USER}@arc4.leeds.ac.uk
+
+# start an interactive session on a compute node on arc4
+qlogin -l h_rt=04:00:00 -l h_vmem=12G
+
+# activate your python environment
+conda activate my_python_environment
+
+# echo back the ssh command to connect to this compute node
+echo "ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk"
+
+# launch a jupyter lab session on this compute node
+jupyter lab --no-browser --ip=`hostname` --port=2222
+
+
+# In[ ]:
+
+
+# in a local terminal
+# ssh into the compute node
+ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk
+
+
+# In[ ]:
+
+
+# open up a local browser (e.g. chrome)
+# go to the jupyter lab session by pasting into the url bar
+localhost:2222
+    
+# can also load the dask dashboard in the browser at localhost:2727
+
+
+# In[ ]:
+
+
+# now the jupyter code
+from dask_jobqueue import SGECluster
+from dask.distributed import Client
+
+cluster = Client(
+    walltime='01:00:00',
+    memory='4 G',
+    resource_spec='h_vmem=4G',
+    scheduler_options={
+        'dashboard_address': ':2727',
+    },
+)
+
+client = Client(cluster)
+
+
+# In[ ]:
+
+
+cluster.scale(jobs=20)
+# cluster.adapt(minimum=0, maximum=20)
+
+
+# In[ ]:
+
+
+client.close()
+cluster.close()
+
+
+# ## [Ray](https://www.ray.io/)
+# Ray will automatically detect the available GPUs and CPUs on the machine.
+# - Can also [specify required resources](https://docs.ray.io/en/latest/walkthrough.html#specifying-required-resources).  
+# 
+# Remote function
+# - Convert regular Python function to Remote function by adding `@ray.remote` decorator  
+# - Then use `.remote()` method  
+# - Retrieved with `ray.get(object)` 
+# 
+# tasks, actors, ML
+
+# ## [Modin](https://modin.readthedocs.io/en/latest/)
+# ...
+
 # In[ ]:
 
 
 
 
+
+# ## Further information
+# [Concurrency](https://youtu.be/18B1pznaU1o) can also run different tasks together, but work is not done at the same time.  
+# [Asynchronous](https://youtu.be/iG6fr81xHKA) (multi-threading), useful for massive scaling, threads controlled explicitly.  
 
 # In[ ]:
 

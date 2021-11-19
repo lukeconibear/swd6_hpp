@@ -51,6 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parallelisation" href="06_parallelisation.html" />
     <link rel="prev" title="Vectorisation" href="04_vectorisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -129,6 +130,16 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Compilers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_parallelisation.html">
+     Parallelisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07_GPUs.html">
+     GPUs
     </a>
    </li>
   </ul>
@@ -232,6 +243,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-information">
+   Further information
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -269,6 +293,7 @@
 <li><p>Enables optimisations at run time, especially for numerical tasks with repitition and loops.</p></li>
 <li><p>Replaces CPython.</p></li>
 <li><p>Faster, though overheads for start-up and memory.</p></li>
+<li><p>Helpful when want to speed up numerical opterations in all of code.</p></li>
 </ul>
 </li>
 </ul>
@@ -280,6 +305,7 @@
 <li><p>Converts to fast machine code (LLVM).</p></li>
 <li><p>Uses decorators around functions.</p></li>
 <li><p>Use with the default CPython.</p></li>
+<li><p>Helpful when want to speed up numerical opterations in specific functions.</p></li>
 <li><p>Examples for <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#using-numba">Pandas</a>.</p></li>
 </ul>
 </li>
@@ -297,7 +323,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_189910</span><span class="o">/</span><span class="mf">3280131263.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_181293</span><span class="o">/</span><span class="mf">3280131263.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>
@@ -350,6 +376,7 @@
 <li><p><em>Compiles to statically typed C/C++</em>.</p></li>
 <li><p>Use for any amount of code.</p></li>
 <li><p>Use with the default CPython.</p></li>
+<li><p>Helpful when need static typing.</p></li>
 <li><p>Examples <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/quickstart/build.html#building-a-cython-module-using-setuptools">not using IPython</a>, <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html">NumPy</a>, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html">Pandas</a> (example below).</p></li>
 </ul>
 </li>
@@ -457,6 +484,10 @@ cpdef double integrate_f(double a, double b, int N): # adding types
 </div>
 </div>
 </div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://youtu.be/I4nkgJdVZFA">Why is Python slow?</a>, Anthony Shaw, PyCon 2020. <a class="reference external" href="https://realpython.com/products/cpython-internals-book/">CPython Internals</a>.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -490,6 +521,13 @@ cpdef double integrate_f(double a, double b, int N): # adding types
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Vectorisation</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="06_parallelisation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parallelisation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
         

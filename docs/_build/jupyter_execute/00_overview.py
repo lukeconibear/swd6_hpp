@@ -3,6 +3,25 @@
 
 # # Overview
 
+# Python is great for many reasons. For example, it is: 
+# - High−level.
+# - Clean, readable, and efficient.
+# - Easy and fun to learn.
+# - Dynamic.
+# - Fast to write and test code.
+# - Less code.
+# - Flexible.
+# - Interactive.
+# - Great support
+# - Open source.
+# - Vast range of libraries.
+# - Huge number of users.
+# - etc...
+# 
+# However, sometimes it can be slow. Often this isn't an issue. Though when it is, there are ways to speed it up.  
+# 
+# That's what this workshop is all about.
+
 # ## Hang on, don't optimise too early
 # - Trade-offs e.g. complexity, speed, memory, disk, readability, time, effort, etc.
 #     - Check that code is correct (tested, documented).

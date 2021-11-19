@@ -112,6 +112,11 @@ get_ipython().run_line_magic('timeit', 'fibonacci_with_caching(20, cache={0: 0, 
 xr.tutorial.open_dataset('air_temperature')
 
 
+# ### Suitable data types for parallel computing
+# - [Parquet](https://examples.dask.org/dataframes/01-data-access.html#Write-to-Parquet) creates efficient tabular data (e.g. dataframes), useful for parallel computing.
+#   - Accessed via [pyarrow](https://arrow.apache.org/docs/python/install.html).
+# - [Zarr](https://zarr.readthedocs.io/en/stable/) creates compressed, chunked, N-dimensional arrays, designed for use in parallel computing.
+
 # ## Algorithms
 # - The instructions to solve the problem.
 #   - Free MIT course on '*Introduction to algorithms*', [video lectures](https://youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb).
@@ -119,6 +124,10 @@ xr.tutorial.open_dataset('air_temperature')
 #   - [Minimal examples of data structures and algorithms in Python](https://github.com/keon/algorithms).
 #   - e.g. [Find multiple strings in a text](https://pythonspeed.com/articles/do-you-need-cluster-or-multiprocessing/).
 #     - [Aho-Corasick algorithm](https://github.com/WojciechMula/pyahocorasick), 25x faster than using regex naively.
+
+# ## Further information
+# [LeetCode](https://leetcode.com)  
+# [AlgoExpert](https://www.algoexpert.io/product)
 
 # In[ ]:
 

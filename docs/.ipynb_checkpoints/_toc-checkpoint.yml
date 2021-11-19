@@ -11,4 +11,6 @@ sections:
   - file: 03_data_structures_and_algorithms
   - file: 04_vectorisation
   - file: 05_compilers
+  - file: 06_parallelisation
+  - file: 07_GPUs
   

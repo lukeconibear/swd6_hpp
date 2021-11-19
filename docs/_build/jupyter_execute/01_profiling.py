@@ -2,37 +2,38 @@
 # coding: utf-8
 
 # # Profiling
-
+# 
 # [Profiling](https://jakevdp.github.io/PythonDataScienceHandbook/01.07-timing-and-profiling.html) analyses your in terms of speed and/or memory. This can help identify where the bottlenecks are and how much potential there is for improvement.
+
+# ## [line_profiler](https://github.com/pyutils/line_profiler)
 # 
+# - [IPython magic](https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html) (Jupyter Lab)
+#   - Line: `%timeit`
+#   - Cell: `%%timeit`
+#   - If `pip install line_profiler`:
+#     - First load module: `%load_ext line_profiler`
+#     - Scripts: `%prun`
+#     - Line-by-line: `%lprun`
+#       - `@profile` decorator around the function
+
+# ## [memory_profiler](https://github.com/pythonprofilers/memory_profiler)
 # 
-# Speed
-#   - [`line_profiler`](https://github.com/pyutils/line_profiler)
-#     - [IPython magic](https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html) (Jupyter Lab)
-#       - Line: `%timeit`
-#       - Cell: `%%timeit`
-#       - If `pip install line_profiler`:
-#         - First load module: `%load_ext line_profiler`
-#         - Scripts: `%prun`
-#         - Line-by-line: `%lprun`
-#           - `@profile` decorator around the function
-#           
-#           
-# Memory
-#   - [`memory_profiler`](https://github.com/pythonprofilers/memory_profiler)
-#     - If `pip install memory_profiler`:
-#     - First load module:
-#       - `%load_ext memory_profiler`
-#       - Line: `%memit`
-#       - Cell: `%%memit`
-#       - Line-by-line: `%mprun`
-# - [Profile parallel code](#Profile-parallel-code)
+# - If `pip install memory_profiler`:
+# - First load module:
+#   - `%load_ext memory_profiler`
+#   - Line: `%memit`
+#   - Cell: `%%memit`
+#   - Line-by-line: `%mprun`
+# 
 
-# In[1]:
+# ## [pyinstrument](https://pyinstrument.readthedocs.io/en/latest/)
+# ...
 
+# #### Profile parallel code
+# - [Example visualisation of profiler](https://docs.dask.org/en/latest/diagnostics-local.html#example).
 
-get_ipython().run_line_magic('pinfo', 'pyinstrument')
-
+# ## Further information
+# [PythonSpeed.com](https://pythonspeed.com/), Itamar Turner-Trauring
 
 # In[ ]:
 
