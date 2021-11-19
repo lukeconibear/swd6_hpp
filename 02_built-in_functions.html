@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; SWD6: High performance Python</title>
+    <title>Built-in functions &#8212; SWD6: High performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -42,8 +42,17 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data structures and algorithms" href="03_data_structures_and_algorithms.html" />
+    <link rel="prev" title="Profiling" href="01_profiling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -87,24 +96,24 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="00_overview.html">
    Overview
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="01_profiling.html">
      Profiling
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_built-in_functions.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Built-in functions
     </a>
    </li>
@@ -168,6 +177,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/02_built-in_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
@@ -179,7 +205,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2F02_built-in_functions.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -195,6 +221,23 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/lukeconibear/swd6_hpp/main?urlpath=tree/docs/02_built-in_functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -208,19 +251,86 @@
         
               <div>
                 
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="built-in-functions">
+<h1><a class="reference external" href="https://docs.python.org/3/library/functions.html">Built-in functions</a><a class="headerlink" href="#built-in-functions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><em>Optimised in C (statically typed and compiled).</em></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span> <span class="c1"># time O(n)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.6 ms ± 1.56 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> len(nums) # time O(1)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79.5 ns ± 0.926 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "swd6_hpp"
+        },
+        kernelOptions: {
+            kernelName: "swd6_hpp",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'swd6_hpp'</script>
 
               </div>
               
         
             <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01_profiling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Profiling</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_data_structures_and_algorithms.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data structures and algorithms</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>

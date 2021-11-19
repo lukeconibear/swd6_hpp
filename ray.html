@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; SWD6: High performance Python</title>
+    <title>&lt;no title&gt; &#8212; SWD6: High performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -42,7 +42,14 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -123,16 +130,6 @@
      Compilers
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="06_parallelisation.html">
-     Parallelisation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="07_GPUs.html">
-     GPUs
-    </a>
-   </li>
   </ul>
  </li>
 </ul>
@@ -168,6 +165,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/ray.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
@@ -179,7 +193,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2Fray.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -195,11 +209,36 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/lukeconibear/swd6_hpp/main?urlpath=tree/docs/ray.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -208,13 +247,67 @@
         
               <div>
                 
+  <p>Ray will automatically detect the available GPUs and CPUs on the machine.</p>
+<ul class="simple">
+<li><p>Can also <a class="reference external" href="https://docs.ray.io/en/latest/walkthrough.html#specifying-required-resources">specify required resources</a>.</p></li>
+</ul>
+<p>include modin for pandas</p>
+<p>Remote function</p>
+<ul class="simple">
+<li><p>Convert regular Python function to Remote function by adding <code class="docutils literal notranslate"><span class="pre">&#64;ray.remote</span></code> decorator</p></li>
+<li><p>Then use <code class="docutils literal notranslate"><span class="pre">.remote()</span></code> method</p></li>
+<li><p>Retrieved with <code class="docutils literal notranslate"><span class="pre">ray.get(object)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Uses</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_13267</span><span class="o">/</span><span class="mf">1640338936.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Uses</span>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+<span class="ne">NameError</span>: name &#39;Uses&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ray</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/redis/connection.py:72: UserWarning: redis-py works best with hiredis. Please consider installing
+  warnings.warn(msg)
+</pre></div>
+</div>
+</div>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "swd6_hpp"
+        },
+        kernelOptions: {
+            kernelName: "swd6_hpp",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'swd6_hpp'</script>
 
               </div>
               
