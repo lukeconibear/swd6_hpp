@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-article
+root: intro
+sections:
+- file: 00_overview
+  sections:
+  - file: 01_profiling
+  - file: 02_built-in_functions
+  - file: 03_data_structures_and_algorithms
+  - file: 04_vectorisation
+  - file: 05_compilers
+  
