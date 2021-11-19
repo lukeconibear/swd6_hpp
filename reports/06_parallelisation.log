@@ -25,7 +25,7 @@ ds = xr.open_dataset(
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1966/452144732.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_1963/452144732.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m ds = xr.open_dataset(
 [0m[1;32m      2[0m     [0;34m'/nfs/a68/shared/earlacoa/wrfout_2015_PM_2_DRY_0.25deg.nc'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      3[0m     [0mchunks[0m[0;34m=[0m[0;34m{[0m[0;34m'time'[0m[0;34m:[0m [0;34m'auto'[0m[0;34m}[0m [0;31m# dask chunks[0m[0;34m[0m[0;34m[0m[0m
