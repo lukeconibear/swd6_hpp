@@ -339,6 +339,20 @@
 <img alt="_images/00_overview_7_0.png" src="_images/00_overview_7_0.png" />
 </div>
 </div>
+<p>To follow along, either copy this conda environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --name swd6_hpp --file<span class="o">=</span>requirements.txt
+</pre></div>
+</div>
+<p>Or create it fresh using the libraries we’ll use here:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n swd6_hpp -c conda-forge jupyter-book numpy jupyterlab matplotlib numba pandas dask xarray dask-jobqueue
+pip install line_profiler memory_profiler ray pyinstrument Cython
+</pre></div>
+</div>
+<p>Or add the libraries you’re interest in to your own Python environment.</p>
+<p>Now open jupyter lab:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+</pre></div>
+</div>
 </div>
 <div class="toctree-wrapper compound">
 </div>

@@ -129,3 +129,21 @@ with plt.xkcd():
     
     plt.show()
 
+
+# To follow along, either copy this conda environment:
+# ```bash
+# conda env create --name swd6_hpp --file=requirements.txt
+# ```
+# 
+# Or create it fresh using the libraries we'll use here:  
+# ```bash
+# conda create -n swd6_hpp -c conda-forge jupyter-book numpy jupyterlab matplotlib numba pandas dask xarray dask-jobqueue
+# pip install line_profiler memory_profiler ray pyinstrument Cython
+# ```
+# 
+# Or add the libraries you're interest in to your own Python environment.
+# 
+# Now open jupyter lab:
+# ```bash
+# jupyter lab
+# ```

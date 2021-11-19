@@ -8,7 +8,7 @@
 # ## [timeit](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
 # [IPython magic](https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html) are very useful for common problems in data analysis.
 
-# These have 1 `%` at the start for a single line:
+# These have one `%` at the start for a single line:
 
 # In[1]:
 
