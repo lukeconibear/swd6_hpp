@@ -5,10 +5,10 @@
 
 #######################################################################################
 # Book settings
-title                       : swd6_hpp  # The title of the book. Will be placed in the left navbar.
+title                       : "SWD6: High performance Python"  # The title of the book. Will be placed in the left navbar.
 author                      : Luke Conibear  # The author of the book
 copyright                   : "2021"  # Copyright year to be placed in the footer
-logo                        : logo.png  # A path to the book logo
+logo                        : images/logo.png  # A path to the book logo
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

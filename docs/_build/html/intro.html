@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to your Jupyter Book &#8212; swd6_hpp</title>
+    <title>Introduction &#8212; SWD6: High performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Content in Jupyter Book" href="content.html" />
+    <link rel="next" title="Overview" href="00_overview.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -80,7 +80,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">swd6_hpp</h1>
+      <h1 class="site-logo" id="site-title">SWD6: High performance Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -91,14 +91,14 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   Welcome to your Jupyter Book
+   Introduction
   </a>
  </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="content.html">
-   Content in Jupyter Book
+  <a class="reference internal" href="00_overview.html">
+   Overview
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -107,13 +107,28 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="markdown.html">
-     Markdown Files
+    <a class="reference internal" href="01_profiling.html">
+     Profiling
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
+    <a class="reference internal" href="02_built-in_functions.html">
+     Built-in functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_data_structures_and_algorithms.html">
+     Data structures and algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_vectorisation.html">
+     Vectorisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_compilers.html">
+     Compilers
     </a>
    </li>
   </ul>
@@ -200,6 +215,39 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workshop-content">
+   Workshop content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duration">
+   Duration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frequency">
+   Frequency
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#suitability">
+   Suitability
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -208,19 +256,46 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Permalink to this headline">¶</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Here is a note!</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Booking for this course is through the IT Training Unit. Click <a class="reference external" href="https://uolr3.leeds.ac.uk/temcatsearch(bD1lbiZjPTUwMA==)/courses.htm?sap-params=Z2Rfa2V5d29yZHM9U1dEJTIwNiUzYSUyMEhpZ2glMjBQZXJmb3JtYW5jZSZnZF9zdHlwZT0mZ2RfdHV0b3I9TGFzdCUyMG5hbWUmZGF0ZTE9ZGQlMmZtbSUyZnl5eXkmZGF0ZTI9ZGQlMmZtbSUyZnl5eXkmZGF0ZTE9MDAuMDAuMDAwMCZkYXRlMj0wMC4wMC4wMDAwJnByb3ZpZGVybGlzdD0wJmFuZG9yPUFORCZzb3J0PUJFR0RBJmdkX2NhbGxpZD1JTklUSUFMJnN0eWxlPQ%3d%3d">here</a> to book.</p>
+<div class="section" id="workshop-content">
+<h2>Workshop content<a class="headerlink" href="#workshop-content" title="Permalink to this headline">¶</a></h2>
+<p>Over the past few years, Python and the wider Python ecosystem have become invaluable tools in scientific computing and data analytics. As Python is (for the most part) an interpreted language there are complaints that Python code can be quite slow to execute. In this hands-on workshop you will have the opportunity discover and use a set of tools and techniques that can be used to improve the execution speed of your Python code. The workshop will introduce a number of ways to both measure the efficiency of your code and improve it’s speed of execution by introducing strategies for fast and scalable computation with Python.</p>
+<p>This workshops covers:</p>
+<ul class="simple">
+<li><p>Optimisation (should you do it?, how fast could it be?)</p></li>
+<li><p>Profiling (<a class="reference external" href="https://github.com/pyutils/line_profiler"><code class="docutils literal notranslate"><span class="pre">line_profiler</span></code></a>, <a class="reference external" href="https://github.com/pythonprofilers/memory_profiler"><code class="docutils literal notranslate"><span class="pre">memory_profiler</span></code></a>)</p></li>
+<li><p>Built-in functions</p></li>
+<li><p>Data structures and algorithms (caching, lazy loading)</p></li>
+<li><p>Vectorisation</p></li>
+<li><p>Compilers (<code class="docutils literal notranslate"><span class="pre">CPython</span></code>, <code class="docutils literal notranslate"><span class="pre">PyPy</span></code>, <code class="docutils literal notranslate"><span class="pre">Numba</span></code>, <code class="docutils literal notranslate"><span class="pre">Cython</span></code>)</p></li>
+</ul>
+<p>…</p>
+<ul class="simple">
+<li><p>Profiling code with cProfile and line_profiler</p></li>
+<li><p>Parallel programming in Python with multiprocessing and ParallelPython</p></li>
+<li><p>Tips for using less RAM</p></li>
+<li><p>Case studies and discussion</p></li>
+</ul>
 </div>
-<p>And here is a code block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">mc</span><span class="o">^</span><span class="mi">2</span>
-</pre></div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>We recommend that attendees have a working knowledge of the Unix shell (although this is not essential) and are proficient Python programmers. If you need to learn how to program in Python, please attend SWD1a: Introduction to Python programming. It is strongly recommended that you bring your own laptop to this workshop with some specific software installed. Further information will be provided when you are accepted onto the course.</p>
 </div>
-<p>Check out the content pages bundled with this sample book to see more.</p>
+<div class="section" id="duration">
+<h2>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">¶</a></h2>
+<p>1 day</p>
+</div>
+<div class="section" id="frequency">
+<h2>Frequency<a class="headerlink" href="#frequency" title="Permalink to this headline">¶</a></h2>
+<p>This workshop usually runs once each academic year.<br />
+If you would like a bespoke version of this course run in your department then please <a class="reference external" href="https://bit.ly/arc-help">contact us</a>.</p>
+</div>
+<div class="section" id="suitability">
+<h2>Suitability<a class="headerlink" href="#suitability" title="Permalink to this headline">¶</a></h2>
+<p>Research postgraduate students and above; teaching and lecturing staff.</p>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -250,10 +325,10 @@ structured.</p>
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="content.html" title="next page">
+    <a class='right-next' id="next-link" href="00_overview.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Content in Jupyter Book</p>
+        <p class="prev-next-title">Overview</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
