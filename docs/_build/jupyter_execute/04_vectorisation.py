@@ -30,7 +30,6 @@ get_ipython().run_cell_magic('timeit', '', 'constant = 500_000\nfor num in range
 
 
 import numpy as np
-import xarray as xr
 
 
 # In[4]:
@@ -69,14 +68,14 @@ nums_col + nums_row
 # In[8]:
 
 
+import xarray as xr
+
+
+# In[9]:
+
+
 nums_col = xr.DataArray([0, 10, 20, 30], [('col', [0, 10, 20, 30])])
 nums_row = xr.DataArray([0, 1, 2], [('row', [0, 1, 2])])
 
 nums_col + nums_row
-
-
-# In[ ]:
-
-
-
 

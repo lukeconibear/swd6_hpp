@@ -1,5 +1,5 @@
 
-def my_func():
+def my_function():
     a = [1] * (10**6)
     b = [2] * (2 * 10**7)
     del b

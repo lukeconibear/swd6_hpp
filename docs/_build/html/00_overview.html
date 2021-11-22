@@ -258,6 +258,11 @@
    How fast could it go?
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-we-begin">
+   Before we begin
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -273,7 +278,7 @@
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <p>Python is great for many reasons including:</p>
 <ul class="simple">
-<li><p>High−level.</p></li>
+<li><p>High−level (so you can focus on your problem).</p></li>
 <li><p>Clean, readable, and efficient.</p></li>
 <li><p>Easy and fun to learn.</p></li>
 <li><p>Dynamic.</p></li>
@@ -296,8 +301,8 @@
 <li><p>The code is correct (have you tested it?, does it have documentation?).</p></li>
 <li><p>Is optimisation really needed?</p>
 <ul>
-<li><p>If yes, then optimise code and data.</p></li>
-<li><p>If still not enough, then parallelise.</p></li>
+<li><p>If yes, then optimise the code and data.</p></li>
+<li><p>If that’s still not enough, then parallelise.</p></li>
 </ul>
 </li>
 </ul>
@@ -339,17 +344,24 @@
 <img alt="_images/00_overview_7_0.png" src="_images/00_overview_7_0.png" />
 </div>
 </div>
-<p>To follow along, either copy this conda environment:</p>
+</div>
+<div class="section" id="before-we-begin">
+<h2>Before we begin<a class="headerlink" href="#before-we-begin" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Clone this GitHub repository:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone ...
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>Copy this conda environment:</p></li>
+</ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --name swd6_hpp --file<span class="o">=</span>requirements.txt
 </pre></div>
 </div>
-<p>Or create it fresh using the libraries we’ll use here:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n swd6_hpp -c conda-forge jupyter-book numpy jupyterlab matplotlib numba pandas dask xarray dask-jobqueue
-pip install line_profiler memory_profiler ray pyinstrument Cython
-</pre></div>
-</div>
-<p>Or add the libraries you’re interest in to your own Python environment.</p>
-<p>Now open jupyter lab:</p>
+<ol class="simple">
+<li><p>Open jupyter lab:</p></li>
+</ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
 </pre></div>
 </div>

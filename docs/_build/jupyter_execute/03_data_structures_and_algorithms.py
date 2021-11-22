@@ -109,6 +109,12 @@ get_ipython().run_line_magic('timeit', 'fibonacci_with_caching(20, cache={0: 0, 
 # In[11]:
 
 
+import xarray as xr
+
+
+# In[12]:
+
+
 xr.tutorial.open_dataset('air_temperature')
 
 
@@ -128,9 +134,3 @@ xr.tutorial.open_dataset('air_temperature')
 # ## Further information
 # [LeetCode](https://leetcode.com)  
 # [AlgoExpert](https://www.algoexpert.io/product)
-
-# In[ ]:
-
-
-
-

@@ -26,12 +26,17 @@
 # In[1]:
 
 
+import numpy as np
 from numba import njit
+
+
+# In[2]:
+
 
 nums = np.arange(1_000_000)
 
 
-# In[ ]:
+# In[3]:
 
 
 def super_function(nums):
@@ -41,13 +46,13 @@ def super_function(nums):
     return nums + trace # broadcasting
 
 
-# In[ ]:
+# In[4]:
 
 
 get_ipython().run_line_magic('timeit', 'super_function(nums)')
 
 
-# In[ ]:
+# In[5]:
 
 
 @njit # numba decorator
@@ -58,7 +63,7 @@ def super_function(nums):
     return nums + trace # broadcasting
 
 
-# In[ ]:
+# In[6]:
 
 
 get_ipython().run_line_magic('timeit', 'super_function(nums)')
@@ -71,13 +76,13 @@ get_ipython().run_line_magic('timeit', 'super_function(nums)')
 #   - Helpful when need static typing.  
 #   - Examples [not using IPython](https://cython.readthedocs.io/en/latest/src/quickstart/build.html#building-a-cython-module-using-setuptools), [NumPy](https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html), [Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html) (example below).
 
-# In[ ]:
+# In[7]:
 
 
 import pandas as pd
 
 
-# In[ ]:
+# In[8]:
 
 
 df = pd.DataFrame({
@@ -89,7 +94,7 @@ df = pd.DataFrame({
 df.head()
 
 
-# In[ ]:
+# In[9]:
 
 
 def f(x):
@@ -105,37 +110,39 @@ def integrate_f(a, b, N):
     return s * dx
 
 
-# In[ ]:
+# In[10]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
 
 
-# In[ ]:
+# In[11]:
 
 
 get_ipython().run_line_magic('load_ext', 'Cython')
 
 
-# In[ ]:
+# The only change below is the addition of the `%%cython` IPython magic command to state that this is a cython cell.
+
+# In[12]:
 
 
-get_ipython().run_cell_magic('cython', '# only change', 'def f(x):\n    return x * (x - 1)\n   \n\ndef integrate_f(a, b, N):\n    s = 0\n    dx = (b - a) / N\n    for i in range(N):\n        s += f(a + i * dx)\n        \n    return s * dx')
+get_ipython().run_cell_magic('cython', '', 'def f(x):\n    return x * (x - 1)\n   \n\ndef integrate_f(a, b, N):\n    s = 0\n    dx = (b - a) / N\n    for i in range(N):\n        s += f(a + i * dx)\n        \n    return s * dx')
 
 
-# In[ ]:
+# In[13]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
 
 
-# In[ ]:
+# In[14]:
 
 
 get_ipython().run_cell_magic('cython', '', 'cdef double f(double x) except? -2:                  # adding types\n    return x * (x - 1)\n   \n\ncpdef double integrate_f(double a, double b, int N): # adding types\n    cdef int i                                       # adding types\n    cdef double s, dx                                # adding types\n    s = 0\n    dx = (b - a) / N\n    for i in range(N):\n        s += f(a + i * dx)\n        \n    return s * dx')
 
 
-# In[ ]:
+# In[15]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
@@ -143,15 +150,3 @@ get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x
 
 # ## Further information
 # [Why is Python slow?](https://youtu.be/I4nkgJdVZFA), Anthony Shaw, PyCon 2020. [CPython Internals](https://realpython.com/products/cpython-internals-book/).
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

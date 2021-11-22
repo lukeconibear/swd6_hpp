@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ### [Built-in functions](https://docs.python.org/3/library/functions.html)
-# - *Optimised in C (statically typed and compiled).*
+# # [Built-in functions](https://docs.python.org/3/library/functions.html)
+# Optimised in C (statically typed and compiled).
+
+# ## [`len`](https://docs.python.org/3/library/functions.html#len)
 
 # In[1]:
 

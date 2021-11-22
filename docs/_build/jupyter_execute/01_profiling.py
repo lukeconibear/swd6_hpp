@@ -5,12 +5,38 @@
 # 
 # [Profiling](https://jakevdp.github.io/PythonDataScienceHandbook/01.07-timing-and-profiling.html) analyses your code in terms of speed and/or memory. This can help identify where the bottlenecks are and how much potential there is for improvement.
 
-# ## [timeit](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
-# [IPython magic](https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html) are very useful for common problems in data analysis.
+# In[ ]:
 
-# These have one `%` at the start for a single line:
+
+
+
 
 # In[1]:
+
+
+mention `profile` and `cprofile` somehow to be complete, but dont use
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ## [timeit](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit)
+# [IPython magic commands](https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html) are very useful for common problems in data analysis.
+# 
+# `timeit` is one of them, which measures the time execution of an expression. It runs a few times, depending on how intensive the expression is, and returns the average and error.
+# 
+# These have one `%` at the start for a single line:
+
+# In[5]:
 
 
 get_ipython().run_line_magic('timeit', 'range(100)')
@@ -18,7 +44,7 @@ get_ipython().run_line_magic('timeit', 'range(100)')
 
 # Or two `%%` at the start for a cell:
 
-# In[2]:
+# In[6]:
 
 
 get_ipython().run_cell_magic('timeit', '', 'for x in range(100):\n    pass')
@@ -26,63 +52,68 @@ get_ipython().run_cell_magic('timeit', '', 'for x in range(100):\n    pass')
 
 # ## [line_profiler](https://github.com/pyutils/line_profiler)
 # 
-# The line profiler tool measures the time spent in each line of a function.
+# The `line_profiler` module measures the time spent in each line of a function.
 
-# In[3]:
+# In[2]:
 
 
 get_ipython().run_line_magic('load_ext', 'line_profiler')
 
 
-# In[4]:
+# In[17]:
 
 
-def my_maths(x, y):
-    z = x * y**2
-    print('Gary')
-    return z
+def my_function():
+    a = [1] * (10**6)
+    b = [2] * (2 * 10**7)
+    del b
+    return a
 
 
-# In[5]:
+# In[8]:
 
 
-get_ipython().run_line_magic('lprun', '-f my_maths my_maths(5, 10)')
+get_ipython().run_line_magic('lprun', '-f my_function my_function()')
 
 
 # ## [memory_profiler](https://github.com/pythonprofilers/memory_profiler)
+# 
+# The `memory_profiler` module measures the memory used by a function, at its peak and the overall increment.
 
-# In[6]:
+# In[3]:
 
 
 get_ipython().run_line_magic('load_ext', 'memory_profiler')
 
 
-# In[7]:
+# In[10]:
 
 
-get_ipython().run_line_magic('memit', 'my_maths(5, 10)')
+get_ipython().run_line_magic('memit', 'my_function()')
 
 
-# For a line-by-line description of memory, you can use `%mprun`, though the function needs to be from a file.
+# Though sometimes you'll want to see the memory allocations on each line. For this, you can use `%mprun`, though the function needs to be from a file.
+# 
+# Note, `%%file <filename>` is another IPython magic command, to write the cell contents to disk.
 
-# In[8]:
-
-
-get_ipython().run_cell_magic('file', 'mprun_example.py', '\ndef my_func():\n    a = [1] * (10**6)\n    b = [2] * (2 * 10**7)\n    del b\n    return a')
-
-
-# In[9]:
+# In[16]:
 
 
-from mprun_example import my_func
-get_ipython().run_line_magic('mprun', '-f my_func my_func()')
+get_ipython().run_cell_magic('file', 'mprun_example.py', '\ndef my_function():\n    a = [1] * (10**6)\n    b = [2] * (2 * 10**7)\n    del b\n    return a')
+
+
+# In[12]:
+
+
+from mprun_example import my_function
+get_ipython().run_line_magic('mprun', '-f my_function my_function()')
 
 
 # ## [pyinstrument](https://pyinstrument.readthedocs.io/en/latest/)
 # 
-# Pyinstrument is a similar profiler, that helps you find the bottlenecks.
+# `pyinstrument` is a statistical profiling module of wall-clock time (recording the call stack every 1ms), lowering the overhead compared to tracing profilers. It hides library frames, so you can focus on the slow parts of your code. The output shows *how* the function executes using a traffic light colour legend.
 
-# In[10]:
+# In[14]:
 
 
 import time

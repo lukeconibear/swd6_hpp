@@ -4,7 +4,7 @@
 # # Overview
 
 # Python is great for many reasons including: 
-# - High−level.
+# - High−level (so you can focus on your problem).  
 # - Clean, readable, and efficient.
 # - Easy and fun to learn.
 # - Dynamic.
@@ -26,8 +26,8 @@
 # There are trade-offs when you pursue faster code, for example, it may become more complex, use more memory, become less readable, etc. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:
 # - The code is correct (have you tested it?, does it have documentation?).  
 # - Is optimisation really needed?
-#     - If yes, then optimise code and data.
-#     - If still not enough, then parallelise.  
+#     - If yes, then optimise the code and data.
+#     - If that's still not enough, then parallelise.  
 # 
 # *Plot idea from [Dask-ML](https://ml.dask.org/).*
 
@@ -36,6 +36,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+plt.rcParams['font.family'] = "DejaVu Sans"
 
 with plt.xkcd():
     fig = plt.figure(figsize=(4, 4), dpi=100)
@@ -130,20 +131,22 @@ with plt.xkcd():
     plt.show()
 
 
-# To follow along, either copy this conda environment:
+# ## Before we begin
+# 
+# 1. Clone this GitHub repository:
+# 
+# ```bash
+# git clone ...
+# ```
+# 
+# 2. Copy this conda environment:
+# 
 # ```bash
 # conda env create --name swd6_hpp --file=requirements.txt
 # ```
+#     
+# 3. Open jupyter lab:
 # 
-# Or create it fresh using the libraries we'll use here:  
-# ```bash
-# conda create -n swd6_hpp -c conda-forge jupyter-book numpy jupyterlab matplotlib numba pandas dask xarray dask-jobqueue
-# pip install line_profiler memory_profiler ray pyinstrument Cython
-# ```
-# 
-# Or add the libraries you're interest in to your own Python environment.
-# 
-# Now open jupyter lab:
 # ```bash
 # jupyter lab
 # ```

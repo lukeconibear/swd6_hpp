@@ -80,31 +80,49 @@ client
 # In[3]:
 
 
-ds = xr.open_dataset(
-    '/nfs/a68/shared/earlacoa/wrfout_2015_PM_2_DRY_0.25deg.nc',
+import xarray as xr
+
+
+# In[4]:
+
+
+ds = xr.tutorial.open_dataset(
+    'air_temperature',
     chunks={'time': 'auto'} # dask chunks
 )
 
 
-# In[ ]:
+# In[5]:
+
+
+ds
+
+
+# In[6]:
 
 
 ds.nbytes * (2 ** -30)
 
 
-# In[ ]:
+# In[7]:
 
 
 get_ipython().run_line_magic('time', 'ds_mean = ds.mean()')
 
 
-# In[ ]:
+# In[8]:
+
+
+ds_mean
+
+
+# In[9]:
 
 
 get_ipython().run_line_magic('time', 'ds_mean.compute()')
 
 
-# In[3]:
+# In[10]:
 
 
 ds.close()
@@ -114,19 +132,19 @@ client.close()
 # ### [dask.array](https://examples.dask.org/array.html) (NumPy)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[5]:
+# In[11]:
 
 
 IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
 
 
-# In[ ]:
+# In[12]:
 
 
 import dask.array as da
 
 
-# In[ ]:
+# In[13]:
 
 
 my_array = da.random.random(
@@ -137,13 +155,13 @@ result = my_array + my_array.T
 result
 
 
-# In[ ]:
+# In[14]:
 
 
 result.compute()
 
 
-# In[ ]:
+# In[15]:
 
 
 client.close()
@@ -152,40 +170,39 @@ client.close()
 # ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[6]:
+# In[16]:
 
 
 IFrame(src='https://www.youtube.com/embed/6qwlDc959b0', width='560', height='315')
 
 
-# In[ ]:
+# In[17]:
 
 
 import dask
-import dask.dataframe as dd
 
 
-# In[ ]:
+# In[18]:
 
 
 df = dask.datasets.timeseries()
 df
 
 
-# In[ ]:
+# In[19]:
 
 
 type(df)
 
 
-# In[ ]:
+# In[20]:
 
 
 result = df.groupby('name').x.std()
 result
 
 
-# In[ ]:
+# In[21]:
 
 
 result.visualize()
@@ -278,77 +295,61 @@ cluster.close()
 IFrame(src='https://www.youtube.com/embed/FXsgmwpRExM', width='560', height='315')
 
 
-# In[ ]:
-
-
-# in a terminal
-
-# log onto arc4
-ssh ${USER}@arc4.leeds.ac.uk
-
-# start an interactive session on a compute node on arc4
-qlogin -l h_rt=04:00:00 -l h_vmem=12G
-
-# activate your python environment
-conda activate my_python_environment
-
-# echo back the ssh command to connect to this compute node
-echo "ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk"
-
-# launch a jupyter lab session on this compute node
-jupyter lab --no-browser --ip=`hostname` --port=2222
-
-
-# In[ ]:
-
-
-# in a local terminal
-# ssh into the compute node
-ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk
-
-
-# In[ ]:
-
-
-# open up a local browser (e.g. chrome)
-# go to the jupyter lab session by pasting into the url bar
-localhost:2222
-    
-# can also load the dask dashboard in the browser at localhost:2727
-
-
-# In[ ]:
-
-
-# now the jupyter code
-from dask_jobqueue import SGECluster
-from dask.distributed import Client
-
-cluster = Client(
-    walltime='01:00:00',
-    memory='4 G',
-    resource_spec='h_vmem=4G',
-    scheduler_options={
-        'dashboard_address': ':2727',
-    },
-)
-
-client = Client(cluster)
-
-
-# In[ ]:
-
-
-cluster.scale(jobs=20)
-# cluster.adapt(minimum=0, maximum=20)
-
-
-# In[ ]:
-
-
-client.close()
-cluster.close()
-
+# ```bash
+# # in a terminal
+# 
+# # log onto arc4
+# ssh ${USER}@arc4.leeds.ac.uk
+# 
+# # start an interactive session on a compute node on arc4
+# qlogin -l h_rt=04:00:00 -l h_vmem=12G
+# 
+# # activate your python environment
+# conda activate my_python_environment
+# 
+# # echo back the ssh command to connect to this compute node
+# echo "ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk"
+# 
+# # launch a jupyter lab session on this compute node
+# jupyter lab --no-browser --ip=`hostname` --port=2222
+# ```
+# ___
+# ```bash
+# # in a local terminal
+# # ssh into the compute node
+# ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk
+# ```
+# ___
+# ```bash
+# # open up a local browser (e.g. chrome)
+# # go to the jupyter lab session by pasting into the url bar
+# localhost:2222
+#     
+# # can also load the dask dashboard in the browser at localhost:2727
+# ```
+# ___
+# ```bash
+# # now the jupyter code
+# from dask_jobqueue import SGECluster
+# from dask.distributed import Client
+# 
+# cluster = Client(
+#     walltime='01:00:00',
+#     memory='4 G',
+#     resource_spec='h_vmem=4G',
+#     scheduler_options={
+#         'dashboard_address': ':2727',
+#     },
+# )
+# 
+# client = Client(cluster)
+# 
+# cluster.scale(jobs=20)
+# # cluster.adapt(minimum=0, maximum=20)
+# 
+# client.close()
+# cluster.close()
+# ```
 
 # ## [Ray](https://www.ray.io/)
 # Ray will automatically detect the available GPUs and CPUs on the machine.

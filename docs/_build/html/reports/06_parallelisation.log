@@ -17,20 +17,63 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-ds = xr.open_dataset(
-    '/nfs/a68/shared/earlacoa/wrfout_2015_PM_2_DRY_0.25deg.nc',
-    chunks={'time': 'auto'} # dask chunks
-)
+result.visualize()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_181604/452144732.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m ds = xr.open_dataset(
-[0m[1;32m      2[0m     [0;34m'/nfs/a68/shared/earlacoa/wrfout_2015_PM_2_DRY_0.25deg.nc'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m     [0mchunks[0m[0;34m=[0m[0;34m{[0m[0;34m'time'[0m[0;34m:[0m [0;34m'auto'[0m[0;34m}[0m [0;31m# dask chunks[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m )
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/dask/utils.py[0m in [0;36mimport_required[0;34m(mod_name, error_msg)[0m
+[1;32m    168[0m     [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 169[0;31m         [0;32mreturn[0m [0mimport_module[0m[0;34m([0m[0mmod_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    170[0m     [0;32mexcept[0m [0mImportError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'xr' is not defined
-NameError: name 'xr' is not defined
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/importlib/__init__.py[0m in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    126[0m             [0mlevel[0m [0;34m+=[0m [0;36m1[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 127[0;31m     [0;32mreturn[0m [0m_bootstrap[0m[0;34m.[0m[0m_gcd_import[0m[0;34m([0m[0mname[0m[0;34m[[0m[0mlevel[0m[0;34m:[0m[0;34m][0m[0;34m,[0m [0mpackage[0m[0;34m,[0m [0mlevel[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    128[0m [0;34m[0m[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/importlib/_bootstrap.py[0m in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/importlib/_bootstrap.py[0m in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/importlib/_bootstrap.py[0m in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'graphviz'
+
+The above exception was the direct cause of the following exception:
+
+[0;31mRuntimeError[0m                              Traceback (most recent call last)
+[0;32m/tmp/ipykernel_19132/503654577.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mresult[0m[0;34m.[0m[0mvisualize[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/dask/base.py[0m in [0;36mvisualize[0;34m(self, filename, format, optimize_graph, **kwargs)[0m
+[1;32m    212[0m         [0mhttps[0m[0;34m:[0m[0;34m//[0m[0mdocs[0m[0;34m.[0m[0mdask[0m[0;34m.[0m[0morg[0m[0;34m/[0m[0men[0m[0;34m/[0m[0mlatest[0m[0;34m/[0m[0moptimize[0m[0;34m.[0m[0mhtml[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    213[0m         """
+[0;32m--> 214[0;31m         return visualize(
+[0m[1;32m    215[0m             [0mself[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    216[0m             [0mfilename[0m[0;34m=[0m[0mfilename[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/dask/base.py[0m in [0;36mvisualize[0;34m(*args, **kwargs)[0m
+[1;32m    637[0m     [0mhttps[0m[0;34m:[0m[0;34m//[0m[0mdocs[0m[0;34m.[0m[0mdask[0m[0;34m.[0m[0morg[0m[0;34m/[0m[0men[0m[0;34m/[0m[0mlatest[0m[0;34m/[0m[0moptimize[0m[0;34m.[0m[0mhtml[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    638[0m     """
+[0;32m--> 639[0;31m     [0;32mfrom[0m [0mdask[0m[0;34m.[0m[0mdot[0m [0;32mimport[0m [0mdot_graph[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    640[0m [0;34m[0m[0m
+[1;32m    641[0m     [0mfilename[0m [0;34m=[0m [0mkwargs[0m[0;34m.[0m[0mpop[0m[0;34m([0m[0;34m"filename"[0m[0;34m,[0m [0;34m"mydask"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/dask/dot.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      6[0m [0;32mfrom[0m [0;34m.[0m[0mutils[0m [0;32mimport[0m [0mapply[0m[0;34m,[0m [0mfuncname[0m[0;34m,[0m [0mimport_required[0m[0;34m,[0m [0mkey_split[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m [0;34m[0m[0m
+[0;32m----> 8[0;31m graphviz = import_required(
+[0m[1;32m      9[0m     [0;34m"graphviz"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m     [0;34m"Drawing dask graphs requires the "[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/nfs/b0122/Users/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/dask/utils.py[0m in [0;36mimport_required[0;34m(mod_name, error_msg)[0m
+[1;32m    169[0m         [0;32mreturn[0m [0mimport_module[0m[0;34m([0m[0mmod_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    170[0m     [0;32mexcept[0m [0mImportError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 171[0;31m         [0;32mraise[0m [0mRuntimeError[0m[0;34m([0m[0merror_msg[0m[0;34m)[0m [0;32mfrom[0m [0me[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    172[0m [0;34m[0m[0m
+[1;32m    173[0m [0;34m[0m[0m
+
+[0;31mRuntimeError[0m: Drawing dask graphs requires the `graphviz` python library and the `graphviz` system library to be installed.
+RuntimeError: Drawing dask graphs requires the `graphviz` python library and the `graphviz` system library to be installed.
 
