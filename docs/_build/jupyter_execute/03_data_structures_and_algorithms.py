@@ -72,9 +72,9 @@ get_ipython().run_cell_magic('timeit', '', 'needles_found = 0\nfor needle in nee
 #   - Generators save memory by yielding only the next iteration.
 #   - Memory usage for floats/integers of 16 bit < 32 bit < 64 bit.
 #   - For NetCDFs, using [`engine='h5netcdf'`](https://github.com/shoyer/h5netcdf) with `xarray` can be faster, over than the default [`engine='netcdf4'`](https://github.com/Unidata/netcdf4-python).  
-#   - *[Compression](https://youtu.be/8pFnrr0NnwY)*: If arrays are mostly 0, then can save memory using [sparse arrays](https://sparse.pydata.org/en/stable/quickstart.html).
-#   - *[Chunking](https://youtu.be/8pFnrr0NnwY)*: If need all data, then can load/process in chunks to reduce amount in memory: [Zarr](https://zarr.readthedocs.io/en/stable/) for arrays, [Pandas](https://pythonspeed.com/articles/chunking-pandas/).
-#   - *[Indexing](https://youtu.be/8pFnrr0NnwY)*: If need a subset of the data, then can index (multi-index) to reduce memory and increase speed for queries: [Pandas](https://pythonspeed.com/articles/indexing-pandas-sqlite/), [SQLite](https://docs.python.org/3/library/sqlite3.html).
+#   - [Compression](https://youtu.be/8pFnrr0NnwY): If arrays are mostly 0, then can save memory using [sparse arrays](https://sparse.pydata.org/en/stable/quickstart.html).
+#   - [Chunking](https://youtu.be/8pFnrr0NnwY): If need all data, then can load/process in chunks to reduce amount in memory: [Zarr](https://zarr.readthedocs.io/en/stable/) for arrays, [Pandas](https://pythonspeed.com/articles/chunking-pandas/).
+#   - [Indexing](https://youtu.be/8pFnrr0NnwY): If need a subset of the data, then can index (multi-index) to reduce memory and increase speed for queries: [Pandas](https://pythonspeed.com/articles/indexing-pandas-sqlite/), [SQLite](https://docs.python.org/3/library/sqlite3.html).
 
 # ### Reduce repeated calculations with [caching](https://realpython.com/lru-cache-python/)
 # - e.g. [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number) (each number is the sum of the two preceding ones starting from 0 and 1 e.g. 0, 1, 1, 2, 3, 5, 8, 13, 21, 34).

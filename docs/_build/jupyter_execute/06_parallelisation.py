@@ -27,28 +27,63 @@ if IN_COLAB:
 
 # ## Parallelising a Python?
 # 
-# Python itself is not designed for massive scalability and controls threads preemptively using a [Global Interpreter Lock, GIL](https://wiki.python.org/moin/GlobalInterpreterLock). This has lead many libraries to work around this using C/C++ backends. Some options include:
-# - [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) for creating a pool of asynchronous workers.  
-# - [joblib](https://joblib.readthedocs.io/en/latest/) for creating lightweight pipelines.  
-# - [asyncio](https://docs.python.org/3/library/asyncio.html) for concurrent programs.  
+# Python itself is not designed for massive scalability and controls threads preemptively using a [Global Interpreter Lock, GIL](https://wiki.python.org/moin/GlobalInterpreterLock). This has lead many libraries to work around this using C/C++ backends.  
 # 
+# Some options include:  
+
+# [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) for creating a pool of asynchronous workers. 
+
+# In[2]:
+
+
+from multiprocessing import Pool
+
+
+# In[3]:
+
+
+def my_function(x):
+    return x * x
+
+
+# In[4]:
+
+
+with Pool(3) as workers:
+    print(workers.map(my_function, [1, 2, 3]))
+
+
+# [joblib](https://joblib.readthedocs.io/en/latest/) for creating lightweight pipelines. 
+
+# In[5]:
+
+
+import joblib
+import math
+
+
+# In[6]:
+
+
+joblib.Parallel(n_jobs=1)(
+    joblib.delayed(math.sqrt)(i**2) for i in range(10)
+)
+
+
+# [asyncio](https://docs.python.org/3/library/asyncio.html) for concurrent programs.  
+# 
+# ```python
+# import asyncio
+# 
+# async def main():
+#     print('Hello ...')
+#     await asyncio.sleep(1)
+#     print('... World!')
+#     
+# asyncio.run(main())
+# ```
+
 # These options work well for the CPU cores on your machine, though not really beyond that.  
-
-# 
-# 
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
 
 # ## [Dask](https://docs.dask.org/en/latest/)
 # 
@@ -61,20 +96,14 @@ if IN_COLAB:
 # 
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[2]:
+# In[7]:
 
 
 from IPython.display import IFrame
 IFrame(src='https://www.youtube.com/embed/ods97a5Pzw0', width='560', height='315')
 
 
-# In[3]:
-
-
-client.close()
-
-
-# In[25]:
+# In[8]:
 
 
 if not IN_COLAB:
@@ -95,13 +124,13 @@ if not IN_COLAB:
 
 # ### Dask behind the scenes
 
-# In[1]:
+# In[9]:
 
 
 import xarray as xr
 
 
-# In[9]:
+# In[10]:
 
 
 ds = xr.tutorial.open_dataset(
@@ -110,26 +139,26 @@ ds = xr.tutorial.open_dataset(
 )
 
 
-# In[10]:
+# In[11]:
 
 
 ds.nbytes * (2 ** -30)
 
 
-# In[15]:
+# In[12]:
 
 
 ds_mean = ds.mean()
 ds_mean # a dask.array (an unexecuted task graph)
 
 
-# In[16]:
+# In[13]:
 
 
 ds_mean.compute()
 
 
-# In[23]:
+# In[14]:
 
 
 ds.close()
@@ -138,19 +167,19 @@ ds.close()
 # ### [dask.array](https://examples.dask.org/array.html) (NumPy)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[5]:
+# In[15]:
 
 
 IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
 
 
-# In[28]:
+# In[16]:
 
 
 import dask.array as da
 
 
-# In[29]:
+# In[17]:
 
 
 my_array = da.random.random(
@@ -161,7 +190,7 @@ result = my_array + my_array.T
 result
 
 
-# In[30]:
+# In[18]:
 
 
 if not IN_COLAB:
@@ -171,39 +200,39 @@ if not IN_COLAB:
 # ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[6]:
+# In[ ]:
 
 
 IFrame(src='https://www.youtube.com/embed/6qwlDc959b0', width='560', height='315')
 
 
-# In[18]:
+# In[ ]:
 
 
 import dask
 
 
-# In[19]:
+# In[ ]:
 
 
 df = dask.datasets.timeseries()
 df
 
 
-# In[20]:
+# In[ ]:
 
 
 type(df)
 
 
-# In[21]:
+# In[ ]:
 
 
 result = df.groupby('name').x.std()
 result
 
 
-# In[22]:
+# In[ ]:
 
 
 result.visualize()
@@ -278,7 +307,7 @@ if not IN_COLAB:
 # - Create or edit the [`~/.config/dask/jobqueue.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml) file within this repository.
 # - Check the [`~/.config/dask/distributed.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml) file with this repository.
 
-# In[8]:
+# In[ ]:
 
 
 IFrame(src='https://www.youtube.com/embed/FXsgmwpRExM', width='560', height='315')
@@ -317,7 +346,7 @@ IFrame(src='https://www.youtube.com/embed/FXsgmwpRExM', width='560', height='315
 # # can also load the dask dashboard in the browser at localhost:2727
 # ```
 # ___
-# ```bash
+# ```python
 # # now the jupyter code
 # from dask_jobqueue import SGECluster
 # from dask.distributed import Client

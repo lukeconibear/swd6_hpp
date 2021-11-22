@@ -360,12 +360,71 @@
 </div>
 <div class="section" id="parallelising-a-python">
 <h2>Parallelising a Python?<a class="headerlink" href="#parallelising-a-python" title="Permalink to this headline">¶</a></h2>
-<p>Python itself is not designed for massive scalability and controls threads preemptively using a <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock, GIL</a>. This has lead many libraries to work around this using C/C++ backends. Some options include:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a> for creating a pool of asynchronous workers.</p></li>
-<li><p><a class="reference external" href="https://joblib.readthedocs.io/en/latest/">joblib</a> for creating lightweight pipelines.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> for concurrent programs.</p></li>
-</ul>
+<p>Python itself is not designed for massive scalability and controls threads preemptively using a <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock, GIL</a>. This has lead many libraries to work around this using C/C++ backends.</p>
+<p>Some options include:</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a> for creating a pool of asynchronous workers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://joblib.readthedocs.io/en/latest/">joblib</a> for creating lightweight pipelines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> for concurrent programs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello ...&#39;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;... World!&#39;</span><span class="p">)</span>
+    
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
 <p>These options work well for the CPU cores on your machine, though not really beyond that.</p>
 </div>
 <div class="section" id="dask">
@@ -394,39 +453,10 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_135845</span><span class="o">/</span><span class="mf">1700138376.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="ne">NameError</span>: name &#39;client&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
     <span class="n">client</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-ltz7yqu0&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-vjx6i4yt&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-o1xpf5lv&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-2170deu2&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-uubxyhzq&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-e1qb6t85&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-bfbjq3wb&#39;, purging
-distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-y5b3fsv1&#39;, purging
 </pre></div>
 </div>
 </div>
@@ -833,7 +863,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f2cde764-e721-4d8d-a840-72e500fea0ef' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f2cde764-e721-4d8d-a840-72e500fea0ef' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ec9d2ac3-8b8b-45a2-85c6-634e29fb4ad5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ec9d2ac3-8b8b-45a2-85c6-634e29fb4ad5' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-6cacf6da-cd20-40b6-a133-8d2e782831e1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6cacf6da-cd20-40b6-a133-8d2e782831e1' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-6ef956f9-5d63-44e3-a7db-7546b7ae0a7e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6ef956f9-5d63-44e3-a7db-7546b7ae0a7e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43b9e446-7a1a-49ca-8102-4d69bba58deb' class='xr-var-data-in' type='checkbox'><label for='data-43b9e446-7a1a-49ca-8102-4d69bba58deb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-a4315b6a-c79c-4c40-b8c1-130ac2385338' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a4315b6a-c79c-4c40-b8c1-130ac2385338' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-77be2191-f963-4122-9b4d-cfbf901d25b4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-77be2191-f963-4122-9b4d-cfbf901d25b4' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-922ecc4e-62cd-4ea6-89d9-cb262988bf14' class='xr-section-summary-in' type='checkbox'  checked><label for='section-922ecc4e-62cd-4ea6-89d9-cb262988bf14' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-d19c92cd-d4b3-4189-9d96-3d54d5776c70' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d19c92cd-d4b3-4189-9d96-3d54d5776c70' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8f6e181e-d583-445a-877a-30421746a770' class='xr-var-data-in' type='checkbox'><label for='data-8f6e181e-d583-445a-877a-30421746a770' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table>
@@ -874,7 +904,7 @@ Data variables:
 
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-ab4151d1-dd6c-4d14-afbc-cf9f5b356284' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ab4151d1-dd6c-4d14-afbc-cf9f5b356284' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-cc33b3cf-86e5-41fb-89b1-bbff61a8121e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cc33b3cf-86e5-41fb-89b1-bbff61a8121e' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1237,7 +1267,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2b3b1136-2cd6-402e-8903-63857ba53225' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2b3b1136-2cd6-402e-8903-63857ba53225' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0d977caf-074a-4032-a77f-fa07c2a93b16' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0d977caf-074a-4032-a77f-fa07c2a93b16' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-5223e8a0-30f7-409b-a7d0-194679a3dc16' class='xr-section-summary-in' type='checkbox'  checked><label for='section-5223e8a0-30f7-409b-a7d0-194679a3dc16' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-9a7169df-77d3-40ea-ac6e-5d181ba38685' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9a7169df-77d3-40ea-ac6e-5d181ba38685' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-327ca54b-bb73-4fe7-a347-bb6a3162b7d7' class='xr-var-data-in' type='checkbox'><label for='data-327ca54b-bb73-4fe7-a347-bb6a3162b7d7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c9cba642-bbab-4c35-a8b4-73a08995414d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c9cba642-bbab-4c35-a8b4-73a08995414d' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-6c14e616-9c4c-4aec-bfed-08acaea016fd' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6c14e616-9c4c-4aec-bfed-08acaea016fd' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-7b84fd82-582b-48c1-805e-bcccee610aa1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-7b84fd82-582b-48c1-805e-bcccee610aa1' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-acc61f87-c0d3-4aca-aa3c-5668f953052a' class='xr-section-summary-in' type='checkbox'  checked><label for='section-acc61f87-c0d3-4aca-aa3c-5668f953052a' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-0a45c104-85b7-4031-b812-23068a07244c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0a45c104-85b7-4031-b812-23068a07244c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-627269f7-f8e4-4a88-9935-01ff587309ef' class='xr-var-data-in' type='checkbox'><label for='data-627269f7-f8e4-4a88-9935-01ff587309ef' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-bea7b265-29ed-4979-b435-ca63aa5c79c2' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bea7b265-29ed-4979-b435-ca63aa5c79c2' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1372,17 +1402,6 @@ Data variables:
 <h3><a class="reference external" href="https://examples.dask.org/dataframe.html">dask.dataframe</a> (Pandas)<a class="headerlink" href="#dask-dataframe-pandas" title="Permalink to this headline">¶</a></h3>
 <p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
 <div class="cell tag_remove_input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html">
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/6qwlDc959b0"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1398,88 +1417,10 @@ Data variables:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div><strong>Dask DataFrame Structure:</strong></div>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-    <tr>
-      <th>npartitions=30</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2000-01-01</th>
-      <td>int64</td>
-      <td>object</td>
-      <td>float64</td>
-      <td>float64</td>
-    </tr>
-    <tr>
-      <th>2000-01-02</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2000-01-30</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2000-01-31</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<div>Dask Name: make-timeseries, 30 tasks</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dask.dataframe.core.DataFrame
 </pre></div>
 </div>
 </div>
@@ -1491,25 +1432,12 @@ Data variables:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dask Series Structure:
-npartitions=1
-    float64
-        ...
-Name: x, dtype: float64
-Dask Name: sqrt, 67 tasks
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/06_parallelisation_33_0.png" src="_images/06_parallelisation_33_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1596,17 +1524,6 @@ Dask Name: sqrt, 67 tasks
 <li><p>Check the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code></a> file with this repository.</p></li>
 </ul>
 <div class="cell tag_remove_input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html">
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/FXsgmwpRExM"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># in a terminal</span>
 
@@ -1641,26 +1558,26 @@ localhost:2222
 </pre></div>
 </div>
 <hr class="docutils" />
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># now the jupyter code</span>
-from dask_jobqueue import SGECluster
-from dask.distributed import Client
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># now the jupyter code</span>
+<span class="kn">from</span> <span class="nn">dask_jobqueue</span> <span class="kn">import</span> <span class="n">SGECluster</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
 
-<span class="nv">cluster</span> <span class="o">=</span> Client<span class="o">(</span>
-    <span class="nv">walltime</span><span class="o">=</span><span class="s1">&#39;01:00:00&#39;</span>,
-    <span class="nv">memory</span><span class="o">=</span><span class="s1">&#39;4 G&#39;</span>,
-    <span class="nv">resource_spec</span><span class="o">=</span><span class="s1">&#39;h_vmem=4G&#39;</span>,
-    <span class="nv">scheduler_options</span><span class="o">={</span>
-        <span class="s1">&#39;dashboard_address&#39;</span>: <span class="s1">&#39;:2727&#39;</span>,
-    <span class="o">}</span>,
-<span class="o">)</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span>
+    <span class="n">walltime</span><span class="o">=</span><span class="s1">&#39;01:00:00&#39;</span><span class="p">,</span>
+    <span class="n">memory</span><span class="o">=</span><span class="s1">&#39;4 G&#39;</span><span class="p">,</span>
+    <span class="n">resource_spec</span><span class="o">=</span><span class="s1">&#39;h_vmem=4G&#39;</span><span class="p">,</span>
+    <span class="n">scheduler_options</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;dashboard_address&#39;</span><span class="p">:</span> <span class="s1">&#39;:2727&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
 
-<span class="nv">client</span> <span class="o">=</span> Client<span class="o">(</span>cluster<span class="o">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
 
-cluster.scale<span class="o">(</span><span class="nv">jobs</span><span class="o">=</span><span class="m">20</span><span class="o">)</span>
+<span class="n">cluster</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">jobs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="c1"># cluster.adapt(minimum=0, maximum=20)</span>
 
-client.close<span class="o">()</span>
-cluster.close<span class="o">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

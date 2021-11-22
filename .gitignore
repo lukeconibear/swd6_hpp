@@ -1,0 +1,6 @@
+docs/dask-worker-space/
+.ipynb_checkpoints/
+docs/_build/html/.ipynb_checkpoints/
+docs/_build/html/_images/06_*.png
+docs/_build/jupyter_execute/06_*.png
+docs/mydask.png
