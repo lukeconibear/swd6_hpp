@@ -3,6 +3,14 @@
 
 # # Parallelisation
 
+# <table align="left">
+# 
+#   <td>
+#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+#   </td>
+# 
+# </table>
+
 # ## What is it?
 # 
 # Parallelisation divides a large problem into many smaller ones and solves them *simultaneously*.
@@ -70,7 +78,7 @@ client
 # client = Client(processes=False, threads_per_worker=4, n_workers=1)
 # ```
 
-# Remember, always need to close down the client at the end:
+# Remember (important), always need to close down the client at the end:
 # ```python
 # client.close()
 # ```
@@ -95,56 +103,44 @@ ds = xr.tutorial.open_dataset(
 # In[5]:
 
 
-ds
+ds.nbytes * (2 ** -30)
 
 
 # In[6]:
 
 
-ds.nbytes * (2 ** -30)
+ds_mean = ds.mean()
+ds_mean # a dask.array (an unexecuted task graph)
 
 
 # In[7]:
 
 
-get_ipython().run_line_magic('time', 'ds_mean = ds.mean()')
+ds_mean.compute()
 
 
 # In[8]:
 
 
-ds_mean
-
-
-# In[9]:
-
-
-get_ipython().run_line_magic('time', 'ds_mean.compute()')
-
-
-# In[10]:
-
-
 ds.close()
-client.close()
 
 
 # ### [dask.array](https://examples.dask.org/array.html) (NumPy)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[11]:
+# In[9]:
 
 
 IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
 
 
-# In[12]:
+# In[10]:
 
 
 import dask.array as da
 
 
-# In[13]:
+# In[11]:
 
 
 my_array = da.random.random(
@@ -155,54 +151,48 @@ result = my_array + my_array.T
 result
 
 
-# In[14]:
+# In[12]:
 
 
 result.compute()
 
 
-# In[15]:
-
-
-client.close()
-
-
 # ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[16]:
+# In[6]:
 
 
 IFrame(src='https://www.youtube.com/embed/6qwlDc959b0', width='560', height='315')
 
 
-# In[17]:
+# In[18]:
 
 
 import dask
 
 
-# In[18]:
+# In[19]:
 
 
 df = dask.datasets.timeseries()
 df
 
 
-# In[19]:
+# In[20]:
 
 
 type(df)
 
 
-# In[20]:
+# In[21]:
 
 
 result = df.groupby('name').x.std()
 result
 
 
-# In[21]:
+# In[22]:
 
 
 result.visualize()
@@ -218,12 +208,6 @@ result_computed = result.compute()
 
 
 type(result_computed)
-
-
-# In[ ]:
-
-
-client.close()
 
 
 # ### [dask.bag](https://examples.dask.org/bag.html)

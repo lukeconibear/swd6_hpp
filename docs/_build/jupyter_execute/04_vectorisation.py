@@ -3,6 +3,14 @@
 
 # # Vectorisation
 
+# <table align="left">
+# 
+#   <td>
+#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+#   </td>
+# 
+# </table>
+
 # ## [Loop-invariants](https://en.wikipedia.org/wiki/Loop_invariant)
 # Move them *outside* the loop.
 
@@ -22,9 +30,6 @@ get_ipython().run_cell_magic('timeit', '', 'constant = 500_000\nfor num in range
 # - Loops are slow in Python ([CPython](https://www.python.org/), default interpreter).
 #   - *Because loops type−check and dispatch functions per cycle.*
 # - [Vectors](https://en.wikipedia.org/wiki/Automatic_vectorization) can work on many parts of the problem at once.
-# - NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) (universal functions).
-#   - *Optimised in C (statically typed and compiled).*
-#   - [Arbitrary Python function to NumPy ufunc](https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html).
 
 # In[3]:
 
@@ -78,4 +83,57 @@ nums_col = xr.DataArray([0, 10, 20, 30], [('col', [0, 10, 20, 30])])
 nums_row = xr.DataArray([0, 1, 2], [('row', [0, 1, 2])])
 
 nums_col + nums_row
+
+
+# - NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) (universal functions).
+#   - *Optimised in C (statically typed and compiled).*
+#   - Arbitrary Python function to NumPy ufunc:
+#       - [`np.frompyfunc`](https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html). 
+#       - [`np.vectorize`](https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html).  
+
+# In[10]:
+
+
+random_array = np.random.rand(5, 5)
+random_array
+
+
+# In[11]:
+
+
+def my_function(array, threshold):
+    """Compare an array to a threshold."""
+    if array > threshold:
+        return round(array - threshold, 1)
+    else:
+        return round(array + threshold, 1)
+
+
+# In[12]:
+
+
+frompyfunc_function = np.frompyfunc(
+    my_function, 
+    2, # number of input arguments 
+    1) # number of returned objects
+frompyfunc_function(random_array, 0.5)
+
+
+# In[13]:
+
+
+frompyfunc_function.__doc__
+
+
+# In[14]:
+
+
+vectorized_function = np.vectorize(my_function)
+vectorized_function(random_array, 0.5)
+
+
+# In[15]:
+
+
+vectorized_function.__doc__
 

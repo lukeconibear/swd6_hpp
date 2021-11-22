@@ -131,22 +131,23 @@ with plt.xkcd():
     plt.show()
 
 
-# ## Before we begin
+# ## To follow along
 # 
-# 1. Clone this GitHub repository:
+# *Option 1 - Run on Google Colab (recommended)*:  
+# - Click on the Colab button within each Jupyter notebook to run there.  
 # 
+# 
+# *Option 2 - Run locally*:  
+# 
+# a. Clone this GitHub repository:
 # ```bash
 # git clone ...
 # ```
-# 
-# 2. Copy this conda environment:
-# 
+# b. Copy this conda environment:
 # ```bash
 # conda env create --name swd6_hpp --file=requirements.txt
 # ```
-#     
-# 3. Open jupyter lab:
-# 
+# c. Open jupyter lab:
 # ```bash
 # jupyter lab
 # ```

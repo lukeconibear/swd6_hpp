@@ -271,7 +271,11 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="vectorisation">
 <h1>Vectorisation<a class="headerlink" href="#vectorisation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="loop-invariants">
+<table align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+  </td>
+</table><div class="section" id="loop-invariants">
 <h2><a class="reference external" href="https://en.wikipedia.org/wiki/Loop_invariant">Loop-invariants</a><a class="headerlink" href="#loop-invariants" title="Permalink to this headline">¶</a></h2>
 <p>Move them <em>outside</em> the loop.</p>
 <div class="cell docutils container">
@@ -284,7 +288,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>151 ms ± 4.02 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>154 ms ± 2.9 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -299,7 +303,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>155 ms ± 4.08 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>155 ms ± 7.31 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -314,12 +318,6 @@
 </ul>
 </li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_vectorization">Vectors</a> can work on many parts of the problem at once.</p></li>
-<li><p>NumPy <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a> (universal functions).</p>
-<ul>
-<li><p><em>Optimised in C (statically typed and compiled).</em></p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html">Arbitrary Python function to NumPy ufunc</a>.</p></li>
-</ul>
-</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -344,7 +342,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>201 ms ± 4.17 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>184 ms ± 10.8 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -357,7 +355,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.01 ms ± 57.8 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>874 µs ± 41.5 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -760,10 +758,113 @@ array([[ 0,  1,  2],
        [30, 31, 32]])
 Coordinates:
   * col      (col) int64 0 10 20 30
-  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-e4245311-f1c7-450f-b467-9c684959e569' class='xr-array-in' type='checkbox' checked><label for='section-e4245311-f1c7-450f-b467-9c684959e569' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
+  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-352de3f2-b32e-44e6-a43c-2673fe5dff36' class='xr-array-in' type='checkbox' checked><label for='section-352de3f2-b32e-44e6-a43c-2673fe5dff36' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
        [10, 11, 12],
        [20, 21, 22],
-       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-d2c7acce-4884-4c84-a3ec-ae1d954541fc' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d2c7acce-4884-4c84-a3ec-ae1d954541fc' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-8fb32c03-33ab-4216-bd62-af42cb98b4c7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8fb32c03-33ab-4216-bd62-af42cb98b4c7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ac260973-b07b-4283-a4cc-c5e0d84baa70' class='xr-var-data-in' type='checkbox'><label for='data-ac260973-b07b-4283-a4cc-c5e0d84baa70' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-d674e5c5-ca48-4aad-a288-e23f441da512' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d674e5c5-ca48-4aad-a288-e23f441da512' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eb95b0e7-82c4-421a-83ba-c1846dd936c3' class='xr-var-data-in' type='checkbox'><label for='data-eb95b0e7-82c4-421a-83ba-c1846dd936c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ee12b90a-4380-437c-ae35-aa656baccde5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ee12b90a-4380-437c-ae35-aa656baccde5' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-eb69617d-1245-43e1-ac2a-9cbbe66c4ad4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-eb69617d-1245-43e1-ac2a-9cbbe66c4ad4' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-4b4bbbe1-89aa-464c-b022-e7ec620dd481' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4b4bbbe1-89aa-464c-b022-e7ec620dd481' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c01036fa-8616-4a90-9fc2-95c7ecc71f62' class='xr-var-data-in' type='checkbox'><label for='data-c01036fa-8616-4a90-9fc2-95c7ecc71f62' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-245ce5e5-f7cf-4bd3-8c11-c45c7d92d934' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-245ce5e5-f7cf-4bd3-8c11-c45c7d92d934' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0a8d650a-abec-4fcc-be78-ff1869ed7e0d' class='xr-var-data-in' type='checkbox'><label for='data-0a8d650a-abec-4fcc-be78-ff1869ed7e0d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8eda5fe1-f5cc-4546-b076-5ca8c3c0c496' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8eda5fe1-f5cc-4546-b076-5ca8c3c0c496' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<ul class="simple">
+<li><p>NumPy <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a> (universal functions).</p>
+<ul>
+<li><p><em>Optimised in C (statically typed and compiled).</em></p></li>
+<li><p>Arbitrary Python function to NumPy ufunc:</p>
+<ul>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html"><code class="docutils literal notranslate"><span class="pre">np.frompyfunc</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html"><code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code></a>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">random_array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.25194569, 0.33972516, 0.02719451, 0.13872906, 0.92853763],
+       [0.8012418 , 0.22658831, 0.26848014, 0.61623393, 0.15318931],
+       [0.67426502, 0.79283828, 0.47126128, 0.14828248, 0.27016097],
+       [0.5192801 , 0.27843108, 0.50677245, 0.93838368, 0.44707201],
+       [0.5637202 , 0.12480102, 0.09322177, 0.20946835, 0.09838558]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compare an array to a threshold.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">array</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">array</span> <span class="o">-</span> <span class="n">threshold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">array</span> <span class="o">+</span> <span class="n">threshold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frompyfunc_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frompyfunc</span><span class="p">(</span>
+    <span class="n">my_function</span><span class="p">,</span> 
+    <span class="mi">2</span><span class="p">,</span> <span class="c1"># number of input arguments </span>
+    <span class="mi">1</span><span class="p">)</span> <span class="c1"># number of returned objects</span>
+<span class="n">frompyfunc_function</span><span class="p">(</span><span class="n">random_array</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.8, 0.8, 0.5, 0.6, 0.4],
+       [0.3, 0.7, 0.8, 0.1, 0.7],
+       [0.2, 0.3, 1.0, 0.6, 0.8],
+       [0.0, 0.8, 0.0, 0.4, 0.9],
+       [0.1, 0.6, 0.6, 0.7, 0.6]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frompyfunc_function</span><span class="o">.</span><span class="vm">__doc__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;my_function (vectorized)(x1, x2, /, out=None, *, where=True, casting=&#39;same_kind&#39;, order=&#39;K&#39;, dtype=None, subok=True[, signature, extobj])\n\ndynamic ufunc based on a python function&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+<span class="n">vectorized_function</span><span class="p">(</span><span class="n">random_array</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.8, 0.8, 0.5, 0.6, 0.4],
+       [0.3, 0.7, 0.8, 0.1, 0.7],
+       [0.2, 0.3, 1. , 0.6, 0.8],
+       [0. , 0.8, 0. , 0.4, 0.9],
+       [0.1, 0.6, 0.6, 0.7, 0.6]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function</span><span class="o">.</span><span class="vm">__doc__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Compare an array to a threshold.&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>

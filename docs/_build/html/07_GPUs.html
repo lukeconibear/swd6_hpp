@@ -252,8 +252,12 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="gpus">
 <h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
+<table align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/01_profiling.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+  </td>
+</table><p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs perform general computation.</p>
 <ul class="simple">
-<li><p><em>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs perform general computation.</em></p></li>
 <li><p><a class="reference external" href="https://cupy.dev/">cuPy</a> (NumPy).</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
@@ -269,6 +273,17 @@
 </ul>
 </li>
 </ul>
+<p>Many libraries can use GPUs automatically if they can detect one.</p>
+<p><a class="reference external" href="https://www.tensorflow.org/install/gpu"><code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://pytorch.org/docs/stable/notes/cuda.html"><code class="docutils literal notranslate"><span class="pre">PyTorch</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

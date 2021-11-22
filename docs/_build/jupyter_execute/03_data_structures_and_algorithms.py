@@ -3,6 +3,14 @@
 
 # # Data structures and algorithms
 
+# <table align="left">
+# 
+#   <td>
+#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/03_data_structures_and_algorithms.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+#   </td>
+# 
+# </table>
+
 # ## [Data structures](https://docs.python.org/3/library/datatypes.html)
 # - [Common](https://docs.python.org/3/tutorial/datastructures.html) and [additional data structures](https://docs.python.org/3/library/collections.html).
 

@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # [Compilers](https://youtu.be/I4nkgJdVZFA)
+# # Compilers
+
+# <table align="left">
+# 
+#   <td>
+#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/05_compilers.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+#   </td>
+# 
+# </table>
+
 # - [CPython](https://www.python.org/)
 #   - *Ahead-Of-Time (AOT) compiler.*
 #     - Statically compiled C extensions.
@@ -63,10 +72,20 @@ def super_function(nums):
     return nums + trace # broadcasting
 
 
+# The first call of the expression has an overhead to compile the function.
+
 # In[6]:
 
 
-get_ipython().run_line_magic('timeit', 'super_function(nums)')
+get_ipython().run_cell_magic('timeit', '-n 1 -r 1', 'super_function(nums)')
+
+
+# All subsequent calls use this compiled version, and are therefore much faster.
+
+# In[7]:
+
+
+get_ipython().run_cell_magic('timeit', '-n 1 -r 1', 'super_function(nums)')
 
 
 # - [Cython](https://cython.org/)
@@ -76,13 +95,13 @@ get_ipython().run_line_magic('timeit', 'super_function(nums)')
 #   - Helpful when need static typing.  
 #   - Examples [not using IPython](https://cython.readthedocs.io/en/latest/src/quickstart/build.html#building-a-cython-module-using-setuptools), [NumPy](https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html), [Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html) (example below).
 
-# In[7]:
+# In[8]:
 
 
 import pandas as pd
 
 
-# In[8]:
+# In[9]:
 
 
 df = pd.DataFrame({
@@ -94,7 +113,7 @@ df = pd.DataFrame({
 df.head()
 
 
-# In[9]:
+# In[10]:
 
 
 def f(x):
@@ -110,13 +129,13 @@ def integrate_f(a, b, N):
     return s * dx
 
 
-# In[10]:
+# In[11]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
 
 
-# In[11]:
+# In[12]:
 
 
 get_ipython().run_line_magic('load_ext', 'Cython')
@@ -124,25 +143,25 @@ get_ipython().run_line_magic('load_ext', 'Cython')
 
 # The only change below is the addition of the `%%cython` IPython magic command to state that this is a cython cell.
 
-# In[12]:
+# In[13]:
 
 
 get_ipython().run_cell_magic('cython', '', 'def f(x):\n    return x * (x - 1)\n   \n\ndef integrate_f(a, b, N):\n    s = 0\n    dx = (b - a) / N\n    for i in range(N):\n        s += f(a + i * dx)\n        \n    return s * dx')
 
 
-# In[13]:
+# In[14]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
 
 
-# In[14]:
+# In[15]:
 
 
 get_ipython().run_cell_magic('cython', '', 'cdef double f(double x) except? -2:                  # adding types\n    return x * (x - 1)\n   \n\ncpdef double integrate_f(double a, double b, int N): # adding types\n    cdef int i                                       # adding types\n    cdef double s, dx                                # adding types\n    s = 0\n    dx = (b - a) / N\n    for i in range(N):\n        s += f(a + i * dx)\n        \n    return s * dx')
 
 
-# In[15]:
+# In[16]:
 
 
 get_ipython().run_line_magic('timeit', 'df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)')
