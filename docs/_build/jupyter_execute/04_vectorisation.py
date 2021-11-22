@@ -3,13 +3,7 @@
 
 # # Vectorisation
 
-# <table align="left">
-# 
-#   <td>
-#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-#   </td>
-# 
-# </table>
+# [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb)
 
 # ## [Loop-invariants](https://en.wikipedia.org/wiki/Loop_invariant)
 # Move them *outside* the loop.

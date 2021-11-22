@@ -328,11 +328,18 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="parallelisation">
 <h1>Parallelisation<a class="headerlink" href="#parallelisation" title="Permalink to this headline">¶</a></h1>
-<table align="left">
-  <td>
-    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-  </td>
-</table><div class="section" id="what-is-it">
+<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">IN_COLAB</span> <span class="o">=</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="o">!</span>pip install dask<span class="o">[</span>dataframe<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="what-is-it">
 <h2>What is it?<a class="headerlink" href="#what-is-it" title="Permalink to this headline">¶</a></h2>
 <p>Parallelisation divides a large problem into many smaller ones and solves them <em>simultaneously</em>.</p>
 <ul class="simple">
@@ -387,491 +394,42 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-<span class="n">client</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-952f5783-4ba1-11ec-826f-d0946603a982</p>
-        <table style="width: 100%; text-align: left;">
-
-        <tr>
-
-            <td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
-            <td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
-
-        </tr>
-
-
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Dashboard: </strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                </td>
-                <td style="text-align: left;"></td>
-            </tr>
-
-
-        </table>
-
-
-            <details>
-            <summary style="margin-bottom: 20px;"><h3 style="display: inline;">Cluster Info</h3></summary>
-            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
-    </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">ccdcfaaf</p>
-        <table style="width: 100%; text-align: left;">
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                </td>
-                <td style="text-align: left;">
-                    <strong>Workers:</strong> 8
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Total threads:</strong> 40
-                </td>
-                <td style="text-align: left;">
-                    <strong>Total memory:</strong> 251.80 GiB
-                </td>
-            </tr>
-
-            <tr>
-    <td style="text-align: left;"><strong>Status:</strong> running</td>
-    <td style="text-align: left;"><strong>Using processes:</strong> True</td>
-</tr>
-
-
-        </table>
-
-        <details>
-            <summary style="margin-bottom: 20px;">
-                <h3 style="display: inline;">Scheduler Info</h3>
-            </summary>
-
-            <div style="">
-    <div>
-        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
-        <div style="margin-left: 48px;">
-            <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-88f099c4-c5fe-4a82-860a-f2b28b81c4f4</p>
-            <table style="width: 100%; text-align: left;">
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:35667
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Workers:</strong> 8
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Total threads:</strong> 40
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Started:</strong> Just now
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Total memory:</strong> 251.80 GiB
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <details style="margin-left: 48px;">
-        <summary style="margin-bottom: 20px;">
-            <h3 style="display: inline;">Workers</h3>
-        </summary>
-
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 0</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42638
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46039/status" target="_blank">http://127.0.0.1:46039/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37055
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-uubxyhzq
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 1</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37251
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38463/status" target="_blank">http://127.0.0.1:38463/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40615
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-e1qb6t85
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 2</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40809
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41180/status" target="_blank">http://127.0.0.1:41180/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36807
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-y5b3fsv1
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 3</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44573
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37423/status" target="_blank">http://127.0.0.1:37423/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38479
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-bfbjq3wb
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 4</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33076
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:32973/status" target="_blank">http://127.0.0.1:32973/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41610
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-vjx6i4yt
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 5</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:35424
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40961/status" target="_blank">http://127.0.0.1:40961/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40751
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-ltz7yqu0
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 6</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:35571
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35900/status" target="_blank">http://127.0.0.1:35900/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41098
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-2170deu2
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 7</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:36720
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 5
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37017/status" target="_blank">http://127.0.0.1:37017/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 31.47 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39299
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-o1xpf5lv
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-
-    </details>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_135845</span><span class="o">/</span><span class="mf">1700138376.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;client&#39; is not defined
+</pre></div>
 </div>
-
-        </details>
-    </div>
 </div>
-            </details>
-
-
-    </div>
-</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    <span class="n">client</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-ltz7yqu0&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-vjx6i4yt&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-o1xpf5lv&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-2170deu2&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-uubxyhzq&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-e1qb6t85&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-bfbjq3wb&#39;, purging
+distributed.diskutils - INFO - Found stale lock file and directory &#39;/nfs/see-fs-02_users/earlacoa/swd6_hpp/docs/dask-worker-space/worker-y5b3fsv1&#39;, purging
+</pre></div>
+</div>
+</div>
 </div>
 <p>If want multiple threads, then could use keyword arguments in Client instance:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">threads_per_worker</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1275,7 +833,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-717b71d4-f08b-42b3-8af6-e99d868259c2' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-717b71d4-f08b-42b3-8af6-e99d868259c2' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-4e99f3b7-e31e-4bbd-a577-10d30f1efaf5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-4e99f3b7-e31e-4bbd-a577-10d30f1efaf5' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-f569ec00-b495-4fd9-95ba-f2663d29e7e4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f569ec00-b495-4fd9-95ba-f2663d29e7e4' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-edf313b4-c56b-4a98-9c23-7c53b70fd5d7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-edf313b4-c56b-4a98-9c23-7c53b70fd5d7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2db89ec2-9de4-46a1-bbcc-082dc6c036d7' class='xr-var-data-in' type='checkbox'><label for='data-2db89ec2-9de4-46a1-bbcc-082dc6c036d7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f2cde764-e721-4d8d-a840-72e500fea0ef' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f2cde764-e721-4d8d-a840-72e500fea0ef' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ec9d2ac3-8b8b-45a2-85c6-634e29fb4ad5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ec9d2ac3-8b8b-45a2-85c6-634e29fb4ad5' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-6cacf6da-cd20-40b6-a133-8d2e782831e1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6cacf6da-cd20-40b6-a133-8d2e782831e1' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-6ef956f9-5d63-44e3-a7db-7546b7ae0a7e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6ef956f9-5d63-44e3-a7db-7546b7ae0a7e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43b9e446-7a1a-49ca-8102-4d69bba58deb' class='xr-var-data-in' type='checkbox'><label for='data-43b9e446-7a1a-49ca-8102-4d69bba58deb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table>
@@ -1316,7 +874,7 @@ Data variables:
 
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-43443fa6-d61c-4577-9ebf-0ba37f4717c3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-43443fa6-d61c-4577-9ebf-0ba37f4717c3' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-ab4151d1-dd6c-4d14-afbc-cf9f5b356284' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ab4151d1-dd6c-4d14-afbc-cf9f5b356284' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1679,7 +1237,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9acfc34e-f990-45f9-92fa-8723d2211e2d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9acfc34e-f990-45f9-92fa-8723d2211e2d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ac5f46b5-853a-417b-b14a-3ba5822ca4e1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ac5f46b5-853a-417b-b14a-3ba5822ca4e1' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d285720b-579d-4710-83a8-e13465973deb' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d285720b-579d-4710-83a8-e13465973deb' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-c1fe76c0-f7a2-427b-b571-b7c7b0bb3473' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c1fe76c0-f7a2-427b-b571-b7c7b0bb3473' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d7a48372-9027-4ff4-a89e-bbe42c0fcd66' class='xr-var-data-in' type='checkbox'><label for='data-d7a48372-9027-4ff4-a89e-bbe42c0fcd66' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e5353d4b-5a05-4051-945a-dd007e6c2587' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e5353d4b-5a05-4051-945a-dd007e6c2587' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2b3b1136-2cd6-402e-8903-63857ba53225' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2b3b1136-2cd6-402e-8903-63857ba53225' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0d977caf-074a-4032-a77f-fa07c2a93b16' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0d977caf-074a-4032-a77f-fa07c2a93b16' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-5223e8a0-30f7-409b-a7d0-194679a3dc16' class='xr-section-summary-in' type='checkbox'  checked><label for='section-5223e8a0-30f7-409b-a7d0-194679a3dc16' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-9a7169df-77d3-40ea-ac6e-5d181ba38685' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9a7169df-77d3-40ea-ac6e-5d181ba38685' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-327ca54b-bb73-4fe7-a347-bb6a3162b7d7' class='xr-var-data-in' type='checkbox'><label for='data-327ca54b-bb73-4fe7-a347-bb6a3162b7d7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c9cba642-bbab-4c35-a8b4-73a08995414d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c9cba642-bbab-4c35-a8b4-73a08995414d' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1803,7 +1361,8 @@ Data variables:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1950,7 +1509,7 @@ Dask Name: sqrt, 67 tasks
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/06_parallelisation_31_0.png" src="_images/06_parallelisation_31_0.png" />
+<img alt="_images/06_parallelisation_33_0.png" src="_images/06_parallelisation_33_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1997,23 +1556,15 @@ Dask Name: sqrt, 67 tasks
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-<span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">weird_function</span><span class="p">)</span>
-<span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">weird_function</span><span class="p">)</span>
+    
+    <span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2023,8 +1574,8 @@ Dask Name: sqrt, 67 tasks
 <h3><a class="reference external" href="https://docs.dask.org/en/latest/setup/hpc.html">Dask on HPC</a><a class="headerlink" href="#dask-on-hpc" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Non-interactive</p></li>
-<li><p>Create/edit the <code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code> file.</p></li>
-<li><p>Submit to the queue using <code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code>.</p></li>
+<li><p>Create/edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py"><code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code></a> file.</p></li>
+<li><p>Submit to the queue using <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash"><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code></a>.</p></li>
 </ul>
 <p>If need to share memory across chunks:</p>
 <ul class="simple">
@@ -2041,8 +1592,8 @@ Dask Name: sqrt, 67 tasks
 <h3><a class="reference external" href="https://pangeo.io/setup_guides/hpc.html">Interactive Jupyter/Dask on HPC</a><a class="headerlink" href="#interactive-jupyter-dask-on-hpc" title="Permalink to this headline">¶</a></h3>
 <p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
 <ul class="simple">
-<li><p>Create or edit the <code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code> file within this repository.</p></li>
-<li><p>Check the <code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code> file with this repository.</p></li>
+<li><p>Create or edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code></a> file within this repository.</p></li>
+<li><p>Check the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code></a> file with this repository.</p></li>
 </ul>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">

@@ -3,13 +3,7 @@
 
 # # GPUs
 
-# <table align="left">
-# 
-#   <td>
-#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/01_profiling.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-#   </td>
-# 
-# </table>
+# [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb)
 
 # GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs perform general computation.
 # - [cuPy](https://cupy.dev/) (NumPy).

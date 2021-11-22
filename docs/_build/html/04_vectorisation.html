@@ -271,11 +271,8 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="vectorisation">
 <h1>Vectorisation<a class="headerlink" href="#vectorisation" title="Permalink to this headline">¶</a></h1>
-<table align="left">
-  <td>
-    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-  </td>
-</table><div class="section" id="loop-invariants">
+<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/04_vectorisation.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="section" id="loop-invariants">
 <h2><a class="reference external" href="https://en.wikipedia.org/wiki/Loop_invariant">Loop-invariants</a><a class="headerlink" href="#loop-invariants" title="Permalink to this headline">¶</a></h2>
 <p>Move them <em>outside</em> the loop.</p>
 <div class="cell docutils container">
@@ -288,7 +285,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>154 ms ± 2.9 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>153 ms ± 6.07 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -303,7 +300,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>155 ms ± 7.31 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>150 ms ± 4.93 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -342,7 +339,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>184 ms ± 10.8 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>184 ms ± 4.82 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -355,7 +352,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>874 µs ± 41.5 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>875 µs ± 38.9 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -758,10 +755,10 @@ array([[ 0,  1,  2],
        [30, 31, 32]])
 Coordinates:
   * col      (col) int64 0 10 20 30
-  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-352de3f2-b32e-44e6-a43c-2673fe5dff36' class='xr-array-in' type='checkbox' checked><label for='section-352de3f2-b32e-44e6-a43c-2673fe5dff36' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
+  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-2ae20424-79a0-45ee-908b-240189ad10c6' class='xr-array-in' type='checkbox' checked><label for='section-2ae20424-79a0-45ee-908b-240189ad10c6' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
        [10, 11, 12],
        [20, 21, 22],
-       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-eb69617d-1245-43e1-ac2a-9cbbe66c4ad4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-eb69617d-1245-43e1-ac2a-9cbbe66c4ad4' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-4b4bbbe1-89aa-464c-b022-e7ec620dd481' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4b4bbbe1-89aa-464c-b022-e7ec620dd481' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c01036fa-8616-4a90-9fc2-95c7ecc71f62' class='xr-var-data-in' type='checkbox'><label for='data-c01036fa-8616-4a90-9fc2-95c7ecc71f62' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-245ce5e5-f7cf-4bd3-8c11-c45c7d92d934' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-245ce5e5-f7cf-4bd3-8c11-c45c7d92d934' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0a8d650a-abec-4fcc-be78-ff1869ed7e0d' class='xr-var-data-in' type='checkbox'><label for='data-0a8d650a-abec-4fcc-be78-ff1869ed7e0d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8eda5fe1-f5cc-4546-b076-5ca8c3c0c496' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8eda5fe1-f5cc-4546-b076-5ca8c3c0c496' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-48808cbd-dbf2-4afb-9ec1-78fe0f92a717' class='xr-section-summary-in' type='checkbox'  checked><label for='section-48808cbd-dbf2-4afb-9ec1-78fe0f92a717' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-29730b9e-1654-4512-bc69-f09015d4e92e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-29730b9e-1654-4512-bc69-f09015d4e92e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-578676c1-f0df-4acd-8e6f-e1a7043b2a43' class='xr-var-data-in' type='checkbox'><label for='data-578676c1-f0df-4acd-8e6f-e1a7043b2a43' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-677138a7-d7d6-4274-addc-b30d8bb589ab' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-677138a7-d7d6-4274-addc-b30d8bb589ab' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-24c742a0-2fbe-4742-af0d-84fa6ac5afb1' class='xr-var-data-in' type='checkbox'><label for='data-24c742a0-2fbe-4742-af0d-84fa6ac5afb1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7c68475a-63fd-4479-8c34-8c1f71f8a7e0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-7c68475a-63fd-4479-8c34-8c1f71f8a7e0' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <ul class="simple">
 <li><p>NumPy <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a> (universal functions).</p>
@@ -784,11 +781,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.25194569, 0.33972516, 0.02719451, 0.13872906, 0.92853763],
-       [0.8012418 , 0.22658831, 0.26848014, 0.61623393, 0.15318931],
-       [0.67426502, 0.79283828, 0.47126128, 0.14828248, 0.27016097],
-       [0.5192801 , 0.27843108, 0.50677245, 0.93838368, 0.44707201],
-       [0.5637202 , 0.12480102, 0.09322177, 0.20946835, 0.09838558]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.08363296, 0.71772974, 0.45654356, 0.02626162, 0.78983075],
+       [0.31535915, 0.64392175, 0.57541925, 0.34337438, 0.13889639],
+       [0.4415607 , 0.39573831, 0.04245232, 0.44945413, 0.06639697],
+       [0.41642298, 0.68569754, 0.05503424, 0.5437495 , 0.31490221],
+       [0.34783376, 0.39664827, 0.06425334, 0.84674921, 0.78051883]])
 </pre></div>
 </div>
 </div>
@@ -816,11 +813,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.8, 0.8, 0.5, 0.6, 0.4],
-       [0.3, 0.7, 0.8, 0.1, 0.7],
-       [0.2, 0.3, 1.0, 0.6, 0.8],
-       [0.0, 0.8, 0.0, 0.4, 0.9],
-       [0.1, 0.6, 0.6, 0.7, 0.6]], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.2, 1.0, 0.5, 0.3],
+       [0.8, 0.1, 0.1, 0.8, 0.6],
+       [0.9, 0.9, 0.5, 0.9, 0.6],
+       [0.9, 0.2, 0.6, 0.0, 0.8],
+       [0.8, 0.9, 0.6, 0.3, 0.3]], dtype=object)
 </pre></div>
 </div>
 </div>
@@ -845,11 +842,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.8, 0.8, 0.5, 0.6, 0.4],
-       [0.3, 0.7, 0.8, 0.1, 0.7],
-       [0.2, 0.3, 1. , 0.6, 0.8],
-       [0. , 0.8, 0. , 0.4, 0.9],
-       [0.1, 0.6, 0.6, 0.7, 0.6]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.2, 1. , 0.5, 0.3],
+       [0.8, 0.1, 0.1, 0.8, 0.6],
+       [0.9, 0.9, 0.5, 0.9, 0.6],
+       [0.9, 0.2, 0.6, 0. , 0.8],
+       [0.8, 0.9, 0.6, 0.3, 0.3]])
 </pre></div>
 </div>
 </div>

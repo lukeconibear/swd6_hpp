@@ -1,31 +1,34 @@
-# swd6_hpp
+# SWD6: High performance Python
 
-SWD6: High performance Python
+## THIS BOOK IS A WORK IN PROGRESS.
+## MANY PAGES ARE INCOMPLETE OR HAVE ERRORS.
 
-## Usage
+Booking for this course is through the IT Training Unit.  
 
-### Building the book
+Click [here](https://uolr3.leeds.ac.uk/temcatsearch(bD1lbiZjPTUwMA==)/courses.htm?sap-params=Z2Rfa2V5d29yZHM9U1dEJTIwNiUzYSUyMEhpZ2glMjBQZXJmb3JtYW5jZSZnZF9zdHlwZT0mZ2RfdHV0b3I9TGFzdCUyMG5hbWUmZGF0ZTE9ZGQlMmZtbSUyZnl5eXkmZGF0ZTI9ZGQlMmZtbSUyZnl5eXkmZGF0ZTE9MDAuMDAuMDAwMCZkYXRlMj0wMC4wMC4wMDAwJnByb3ZpZGVybGlzdD0wJmFuZG9yPUFORCZzb3J0PUJFR0RBJmdkX2NhbGxpZD1JTklUSUFMJnN0eWxlPQ%3d%3d) to book.  
 
-If you'd like to develop and/or build the swd6_hpp book, you should:
+## Content
+Over the past few years, Python and the wider Python ecosystem have become invaluable tools in scientific computing and data analytics. As Python is (for the most part) an interpreted language there are complaints that Python code can be quite slow to execute. In this hands-on workshop you will have the opportunity discover and use a set of tools and techniques that can be used to improve the execution speed of your Python code. The workshop will introduce a number of ways to both measure the efficiency of your code and improve it’s speed of execution by introducing strategies for fast and scalable computation with Python.
 
-1. Clone this repository
-2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
-3. (Optional) Edit the books source files located in the `swd6_hpp/` directory
-4. Run `jupyter-book clean swd6_hpp/` to remove any existing builds
-5. Run `jupyter-book build swd6_hpp/`
+This workshop includes:
+- Optimisation
+- Profiling
+- Built-in functions
+- Data structures and algorithms (caching, lazy loading)
+- Vectorisation
+- Compilers ([CPython](https://www.python.org/), [PyPy](https://www.pypy.org/), [Numba](http://numba.pydata.org/), [Cython](https://cython.org/))
+- Parallelisation ([Dask](https://docs.dask.org/en/latest/), [Ray](https://www.ray.io/))
+- GPUs
 
-A fully-rendered HTML version of the book will be built in `swd6_hpp/_build/html/`.
+## Prerequisites
+We recommend that attendees have a working knowledge of the Unix shell (although this is not essential) and are proficient Python programmers. If you need to learn how to program in Python, please attend SWD1a: Introduction to Python programming. It is strongly recommended that you bring your own laptop to this workshop with some specific software installed. Further information will be provided when you are accepted onto the course.
 
-### Hosting the book
+## Duration
+1 day
 
-Please see the [Jupyter Book documentation](https://jupyterbook.org/publish/web.html) to discover options for deploying a book online using services such as GitHub, GitLab, or Netlify.
+## Frequency
+This workshop usually runs once each academic year.  
+If you would like a bespoke version of this course run in your department, then please [contact us](https://bit.ly/arc-help).  
 
-For GitHub and GitLab deployment specifically, the [cookiecutter-jupyter-book](https://github.com/executablebooks/cookiecutter-jupyter-book) includes templates for, and information about, optional continuous integration (CI) workflow files to help easily and automatically deploy books online with GitHub or GitLab. For example, if you chose `github` for the `include_ci` cookiecutter option, your book template was created with a GitHub actions workflow file that, once pushed to GitHub, automatically renders and pushes your book to the `gh-pages` branch of your repo and hosts it on GitHub Pages when a push or pull request is made to the main branch.
-
-## Contributors
-
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/lukeconibear/swd6_hpp/graphs/contributors).
-
-## Credits
-
-This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/) and the [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
+## Suitability
+Research postgraduate students and above; teaching and lecturing staff.

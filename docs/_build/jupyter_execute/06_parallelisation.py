@@ -3,13 +3,16 @@
 
 # # Parallelisation
 
-# <table align="left">
-# 
-#   <td>
-#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-#   </td>
-# 
-# </table>
+# [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb)
+
+# In[1]:
+
+
+import sys
+IN_COLAB = 'google.colab' in sys.modules
+if IN_COLAB:
+    get_ipython().system('pip install dask[dataframe]')
+
 
 # ## What is it?
 # 
@@ -58,19 +61,26 @@
 # 
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[1]:
+# In[2]:
 
 
 from IPython.display import IFrame
 IFrame(src='https://www.youtube.com/embed/ods97a5Pzw0', width='560', height='315')
 
 
-# In[2]:
+# In[3]:
 
 
-from dask.distributed import Client
-client = Client()
-client 
+client.close()
+
+
+# In[25]:
+
+
+if not IN_COLAB:
+    from dask.distributed import Client
+    client = Client()
+    client 
 
 
 # If want multiple threads, then could use keyword arguments in Client instance:
@@ -85,13 +95,13 @@ client
 
 # ### Dask behind the scenes
 
-# In[3]:
+# In[1]:
 
 
 import xarray as xr
 
 
-# In[4]:
+# In[9]:
 
 
 ds = xr.tutorial.open_dataset(
@@ -100,26 +110,26 @@ ds = xr.tutorial.open_dataset(
 )
 
 
-# In[5]:
+# In[10]:
 
 
 ds.nbytes * (2 ** -30)
 
 
-# In[6]:
+# In[15]:
 
 
 ds_mean = ds.mean()
 ds_mean # a dask.array (an unexecuted task graph)
 
 
-# In[7]:
+# In[16]:
 
 
 ds_mean.compute()
 
 
-# In[8]:
+# In[23]:
 
 
 ds.close()
@@ -128,19 +138,19 @@ ds.close()
 # ### [dask.array](https://examples.dask.org/array.html) (NumPy)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[9]:
+# In[5]:
 
 
 IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
 
 
-# In[10]:
+# In[28]:
 
 
 import dask.array as da
 
 
-# In[11]:
+# In[29]:
 
 
 my_array = da.random.random(
@@ -151,10 +161,11 @@ result = my_array + my_array.T
 result
 
 
-# In[12]:
+# In[30]:
 
 
-result.compute()
+if not IN_COLAB:
+    result.compute()
 
 
 # ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
@@ -237,28 +248,22 @@ def weird_function(nums):
 # In[ ]:
 
 
-bag = db.from_sequence(nums)
-bag = bag.map(weird_function)
-bag.visualize()
-
-
-# In[ ]:
-
-
-result = bag.compute()
-
-
-# In[ ]:
-
-
-cluster.close()
+if not IN_COLAB:
+    bag = db.from_sequence(nums)
+    bag = bag.map(weird_function)
+    
+    bag.visualize()
+    
+    result = bag.compute()
+    
+    client.close()
 
 
 # ### [Dask on HPC](https://docs.dask.org/en/latest/setup/hpc.html)
 # 
 # - Non-interactive
-# - Create/edit the `dask_on_hpc.py` file.
-# - Submit to the queue using `qsub dask_on_hpc.bash`.
+# - Create/edit the [`dask_on_hpc.py`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py) file.
+# - Submit to the queue using [`qsub dask_on_hpc.bash`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash).
 # 
 # If need to share memory across chunks:  
 # - Use [shared memory](https://docs.dask.org/en/latest/shared.html) (commonly OpenMP, Open Multi-Processing).
@@ -270,8 +275,8 @@ cluster.close()
 
 # ### [Interactive Jupyter/Dask on HPC](https://pangeo.io/setup_guides/hpc.html)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
-# - Create or edit the `~/.config/dask/jobqueue.yaml` file within this repository.
-# - Check the `~/.config/dask/distributed.yaml` file with this repository.
+# - Create or edit the [`~/.config/dask/jobqueue.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml) file within this repository.
+# - Check the [`~/.config/dask/distributed.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml) file with this repository.
 
 # In[8]:
 

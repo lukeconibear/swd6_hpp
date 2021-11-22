@@ -3,13 +3,17 @@
 
 # # Profiling
 
-# <table align="left">
-# 
-#   <td>
-#     <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/01_profiling.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-#   </td>
-# 
-# </table>
+# [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/01_profiling.ipynb)
+
+# In[1]:
+
+
+# if you're using colab, then install the required modules
+import sys
+IN_COLAB = 'google.colab' in sys.modules
+if IN_COLAB:
+    get_ipython().system('pip install line_profiler memory_profiler pyinstrument')
+
 
 # [Profiling](https://jakevdp.github.io/PythonDataScienceHandbook/01.07-timing-and-profiling.html) analyses your code in terms of speed and/or memory. This can help identify where the bottlenecks are and how much potential there is for improvement.
 
@@ -20,7 +24,7 @@
 # 
 # These have one `%` at the start for a single line:
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().run_line_magic('timeit', 'range(100)')
@@ -28,7 +32,7 @@ get_ipython().run_line_magic('timeit', 'range(100)')
 
 # Or two `%%` at the start for a cell:
 
-# In[2]:
+# In[3]:
 
 
 get_ipython().run_cell_magic('timeit', '', 'for x in range(100):\n    pass')
@@ -38,7 +42,7 @@ get_ipython().run_cell_magic('timeit', '', 'for x in range(100):\n    pass')
 # - [`cProfile`](https://docs.python.org/3/library/profile.html#module-cProfile)
 # - [`profile`](https://docs.python.org/3/library/profile.html#module-profile)
 
-# In[3]:
+# In[4]:
 
 
 def my_function():
@@ -48,13 +52,13 @@ def my_function():
     return a
 
 
-# In[4]:
+# In[5]:
 
 
 import cProfile
 
 
-# In[5]:
+# In[6]:
 
 
 cProfile.run('my_function()')
@@ -66,13 +70,13 @@ cProfile.run('my_function()')
 # 
 # The `line_profiler` module measures the time spent in each line of a function.
 
-# In[6]:
+# In[7]:
 
 
 get_ipython().run_line_magic('load_ext', 'line_profiler')
 
 
-# In[7]:
+# In[8]:
 
 
 get_ipython().run_line_magic('lprun', '-f my_function my_function()')
@@ -82,13 +86,13 @@ get_ipython().run_line_magic('lprun', '-f my_function my_function()')
 # 
 # The `memory_profiler` module measures the memory used by a function, at its peak and the overall increment.
 
-# In[8]:
+# In[9]:
 
 
 get_ipython().run_line_magic('load_ext', 'memory_profiler')
 
 
-# In[9]:
+# In[10]:
 
 
 get_ipython().run_line_magic('memit', 'my_function()')
@@ -98,13 +102,13 @@ get_ipython().run_line_magic('memit', 'my_function()')
 # 
 # Note, `%%file <filename>` is another IPython magic command, to write the cell contents to disk.
 
-# In[10]:
+# In[11]:
 
 
 get_ipython().run_cell_magic('file', 'mprun_example.py', '\ndef my_function():\n    a = [1] * (10**6)\n    b = [2] * (2 * 10**7)\n    del b\n    return a')
 
 
-# In[11]:
+# In[12]:
 
 
 from mprun_example import my_function
@@ -115,14 +119,14 @@ get_ipython().run_line_magic('mprun', '-f my_function my_function()')
 # 
 # `pyinstrument` is a statistical profiling module of wall-clock time (recording the call stack every 1ms), lowering the overhead compared to tracing profilers. It hides library frames, so you can focus on the slow parts of your code. The output shows *how* the function executes using a traffic light colour legend.
 
-# In[12]:
+# In[13]:
 
 
 import time
 get_ipython().run_line_magic('load_ext', 'pyinstrument')
 
 
-# In[13]:
+# In[14]:
 
 
 get_ipython().run_cell_magic('pyinstrument', '', 'def a():\n    b()\n    c()\ndef b():\n    d()\ndef c():\n    d()\ndef d():\n    e()\ndef e():\n    time.sleep(1)\na()')
