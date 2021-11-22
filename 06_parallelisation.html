@@ -334,7 +334,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
 <span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="o">!</span>pip install dask<span class="o">[</span>dataframe<span class="o">]</span>
+    <span class="o">!</span>pip install dask<span class="o">[</span>dataframe<span class="o">]</span> joblib
 </pre></div>
 </div>
 </div>
@@ -348,7 +348,7 @@
 <li><p>Multi-processing (cores)</p>
 <ul>
 <li><p>Useful for compute-bound problems.</p></li>
-<li><p>Don’t need to worry about the GIL.</p></li>
+<li><p>Don’t need to worry about the <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock, GIL</a>.</p></li>
 </ul>
 </li>
 <li><p>Multi-threading (parts of processes)</p>
@@ -360,7 +360,7 @@
 </div>
 <div class="section" id="parallelising-a-python">
 <h2>Parallelising a Python?<a class="headerlink" href="#parallelising-a-python" title="Permalink to this headline">¶</a></h2>
-<p>Python itself is not designed for massive scalability and controls threads preemptively using a <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock, GIL</a>. This has lead many libraries to work around this using C/C++ backends.</p>
+<p>Python itself is not designed for massive scalability and controls threads preemptively using the GIL. This has lead many libraries to work around this using C/C++ backends.</p>
 <p>Some options include:</p>
 <p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a> for creating a pool of asynchronous workers.</p>
 <div class="cell docutils container">
@@ -402,7 +402,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2199</span><span class="o">/</span><span class="mf">270641994.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2068</span><span class="o">/</span><span class="mf">270641994.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">joblib</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">math</span>
 
