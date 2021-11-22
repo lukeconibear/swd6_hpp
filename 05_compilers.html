@@ -265,8 +265,12 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="compilers">
-<h1><a class="reference external" href="https://youtu.be/I4nkgJdVZFA">Compilers</a><a class="headerlink" href="#compilers" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
+<h1>Compilers<a class="headerlink" href="#compilers" title="Permalink to this headline">¶</a></h1>
+<table align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/05_compilers.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+  </td>
+</table><ul class="simple">
 <li><p><a class="reference external" href="https://www.python.org/">CPython</a></p>
 <ul>
 <li><p><em>Ahead-Of-Time (AOT) compiler.</em></p>
@@ -345,7 +349,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.73 s ± 8.57 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.57 s ± 32.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -362,14 +366,30 @@
 </div>
 </div>
 </div>
+<p>The first call of the expression has an overhead to compile the function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> super_function(nums)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it -n 1 -r 1
+<span class="n">super_function</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.2 ms ± 97.2 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>325 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>All subsequent calls use this compiled version, and are therefore much faster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it -n 1 -r 1
+<span class="n">super_function</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.1 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -432,37 +452,37 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.188121</td>
-      <td>1.811415</td>
-      <td>952</td>
+      <td>1.323720</td>
+      <td>2.702858</td>
+      <td>444</td>
       <td>x</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-0.404679</td>
-      <td>0.773721</td>
-      <td>141</td>
+      <td>2.152351</td>
+      <td>-1.279387</td>
+      <td>558</td>
       <td>x</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.052212</td>
-      <td>-0.437149</td>
-      <td>777</td>
+      <td>-0.039661</td>
+      <td>0.504070</td>
+      <td>151</td>
       <td>x</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>-0.764506</td>
-      <td>0.821006</td>
-      <td>120</td>
+      <td>0.493289</td>
+      <td>-0.364462</td>
+      <td>603</td>
       <td>x</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3.446457</td>
-      <td>0.167174</td>
-      <td>695</td>
+      <td>-0.241828</td>
+      <td>-0.028767</td>
+      <td>348</td>
       <td>x</td>
     </tr>
   </tbody>
@@ -493,7 +513,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120 ms ± 120 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>141 ms ± 3.14 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -531,7 +551,7 @@ def integrate_f(a, b, N):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.1 ms ± 94.2 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.1 ms ± 1.56 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -563,7 +583,7 @@ cpdef double integrate_f(double a, double b, int N): # adding types
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16 ms ± 24.6 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.3 ms ± 459 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
