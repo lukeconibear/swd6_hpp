@@ -243,6 +243,23 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#len">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     len
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -251,11 +268,11 @@
         
               <div>
                 
-  <div class="section" id="built-in-functions">
+  <div class="tex2jax_ignore mathjax_ignore section" id="built-in-functions">
 <h1><a class="reference external" href="https://docs.python.org/3/library/functions.html">Built-in functions</a><a class="headerlink" href="#built-in-functions" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><em>Optimised in C (statically typed and compiled).</em></p></li>
-</ul>
+<p>Optimised in C (statically typed and compiled).</p>
+<div class="section" id="len">
+<h2><a class="reference external" href="https://docs.python.org/3/library/functions.html#len"><code class="docutils literal notranslate"><span class="pre">len</span></code></a><a class="headerlink" href="#len" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)]</span>
@@ -273,7 +290,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.3 ms ± 1.86 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.7 ms ± 428 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -285,8 +302,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83.4 ns ± 3.84 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64.5 ns ± 0.336 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
+</div>
 </div>
 </div>
 </div>
