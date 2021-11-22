@@ -328,11 +328,18 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="parallelisation">
 <h1>Parallelisation<a class="headerlink" href="#parallelisation" title="Permalink to this headline">¶</a></h1>
-<table align="left">
-  <td>
-    <a href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-  </td>
-</table><div class="section" id="what-is-it">
+<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_parallelisation.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">IN_COLAB</span> <span class="o">=</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="o">!</span>pip install dask<span class="o">[</span>dataframe<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="what-is-it">
 <h2>What is it?<a class="headerlink" href="#what-is-it" title="Permalink to this headline">¶</a></h2>
 <p>Parallelisation divides a large problem into many smaller ones and solves them <em>simultaneously</em>.</p>
 <ul class="simple">
@@ -387,221 +394,13 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-<span class="n">client</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    <span class="n">client</span> 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-0d176ae6-4ba3-11ec-8813-a38a4103a4cf</p>
-        <table style="width: 100%; text-align: left;">
-
-        <tr>
-
-            <td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
-            <td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
-
-        </tr>
-
-
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Dashboard: </strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                </td>
-                <td style="text-align: left;"></td>
-            </tr>
-
-
-        </table>
-
-
-            <details>
-            <summary style="margin-bottom: 20px;"><h3 style="display: inline;">Cluster Info</h3></summary>
-            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
-    </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">f2548b7a</p>
-        <table style="width: 100%; text-align: left;">
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                </td>
-                <td style="text-align: left;">
-                    <strong>Workers:</strong> 2
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">
-                    <strong>Total threads:</strong> 2
-                </td>
-                <td style="text-align: left;">
-                    <strong>Total memory:</strong> 6.79 GiB
-                </td>
-            </tr>
-
-            <tr>
-    <td style="text-align: left;"><strong>Status:</strong> running</td>
-    <td style="text-align: left;"><strong>Using processes:</strong> True</td>
-</tr>
-
-
-        </table>
-
-        <details>
-            <summary style="margin-bottom: 20px;">
-                <h3 style="display: inline;">Scheduler Info</h3>
-            </summary>
-
-            <div style="">
-    <div>
-        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
-        <div style="margin-left: 48px;">
-            <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-99ca6e30-168d-4db1-b650-0e3fd109c1b5</p>
-            <table style="width: 100%; text-align: left;">
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:36111
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Workers:</strong> 2
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Total threads:</strong> 2
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;">
-                        <strong>Started:</strong> Just now
-                    </td>
-                    <td style="text-align: left;">
-                        <strong>Total memory:</strong> 6.79 GiB
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <details style="margin-left: 48px;">
-        <summary style="margin-bottom: 20px;">
-            <h3 style="display: inline;">Workers</h3>
-        </summary>
-
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 0</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45311
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35317/status" target="_blank">http://127.0.0.1:35317/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 3.39 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35617
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-5dst3u0r
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 1</h4>
-                </summary>
-                <table style="width: 100%; text-align: left;">
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44945
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Total threads: </strong> 1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35751/status" target="_blank">http://127.0.0.1:35751/status</a>
-                        </td>
-                        <td style="text-align: left;">
-                            <strong>Memory: </strong> 3.39 GiB
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:44169
-                        </td>
-                        <td style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-mvhx70jv
-                        </td>
-                    </tr>
-
-
-
-
-
-                </table>
-            </details>
-            </div>
-        </div>
-
-
-    </details>
-</div>
-
-        </details>
-    </div>
-</div>
-            </details>
-
-
-    </div>
-</div></div></div>
 </div>
 <p>If want multiple threads, then could use keyword arguments in Client instance:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">threads_per_worker</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -643,7 +442,7 @@
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2067</span><span class="o">/</span><span class="mf">286459396.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2123</span><span class="o">/</span><span class="mf">286459396.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">tutorial</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="s1">&#39;air_temperature&#39;</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">}</span> <span class="c1"># dask chunks</span>
@@ -1483,10 +1282,88 @@ Data variables:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+    <tr>
+        <td>
+            <table>
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 18.63 GiB </td>
+                        <td> 190.73 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (50000, 50000) </td>
+                        <td> (5000, 5000) </td>
+                    </tr>
+                    <tr>
+                        <th> Count </th>
+                        <td> 300 Tasks </td>
+                        <td> 100 Chunks </td>
+                    </tr>
+                    <tr>
+                    <th> Type </th>
+                    <td> float64 </td>
+                    <td> numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="170" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="36" x2="120" y2="36" />
+  <line x1="0" y1="48" x2="120" y2="48" />
+  <line x1="0" y1="60" x2="120" y2="60" />
+  <line x1="0" y1="72" x2="120" y2="72" />
+  <line x1="0" y1="84" x2="120" y2="84" />
+  <line x1="0" y1="96" x2="120" y2="96" />
+  <line x1="0" y1="108" x2="120" y2="108" />
+  <line x1="0" y1="120" x2="120" y2="120" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="120" style="stroke-width:2" />
+  <line x1="12" y1="0" x2="12" y2="120" />
+  <line x1="24" y1="0" x2="24" y2="120" />
+  <line x1="36" y1="0" x2="36" y2="120" />
+  <line x1="48" y1="0" x2="48" y2="120" />
+  <line x1="60" y1="0" x2="60" y2="120" />
+  <line x1="72" y1="0" x2="72" y2="120" />
+  <line x1="84" y1="0" x2="84" y2="120" />
+  <line x1="96" y1="0" x2="96" y2="120" />
+  <line x1="108" y1="0" x2="108" y2="120" />
+  <line x1="120" y1="0" x2="120" y2="120" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,120.0 0.0,120.0" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="140.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" >50000</text>
+  <text x="140.000000" y="60.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,60.000000)">50000</text>
+</svg>
+        </td>
+    </tr>
+</table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1633,7 +1510,7 @@ Dask Name: sqrt, 67 tasks
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/06_parallelisation_31_0.png" src="_images/06_parallelisation_31_0.png" />
+<img alt="_images/06_parallelisation_32_0.png" src="_images/06_parallelisation_32_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1680,23 +1557,15 @@ Dask Name: sqrt, 67 tasks
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-<span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">weird_function</span><span class="p">)</span>
-<span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">weird_function</span><span class="p">)</span>
+    
+    <span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1706,8 +1575,8 @@ Dask Name: sqrt, 67 tasks
 <h3><a class="reference external" href="https://docs.dask.org/en/latest/setup/hpc.html">Dask on HPC</a><a class="headerlink" href="#dask-on-hpc" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Non-interactive</p></li>
-<li><p>Create/edit the <code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code> file.</p></li>
-<li><p>Submit to the queue using <code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code>.</p></li>
+<li><p>Create/edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py"><code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code></a> file.</p></li>
+<li><p>Submit to the queue using <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash"><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code></a>.</p></li>
 </ul>
 <p>If need to share memory across chunks:</p>
 <ul class="simple">
@@ -1724,8 +1593,8 @@ Dask Name: sqrt, 67 tasks
 <h3><a class="reference external" href="https://pangeo.io/setup_guides/hpc.html">Interactive Jupyter/Dask on HPC</a><a class="headerlink" href="#interactive-jupyter-dask-on-hpc" title="Permalink to this headline">¶</a></h3>
 <p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
 <ul class="simple">
-<li><p>Create or edit the <code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code> file within this repository.</p></li>
-<li><p>Check the <code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code> file with this repository.</p></li>
+<li><p>Create or edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code></a> file within this repository.</p></li>
+<li><p>Check the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code></a> file with this repository.</p></li>
 </ul>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">
