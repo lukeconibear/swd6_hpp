@@ -11,7 +11,7 @@
 import sys
 IN_COLAB = 'google.colab' in sys.modules
 if IN_COLAB:
-    get_ipython().system('pip install dask[dataframe]')
+    get_ipython().system('pip install dask[dataframe] joblib')
 
 
 # ## What is it?
@@ -21,13 +21,13 @@ if IN_COLAB:
 # - Tasks centrally managed by a scheduler.
 # - Multi-processing (cores)
 #     - Useful for compute-bound problems.
-#     - Don't need to worry about the GIL.  
+#     - Don't need to worry about the [Global Interpreter Lock, GIL](https://wiki.python.org/moin/GlobalInterpreterLock).  
 # - Multi-threading (parts of processes)
 #     - Useful for memory-bound problems.
 
 # ## Parallelising a Python?
 # 
-# Python itself is not designed for massive scalability and controls threads preemptively using a [Global Interpreter Lock, GIL](https://wiki.python.org/moin/GlobalInterpreterLock). This has lead many libraries to work around this using C/C++ backends.  
+# Python itself is not designed for massive scalability and controls threads preemptively using the GIL. This has lead many libraries to work around this using C/C++ backends.  
 # 
 # Some options include:  
 

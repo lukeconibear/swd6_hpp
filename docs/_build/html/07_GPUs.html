@@ -242,6 +242,34 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-detection">
+   Automatic detection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cuda-programming">
+   CUDA programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-gpus">
+   Parallel GPUs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-information">
+   Further information
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -253,23 +281,9 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="gpus">
 <h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
-<p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs perform general computation.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://cupy.dev/">cuPy</a> (NumPy).</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
-<span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/">cuDF</a> (Pandas).</p></li>
-<li><p>Can run in <a class="reference external" href="https://docs.dask.org/en/latest/gpu.html">parallel</a>.</p>
-<ul>
-<li><p>GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.uk/systems/arc4.html#using-the-v100-gpu-nodes">ARC4</a>.</p></li>
-</ul>
-</li>
-</ul>
+<p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.</p>
+<div class="section" id="automatic-detection">
+<h2>Automatic detection<a class="headerlink" href="#automatic-detection" title="Permalink to this headline">¶</a></h2>
 <p>Many libraries can use GPUs automatically if they can detect one.</p>
 <p><a class="reference external" href="https://www.tensorflow.org/install/gpu"><code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -280,6 +294,54 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="cuda-programming">
+<h2>CUDA programming<a class="headerlink" href="#cuda-programming" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cupy.dev/"><code class="docutils literal notranslate"><span class="pre">CuPy</span></code></a> (NumPy and SciPy for GPUs).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy for CPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_cpu</span><span class="p">,</span> <span class="n">y_cpu</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_cpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asnumpy</span><span class="p">(</span><span class="n">z_gpu</span><span class="p">)</span> <span class="c1"># convert over</span>
+
+<span class="c1"># CuPy for GPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_gpu</span><span class="p">,</span> <span class="n">y_gpu</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">z_cpu</span><span class="p">)</span> <span class="c1"># convert over</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/"><code class="docutils literal notranslate"><span class="pre">cuDF</span></code></a> (Pandas for GPUs).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas for CPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="p">})</span>
+
+<span class="c1"># cuDF for GPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cudf</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">cudf</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parallel-gpus">
+<h2>Parallel GPUs<a class="headerlink" href="#parallel-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Can run across multiple GPUs in <a class="reference external" href="https://docs.dask.org/en/latest/gpu.html">parallel</a>.<br />
+GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.uk/systems/arc4.html#using-the-v100-gpu-nodes">ARC4</a>.</p>
+</div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=_AKDqw6li58">CuPy - Sean Farley</a>, PyBay 2019.<br />
+<a class="reference external" href="https://www.youtube.com/watch?v=lV7rtDW94do">cuDF - Mark Harris</a>, PyCon AU 2019.</p>
 </div>
 </div>
 
