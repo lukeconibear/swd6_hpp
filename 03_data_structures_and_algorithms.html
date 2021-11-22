@@ -336,7 +336,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.3 µs ± 39.6 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.5 µs ± 216 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -351,7 +351,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64.3 µs ± 25.3 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.7 µs ± 118 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -392,7 +392,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.23 ms ± 3.04 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.18 ms ± 200 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -408,7 +408,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>209 ns ± 0.207 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>189 ns ± 0.305 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
 </div>
 </div>
@@ -419,9 +419,9 @@
 <li><p>Generators save memory by yielding only the next iteration.</p></li>
 <li><p>Memory usage for floats/integers of 16 bit &lt; 32 bit &lt; 64 bit.</p></li>
 <li><p>For NetCDFs, using <a class="reference external" href="https://github.com/shoyer/h5netcdf"><code class="docutils literal notranslate"><span class="pre">engine='h5netcdf'</span></code></a> with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> can be faster, over than the default <a class="reference external" href="https://github.com/Unidata/netcdf4-python"><code class="docutils literal notranslate"><span class="pre">engine='netcdf4'</span></code></a>.</p></li>
-<li><p><em><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Compression</a></em>: If arrays are mostly 0, then can save memory using <a class="reference external" href="https://sparse.pydata.org/en/stable/quickstart.html">sparse arrays</a>.</p></li>
-<li><p><em><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Chunking</a></em>: If need all data, then can load/process in chunks to reduce amount in memory: <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a> for arrays, <a class="reference external" href="https://pythonspeed.com/articles/chunking-pandas/">Pandas</a>.</p></li>
-<li><p><em><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Indexing</a></em>: If need a subset of the data, then can index (multi-index) to reduce memory and increase speed for queries: <a class="reference external" href="https://pythonspeed.com/articles/indexing-pandas-sqlite/">Pandas</a>, <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">SQLite</a>.</p></li>
+<li><p><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Compression</a>: If arrays are mostly 0, then can save memory using <a class="reference external" href="https://sparse.pydata.org/en/stable/quickstart.html">sparse arrays</a>.</p></li>
+<li><p><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Chunking</a>: If need all data, then can load/process in chunks to reduce amount in memory: <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a> for arrays, <a class="reference external" href="https://pythonspeed.com/articles/chunking-pandas/">Pandas</a>.</p></li>
+<li><p><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Indexing</a>: If need a subset of the data, then can index (multi-index) to reduce memory and increase speed for queries: <a class="reference external" href="https://pythonspeed.com/articles/indexing-pandas-sqlite/">Pandas</a>, <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">SQLite</a>.</p></li>
 </ul>
 </li>
 </ul>
@@ -451,7 +451,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.95 ms ± 2.08 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.81 ms ± 2.71 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -475,7 +475,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.71 µs ± 14.9 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.28 µs ± 15.1 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -513,7 +513,7 @@
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1954</span><span class="o">/</span><span class="mf">2909400882.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2049</span><span class="o">/</span><span class="mf">2909400882.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">xr</span><span class="o">.</span><span class="n">tutorial</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">)</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/xarray/tutorial.py</span> in <span class="ni">open_dataset</span><span class="nt">(name, cache, cache_dir, engine, **kws)</span>
