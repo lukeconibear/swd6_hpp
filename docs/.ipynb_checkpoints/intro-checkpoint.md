@@ -14,11 +14,11 @@ This workshop includes:
 - Optimisation
 - Profiling
 - Built-in functions
-- Data structures and algorithms (caching, lazy loading)
+- Data structures and algorithms
 - Vectorisation
 - Compilers ([CPython](https://www.python.org/), [PyPy](https://www.pypy.org/), [Numba](http://numba.pydata.org/), [Cython](https://cython.org/))
 - Parallelisation ([Dask](https://docs.dask.org/en/latest/), [Ray](https://www.ray.io/))
-- GPUs
+- GPUs ([JAX](https://jax.readthedocs.io/en/latest/index.html), [CUDA](https://developer.nvidia.com/how-to-cuda-python), [RAPIDS](https://developer.nvidia.com/rapids))
 
 ## Prerequisites
 We recommend that attendees have a working knowledge of the Unix shell (although this is not essential) and are proficient Python programmers. If you need to learn how to program in Python, please attend SWD1a: Introduction to Python programming. It is strongly recommended that you bring your own laptop to this workshop with some specific software installed. Further information will be provided when you are accepted onto the course.

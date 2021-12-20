@@ -27,6 +27,12 @@ get_ipython().run_cell_magic('timeit', '', 'count = 0\nfor num in nums: # time O
 get_ipython().run_line_magic('timeit', 'len(nums) # time O(1)')
 
 
+# In[4]:
+
+
+() or {}
+
+
 # In[ ]:
 
 

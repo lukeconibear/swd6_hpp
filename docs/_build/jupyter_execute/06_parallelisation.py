@@ -38,31 +38,23 @@ if IN_COLAB:
 
 from multiprocessing import Pool
 
-
-# In[3]:
-
-
 def my_function(x):
     return x * x
-
-
-# In[4]:
-
 
 with Pool(3) as workers:
     print(workers.map(my_function, [1, 2, 3]))
 
 
-# [joblib](https://joblib.readthedocs.io/en/latest/) for creating lightweight pipelines. 
+# [joblib](https://joblib.readthedocs.io/en/latest/) for creating lightweight pipelines that help with "embaressingly parallel" tasks.
 
-# In[5]:
+# In[3]:
 
 
 import joblib
 import math
 
 
-# In[6]:
+# In[4]:
 
 
 joblib.Parallel(n_jobs=1)(
@@ -70,7 +62,7 @@ joblib.Parallel(n_jobs=1)(
 )
 
 
-# [asyncio](https://docs.python.org/3/library/asyncio.html) for concurrent programs.  
+# [asyncio](https://docs.python.org/3/library/asyncio.html) for concurrent programs, especially ones that are IO-bound.  
 # 
 # ```python
 # import asyncio
@@ -96,14 +88,14 @@ joblib.Parallel(n_jobs=1)(
 # 
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[7]:
+# In[5]:
 
 
 from IPython.display import IFrame
 IFrame(src='https://www.youtube.com/embed/ods97a5Pzw0', width='560', height='315')
 
 
-# In[8]:
+# In[6]:
 
 
 if not IN_COLAB:
@@ -124,13 +116,13 @@ if not IN_COLAB:
 
 # ### Dask behind the scenes
 
-# In[9]:
+# In[7]:
 
 
 import xarray as xr
 
 
-# In[10]:
+# In[8]:
 
 
 ds = xr.tutorial.open_dataset(
@@ -139,26 +131,20 @@ ds = xr.tutorial.open_dataset(
 )
 
 
-# In[11]:
-
-
-ds.nbytes * (2 ** -30)
-
-
-# In[12]:
+# In[9]:
 
 
 ds_mean = ds.mean()
 ds_mean # a dask.array (an unexecuted task graph)
 
 
-# In[13]:
+# In[10]:
 
 
 ds_mean.compute()
 
 
-# In[14]:
+# In[11]:
 
 
 ds.close()
@@ -167,30 +153,31 @@ ds.close()
 # ### [dask.array](https://examples.dask.org/array.html) (NumPy)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[15]:
+# In[12]:
 
 
+from IPython.display import IFrame
 IFrame(src='https://www.youtube.com/embed/ZrP-QTxwwnU', width='560', height='315')
 
 
-# In[16]:
+# In[13]:
 
 
 import dask.array as da
 
 
-# In[17]:
+# In[14]:
 
 
 my_array = da.random.random(
-    (50_000, 50_000),
-    chunks=(5_000, 5_000) # dask chunks
+    (5_000, 5_000),
+    chunks=(500, 500) # dask chunks
 )
 result = my_array + my_array.T
 result
 
 
-# In[18]:
+# In[15]:
 
 
 if not IN_COLAB:
@@ -200,51 +187,51 @@ if not IN_COLAB:
 # ### [dask.dataframe](https://examples.dask.org/dataframe.html) (Pandas)
 # See the excellent video from Dask creator, Matthew Rocklin, below.
 
-# In[ ]:
+# In[16]:
 
 
 IFrame(src='https://www.youtube.com/embed/6qwlDc959b0', width='560', height='315')
 
 
-# In[ ]:
+# In[17]:
 
 
 import dask
 
 
-# In[ ]:
+# In[18]:
 
 
 df = dask.datasets.timeseries()
 df
 
 
-# In[ ]:
+# In[19]:
 
 
 type(df)
 
 
-# In[ ]:
+# In[20]:
 
 
 result = df.groupby('name').x.std()
 result
 
 
-# In[ ]:
+# In[21]:
 
 
 result.visualize()
 
 
-# In[ ]:
+# In[22]:
 
 
 result_computed = result.compute()
 
 
-# In[ ]:
+# In[23]:
 
 
 type(result_computed)
@@ -253,33 +240,33 @@ type(result_computed)
 # ### [dask.bag](https://examples.dask.org/bag.html)
 # Iterate over a bag of independent objects (embarrassingly parallel).
 
-# In[ ]:
+# In[24]:
 
 
 import numpy as np
 import dask.bag as db
 
 
-# In[ ]:
+# In[25]:
 
 
-nums = np.random.randint(low=0, high=100, size=(5_000_000))
+nums = np.random.randint(low=0, high=100, size=(5_000))
 nums
 
 
-# In[ ]:
+# In[26]:
 
 
-def weird_function(nums):
+def function(nums):
     return chr(nums)
 
 
-# In[ ]:
+# In[27]:
 
 
 if not IN_COLAB:
     bag = db.from_sequence(nums)
-    bag = bag.map(weird_function)
+    bag = bag.map(function)
     
     bag.visualize()
     
@@ -290,7 +277,6 @@ if not IN_COLAB:
 
 # ### [Dask on HPC](https://docs.dask.org/en/latest/setup/hpc.html)
 # 
-# - Non-interactive
 # - Create/edit the [`dask_on_hpc.py`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py) file.
 # - Submit to the queue using [`qsub dask_on_hpc.bash`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash).
 # 
@@ -302,99 +288,280 @@ if not IN_COLAB:
 # - Use [message passing interface, MPI](https://docs.dask.org/en/latest/setup/hpc.html?highlight=mpi#using-mpi) (commonly OpenMPI).
 # - `-pe ib np` on ARC4
 
-# ### [Interactive Jupyter/Dask on HPC](https://pangeo.io/setup_guides/hpc.html)
-# See the excellent video from Dask creator, Matthew Rocklin, below.
-# - Create or edit the [`~/.config/dask/jobqueue.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml) file within this repository.
-# - Check the [`~/.config/dask/distributed.yaml`](https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml) file with this repository.
-
-# In[ ]:
-
-
-IFrame(src='https://www.youtube.com/embed/FXsgmwpRExM', width='560', height='315')
-
-
-# ```bash
-# # in a terminal
-# 
-# # log onto arc4
-# ssh ${USER}@arc4.leeds.ac.uk
-# 
-# # start an interactive session on a compute node on arc4
-# qlogin -l h_rt=04:00:00 -l h_vmem=12G
-# 
-# # activate your python environment
-# conda activate my_python_environment
-# 
-# # echo back the ssh command to connect to this compute node
-# echo "ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk"
-# 
-# # launch a jupyter lab session on this compute node
-# jupyter lab --no-browser --ip=`hostname` --port=2222
-# ```
-# ___
-# ```bash
-# # in a local terminal
-# # ssh into the compute node
-# ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 ${USER}@arc4.leeds.ac.uk
-# ```
-# ___
-# ```bash
-# # open up a local browser (e.g. chrome)
-# # go to the jupyter lab session by pasting into the url bar
-# localhost:2222
-#     
-# # can also load the dask dashboard in the browser at localhost:2727
-# ```
-# ___
-# ```python
-# # now the jupyter code
-# from dask_jobqueue import SGECluster
-# from dask.distributed import Client
-# 
-# cluster = Client(
-#     walltime='01:00:00',
-#     memory='4 G',
-#     resource_spec='h_vmem=4G',
-#     scheduler_options={
-#         'dashboard_address': ':2727',
-#     },
-# )
-# 
-# client = Client(cluster)
-# 
-# cluster.scale(jobs=20)
-# # cluster.adapt(minimum=0, maximum=20)
-# 
-# client.close()
-# cluster.close()
-# ```
-
 # ## [Ray](https://www.ray.io/)
 # Ray will automatically detect the available GPUs and CPUs on the machine.
 # - Can also [specify required resources](https://docs.ray.io/en/latest/walkthrough.html#specifying-required-resources).  
+
+# First, initialise Ray.
+
+# In[28]:
+
+
+import ray
+ray.init()
+
+
+# ### Functions become Tasks
+# - Parallelise functions by adding `@ray.remote` decorator  
+# - Then instead of calling it normally, use the `.remote()` method  
+# - This yields a future object reference that you can retrieve with `ray.get(object)` 
+
+# In[29]:
+
+
+@ray.remote
+def f(x):
+    return x * x
+
+
+# In[30]:
+
+
+# asynchronously run a task
+futures = [f.remote(i) for i in range(4)]
+print(ray.get(futures))
+
+
+# ### Classes become Actors
+# - Parallelise classes the same way
+# - These actors maintain their internal state  
+
+# In[31]:
+
+
+@ray.remote
+class Counter(object):
+    def __init__(self):
+        self.value = 0
+        
+    def increment(self):
+        self.value += 1
+    
+    def read(self):
+        return self.value
+
+
+# In[32]:
+
+
+# construct an actor instance using .remote()
+counters = [Counter.remote() for i in range(4)]
+
+
+# In[33]:
+
+
+# asynchronously run actor methods
+[counter.increment.remote() for counter in counters]
+futures = [counter.read.remote() for counter in counters]
+print(ray.get(futures))
+
+
+# Other key API methods:
+# - `ray.put()`
+#     - Put a value in the distributed object store.
+#     - `put_id = ray.put(my_object)`
+# - `ray.get()`
+#     - Get an object from the distributed object store, either placed there by `ray.put()` explicitly or by a task or actor method, blocking until object is available.
+#     - `thing = ray.get(put_id)`
+# - `ray.wait()`
+#     - Wait on a list of ids until one of the corresponding objects is available (e.g., the task completes). Return two lists, one with ids for the available objects and the other with ids for the still-running tasks or method calls.
+#     `finished, running = ray.wait([train_id, track_id])`
+
+# ### Ray's [`multiprocessing`](https://docs.ray.io/en/latest/multiprocessing.html)
+# To scale beyond one machine and generally manage a pool of processes.  
 # 
-# Remote function
-# - Convert regular Python function to Remote function by adding `@ray.remote` decorator  
-# - Then use `.remote()` method  
-# - Retrieved with `ray.get(object)` 
+# Replace:
+# ```python
+# from multiprocessing.pool import Pool
+# ```
 # 
-# tasks, actors, ML
+# With:
+# 
+# ```python
+# from ray.util.multiprocessing.pool import Pool
+# ```
+# 
+
+# In[34]:
+
+
+from ray.util.multiprocessing.pool import Pool
+
+
+# In[35]:
+
+
+def my_function(x):
+    return x * x
+
+
+# In[36]:
+
+
+with Pool(3) as workers:
+    print(workers.map(my_function, [1, 2, 3]))
+
+
+# ### Ray's [`joblib`](https://docs.ray.io/en/latest/joblib.html)
+# The underpinnings of [scikit-learn](https://scikit-learn.org/stable/), which Ray can scale to a cluster.
+# 
+# Import and instantiate `register_ray`, which registers Ray as a `joblib` backend for `scikit-learn`:  
+# ```python
+# import joblib
+# from ray.util.joblib import register_ray
+# register_ray()
+# ```
+# 
+# Then run your original `scikit-learn` code within a Ray/`joblib` backend:
+# ```python
+# with joblib.parallel_backend('ray'):
+#     # original scikit-learn code
+# ```
+# 
+# For example, here's some parallel hyperparameter tuning:
+# ```python
+# import joblib
+# from ray.util.joblib import register_ray
+# register_ray()
+# 
+# import numpy as np
+# from sklearn.datasets import load_digits
+# from sklearn.svm import SVC
+# from sklearn.model_selection import RandomizedSearchCV
+# 
+# digits = load_digits()
+# param_space = {
+#     'C': np.logspace(-6, 6, 30),
+#     'gamma': np.logspace(-8, 8, 30),
+#     'tol': np.logspace(-4, -1, 30),
+#     'class_weight': [None, 'balanced'],
+# }
+# model = SVC(kernel='rbf')
+# search = sklearn.model_selection.RandomizedSearchCV(
+#     model, param_space, cv=5, n_iter=300, verbose=10)
+# 
+# with joblib.parallel_backend('ray'):
+#     search.fit(digits.data, digits.target)
+# ```
+
+# When finished, remember to shut down the Ray connection.
+
+# In[37]:
+
+
+ray.shutdown()
+
+
+# Please see this [repository](https://github.com/lukeconibear/distributed_deep_learning) for examples of how to do distributed deep learning using Ray Train with TensorFlow, PyTorch, and Horovod.
+
+# ## [Dask on Ray](https://docs.ray.io/en/latest/data/dask-on-ray.html)
+# Use Ray as a backend for Dask tasks.  
+# Dask dispatches tasks to Ray for scheduling and execution.
+
+# In[38]:
+
+
+import ray
+import dask
+import dask.dataframe as dd 
+import pandas as pd
+import numpy as np
+from ray.util.dask import ray_dask_get
+
+
+# In[39]:
+
+
+dask.config.set(scheduler=ray_dask_get) 
+ray.init()
+
+
+# In[40]:
+
+
+df = pd.DataFrame(np.random.randint(0, 100, size=(2**10, 2**8)))
+df = dd.from_pandas(df, npartitions=10)
+df.head(10)
+
+
+# In[41]:
+
+
+ray.shutdown()
+
 
 # ## [Modin](https://modin.readthedocs.io/en/latest/)
-# ...
+# Modin uses Ray or Dask to easily speed up your Pandas code.  
+# To use Modin, simply replace the import and use Pandas API as normal.
 
-# In[ ]:
+# In[42]:
 
 
+import os
+os.environ['MODIN_ENGINE'] = 'ray'
+# os.environ['MODIN_ENGINE'] = 'dask'
 
 
+# In[43]:
+
+
+# import pandas as pd
+import modin.pandas as pd
+
+
+# In[44]:
+
+
+frame_data = np.random.randint(0, 100, size=(5_000, 1_000))
+df = pd.DataFrame(frame_data)
+df.head(10)
+
+
+# ## [Mars](https://docs.pymars.org/en/latest/)
+# Mars is a tensor-based unified framework for large-scale data computation which scales numpy, pandas, scikit-learn and many other libraries.  
+# Swap out the library import, use the same API, and add `.execute()`.
+
+# ```python
+# import mars
+# mars.new_session()
+# ```
+
+# ### [Mars Tensor](https://docs.pymars.org/en/latest/getting_started/tensor.html) for NumPy
+
+# ```python
+# # import numpy as np
+# # np.random.rand(10)
+# 
+# import mars.tensor as mt
+# mt.random.rand(10).execute()
+# ```
+
+# ### [Mars DataFrame](https://docs.pymars.org/en/latest/getting_started/dataframe.html) for Pandas
+
+# ```python
+# # import pandas as pd
+# # df = pd.DataFrame(
+# #     np.random.rand(10),
+# #     columns=['random_numbers']
+# # )
+# 
+# import mars.dataframe as md
+# df = md.DataFrame(
+#     np.random.rand(10),
+#     columns=['random_numbers']
+# ).execute()
+# ```
+
+# And remember to stop the server when you're finished.
+
+# ```python
+# mars.stop_server()
+# ```
+
+# Mars can also use Ray as the backend ([instructions](https://docs.ray.io/en/latest/data/mars-on-ray.html)).
 
 # ## Further information
-# [Concurrency](https://youtu.be/18B1pznaU1o) can also run different tasks together, but work is not done at the same time.  
-# [Asynchronous](https://youtu.be/iG6fr81xHKA) (multi-threading), useful for massive scaling, threads controlled explicitly.  
-
-# In[ ]:
-
-
-
-
+# - [Spark on Ray](https://docs.ray.io/en/latest/data/raydp.html): RayDP combines your Spark and Ray clusters, making it easy to do large scale data processing using the PySpark API and seemlessly use that data to train your models using TensorFlow and PyTorch.
+# - [Concurrency](https://youtu.be/18B1pznaU1o) can also run different tasks together, but work is not done at the same time.  
+# - [Asynchronous](https://youtu.be/iG6fr81xHKA) (multi-threading), useful for massive scaling, threads controlled explicitly.  

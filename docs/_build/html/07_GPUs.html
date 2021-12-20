@@ -248,14 +248,36 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jax">
+   JAX
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automatic-detection">
    Automatic detection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cuda-programming">
-   CUDA programming
+  <a class="reference internal nav-link" href="#cuda">
+   CUDA
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rapids">
+   RAPIDS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cupy">
+     cuPy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cudf">
+     cuDF
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallel-gpus">
@@ -282,6 +304,11 @@
 <h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.</p>
+<p>Could use other types of accelerators too.</p>
+<div class="section" id="jax">
+<h2><a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a><a class="headerlink" href="#jax" title="Permalink to this headline">¶</a></h2>
+<p>…</p>
+</div>
 <div class="section" id="automatic-detection">
 <h2>Automatic detection<a class="headerlink" href="#automatic-detection" title="Permalink to this headline">¶</a></h2>
 <p>Many libraries can use GPUs automatically if they can detect one.</p>
@@ -296,9 +323,14 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="cuda-programming">
-<h2>CUDA programming<a class="headerlink" href="#cuda-programming" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://cupy.dev/"><code class="docutils literal notranslate"><span class="pre">CuPy</span></code></a> (NumPy and SciPy for GPUs).</p>
+<div class="section" id="cuda">
+<h2><a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a><a class="headerlink" href="#cuda" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="rapids">
+<h2><a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a><a class="headerlink" href="#rapids" title="Permalink to this headline">¶</a></h2>
+<p>Accelerated data science libraries, including cuPy for NumPy and SciPy, cuDF for Pandas, and others such as XGBoost, cuML, cuGraph.</p>
+<div class="section" id="cupy">
+<h3><a class="reference external" href="https://cupy.dev/">cuPy</a><a class="headerlink" href="#cupy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy for CPU</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">x_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="p">))</span>
@@ -314,7 +346,9 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">z_cpu</span><span class="p">)</span> <span class="c1"># convert over</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/"><code class="docutils literal notranslate"><span class="pre">cuDF</span></code></a> (Pandas for GPUs).</p>
+</div>
+<div class="section" id="cudf">
+<h3><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/">cuDF</a><a class="headerlink" href="#cudf" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas for CPU</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -331,6 +365,7 @@
         <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
     <span class="p">})</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="parallel-gpus">

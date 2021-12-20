@@ -6,6 +6,18 @@
 # [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb)
 
 # GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.
+# 
+# Could use other types of accelerators too.
+
+# ## [JAX](https://jax.readthedocs.io/en/latest/index.html)
+
+# ...
+
+# In[ ]:
+
+
+
+
 
 # ## Automatic detection
 
@@ -23,9 +35,24 @@
 # torch.cuda.is_available()
 # ```
 
-# ## CUDA programming
+# ## [CUDA](https://developer.nvidia.com/how-to-cuda-python)
 
-# [`CuPy`](https://cupy.dev/) (NumPy and SciPy for GPUs).
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ## [RAPIDS](https://developer.nvidia.com/rapids)
+# Accelerated data science libraries, including cuPy for NumPy and SciPy, cuDF for Pandas, and others such as XGBoost, cuML, cuGraph.
+
+# ### [cuPy](https://cupy.dev/)
 # 
 # ```python
 # # NumPy for CPU
@@ -43,7 +70,7 @@
 # >>> z_gpu = cp.asarray(z_cpu) # convert over
 # ```
 
-# [`cuDF`](https://docs.rapids.ai/api/cudf/stable/) (Pandas for GPUs).  
+# ### [cuDF](https://docs.rapids.ai/api/cudf/stable/)
 # 
 # ```python
 # # Pandas for CPU
