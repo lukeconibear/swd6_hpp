@@ -130,6 +130,23 @@ import xarray as xr
 xr.tutorial.open_dataset('air_temperature')
 
 
+# ### [Loop-invariants](https://en.wikipedia.org/wiki/Loop_invariant)
+# Move them *outside* the loop.  
+# 
+# Loops are slow in Python ([CPython](https://www.python.org/), default interpreter), because loops type−check and dispatch functions per cycle. Try to avoid them where can (e.g., using NumPy ufuncs, aggregations, broadcasting, etc.). 
+
+# In[14]:
+
+
+get_ipython().run_cell_magic('timeit', '', 'for num in range(1_000_000):\n    constant = 500_000\n    bigger_num = max(num, constant)')
+
+
+# In[15]:
+
+
+get_ipython().run_cell_magic('timeit', '', 'constant = 500_000\nfor num in range(1_000_000):\n    bigger_num = max(num, constant)')
+
+
 # ### Suitable data types for parallel computing
 # - [Parquet](https://examples.dask.org/dataframes/01-data-access.html#Write-to-Parquet) creates efficient tabular data (e.g. dataframes), useful for parallel computing.
 #   - Accessed via [pyarrow](https://arrow.apache.org/docs/python/install.html).
@@ -141,13 +158,13 @@ xr.tutorial.open_dataset('air_temperature')
 # - Many existing libraries are already optimised (computationally and algorithmically).
 #   - [Minimal examples of data structures and algorithms in Python](https://github.com/keon/algorithms).
 
-# In[14]:
+# In[16]:
 
 
 from algorithms import sort
 
 
-# In[15]:
+# In[17]:
 
 
 unsorted_array = np.random.rand(1_000)
@@ -160,7 +177,7 @@ unsorted_array = np.random.rand(1_000)
 # 2. Find smallest number in the unsorted array and add to the sorted array.
 # 3. Repeat step 2 until final index is the largest number (i.e. sorted array).
 
-# In[16]:
+# In[18]:
 
 
 get_ipython().run_line_magic('timeit', 'sort.selection_sort(unsorted_array)')
@@ -175,7 +192,7 @@ get_ipython().run_line_magic('timeit', 'sort.selection_sort(unsorted_array)')
 #     b. Merge the two length 1 arrays into sorted array of length 2.  
 #     c. Repeat b, all the way up for this half.  
 
-# In[17]:
+# In[19]:
 
 
 get_ipython().run_line_magic('timeit', 'sort.merge_sort(unsorted_array)')

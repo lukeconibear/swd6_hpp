@@ -9,8 +9,7 @@ sections:
   - file: 01_profiling
   - file: 02_built-in_functions
   - file: 03_data_structures_and_algorithms
-  - file: 04_vectorisation
-  - file: 05_compilers
-  - file: 06_parallelisation
-  - file: 07_GPUs
+  - file: 04_compilers
+  - file: 05_parallelisation
+  - file: 06_GPUs
   

@@ -15,9 +15,8 @@ This workshop includes:
 - Profiling
 - Built-in functions
 - Data structures and algorithms
-- Vectorisation
 - Compilers ([CPython](https://www.python.org/), [PyPy](https://www.pypy.org/), [Numba](http://numba.pydata.org/), [Cython](https://cython.org/))
-- Parallelisation ([Dask](https://docs.dask.org/en/latest/), [Ray](https://www.ray.io/))
+- Parallelisation (Vectorisation with [NumPy](https://numpy.org/doc/stable/reference/ufuncs.html), [Dask](https://docs.dask.org/en/latest/), [Ray](https://www.ray.io/), [Modin](https://modin.readthedocs.io/en/latest/), [Mars](https://docs.pymars.org/en/latest/))
 - GPUs ([JAX](https://jax.readthedocs.io/en/latest/index.html), [CUDA](https://developer.nvidia.com/how-to-cuda-python), [RAPIDS](https://developer.nvidia.com/rapids))
 
 ## Prerequisites
