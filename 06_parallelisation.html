@@ -293,22 +293,71 @@
      Dask on HPC
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-jupyter-dask-on-hpc">
-     Interactive Jupyter/Dask on HPC
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ray">
    Ray
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions-become-tasks">
+     Functions become Tasks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes-become-actors">
+     Classes become Actors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ray-s-multiprocessing">
+     Ray’s
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       multiprocessing
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ray-s-joblib">
+     Ray’s
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       joblib
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dask-on-ray">
+   Dask on Ray
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modin">
    Modin
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mars">
+   Mars
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mars-tensor-for-numpy">
+     Mars Tensor for NumPy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mars-dataframe-for-pandas">
+     Mars DataFrame for Pandas
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#further-information">
@@ -366,21 +415,11 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
+
+<span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
@@ -391,7 +430,7 @@
 </div>
 </div>
 </div>
-<p><a class="reference external" href="https://joblib.readthedocs.io/en/latest/">joblib</a> for creating lightweight pipelines.</p>
+<p><a class="reference external" href="https://joblib.readthedocs.io/en/latest/">joblib</a> for creating lightweight pipelines that help with “embaressingly parallel” tasks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
@@ -414,7 +453,7 @@
 </div>
 </div>
 </div>
-<p><a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> for concurrent programs.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> for concurrent programs, especially ones that are IO-bound.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -485,18 +524,6 @@
     <span class="s1">&#39;air_temperature&#39;</span><span class="p">,</span>
     <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">}</span> <span class="c1"># dask chunks</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">nbytes</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.014435194432735443
 </pre></div>
 </div>
 </div>
@@ -863,7 +890,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-705a0746-a89f-43b2-ba45-b12144987e8d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-705a0746-a89f-43b2-ba45-b12144987e8d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-c8cbc3b8-2549-457b-9e4d-54a4b93f877f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c8cbc3b8-2549-457b-9e4d-54a4b93f877f' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-0c2df94d-7228-43b8-a64b-0777d1d52a2b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0c2df94d-7228-43b8-a64b-0777d1d52a2b' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-2128f17b-a468-4c6b-9899-fe111a4282ef' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2128f17b-a468-4c6b-9899-fe111a4282ef' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2e96b68a-de3d-4dd9-923e-5a62835890d1' class='xr-var-data-in' type='checkbox'><label for='data-2e96b68a-de3d-4dd9-923e-5a62835890d1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b37a15d3-a288-4e4a-a77b-62e1c280e314' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b37a15d3-a288-4e4a-a77b-62e1c280e314' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-3e05b187-33b1-4d7d-b66f-abde96bf603a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-3e05b187-33b1-4d7d-b66f-abde96bf603a' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-f48f89a8-64ea-49fb-bca6-f0aaa0645985' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f48f89a8-64ea-49fb-bca6-f0aaa0645985' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-63e800b8-d6d7-41e3-9d27-e2a9e31b4451' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-63e800b8-d6d7-41e3-9d27-e2a9e31b4451' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-756bc0b6-37f0-432f-8844-26fd1639941d' class='xr-var-data-in' type='checkbox'><label for='data-756bc0b6-37f0-432f-8844-26fd1639941d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table>
@@ -904,7 +931,7 @@ Data variables:
 
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-e6cc6b20-3879-44ad-98a4-ba40e5eb2a4e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e6cc6b20-3879-44ad-98a4-ba40e5eb2a4e' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-30f76012-053b-4d80-9b78-0d1f0fbcb17f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-30f76012-053b-4d80-9b78-0d1f0fbcb17f' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1267,7 +1294,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f41830dd-19a1-48b6-9d7a-5d011cb80e66' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f41830dd-19a1-48b6-9d7a-5d011cb80e66' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-9feeca32-ed58-4500-a61b-2a38a7d3eafa' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9feeca32-ed58-4500-a61b-2a38a7d3eafa' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-9c05fbcd-294f-4dc9-bde2-9e29658b286b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9c05fbcd-294f-4dc9-bde2-9e29658b286b' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-3b9e6b7f-cc2b-4d6a-87cf-7d9d7b0079ae' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3b9e6b7f-cc2b-4d6a-87cf-7d9d7b0079ae' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-814c1104-55ba-430a-97e5-cfd4c00f92e1' class='xr-var-data-in' type='checkbox'><label for='data-814c1104-55ba-430a-97e5-cfd4c00f92e1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e6d9c8f6-920a-4952-ad66-247f7914b6e5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e6d9c8f6-920a-4952-ad66-247f7914b6e5' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-70e03f20-4f99-45bb-a5b4-77324d264a48' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-70e03f20-4f99-45bb-a5b4-77324d264a48' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-b0523f97-f692-4e38-b43e-c6514ef3108e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b0523f97-f692-4e38-b43e-c6514ef3108e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d13e8104-8881-4ee0-b4b1-36a7b6070127' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d13e8104-8881-4ee0-b4b1-36a7b6070127' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-3f198971-9196-428b-bf07-ed462d65f9cb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3f198971-9196-428b-bf07-ed462d65f9cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9dfc2ab0-affb-45a8-b360-f2cd13dcfae4' class='xr-var-data-in' type='checkbox'><label for='data-9dfc2ab0-affb-45a8-b360-f2cd13dcfae4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b6f160e6-9055-4b07-8271-1dd51b8e8a41' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b6f160e6-9055-4b07-8271-1dd51b8e8a41' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1303,8 +1330,8 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_array</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span>
-    <span class="p">(</span><span class="mi">50_000</span><span class="p">,</span> <span class="mi">50_000</span><span class="p">),</span>
-    <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">5_000</span><span class="p">,</span> <span class="mi">5_000</span><span class="p">)</span> <span class="c1"># dask chunks</span>
+    <span class="p">(</span><span class="mi">5_000</span><span class="p">,</span> <span class="mi">5_000</span><span class="p">),</span>
+    <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="c1"># dask chunks</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">my_array</span> <span class="o">+</span> <span class="n">my_array</span><span class="o">.</span><span class="n">T</span>
 <span class="n">result</span>
@@ -1327,14 +1354,14 @@ Data variables:
 
                     <tr>
                         <th> Bytes </th>
-                        <td> 18.63 GiB </td>
                         <td> 190.73 MiB </td>
+                        <td> 1.91 MiB </td>
                     </tr>
 
                     <tr>
                         <th> Shape </th>
-                        <td> (50000, 50000) </td>
                         <td> (5000, 5000) </td>
+                        <td> (500, 500) </td>
                     </tr>
                     <tr>
                         <th> Count </th>
@@ -1382,8 +1409,8 @@ Data variables:
   <polygon points="0.0,0.0 120.0,0.0 120.0,120.0 0.0,120.0" style="fill:#ECB172A0;stroke-width:0"/>
 
   <!-- Text -->
-  <text x="60.000000" y="140.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" >50000</text>
-  <text x="140.000000" y="60.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,60.000000)">50000</text>
+  <text x="60.000000" y="140.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" >5000</text>
+  <text x="140.000000" y="60.000000" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,60.000000)">5000</text>
 </svg>
         </td>
     </tr>
@@ -1396,172 +1423,23 @@ Data variables:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process Dask Worker process (from Nanny):
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/multiprocessing/process.py&quot;, line 315, in _bootstrap
-    self.run()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/multiprocessing/process.py&quot;, line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/process.py&quot;, line 175, in _run
-    target(*args, **kwargs)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/nanny.py&quot;, line 938, in _run
-    loop.run_sync(do_stop)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 524, in run_sync
-    self.start()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/platform/asyncio.py&quot;, line 199, in start
-    self.asyncio_loop.run_forever()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 570, in run_forever
-    self._run_once()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 1859, in _run_once
-    handle._run()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/events.py&quot;, line 81, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 688, in &lt;lambda&gt;
-    lambda f: self._run_callback(functools.partial(callback, future))
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 741, in _run_callback
-    ret = callback()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 765, in _discard_future_result
-    future.result()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/nanny.py&quot;, line 931, in _run
-    loop.run_sync(run)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 524, in run_sync
-    self.start()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/platform/asyncio.py&quot;, line 199, in start
-    self.asyncio_loop.run_forever()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 570, in run_forever
-    self._run_once()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 1859, in _run_once
-    handle._run()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/events.py&quot;, line 81, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 3279, in execute
-    self.transitions(recommendations, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2376, in transitions
-    a_recs, a_smsgs = self._transition(ts, finish, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2303, in _transition
-    recs, smsgs = func(ts, *args, stimulus_id=stimulus_id, **kwargs)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2174, in transition_executing_memory
-    return self.transition_generic_memory(ts, value=value, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2162, in transition_generic_memory
-    recs, smsgs = self._put_key_in_memory(ts, value, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2548, in _put_key_in_memory
-    self.data[ts.key] = value
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/spill.py&quot;, line 66, in __setitem__
-    super().__setitem__(key, value)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/buffer.py&quot;, line 87, in __setitem__
-    self.fast[key] = value
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/lru.py&quot;, line 70, in __setitem__
-    self.evict()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/lru.py&quot;, line 89, in evict
-    cb(k, v)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/buffer.py&quot;, line 60, in fast_to_slow
-    self.slow[key] = value
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/func.py&quot;, line 41, in __setitem__
-    self.d[key] = self.dump(value)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/zict/file.py&quot;, line 82, in __setitem__
-    f.write(v)
-KeyboardInterrupt
-distributed.worker - ERROR - Exception during execution of task (&#39;add-4f5aa0625e731403d8b63c4dfb324eef&#39;, 1, 3).
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/nanny.py&quot;, line 931, in _run
-    loop.run_sync(run)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/ioloop.py&quot;, line 524, in run_sync
-    self.start()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tornado/platform/asyncio.py&quot;, line 199, in start
-    self.asyncio_loop.run_forever()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 570, in run_forever
-    self._run_once()
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py&quot;, line 1823, in _run_once
-    event_list = self._selector.select(timeout)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/selectors.py&quot;, line 468, in select
-    fd_event_list = self._selector.poll(timeout, max_ev)
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 3279, in execute
-    self.transitions(recommendations, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2376, in transitions
-    a_recs, a_smsgs = self._transition(ts, finish, stimulus_id=stimulus_id)
-  File &quot;/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/worker.py&quot;, line 2303, in _transition
-    recs, smsgs = func(ts, *args, stimulus_id=stimulus_id, **kwargs)
-TypeError: transition_executing_error() missing 2 required positional arguments: &#39;exception_text&#39; and &#39;traceback_text&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2074</span><span class="o">/</span><span class="mf">4150157725.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">result</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/base.py</span> in <span class="ni">compute</span><span class="nt">(self, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span>         <span class="n">dask</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">compute</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">288</span><span class="s2">         (result,) = compute(self, traverse=False, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span><span class="s2">         return result</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span><span class="s2"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/base.py</span> in <span class="ni">compute</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">568</span><span class="s2">         postcomputes.append(x.__dask_postcompute__())</span>
-<span class="g g-Whitespace">    </span><span class="mi">569</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">570</span><span class="s2">     results = schedule(dsk, keys, **kwargs)</span>
-<span class="nn">    571     return repack([f(r, *a) for r, (f, a)</span> in <span class="ni">zip</span><span class="nt">(results, postcomputes)])</span>
-<span class="g g-Whitespace">    </span><span class="mi">572</span><span class="s2"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ni">get</span><span class="nt">(self, dsk, keys, workers, allow_other_workers, resources, sync, asynchronous, direct, retries, priority, fifo_timeout, actors, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2720</span><span class="s2">                     should_rejoin = False</span>
-<span class="g g-Whitespace">   </span><span class="mi">2721</span><span class="s2">             try:</span>
-<span class="ne">-&gt; </span><span class="mi">2722</span><span class="s2">                 results = self.gather(packed, asynchronous=asynchronous, direct=direct)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2723</span><span class="s2">             finally:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2724</span><span class="s2">                 for f in futures.values():</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ni">gather</span><span class="nt">(self, futures, errors, direct, asynchronous)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1975</span><span class="s2">             else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1976</span><span class="s2">                 local_worker = None</span>
-<span class="ne">-&gt; </span><span class="mi">1977</span><span class="s2">             return self.sync(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1978</span><span class="s2">                 self._gather,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1979</span><span class="s2">                 futures,</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ni">sync</span><span class="nt">(self, func, asynchronous, callback_timeout, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span><span class="s2">             return future</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span><span class="s2">         else:</span>
-<span class="ne">--&gt; </span><span class="mi">865</span><span class="s2">             return sync(</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span><span class="s2">                 self.loop, func, *args, callback_timeout=callback_timeout, **kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span><span class="s2">             )</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/distributed/utils.py</span> in <span class="ni">sync</span><span class="nt">(loop, func, callback_timeout, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span><span class="s2">     else:</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span><span class="s2">         while not e.is_set():</span>
-<span class="ne">--&gt; </span><span class="mi">324</span><span class="s2">             e.wait(10)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span><span class="s2">     if error[0]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span><span class="s2">         typ, exc, tb = error[0]</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/threading.py</span> in <span class="ni">wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">556</span><span class="s2">             signaled = self._flag</span>
-<span class="g g-Whitespace">    </span><span class="mi">557</span><span class="s2">             if not signaled:</span>
-<span class="ne">--&gt; </span><span class="mi">558</span><span class="s2">                 signaled = self._cond.wait(timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span><span class="s2">             return signaled</span>
-<span class="g g-Whitespace">    </span><span class="mi">560</span><span class="s2"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/threading.py</span> in <span class="ni">wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span><span class="s2">             else:</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span><span class="s2">                 if timeout &gt; 0:</span>
-<span class="ne">--&gt; </span><span class="mi">306</span><span class="s2">                     gotit = waiter.acquire(True, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span><span class="s2">                 else:</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span><span class="s2">                     gotit = waiter.acquire(False)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="dask-dataframe-pandas">
 <h3><a class="reference external" href="https://examples.dask.org/dataframe.html">dask.dataframe</a> (Pandas)<a class="headerlink" href="#dask-dataframe-pandas" title="Permalink to this headline">¶</a></h3>
 <p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
 <div class="cell tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/6qwlDc959b0"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1577,10 +1455,88 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><strong>Dask DataFrame Structure:</strong></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+    <tr>
+      <th>npartitions=30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-01</th>
+      <td>int64</td>
+      <td>object</td>
+      <td>float64</td>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>2000-01-02</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2000-01-30</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2000-01-31</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div>Dask Name: make-timeseries, 30 tasks</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dask.dataframe.core.DataFrame
 </pre></div>
 </div>
 </div>
@@ -1592,10 +1548,102 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dask Series Structure:
+npartitions=1
+    float64
+        ...
+Name: x, dtype: float64
+Dask Name: sqrt, 67 tasks
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/graphviz/backend/execute.py</span> in <span class="ni">run_check</span><span class="nt">(cmd, input_lines, encoding, capture_output, quiet, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>             <span class="k">assert</span> <span class="nb">iter</span><span class="p">(</span><span class="n">input_lines</span><span class="p">)</span> <span class="ow">is</span> <span class="n">input_lines</span>
+<span class="ne">---&gt; </span><span class="mi">83</span>             <span class="n">proc</span> <span class="o">=</span> <span class="n">_run_input_lines</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">input_lines</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span>         <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/graphviz/backend/execute.py</span> in <span class="ni">_run_input_lines</span><span class="nt">(cmd, input_lines, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="k">def</span> <span class="nf">_run_input_lines</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">input_lines</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>     <span class="n">popen</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/subprocess.py</span> in <span class="ni">__init__</span><span class="nt">(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell, cwd, env, universal_newlines, startupinfo, creationflags, restore_signals, start_new_session, pass_fds, encoding, errors, text)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span> 
+<span class="ne">--&gt; </span><span class="mi">858</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_execute_child</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">executable</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="p">,</span> <span class="n">close_fds</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span>                                 <span class="n">pass_fds</span><span class="p">,</span> <span class="n">cwd</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/subprocess.py</span> in <span class="ni">_execute_child</span><span class="nt">(self, args, executable, preexec_fn, close_fds, pass_fds, cwd, env, startupinfo, creationflags, shell, p2cread, p2cwrite, c2pread, c2pwrite, errread, errwrite, restore_signals, start_new_session)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1703</span>                         <span class="n">err_msg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno_num</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1704</span>                     <span class="k">raise</span> <span class="n">child_exception_type</span><span class="p">(</span><span class="n">errno_num</span><span class="p">,</span> <span class="n">err_msg</span><span class="p">,</span> <span class="n">err_filename</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1705</span>                 <span class="k">raise</span> <span class="n">child_exception_type</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: PosixPath(&#39;dot&#39;)
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">ExecutableNotFound</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2134</span><span class="o">/</span><span class="mf">503654577.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">result</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/base.py</span> in <span class="ni">visualize</span><span class="nt">(self, filename, format, optimize_graph, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>         <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">dask</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">optimize</span><span class="o">.</span><span class="n">html</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span>         <span class="sd">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">214</span><span class="sd">         return visualize(</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span><span class="sd">             self,</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span><span class="sd">             filename=filename,</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/base.py</span> in <span class="ni">visualize</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">743</span><span class="sd">         raise NotImplementedError(&quot;Unknown value color=%s&quot; % color)</span>
+<span class="g g-Whitespace">    </span><span class="mi">744</span><span class="sd"> </span>
+<span class="ne">--&gt; </span><span class="mi">745</span><span class="sd">     return dot_graph(dsk, filename=filename, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">746</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">747</span><span class="sd"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/dot.py</span> in <span class="ni">dot_graph</span><span class="nt">(dsk, filename, format, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">g</span> <span class="o">=</span> <span class="n">to_graphviz</span><span class="p">(</span><span class="n">dsk</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">271</span>     <span class="k">return</span> <span class="n">graphviz_to_file</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span> 
+<span class="g g-Whitespace">    </span><span class="mi">273</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/dask/dot.py</span> in <span class="ni">graphviz_to_file</span><span class="nt">(g, filename, format)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span>         <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;png&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span> 
+<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/graphviz/piping.py</span> in <span class="ni">pipe</span><span class="nt">(self, format, renderer, formatter, quiet, engine, encoding)</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span>             <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pipe_lines</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">input_encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>             <span class="k">return</span> <span class="n">raw</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">116</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pipe_lines</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">input_encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/graphviz/backend/piping.py</span> in <span class="ni">pipe_lines</span><span class="nt">(engine, format, input_lines, input_encoding, renderer, formatter, quiet)</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lines&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">input_encoding</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">input_lines</span><span class="p">)}</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span> 
+<span class="ne">--&gt; </span><span class="mi">149</span>     <span class="n">proc</span> <span class="o">=</span> <span class="n">execute</span><span class="o">.</span><span class="n">run_check</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="k">return</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/graphviz/backend/execute.py</span> in <span class="ni">run_check</span><span class="nt">(cmd, input_lines, encoding, capture_output, quiet, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span>         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">88</span>             <span class="k">raise</span> <span class="n">ExecutableNotFound</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="k">raise</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span> 
+
+<span class="ne">ExecutableNotFound</span>: failed to execute PosixPath(&#39;dot&#39;), make sure the Graphviz executables are on your systems&#39; PATH
 </pre></div>
 </div>
 </div>
@@ -1628,7 +1676,7 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5_000_000</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5_000</span><span class="p">))</span>
 <span class="n">nums</span>
 </pre></div>
 </div>
@@ -1636,7 +1684,7 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">weird_function</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1646,7 +1694,7 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
     <span class="n">bag</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">from_sequence</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-    <span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">weird_function</span><span class="p">)</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
     
     <span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
     
@@ -1661,7 +1709,6 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 <div class="section" id="dask-on-hpc">
 <h3><a class="reference external" href="https://docs.dask.org/en/latest/setup/hpc.html">Dask on HPC</a><a class="headerlink" href="#dask-on-hpc" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Non-interactive</p></li>
 <li><p>Create/edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py"><code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code></a> file.</p></li>
 <li><p>Submit to the queue using <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash"><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code></a>.</p></li>
 </ul>
@@ -1676,71 +1723,6 @@ TypeError: transition_executing_error() missing 2 required positional arguments:
 <li><p><code class="docutils literal notranslate"><span class="pre">-pe</span> <span class="pre">ib</span> <span class="pre">np</span></code> on ARC4</p></li>
 </ul>
 </div>
-<div class="section" id="interactive-jupyter-dask-on-hpc">
-<h3><a class="reference external" href="https://pangeo.io/setup_guides/hpc.html">Interactive Jupyter/Dask on HPC</a><a class="headerlink" href="#interactive-jupyter-dask-on-hpc" title="Permalink to this headline">¶</a></h3>
-<p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
-<ul class="simple">
-<li><p>Create or edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code></a> file within this repository.</p></li>
-<li><p>Check the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code></a> file with this repository.</p></li>
-</ul>
-<div class="cell tag_remove_input docutils container">
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># in a terminal</span>
-
-<span class="c1"># log onto arc4</span>
-ssh <span class="si">${</span><span class="nv">USER</span><span class="si">}</span>@arc4.leeds.ac.uk
-
-<span class="c1"># start an interactive session on a compute node on arc4</span>
-qlogin -l <span class="nv">h_rt</span><span class="o">=</span><span class="m">04</span>:00:00 -l <span class="nv">h_vmem</span><span class="o">=</span>12G
-
-<span class="c1"># activate your python environment</span>
-conda activate my_python_environment
-
-<span class="c1"># echo back the ssh command to connect to this compute node</span>
-<span class="nb">echo</span> <span class="s2">&quot;ssh -N -L 2222:`hostname`:2222 -L 2727:`hostname`:2727 </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">@arc4.leeds.ac.uk&quot;</span>
-
-<span class="c1"># launch a jupyter lab session on this compute node</span>
-jupyter lab --no-browser --ip<span class="o">=</span><span class="sb">`</span>hostname<span class="sb">`</span> --port<span class="o">=</span><span class="m">2222</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># in a local terminal</span>
-<span class="c1"># ssh into the compute node</span>
-ssh -N -L <span class="m">2222</span>:<span class="sb">`</span>hostname<span class="sb">`</span>:2222 -L <span class="m">2727</span>:<span class="sb">`</span>hostname<span class="sb">`</span>:2727 <span class="si">${</span><span class="nv">USER</span><span class="si">}</span>@arc4.leeds.ac.uk
-</pre></div>
-</div>
-<hr class="docutils" />
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># open up a local browser (e.g. chrome)</span>
-<span class="c1"># go to the jupyter lab session by pasting into the url bar</span>
-localhost:2222
-    
-<span class="c1"># can also load the dask dashboard in the browser at localhost:2727</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># now the jupyter code</span>
-<span class="kn">from</span> <span class="nn">dask_jobqueue</span> <span class="kn">import</span> <span class="n">SGECluster</span>
-<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
-
-<span class="n">cluster</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span>
-    <span class="n">walltime</span><span class="o">=</span><span class="s1">&#39;01:00:00&#39;</span><span class="p">,</span>
-    <span class="n">memory</span><span class="o">=</span><span class="s1">&#39;4 G&#39;</span><span class="p">,</span>
-    <span class="n">resource_spec</span><span class="o">=</span><span class="s1">&#39;h_vmem=4G&#39;</span><span class="p">,</span>
-    <span class="n">scheduler_options</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;dashboard_address&#39;</span><span class="p">:</span> <span class="s1">&#39;:2727&#39;</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
-
-<span class="n">cluster</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">jobs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="c1"># cluster.adapt(minimum=0, maximum=20)</span>
-
-<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="ray">
 <h2><a class="reference external" href="https://www.ray.io/">Ray</a><a class="headerlink" href="#ray" title="Permalink to this headline">¶</a></h2>
@@ -1748,22 +1730,320 @@ localhost:2222
 <ul class="simple">
 <li><p>Can also <a class="reference external" href="https://docs.ray.io/en/latest/walkthrough.html#specifying-required-resources">specify required resources</a>.</p></li>
 </ul>
-<p>Remote function</p>
+<p>First, initialise Ray.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ray</span>
+<span class="n">ray</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functions-become-tasks">
+<h3>Functions become Tasks<a class="headerlink" href="#functions-become-tasks" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Convert regular Python function to Remote function by adding <code class="docutils literal notranslate"><span class="pre">&#64;ray.remote</span></code> decorator</p></li>
-<li><p>Then use <code class="docutils literal notranslate"><span class="pre">.remote()</span></code> method</p></li>
-<li><p>Retrieved with <code class="docutils literal notranslate"><span class="pre">ray.get(object)</span></code></p></li>
+<li><p>Parallelise functions by adding <code class="docutils literal notranslate"><span class="pre">&#64;ray.remote</span></code> decorator</p></li>
+<li><p>Then instead of calling it normally, use the <code class="docutils literal notranslate"><span class="pre">.remote()</span></code> method</p></li>
+<li><p>This yields a future object reference that you can retrieve with <code class="docutils literal notranslate"><span class="pre">ray.get(object)</span></code></p></li>
 </ul>
-<p>tasks, actors, ML</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@ray</span><span class="o">.</span><span class="n">remote</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># asynchronously run a task</span>
+<span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">futures</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="classes-become-actors">
+<h3>Classes become Actors<a class="headerlink" href="#classes-become-actors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Parallelise classes the same way</p></li>
+<li><p>These actors maintain their internal state</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@ray</span><span class="o">.</span><span class="n">remote</span>
+<span class="k">class</span> <span class="nc">Counter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        
+    <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct an actor instance using .remote()</span>
+<span class="n">counters</span> <span class="o">=</span> <span class="p">[</span><span class="n">Counter</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># asynchronously run actor methods</span>
+<span class="p">[</span><span class="n">counter</span><span class="o">.</span><span class="n">increment</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">counters</span><span class="p">]</span>
+<span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">counter</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">counters</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">futures</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other key API methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ray.put()</span></code></p>
+<ul>
+<li><p>Put a value in the distributed object store.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">put_id</span> <span class="pre">=</span> <span class="pre">ray.put(my_object)</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ray.get()</span></code></p>
+<ul>
+<li><p>Get an object from the distributed object store, either placed there by <code class="docutils literal notranslate"><span class="pre">ray.put()</span></code> explicitly or by a task or actor method, blocking until object is available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thing</span> <span class="pre">=</span> <span class="pre">ray.get(put_id)</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ray.wait()</span></code></p>
+<ul>
+<li><p>Wait on a list of ids until one of the corresponding objects is available (e.g., the task completes). Return two lists, one with ids for the available objects and the other with ids for the still-running tasks or method calls.
+<code class="docutils literal notranslate"><span class="pre">finished,</span> <span class="pre">running</span> <span class="pre">=</span> <span class="pre">ray.wait([train_id,</span> <span class="pre">track_id])</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ray-s-multiprocessing">
+<h3>Ray’s <a class="reference external" href="https://docs.ray.io/en/latest/multiprocessing.html"><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a><a class="headerlink" href="#ray-s-multiprocessing" title="Permalink to this headline">¶</a></h3>
+<p>To scale beyond one machine and generally manage a pool of processes.</p>
+<p>Replace:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+<p>With:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ray.util.multiprocessing.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ray.util.multiprocessing.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ray-s-joblib">
+<h3>Ray’s <a class="reference external" href="https://docs.ray.io/en/latest/joblib.html"><code class="docutils literal notranslate"><span class="pre">joblib</span></code></a><a class="headerlink" href="#ray-s-joblib" title="Permalink to this headline">¶</a></h3>
+<p>The underpinnings of <a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>, which Ray can scale to a cluster.</p>
+<p>Import and instantiate <code class="docutils literal notranslate"><span class="pre">register_ray</span></code>, which registers Ray as a <code class="docutils literal notranslate"><span class="pre">joblib</span></code> backend for <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">ray.util.joblib</span> <span class="kn">import</span> <span class="n">register_ray</span>
+<span class="n">register_ray</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then run your original <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> code within a Ray/<code class="docutils literal notranslate"><span class="pre">joblib</span></code> backend:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">joblib</span><span class="o">.</span><span class="n">parallel_backend</span><span class="p">(</span><span class="s1">&#39;ray&#39;</span><span class="p">):</span>
+    <span class="c1"># original scikit-learn code</span>
+</pre></div>
+</div>
+<p>For example, here’s some parallel hyperparameter tuning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">ray.util.joblib</span> <span class="kn">import</span> <span class="n">register_ray</span>
+<span class="n">register_ray</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+<span class="n">param_space</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;balanced&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">model_selection</span><span class="o">.</span><span class="n">RandomizedSearchCV</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">param_space</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">joblib</span><span class="o">.</span><span class="n">parallel_backend</span><span class="p">(</span><span class="s1">&#39;ray&#39;</span><span class="p">):</span>
+    <span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When finished, remember to shut down the Ray connection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ray</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Please see this <a class="reference external" href="https://github.com/lukeconibear/distributed_deep_learning">repository</a> for examples of how to do distributed deep learning using Ray Train with TensorFlow, PyTorch, and Horovod.</p>
+</div>
+</div>
+<div class="section" id="dask-on-ray">
+<h2><a class="reference external" href="https://docs.ray.io/en/latest/data/dask-on-ray.html">Dask on Ray</a><a class="headerlink" href="#dask-on-ray" title="Permalink to this headline">¶</a></h2>
+<p>Use Ray as a backend for Dask tasks.<br />
+Dask dispatches tasks to Ray for scheduling and execution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ray</span>
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="nn">dd</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ray.util.dask</span> <span class="kn">import</span> <span class="n">ray_dask_get</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dask</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">scheduler</span><span class="o">=</span><span class="n">ray_dask_get</span><span class="p">)</span> 
+<span class="n">ray</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;node_ip_address&#39;: &#39;129.11.87.102&#39;,
+ &#39;raylet_ip_address&#39;: &#39;129.11.87.102&#39;,
+ &#39;redis_address&#39;: &#39;129.11.87.102:6379&#39;,
+ &#39;object_store_address&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572/sockets/plasma_store&#39;,
+ &#39;raylet_socket_name&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572/sockets/raylet&#39;,
+ &#39;webui_url&#39;: None,
+ &#39;session_dir&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572&#39;,
+ &#39;metrics_export_port&#39;: 63246,
+ &#39;node_id&#39;: &#39;e37649cbb30caaafbcfb5fdbe4645c1e07fbbc9c2a044468ebf0a02d&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">8</span><span class="p">)))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">npartitions</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ray</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="modin">
 <h2><a class="reference external" href="https://modin.readthedocs.io/en/latest/">Modin</a><a class="headerlink" href="#modin" title="Permalink to this headline">¶</a></h2>
-<p>…</p>
+<p>Modin uses Ray or Dask to easily speed up your Pandas code.<br />
+To use Modin, simply replace the import and use Pandas API as normal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MODIN_ENGINE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ray&#39;</span>
+<span class="c1"># os.environ[&#39;MODIN_ENGINE&#39;] = &#39;dask&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="kn">import</span> <span class="nn">modin.pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">frame_data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mars">
+<h2><a class="reference external" href="https://docs.pymars.org/en/latest/">Mars</a><a class="headerlink" href="#mars" title="Permalink to this headline">¶</a></h2>
+<p>Mars is a tensor-based unified framework for large-scale data computation which scales numpy, pandas, scikit-learn and many other libraries.<br />
+Swap out the library import, use the same API, and add <code class="docutils literal notranslate"><span class="pre">.execute()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mars</span>
+<span class="n">mars</span><span class="o">.</span><span class="n">new_session</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="mars-tensor-for-numpy">
+<h3><a class="reference external" href="https://docs.pymars.org/en/latest/getting_started/tensor.html">Mars Tensor</a> for NumPy<a class="headerlink" href="#mars-tensor-for-numpy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># np.random.rand(10)</span>
+
+<span class="kn">import</span> <span class="nn">mars.tensor</span> <span class="k">as</span> <span class="nn">mt</span>
+<span class="n">mt</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mars-dataframe-for-pandas">
+<h3><a class="reference external" href="https://docs.pymars.org/en/latest/getting_started/dataframe.html">Mars DataFrame</a> for Pandas<a class="headerlink" href="#mars-dataframe-for-pandas" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="c1"># df = pd.DataFrame(</span>
+<span class="c1">#     np.random.rand(10),</span>
+<span class="c1">#     columns=[&#39;random_numbers&#39;]</span>
+<span class="c1"># )</span>
+
+<span class="kn">import</span> <span class="nn">mars.dataframe</span> <span class="k">as</span> <span class="nn">md</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;random_numbers&#39;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And remember to stop the server when you’re finished.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mars</span><span class="o">.</span><span class="n">stop_server</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Mars can also use Ray as the backend (<a class="reference external" href="https://docs.ray.io/en/latest/data/mars-on-ray.html">instructions</a>).</p>
+</div>
 </div>
 <div class="section" id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://youtu.be/18B1pznaU1o">Concurrency</a> can also run different tasks together, but work is not done at the same time.<br />
-<a class="reference external" href="https://youtu.be/iG6fr81xHKA">Asynchronous</a> (multi-threading), useful for massive scaling, threads controlled explicitly.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ray.io/en/latest/data/raydp.html">Spark on Ray</a>: RayDP combines your Spark and Ray clusters, making it easy to do large scale data processing using the PySpark API and seemlessly use that data to train your models using TensorFlow and PyTorch.</p></li>
+<li><p><a class="reference external" href="https://youtu.be/18B1pznaU1o">Concurrency</a> can also run different tasks together, but work is not done at the same time.</p></li>
+<li><p><a class="reference external" href="https://youtu.be/iG6fr81xHKA">Asynchronous</a> (multi-threading), useful for massive scaling, threads controlled explicitly.</p></li>
+</ul>
 </div>
 </div>
 
