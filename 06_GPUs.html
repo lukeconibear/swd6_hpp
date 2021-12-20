@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overview &#8212; SWD6: High performance Python</title>
+    <title>GPUs &#8212; SWD6: High performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,8 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Profiling" href="01_profiling.html" />
-    <link rel="prev" title="Introduction" href="intro.html" />
+    <link rel="prev" title="Parallelisation" href="05_parallelisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -98,7 +97,7 @@
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="00_overview.html">
    Overview
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -106,7 +105,7 @@
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="01_profiling.html">
      Profiling
@@ -132,8 +131,8 @@
      Parallelisation
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="06_GPUs.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      GPUs
     </a>
    </li>
@@ -180,7 +179,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/00_overview.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/06_GPUs.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -200,7 +199,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2F00_overview.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2F06_GPUs.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -221,7 +220,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/lukeconibear/swd6_hpp/main?urlpath=tree/docs/00_overview.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/lukeconibear/swd6_hpp/main?urlpath=tree/docs/06_GPUs.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -244,18 +243,45 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hang-on-don-t-optimise-too-early">
-   Hang on, don’t optimise too early
+  <a class="reference internal nav-link" href="#jax">
+   JAX
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-fast-could-it-go">
-   How fast could it go?
+  <a class="reference internal nav-link" href="#automatic-detection">
+   Automatic detection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#to-follow-along">
-   To follow along
+  <a class="reference internal nav-link" href="#cuda">
+   CUDA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rapids">
+   RAPIDS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cupy">
+     cuPy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cudf">
+     cuDF
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-gpus">
+   Parallel GPUs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-information">
+   Further information
   </a>
  </li>
 </ul>
@@ -269,110 +295,84 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Python is great for many reasons including:</p>
-<ul class="simple">
-<li><p>High−level (so you can focus on your problem).</p></li>
-<li><p>Clean, readable, and efficient.</p></li>
-<li><p>Easy and fun to learn.</p></li>
-<li><p>Dynamic.</p></li>
-<li><p>Fast to write and test code.</p></li>
-<li><p>Less code.</p></li>
-<li><p>Flexible.</p></li>
-<li><p>Interactive.</p></li>
-<li><p>Great support</p></li>
-<li><p>Open source.</p></li>
-<li><p>Vast range of libraries.</p></li>
-<li><p>Huge number of users.</p></li>
-<li><p>etc…</p></li>
-</ul>
-<p>However, sometimes it can be slow. Often this isn’t an issue. Though when it is, it’s useful to know how to speed it up.</p>
-<p>That’s what this workshop is all about.</p>
-<div class="section" id="hang-on-don-t-optimise-too-early">
-<h2>Hang on, don’t optimise too early<a class="headerlink" href="#hang-on-don-t-optimise-too-early" title="Permalink to this headline">¶</a></h2>
-<p>There are trade-offs when you pursue faster code, for example, it may become more complex, use more memory, become less readable, etc. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:</p>
-<ul class="simple">
-<li><p>The code is correct (have you tested it?, does it have documentation?).</p></li>
-<li><p>Is optimisation really needed?</p>
-<ul>
-<li><p>If yes, then optimise the code and data.</p></li>
-<li><p>If that’s still not enough, then parallelise.</p></li>
-</ul>
-</li>
-</ul>
-<p><em>Plot idea from <a class="reference external" href="https://ml.dask.org/">Dask-ML</a>.</em></p>
-<div class="cell tag_remove_input docutils container">
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family [&#39;xkcd&#39;, &#39;xkcd Script&#39;, &#39;Humor Sans&#39;, &#39;Comic Neue&#39;, &#39;Comic Sans MS&#39;] not found. Falling back to DejaVu Sans.
+  <div class="tex2jax_ignore mathjax_ignore section" id="gpus">
+<h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.</p>
+<p>Could use other types of accelerators too.</p>
+<div class="section" id="jax">
+<h2><a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a><a class="headerlink" href="#jax" title="Permalink to this headline">¶</a></h2>
+<p>…</p>
+</div>
+<div class="section" id="automatic-detection">
+<h2>Automatic detection<a class="headerlink" href="#automatic-detection" title="Permalink to this headline">¶</a></h2>
+<p>Many libraries can use GPUs automatically if they can detect one.</p>
+<p><a class="reference external" href="https://www.tensorflow.org/install/gpu"><code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family [&#39;xkcd&#39;, &#39;xkcd Script&#39;, &#39;Humor Sans&#39;, &#39;Comic Neue&#39;, &#39;Comic Sans MS&#39;] not found. Falling back to DejaVu Sans.
-</pre></div>
-</div>
-<img alt="_images/00_overview_3_2.png" src="_images/00_overview_3_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="how-fast-could-it-go">
-<h2>How fast could it go?<a class="headerlink" href="#how-fast-could-it-go" title="Permalink to this headline">¶</a></h2>
-<p>It’s useful to know how code speed is measured. Miles per hour? Bits per second?</p>
-<p>The speed of code doesn’t have specific units like that. For one reason, this is because computers vary a lot.</p>
-<p>Instead, it’s normally measured in <em>order of operations (O) per element (n)</em>.</p>
-<ul class="simple">
-<li><p>This means how many operations are needed as the number the elements gets bigger.</p></li>
-<li><p>The order of operations is called <a class="reference external" href="https://www.bigocheatsheet.com/">Big O notation</a>.</p></li>
-<li><p>The operations is given as the largest order of a polynomial, ignoring any constants.</p>
-<ul>
-<li><p>For example, O(2n<sup>2</sup> + 3n) would just become O(n<sup>2</sup>).</p></li>
-</ul>
-</li>
-<li><p>This becomes important when the number of elements is large.</p></li>
-<li><p>It’s normally measured for a typical case.</p></li>
-<li><p>Constant time means per machine operation.</p></li>
-</ul>
-<p>A nice example from <a class="reference external" href="https://www.youtube.com/watch?v=duvZ-2UK0fc">Ned Batchelder’s</a> PyCon talk is for counting beans in a jar.</p>
-<ul class="simple">
-<li><p><em>Method 1</em>: If you count each bean one by one as you pick it out of the jar, then this would be an O(n) time operation. So for a new jar of beans, you’ll have to repeat this operation for <em>every</em> bean in the jar. Think of making tally marks for each one.</p></li>
-<li><p><em>Method 2</em>: You have a label on the front of the jar, which tells you how many beans are in it. For this method, no matter how many beans are in there, the time of the operation stays the same at O(1).</p></li>
-</ul>
-<p><img alt="counting_beans.png" src="_images/counting_beans.png" /></p>
-<p>Memory is measured in the same way.</p>
-<p>Both of these two measurements together represent the <em>time-space complexity</em> of your code.</p>
-<p><em>Plot idea from <a class="reference external" href="https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></em>.</p>
-<div class="cell tag_remove_input docutils container">
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family [&#39;xkcd&#39;, &#39;xkcd Script&#39;, &#39;Humor Sans&#39;, &#39;Comic Neue&#39;, &#39;Comic Sans MS&#39;] not found. Falling back to DejaVu Sans.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family [&#39;xkcd&#39;, &#39;xkcd Script&#39;, &#39;Humor Sans&#39;, &#39;Comic Neue&#39;, &#39;Comic Sans MS&#39;] not found. Falling back to DejaVu Sans.
-</pre></div>
-</div>
-<img alt="_images/00_overview_7_2.png" src="_images/00_overview_7_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="to-follow-along">
-<h2>To follow along<a class="headerlink" href="#to-follow-along" title="Permalink to this headline">¶</a></h2>
-<p><em>Option 1 - Run on Google Colab (recommended)</em>:</p>
-<ul class="simple">
-<li><p>Click on the Colab button within each Jupyter notebook to run there.</p></li>
-</ul>
-<p><em>Option 2 - Run locally</em>:</p>
-<p>a. Clone this GitHub repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone ...
-</pre></div>
-</div>
-<p>b. Copy this conda environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --name swd6_hpp --file<span class="o">=</span>requirements.txt
-</pre></div>
-</div>
-<p>c. Open jupyter lab:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+<p><a class="reference external" href="https://pytorch.org/docs/stable/notes/cuda.html"><code class="docutils literal notranslate"><span class="pre">PyTorch</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="toctree-wrapper compound">
+<div class="section" id="cuda">
+<h2><a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a><a class="headerlink" href="#cuda" title="Permalink to this headline">¶</a></h2>
+<p>…</p>
+</div>
+<div class="section" id="rapids">
+<h2><a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a><a class="headerlink" href="#rapids" title="Permalink to this headline">¶</a></h2>
+<p>Accelerated data science libraries, including cuPy for NumPy and SciPy, cuDF for Pandas, and others such as XGBoost, cuML, cuGraph.</p>
+<div class="section" id="cupy">
+<h3><a class="reference external" href="https://cupy.dev/">cuPy</a><a class="headerlink" href="#cupy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy for CPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_cpu</span><span class="p">,</span> <span class="n">y_cpu</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_cpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asnumpy</span><span class="p">(</span><span class="n">z_gpu</span><span class="p">)</span> <span class="c1"># convert over</span>
+
+<span class="c1"># CuPy for GPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_gpu</span><span class="p">,</span> <span class="n">y_gpu</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">z_cpu</span><span class="p">)</span> <span class="c1"># convert over</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cudf">
+<h3><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/">cuDF</a><a class="headerlink" href="#cudf" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas for CPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="p">})</span>
+
+<span class="c1"># cuDF for GPU</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cudf</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">cudf</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="parallel-gpus">
+<h2>Parallel GPUs<a class="headerlink" href="#parallel-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Can run across multiple GPUs in <a class="reference external" href="https://docs.dask.org/en/latest/gpu.html">parallel</a>.<br />
+GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.uk/systems/arc4.html#using-the-v100-gpu-nodes">ARC4</a>.</p>
+</div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=_AKDqw6li58">CuPy - Sean Farley</a>, PyBay 2019.<br />
+<a class="reference external" href="https://www.youtube.com/watch?v=lV7rtDW94do">cuDF - Mark Harris</a>, PyCon AU 2019.</p>
 </div>
 </div>
 
@@ -401,19 +401,12 @@
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="05_parallelisation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction</p>
+            <p class="prev-next-title">Parallelisation</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="01_profiling.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Profiling</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
         
