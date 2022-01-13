@@ -494,7 +494,7 @@ Under the hood for NumPy arrays, functions, and aggregations (e.g., mean, sum).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>253 ms ± 5.67 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>286 ms ± 5.36 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -507,7 +507,7 @@ Under the hood for NumPy arrays, functions, and aggregations (e.g., mean, sum).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>747 µs ± 15.4 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>815 µs ± 7.73 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -520,7 +520,7 @@ Under the hood for NumPy arrays, functions, and aggregations (e.g., mean, sum).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>742 µs ± 11.8 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>814 µs ± 14.6 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -921,10 +921,10 @@ array([[ 0,  1,  2],
        [30, 31, 32]])
 Coordinates:
   * col      (col) int64 0 10 20 30
-  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-50f7d071-6d33-44d2-b7b9-da8c6fe5dfea' class='xr-array-in' type='checkbox' checked><label for='section-50f7d071-6d33-44d2-b7b9-da8c6fe5dfea' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
+  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-c57f02f2-fa4b-4923-8a58-3943cc50880f' class='xr-array-in' type='checkbox' checked><label for='section-c57f02f2-fa4b-4923-8a58-3943cc50880f' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
        [10, 11, 12],
        [20, 21, 22],
-       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-b32680fe-ae63-4b79-ae7a-d07a585d3286' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b32680fe-ae63-4b79-ae7a-d07a585d3286' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-02451f2d-fcdd-4aab-aa92-13f6c4d10a1a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-02451f2d-fcdd-4aab-aa92-13f6c4d10a1a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-480450e6-4635-49cc-a4f6-af5f0cfc3565' class='xr-var-data-in' type='checkbox'><label for='data-480450e6-4635-49cc-a4f6-af5f0cfc3565' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-0554f866-dd69-45e4-9587-4efc3af6a53c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0554f866-dd69-45e4-9587-4efc3af6a53c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-585ff341-319f-4e0f-8059-1a59fd40c6c3' class='xr-var-data-in' type='checkbox'><label for='data-585ff341-319f-4e0f-8059-1a59fd40c6c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-bea3aec6-282c-45a8-8168-cfb5ba9982ea' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bea3aec6-282c-45a8-8168-cfb5ba9982ea' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-a4c950c0-3393-4d61-b7fb-141daeb44e97' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a4c950c0-3393-4d61-b7fb-141daeb44e97' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-93809972-56ac-4dd6-bdcc-9fa49ab5669d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-93809972-56ac-4dd6-bdcc-9fa49ab5669d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3ba6fabb-cd2e-4fe6-b308-07ed7ad0967e' class='xr-var-data-in' type='checkbox'><label for='data-3ba6fabb-cd2e-4fe6-b308-07ed7ad0967e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-d5e9400b-076d-4828-acde-e8001367d33b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d5e9400b-076d-4828-acde-e8001367d33b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-48e4cd5f-6b70-4bf1-8b22-69f1276b1148' class='xr-var-data-in' type='checkbox'><label for='data-48e4cd5f-6b70-4bf1-8b22-69f1276b1148' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f43ef059-1d31-49aa-ab09-a84b7b2ce3d1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f43ef059-1d31-49aa-ab09-a84b7b2ce3d1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>NumPy <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a> (universal functions).</p>
 <ul class="simple">
@@ -944,11 +944,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0583347 , 0.40173876, 0.00303597, 0.03491052, 0.95875923],
-       [0.20361144, 0.0482743 , 0.96601434, 0.68632059, 0.05022938],
-       [0.18247707, 0.61861981, 0.67465545, 0.50785466, 0.86737075],
-       [0.54122967, 0.61597603, 0.24349173, 0.56805258, 0.80363033],
-       [0.67150084, 0.08923524, 0.45588154, 0.7469844 , 0.87443123]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.10539768, 0.81148712, 0.87427006, 0.13203632, 0.24418095],
+       [0.18286657, 0.43689635, 0.6856612 , 0.90356295, 0.59789831],
+       [0.77533761, 0.05022416, 0.1812441 , 0.65634244, 0.20625032],
+       [0.75755165, 0.32614932, 0.42391477, 0.1102079 , 0.17114658],
+       [0.45566421, 0.07214039, 0.68758496, 0.29607096, 0.25139328]])
 </pre></div>
 </div>
 </div>
@@ -976,11 +976,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.9, 0.5, 0.5, 0.5],
-       [0.7, 0.5, 0.5, 0.2, 0.6],
-       [0.7, 0.1, 0.2, 0.0, 0.4],
-       [0.0, 0.1, 0.7, 0.1, 0.3],
-       [0.2, 0.6, 1.0, 0.2, 0.4]], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.3, 0.4, 0.6, 0.7],
+       [0.7, 0.9, 0.2, 0.4, 0.1],
+       [0.3, 0.6, 0.7, 0.2, 0.7],
+       [0.3, 0.8, 0.9, 0.6, 0.7],
+       [1.0, 0.6, 0.2, 0.8, 0.8]], dtype=object)
 </pre></div>
 </div>
 </div>
@@ -1005,11 +1005,11 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.9, 0.5, 0.5, 0.5],
-       [0.7, 0.5, 0.5, 0.2, 0.6],
-       [0.7, 0.1, 0.2, 0. , 0.4],
-       [0. , 0.1, 0.7, 0.1, 0.3],
-       [0.2, 0.6, 1. , 0.2, 0.4]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6, 0.3, 0.4, 0.6, 0.7],
+       [0.7, 0.9, 0.2, 0.4, 0.1],
+       [0.3, 0.6, 0.7, 0.2, 0.7],
+       [0.3, 0.8, 0.9, 0.6, 0.7],
+       [1. , 0.6, 0.2, 0.8, 0.8]])
 </pre></div>
 </div>
 </div>
@@ -1451,7 +1451,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-8180837a-d15c-45ce-b132-63d4f51f3e96' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8180837a-d15c-45ce-b132-63d4f51f3e96' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-f6d3c8f8-6d53-4773-bcc0-a05dca34097b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f6d3c8f8-6d53-4773-bcc0-a05dca34097b' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-f85459ea-5131-4ebc-a8b4-98fa3e6e3de5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f85459ea-5131-4ebc-a8b4-98fa3e6e3de5' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-a73f730c-03cc-4380-b054-97fbd98cc62f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a73f730c-03cc-4380-b054-97fbd98cc62f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c7a48f03-61cd-44c2-a081-2b672b2f5f4b' class='xr-var-data-in' type='checkbox'><label for='data-c7a48f03-61cd-44c2-a081-2b672b2f5f4b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f96a6279-d6de-4842-9772-fb96badebfb8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f96a6279-d6de-4842-9772-fb96badebfb8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-c9548c23-7d98-4b11-bea9-b79bd9bf80cc' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c9548c23-7d98-4b11-bea9-b79bd9bf80cc' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-a409b0fd-bf00-4f38-9221-cb5b7e38d24b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a409b0fd-bf00-4f38-9221-cb5b7e38d24b' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-7efb7b44-5bf9-4326-a695-d3a0f69c7d30' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7efb7b44-5bf9-4326-a695-d3a0f69c7d30' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-777deb48-99be-41d0-b706-3b97722bd864' class='xr-var-data-in' type='checkbox'><label for='data-777deb48-99be-41d0-b706-3b97722bd864' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table>
@@ -1492,7 +1492,7 @@ Data variables:
 
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-ab1b6102-f319-47c6-b3ca-71d3fbb76d49' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ab1b6102-f319-47c6-b3ca-71d3fbb76d49' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-0c603295-dc83-4e07-9364-fe34317321bd' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0c603295-dc83-4e07-9364-fe34317321bd' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1855,7 +1855,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b8976864-64e6-414f-8ad6-2b65550becce' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b8976864-64e6-414f-8ad6-2b65550becce' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1ed49fa9-5bb6-40cf-9443-89f02770aa9a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-1ed49fa9-5bb6-40cf-9443-89f02770aa9a' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-49e7359e-7eaa-4c1a-ab41-793d98fcbc78' class='xr-section-summary-in' type='checkbox'  checked><label for='section-49e7359e-7eaa-4c1a-ab41-793d98fcbc78' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-f5166563-a14d-4ec2-bc02-487517ed5c90' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f5166563-a14d-4ec2-bc02-487517ed5c90' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ad500f20-5c57-4879-8777-c361f472f211' class='xr-var-data-in' type='checkbox'><label for='data-ad500f20-5c57-4879-8777-c361f472f211' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c1492f4d-5e4b-49dc-a79a-705c9f32d3c7' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c1492f4d-5e4b-49dc-a79a-705c9f32d3c7' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-0bd04319-a7ed-4203-b7dc-155470e72cd3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0bd04319-a7ed-4203-b7dc-155470e72cd3' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-84837473-5ae0-4ad7-b772-c8a9491946c9' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-84837473-5ae0-4ad7-b772-c8a9491946c9' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-0d86bb0f-20b1-4fa9-b60a-e4efcff3bde4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0d86bb0f-20b1-4fa9-b60a-e4efcff3bde4' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-c1f61963-5c91-4911-a8f3-3c61ee97b533' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c1f61963-5c91-4911-a8f3-3c61ee97b533' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-285b1955-ec3d-4a2d-8d93-c284794299de' class='xr-var-data-in' type='checkbox'><label for='data-285b1955-ec3d-4a2d-8d93-c284794299de' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a96cd9d0-c746-4c76-a38b-189c15fa74f5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a96cd9d0-c746-4c76-a38b-189c15fa74f5' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2166,7 +2166,7 @@ Dask Name: sqrt, 67 tasks
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([59, 30, 93, ..., 61, 55, 98])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([43,  4, 15, ...,  1, 50, 37])
 </pre></div>
 </div>
 </div>
@@ -2221,7 +2221,7 @@ Dask Name: sqrt, 67 tasks
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">ExecutableNotFound</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1995</span><span class="o">/</span><span class="mf">3192592437.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2152</span><span class="o">/</span><span class="mf">3192592437.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">bag</span> <span class="o">=</span> <span class="n">bag</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> 
 <span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">bag</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
