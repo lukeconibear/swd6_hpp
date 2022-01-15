@@ -1,12 +1,10 @@
 name: deploy
 
 on:
-  # Trigger the workflow on push to main branch
   push:
     branches:
       - main
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
   build-and-deploy-book:
     runs-on: ${{ matrix.os }}
@@ -17,24 +15,32 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # Install dependencies
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: Install Conda environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: swd6_hpp
+        environment-file: environment.yml
+        python-version: 3.8
+        auto-activate-base: false
+        auto-update-conda: false
+
     - name: Create Jupyter kernelspec
       run: |
         python -m ipykernel install --user --name swd6_hpp --display-name "swd6_hpp"
 
-    # Build the book
     - name: Build the book
       run: |
         jupyter-book build docs
 
-    # Deploy the book's HTML to gh-pages branch
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:

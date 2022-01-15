@@ -32,3 +32,14 @@ If you would like a bespoke version of this course run in your department, then 
 
 ## Suitability
 Research postgraduate students and above; teaching and lecturing staff.
+
+## Clone the repository and environment
+```bash
+# 1. clone repo and go into it
+git clone git@github.com:lukeconibear/swd6_hpp.git
+cd swd6_hpp
+
+# 2. create python environment
+conda env create --file environment.yml
+conda activate swd6_hpp
+```
