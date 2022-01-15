@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overview &#8212; SWD6: High performance Python</title>
+    <title>Overview &#8212; SWD6: High Performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -81,7 +81,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">SWD6: High performance Python</h1>
+      <h1 class="site-logo" id="site-title">SWD6: High Performance Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -360,14 +360,19 @@
 </ul>
 <p><em>Option 2 - Run locally</em>:</p>
 <p>a. Clone this GitHub repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone ...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:lukeconibear/swd6_hpp.git
+<span class="nb">cd</span> swd6_hpp
 </pre></div>
 </div>
 <p>b. Copy this conda environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --name swd6_hpp --file<span class="o">=</span>requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --file environment.yml
+conda activate swd6_hpp
+
+<span class="c1"># create the kernel for jupyter</span>
+python -m ipykernel install --user --name swd6_hpp --display-name <span class="s2">&quot;swd6_hpp&quot;</span>
 </pre></div>
 </div>
-<p>c. Open jupyter lab:</p>
+<p>c. Open Jupyter Lab:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
 </pre></div>
 </div>
@@ -425,7 +430,7 @@
         
           By Luke Conibear<br/>
         
-            &copy; Copyright 2021.<br/>
+            &copy; Copyright 2022.<br/>
       </p>
     </div>
   </footer>
