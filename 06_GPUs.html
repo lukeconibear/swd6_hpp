@@ -51,6 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Summary" href="07_summary.html" />
     <link rel="prev" title="Parallelisation" href="05_parallelisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -90,8 +91,8 @@
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Introduction
+  <a class="reference internal" href="index.html">
+   SWD6: High Performance Python
   </a>
  </li>
 </ul>
@@ -112,13 +113,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="02_built-in_functions.html">
-     Built-in functions
+    <a class="reference internal" href="02_data_structures_algorithms_libraries.html">
+     Data Structures, Algorithms, and Libraries
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="03_data_structures_and_algorithms.html">
-     Data structures and algorithms
+    <a class="reference internal" href="03_vectorisation.html">
+     Vectorisation
     </a>
    </li>
    <li class="toctree-l2">
@@ -137,6 +138,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_summary.html">
+   Summary
+  </a>
  </li>
 </ul>
 
@@ -253,9 +259,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cuda">
-   CUDA
+  <a class="reference internal nav-link" href="#cuda-compute-unified-device-architecture">
+   CUDA (Compute Unified Device Architecture)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numba">
+     Numba
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rapids">
@@ -267,22 +280,29 @@
      cuPy
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cudf">
-     cuDF
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parallel-gpus">
-   Parallel GPUs
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#further-information">
    Further information
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-options">
+     Other options
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources">
+     Resources
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -299,6 +319,7 @@
 <h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.</p>
+<p>GPU hardware is designed for data parallelism, where high throughputs are achieved when the GPU is computing the same operations on many different elements at once.</p>
 <p>Could use other types of accelerators too.</p>
 <div class="section" id="jax">
 <h2><a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a><a class="headerlink" href="#jax" title="Permalink to this headline">¶</a></h2>
@@ -318,13 +339,205 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="cuda">
-<h2><a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a><a class="headerlink" href="#cuda" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cuda-compute-unified-device-architecture">
+<h2><a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a> (Compute Unified Device Architecture)<a class="headerlink" href="#cuda-compute-unified-device-architecture" title="Permalink to this headline">¶</a></h2>
 <p>…</p>
+<div class="section" id="numba">
+<h3><a class="reference external" href="https://numba.pydata.org/numba-doc/latest/index.html">Numba</a><a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h3>
+<p>…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span><span class="p">,</span> <span class="n">vectorize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Numba <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> on the CPU</p>
+<ul class="simple">
+<li><p>Can also use <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@vectorize</span>
+<span class="k">def</span> <span class="nf">do_maths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Numba <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> on the GPU</p>
+<ul class="simple">
+<li><p>Can also use <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the GPU, need: types output(inputs) and target </span>
+<span class="nd">@vectorize</span><span class="p">([</span><span class="s1">&#39;float32(float32, float32)&#39;</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">do_maths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py</span> in <span class="ni">__new__</span><span class="nt">(cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>                 <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">119</span>                     <span class="n">inst</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">open_cudalib</span><span class="p">(</span><span class="s1">&#39;nvvm&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span>                 <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/libs.py</span> in <span class="ni">open_cudalib</span><span class="nt">(lib)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">path</span> <span class="o">=</span> <span class="n">get_cudalib</span><span class="p">(</span><span class="n">lib</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>     <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/ctypes/__init__.py</span> in <span class="ni">__init__</span><span class="nt">(self, name, mode, handle, use_errno, use_last_error, winmode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>         <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">382</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">_dlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">OSError</span>: libnvvm.so: cannot open shared object file: No such file or directory
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">NvvmSupportError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4316</span><span class="o">/</span><span class="mf">1006741626.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># For the GPU, need: types output(inputs) and target</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@vectorize</span><span class="p">([</span><span class="s1">&#39;float32(float32, float32)&#39;</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">do_maths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/np/ufunc/decorators.py</span> in <span class="ni">wrap</span><span class="nt">(func)</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>         <span class="n">vec</span> <span class="o">=</span> <span class="n">Vectorize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>         <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">ftylist</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">125</span>             <span class="n">vec</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ftylist</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>             <span class="n">vec</span><span class="o">.</span><span class="n">disable_compile</span><span class="p">()</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/np/ufunc/deviceufunc.py</span> in <span class="ni">add</span><span class="nt">(***failed resolving arguments***)</span>
+<span class="g g-Whitespace">    </span><span class="mi">397</span>         <span class="n">kernelsource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_kernel_source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_kernel_template</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span>                                                <span class="n">devfnsig</span><span class="p">,</span> <span class="n">funcname</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">399</span>         <span class="n">corefn</span><span class="p">,</span> <span class="n">return_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_core</span><span class="p">(</span><span class="n">devfnsig</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>         <span class="n">glbl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_globals</span><span class="p">(</span><span class="n">corefn</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span>         <span class="n">sig</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">void</span><span class="p">,</span> <span class="o">*</span><span class="p">([</span><span class="n">a</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">return_type</span><span class="p">[:]]))</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/vectorizers.py</span> in <span class="ni">_compile_core</span><span class="nt">(self, sig)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">class</span> <span class="nc">CUDAVectorize</span><span class="p">(</span><span class="n">deviceufunc</span><span class="o">.</span><span class="n">DeviceVectorize</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="k">def</span> <span class="nf">_compile_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>         <span class="n">cudevfn</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">pyfunc</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">return</span> <span class="n">cudevfn</span><span class="p">,</span> <span class="n">cudevfn</span><span class="o">.</span><span class="n">cres</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">return_type</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/decorators.py</span> in <span class="ni">device_jit</span><span class="nt">(func)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> 
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="k">def</span> <span class="nf">device_jit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">98</span>             <span class="k">return</span> <span class="n">compile_device</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">restype</span><span class="p">,</span> <span class="n">argtypes</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="n">inline</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>                                   <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py</span> in <span class="ni">compile_device</span><span class="nt">(pyfunc, return_type, args, inline, debug)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span> 
+<span class="g g-Whitespace">    </span><span class="mi">281</span> <span class="k">def</span> <span class="nf">compile_device</span><span class="p">(</span><span class="n">pyfunc</span><span class="p">,</span> <span class="n">return_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">282</span>     <span class="k">return</span> <span class="n">DeviceFunction</span><span class="p">(</span><span class="n">pyfunc</span><span class="p">,</span> <span class="n">return_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span> 
+<span class="g g-Whitespace">    </span><span class="mi">284</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py</span> in <span class="ni">__init__</span><span class="nt">(self, pyfunc, return_type, args, inline, debug)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="bp">self</span><span class="o">.</span><span class="n">inline</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>         <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>         <span class="n">cres</span> <span class="o">=</span> <span class="n">compile_cuda</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">py_func</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>                             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inline</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="bp">self</span><span class="o">.</span><span class="n">cres</span> <span class="o">=</span> <span class="n">cres</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/compiler_lock.py</span> in <span class="ni">_acquire_compile_lock</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>         <span class="k">def</span> <span class="nf">_acquire_compile_lock</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>             <span class="k">with</span> <span class="bp">self</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>         <span class="k">return</span> <span class="n">_acquire_compile_lock</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py</span> in <span class="ni">compile_cuda</span><span class="nt">(pyfunc, return_type, args, debug, inline)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="kn">from</span> <span class="nn">.descriptor</span> <span class="kn">import</span> <span class="n">cuda_target</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">typingctx</span> <span class="o">=</span> <span class="n">cuda_target</span><span class="o">.</span><span class="n">typingctx</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="n">targetctx</span> <span class="o">=</span> <span class="n">cuda_target</span><span class="o">.</span><span class="n">targetctx</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> 
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">flags</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">Flags</span><span class="p">()</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/descriptor.py</span> in <span class="ni">targetctx</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">def</span> <span class="nf">targetctx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targetctx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">28</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_targetctx</span> <span class="o">=</span> <span class="n">CUDATargetContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_typingctx</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_targetctx</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/base.py</span> in <span class="ni">__init__</span><span class="nt">(self, typing_context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> 
+<span class="g g-Whitespace">    </span><span class="mi">259</span>         <span class="c1"># Initialize</span>
+<span class="ne">--&gt; </span><span class="mi">260</span>         <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span> 
+<span class="g g-Whitespace">    </span><span class="mi">262</span>     <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/target.py</span> in <span class="ni">init</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span> 
+<span class="g g-Whitespace">     </span><span class="mi">81</span>     <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">82</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_internal_codegen</span> <span class="o">=</span> <span class="n">codegen</span><span class="o">.</span><span class="n">JITCUDACodegen</span><span class="p">(</span><span class="s2">&quot;numba.cuda.jit&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_target_data</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">create_target_data</span><span class="p">(</span><span class="n">nvvm</span><span class="o">.</span><span class="n">default_data_layout</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/codegen.py</span> in <span class="ni">__init__</span><span class="nt">(self, module_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_data_layout</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_llvm_module</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">parse_assembly</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1097</span>             <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_empty_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_llvm_module</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;global_codegen_module&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_rtlinker</span> <span class="o">=</span> <span class="n">RuntimeLinker</span><span class="p">()</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/codegen.py</span> in <span class="ni">_create_empty_module</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_layout</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="n">ir_module</span><span class="o">.</span><span class="n">data_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_layout</span>
+<span class="ne">---&gt; </span><span class="mi">53</span>         <span class="n">nvvm</span><span class="o">.</span><span class="n">add_ir_version</span><span class="p">(</span><span class="n">ir_module</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>         <span class="k">return</span> <span class="n">ir_module</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py</span> in <span class="ni">add_ir_version</span><span class="nt">(mod)</span>
+<span class="g g-Whitespace">    </span><span class="mi">909</span>     <span class="sd">&quot;&quot;&quot;Add NVVM IR version to module&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span>     <span class="n">i32</span> <span class="o">=</span> <span class="n">ir</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">911</span>     <span class="k">if</span> <span class="n">NVVM</span><span class="p">()</span><span class="o">.</span><span class="n">is_nvvm70</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">912</span>         <span class="c1"># NVVM IR 1.6, DWARF 3.0</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span>         <span class="n">ir_versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">i32</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">i32</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">i32</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">i32</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py</span> in <span class="ni">__new__</span><span class="nt">(cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>                     <span class="n">errmsg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;libNVVM cannot be found. Do `conda install &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>                               <span class="s2">&quot;cudatoolkit`:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">124</span>                     <span class="k">raise</span> <span class="n">NvvmSupportError</span><span class="p">(</span><span class="n">errmsg</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span> 
+<span class="g g-Whitespace">    </span><span class="mi">126</span>                 <span class="c1"># Find &amp; populate functions</span>
+
+<span class="ne">NvvmSupportError</span>: libNVVM cannot be found. Do `conda install cudatoolkit`:
+<span class="n">libnvvm</span><span class="o">.</span><span class="n">so</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">shared</span> <span class="nb">object</span> <span class="n">file</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Considerations and more information:</p>
+<ul class="simple">
+<li><p>Ensure inputs are not too small and the calculation is not too simple.</p></li>
+<li><p>Consider whether the calculation is worth the overhead of sending data to and from the GPU (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/memory.html">memory management</a>).</p></li>
+<li><p>Working with arrays of different dimensions: can use <a class="reference external" href="https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html">generalized ufuncs</a> (NumPy), implemented in Numba as <code class="docutils literal notranslate"><span class="pre">guvectorize</span></code> on <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#the-guvectorize-decorator">CPUs</a> and <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/cuda/ufunc.html#generalized-cuda-ufuncs">GPUs</a>.</p></li>
+<li><p>What data precision is required (i.e., is 64-bit needed?).</p></li>
+<li><p>Custom functions beyond ufuncs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/kernels.html">kernels</a>)</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="rapids">
 <h2><a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a><a class="headerlink" href="#rapids" title="Permalink to this headline">¶</a></h2>
-<p>Accelerated data science libraries, including cuPy for NumPy and SciPy, cuDF for Pandas, and others such as XGBoost, cuML, cuGraph.</p>
+<p>Accelerated data science libraries.</p>
+<ul class="simple">
+<li><p>Arrays and matrices:</p>
+<ul>
+<li><p><a class="reference external" href="https://cupy.dev/">cuPy</a> for NumPy and SciPy</p></li>
+</ul>
+</li>
+</ul>
 <div class="section" id="cupy">
 <h3><a class="reference external" href="https://cupy.dev/">cuPy</a><a class="headerlink" href="#cupy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy for CPU</span>
@@ -342,37 +555,50 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="n">z_gpu</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">z_cpu</span><span class="p">)</span> <span class="c1"># convert over</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Tabular data</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/">cuDF</a> for Pandas</p></li>
+</ul>
+</li>
+<li><p>Machine learning</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.rapids.ai/api/cuml/stable/">cuML</a> for scikit-learn</p></li>
+<li><p><a class="reference external" href="https://rapids.ai/xgboost.html">XGBoost</a> on GPUs</p></li>
+</ul>
+</li>
+<li><p>Graphs and networks</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.rapids.ai/api/cugraph/stable/">cuGraph</a> for <a class="reference external" href="https://networkx.org/">NetworkX</a></p></li>
+</ul>
+</li>
+<li><p>Multiple GPUs</p>
+<ul>
+<li><p><a class="reference external" href="https://rapids.ai/dask.html">Dask with CUDA</a>, cuDF, cuML, and others.</p></li>
+</ul>
+</li>
+</ul>
 </div>
-<div class="section" id="cudf">
-<h3><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/">cuDF</a><a class="headerlink" href="#cudf" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas for CPU</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
-        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
-        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-    <span class="p">})</span>
-
-<span class="c1"># cuDF for GPU</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cudf</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">cudf</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
-        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))),</span>
-        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-    <span class="p">})</span>
-</pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="parallel-gpus">
-<h2>Parallel GPUs<a class="headerlink" href="#parallel-gpus" title="Permalink to this headline">¶</a></h2>
-<p>Can run across multiple GPUs in <a class="reference external" href="https://docs.dask.org/en/latest/gpu.html">parallel</a>.<br />
-GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.uk/systems/arc4.html#using-the-v100-gpu-nodes">ARC4</a>.</p>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>…</p>
 </div>
 <div class="section" id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=_AKDqw6li58">CuPy - Sean Farley</a>, PyBay 2019.<br />
-<a class="reference external" href="https://www.youtube.com/watch?v=lV7rtDW94do">cuDF - Mark Harris</a>, PyCon AU 2019.</p>
+<div class="section" id="other-options">
+<h3>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>…</p></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=_AKDqw6li58">CuPy - Sean Farley</a>, PyBay 2019.</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=lV7rtDW94do">cuDF - Mark Harris</a>, PyCon AU 2019.</p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -385,16 +611,16 @@ GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.u
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "swd6_hpp"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "swd6_hpp",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'swd6_hpp'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -407,6 +633,13 @@ GPUs available on <a class="reference external" href="https://arcdocs.leeds.ac.u
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Parallelisation</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="07_summary.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Summary</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
         

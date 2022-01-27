@@ -1,0 +1,163 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# For the GPU, need: types output(inputs) and target 
+@vectorize(['float32(float32, float32)'], target='cuda')
+def do_maths(x, y):
+    return x + y
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mOSError[0m                                   Traceback (most recent call last)
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py[0m in [0;36m__new__[0;34m(cls)[0m
+[1;32m    118[0m                 [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 119[0;31m                     [0minst[0m[0;34m.[0m[0mdriver[0m [0;34m=[0m [0mopen_cudalib[0m[0;34m([0m[0;34m'nvvm'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    120[0m                 [0;32mexcept[0m [0mOSError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/libs.py[0m in [0;36mopen_cudalib[0;34m(lib)[0m
+[1;32m     59[0m     [0mpath[0m [0;34m=[0m [0mget_cudalib[0m[0;34m([0m[0mlib[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 60[0;31m     [0;32mreturn[0m [0mctypes[0m[0;34m.[0m[0mCDLL[0m[0;34m([0m[0mpath[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     61[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/ctypes/__init__.py[0m in [0;36m__init__[0;34m(self, name, mode, handle, use_errno, use_last_error, winmode)[0m
+[1;32m    381[0m         [0;32mif[0m [0mhandle[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 382[0;31m             [0mself[0m[0;34m.[0m[0m_handle[0m [0;34m=[0m [0m_dlopen[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_name[0m[0;34m,[0m [0mmode[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    383[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mOSError[0m: libnvvm.so: cannot open shared object file: No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+[0;31mNvvmSupportError[0m                          Traceback (most recent call last)
+[0;32m/tmp/ipykernel_4316/1006741626.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# For the GPU, need: types output(inputs) and target[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m@[0m[0mvectorize[0m[0;34m([0m[0;34m[[0m[0;34m'float32(float32, float32)'[0m[0;34m][0m[0;34m,[0m [0mtarget[0m[0;34m=[0m[0;34m'cuda'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0;32mdef[0m [0mdo_maths[0m[0;34m([0m[0mx[0m[0;34m,[0m [0my[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m     [0;32mreturn[0m [0mx[0m [0;34m+[0m [0my[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/np/ufunc/decorators.py[0m in [0;36mwrap[0;34m(func)[0m
+[1;32m    123[0m         [0mvec[0m [0;34m=[0m [0mVectorize[0m[0;34m([0m[0mfunc[0m[0;34m,[0m [0;34m**[0m[0mkws[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    124[0m         [0;32mfor[0m [0msig[0m [0;32min[0m [0mftylist[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 125[0;31m             [0mvec[0m[0;34m.[0m[0madd[0m[0;34m([0m[0msig[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    126[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mftylist[0m[0;34m)[0m [0;34m>[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    127[0m             [0mvec[0m[0;34m.[0m[0mdisable_compile[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/np/ufunc/deviceufunc.py[0m in [0;36madd[0;34m(***failed resolving arguments***)[0m
+[1;32m    397[0m         kernelsource = self._get_kernel_source(self._kernel_template,
+[1;32m    398[0m                                                devfnsig, funcname)
+[0;32m--> 399[0;31m         [0mcorefn[0m[0;34m,[0m [0mreturn_type[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_compile_core[0m[0;34m([0m[0mdevfnsig[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    400[0m         [0mglbl[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_get_globals[0m[0;34m([0m[0mcorefn[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    401[0m         [0msig[0m [0;34m=[0m [0msignature[0m[0;34m([0m[0mtypes[0m[0;34m.[0m[0mvoid[0m[0;34m,[0m [0;34m*[0m[0;34m([0m[0;34m[[0m[0ma[0m[0;34m[[0m[0;34m:[0m[0;34m][0m [0;32mfor[0m [0ma[0m [0;32min[0m [0margs[0m[0;34m][0m [0;34m+[0m [0;34m[[0m[0mreturn_type[0m[0;34m[[0m[0;34m:[0m[0;34m][0m[0;34m][0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/vectorizers.py[0m in [0;36m_compile_core[0;34m(self, sig)[0m
+[1;32m     13[0m [0;32mclass[0m [0mCUDAVectorize[0m[0;34m([0m[0mdeviceufunc[0m[0;34m.[0m[0mDeviceVectorize[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     14[0m     [0;32mdef[0m [0m_compile_core[0m[0;34m([0m[0mself[0m[0;34m,[0m [0msig[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 15[0;31m         [0mcudevfn[0m [0;34m=[0m [0mcuda[0m[0;34m.[0m[0mjit[0m[0;34m([0m[0msig[0m[0;34m,[0m [0mdevice[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0minline[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mpyfunc[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     16[0m         [0;32mreturn[0m [0mcudevfn[0m[0;34m,[0m [0mcudevfn[0m[0;34m.[0m[0mcres[0m[0;34m.[0m[0msignature[0m[0;34m.[0m[0mreturn_type[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     17[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/decorators.py[0m in [0;36mdevice_jit[0;34m(func)[0m
+[1;32m     96[0m [0;34m[0m[0m
+[1;32m     97[0m         [0;32mdef[0m [0mdevice_jit[0m[0;34m([0m[0mfunc[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 98[0;31m             return compile_device(func, restype, argtypes, inline=inline,
+[0m[1;32m     99[0m                                   debug=debug)
+[1;32m    100[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py[0m in [0;36mcompile_device[0;34m(pyfunc, return_type, args, inline, debug)[0m
+[1;32m    280[0m [0;34m[0m[0m
+[1;32m    281[0m [0;32mdef[0m [0mcompile_device[0m[0;34m([0m[0mpyfunc[0m[0;34m,[0m [0mreturn_type[0m[0;34m,[0m [0margs[0m[0;34m,[0m [0minline[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mdebug[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 282[0;31m     [0;32mreturn[0m [0mDeviceFunction[0m[0;34m([0m[0mpyfunc[0m[0;34m,[0m [0mreturn_type[0m[0;34m,[0m [0margs[0m[0;34m,[0m [0minline[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mdebug[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    283[0m [0;34m[0m[0m
+[1;32m    284[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py[0m in [0;36m__init__[0;34m(self, pyfunc, return_type, args, inline, debug)[0m
+[1;32m    309[0m         [0mself[0m[0;34m.[0m[0minline[0m [0;34m=[0m [0;32mTrue[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    310[0m         [0mself[0m[0;34m.[0m[0mdebug[0m [0;34m=[0m [0;32mFalse[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 311[0;31m         cres = compile_cuda(self.py_func, self.return_type, self.args,
+[0m[1;32m    312[0m                             debug=self.debug, inline=self.inline)
+[1;32m    313[0m         [0mself[0m[0;34m.[0m[0mcres[0m [0;34m=[0m [0mcres[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/compiler_lock.py[0m in [0;36m_acquire_compile_lock[0;34m(*args, **kwargs)[0m
+[1;32m     33[0m         [0;32mdef[0m [0m_acquire_compile_lock[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     34[0m             [0;32mwith[0m [0mself[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 35[0;31m                 [0;32mreturn[0m [0mfunc[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     36[0m         [0;32mreturn[0m [0m_acquire_compile_lock[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     37[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/compiler.py[0m in [0;36mcompile_cuda[0;34m(pyfunc, return_type, args, debug, inline)[0m
+[1;32m     33[0m     [0;32mfrom[0m [0;34m.[0m[0mdescriptor[0m [0;32mimport[0m [0mcuda_target[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     34[0m     [0mtypingctx[0m [0;34m=[0m [0mcuda_target[0m[0;34m.[0m[0mtypingctx[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 35[0;31m     [0mtargetctx[0m [0;34m=[0m [0mcuda_target[0m[0;34m.[0m[0mtargetctx[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     36[0m [0;34m[0m[0m
+[1;32m     37[0m     [0mflags[0m [0;34m=[0m [0mcompiler[0m[0;34m.[0m[0mFlags[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/descriptor.py[0m in [0;36mtargetctx[0;34m(self)[0m
+[1;32m     26[0m     [0;32mdef[0m [0mtargetctx[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     27[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0m_targetctx[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 28[0;31m             [0mself[0m[0;34m.[0m[0m_targetctx[0m [0;34m=[0m [0mCUDATargetContext[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_typingctx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     29[0m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_targetctx[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     30[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/base.py[0m in [0;36m__init__[0;34m(self, typing_context)[0m
+[1;32m    258[0m [0;34m[0m[0m
+[1;32m    259[0m         [0;31m# Initialize[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 260[0;31m         [0mself[0m[0;34m.[0m[0minit[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    261[0m [0;34m[0m[0m
+[1;32m    262[0m     [0;32mdef[0m [0minit[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/target.py[0m in [0;36minit[0;34m(self)[0m
+[1;32m     80[0m [0;34m[0m[0m
+[1;32m     81[0m     [0;32mdef[0m [0minit[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 82[0;31m         [0mself[0m[0;34m.[0m[0m_internal_codegen[0m [0;34m=[0m [0mcodegen[0m[0;34m.[0m[0mJITCUDACodegen[0m[0;34m([0m[0;34m"numba.cuda.jit"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     83[0m         [0mself[0m[0;34m.[0m[0m_target_data[0m [0;34m=[0m [0mll[0m[0;34m.[0m[0mcreate_target_data[0m[0;34m([0m[0mnvvm[0m[0;34m.[0m[0mdefault_data_layout[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     84[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/core/codegen.py[0m in [0;36m__init__[0;34m(self, module_name)[0m
+[1;32m   1095[0m         [0mself[0m[0;34m.[0m[0m_data_layout[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1096[0m         self._llvm_module = ll.parse_assembly(
+[0;32m-> 1097[0;31m             str(self._create_empty_module(module_name)))
+[0m[1;32m   1098[0m         [0mself[0m[0;34m.[0m[0m_llvm_module[0m[0;34m.[0m[0mname[0m [0;34m=[0m [0;34m"global_codegen_module"[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1099[0m         [0mself[0m[0;34m.[0m[0m_rtlinker[0m [0;34m=[0m [0mRuntimeLinker[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/codegen.py[0m in [0;36m_create_empty_module[0;34m(self, name)[0m
+[1;32m     51[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0m_data_layout[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     52[0m             [0mir_module[0m[0;34m.[0m[0mdata_layout[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_data_layout[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 53[0;31m         [0mnvvm[0m[0;34m.[0m[0madd_ir_version[0m[0;34m([0m[0mir_module[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     54[0m         [0;32mreturn[0m [0mir_module[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     55[0m [0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py[0m in [0;36madd_ir_version[0;34m(mod)[0m
+[1;32m    909[0m     [0;34m"""Add NVVM IR version to module"""[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    910[0m     [0mi32[0m [0;34m=[0m [0mir[0m[0;34m.[0m[0mIntType[0m[0;34m([0m[0;36m32[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 911[0;31m     [0;32mif[0m [0mNVVM[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mis_nvvm70[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    912[0m         [0;31m# NVVM IR 1.6, DWARF 3.0[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    913[0m         [0mir_versions[0m [0;34m=[0m [0;34m[[0m[0mi32[0m[0;34m([0m[0;36m1[0m[0;34m)[0m[0;34m,[0m [0mi32[0m[0;34m([0m[0;36m6[0m[0;34m)[0m[0;34m,[0m [0mi32[0m[0;34m([0m[0;36m3[0m[0;34m)[0m[0;34m,[0m [0mi32[0m[0;34m([0m[0;36m0[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/numba/cuda/cudadrv/nvvm.py[0m in [0;36m__new__[0;34m(cls)[0m
+[1;32m    122[0m                     errmsg = ("libNVVM cannot be found. Do `conda install "
+[1;32m    123[0m                               "cudatoolkit`:\n%s")
+[0;32m--> 124[0;31m                     [0;32mraise[0m [0mNvvmSupportError[0m[0;34m([0m[0merrmsg[0m [0;34m%[0m [0me[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    125[0m [0;34m[0m[0m
+[1;32m    126[0m                 [0;31m# Find & populate functions[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNvvmSupportError[0m: libNVVM cannot be found. Do `conda install cudatoolkit`:
+libnvvm.so: cannot open shared object file: No such file or directory
+NvvmSupportError: libNVVM cannot be found. Do `conda install cudatoolkit`:
+libnvvm.so: cannot open shared object file: No such file or directory
+

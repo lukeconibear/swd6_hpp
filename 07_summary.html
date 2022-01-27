@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; SWD6: High Performance Python</title>
+    <title>Summary &#8212; SWD6: High Performance Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="00_overview.html" />
+    <link rel="prev" title="GPUs" href="06_GPUs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -89,13 +89,13 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
-   Introduction
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   SWD6: High Performance Python
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="00_overview.html">
    Overview
@@ -112,13 +112,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="02_built-in_functions.html">
-     Built-in functions
+    <a class="reference internal" href="02_data_structures_algorithms_libraries.html">
+     Data Structures, Algorithms, and Libraries
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="03_data_structures_and_algorithms.html">
-     Data structures and algorithms
+    <a class="reference internal" href="03_vectorisation.html">
+     Vectorisation
     </a>
    </li>
    <li class="toctree-l2">
@@ -137,6 +137,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Summary
+  </a>
  </li>
 </ul>
 
@@ -179,7 +184,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/07_summary.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -199,7 +204,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/lukeconibear/swd6_hpp/issues/new?title=Issue%20on%20page%20%2F07_summary.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -220,49 +225,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#this-book-is-a-work-in-progress">
-   THIS BOOK IS A WORK IN PROGRESS
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#many-pages-are-incomplete-or-have-errors">
-   MANY PAGES ARE INCOMPLETE OR HAVE ERRORS
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#content">
-   Content
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prerequisites">
-   Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#duration">
-   Duration
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#frequency">
-   Frequency
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#suitability">
-   Suitability
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -271,49 +233,22 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="this-book-is-a-work-in-progress">
-<h2>THIS BOOK IS A WORK IN PROGRESS<a class="headerlink" href="#this-book-is-a-work-in-progress" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="many-pages-are-incomplete-or-have-errors">
-<h2>MANY PAGES ARE INCOMPLETE OR HAVE ERRORS<a class="headerlink" href="#many-pages-are-incomplete-or-have-errors" title="Permalink to this headline">¶</a></h2>
-<p>Booking for this course is through the IT Training Unit.</p>
-<p>Click <a class="reference external" href="https://uolr3.leeds.ac.uk/temcatsearch(bD1lbiZjPTUwMA==)/courses.htm?sap-params=Z2Rfa2V5d29yZHM9U1dEJTIwNiUzYSUyMEhpZ2glMjBQZXJmb3JtYW5jZSZnZF9zdHlwZT0mZ2RfdHV0b3I9TGFzdCUyMG5hbWUmZGF0ZTE9ZGQlMmZtbSUyZnl5eXkmZGF0ZTI9ZGQlMmZtbSUyZnl5eXkmZGF0ZTE9MDAuMDAuMDAwMCZkYXRlMj0wMC4wMC4wMDAwJnByb3ZpZGVybGlzdD0wJmFuZG9yPUFORCZzb3J0PUJFR0RBJmdkX2NhbGxpZD1JTklUSUFMJnN0eWxlPQ%3d%3d">here</a> to book.</p>
-</div>
-<div class="section" id="content">
-<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Over the past few years, Python and the wider Python ecosystem have become invaluable tools in scientific computing and data analytics. As Python is (for the most part) an interpreted language there are complaints that Python code can be quite slow to execute. In this hands-on workshop you will have the opportunity discover and use a set of tools and techniques that can be used to improve the execution speed of your Python code. The workshop will introduce a number of ways to both measure the efficiency of your code and improve it’s speed of execution by introducing strategies for fast and scalable computation with Python.</p>
-<p>This workshop includes:</p>
-<ul class="simple">
-<li><p>Optimisation</p></li>
-<li><p>Profiling</p></li>
-<li><p>Built-in functions</p></li>
-<li><p>Data structures and algorithms</p></li>
-<li><p>Compilers (<a class="reference external" href="https://www.python.org/">CPython</a>, <a class="reference external" href="https://www.pypy.org/">PyPy</a>, <a class="reference external" href="http://numba.pydata.org/">Numba</a>, <a class="reference external" href="https://cython.org/">Cython</a>)</p></li>
-<li><p>Parallelisation (Vectorisation with <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy</a>, <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a>, <a class="reference external" href="https://www.ray.io/">Ray</a>, <a class="reference external" href="https://modin.readthedocs.io/en/latest/">Modin</a>, <a class="reference external" href="https://docs.pymars.org/en/latest/">Mars</a>)</p></li>
-<li><p>GPUs (<a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a>, <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a>, <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a>)</p></li>
+  <div class="tex2jax_ignore mathjax_ignore section" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<p>In this workshop, we aimed to cover:</p>
+<ol class="simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to profile Python code and identify bottlenecks (with <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">timeit</a>, <a class="reference external" href="https://github.com/pyutils/line_profiler">line_profiler</a>, and <a class="reference external" href="https://jiffyclub.github.io/snakeviz/">SnakeViz</a>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to choose the most appropriate data structure, algorithm, and libraries for a problem</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Improve the execution time of Python code using:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Vectorisation (with <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy</a>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Compilers (with <a class="reference external" href="http://numba.pydata.org/">Numba</a>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Parallelisation (with <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a> and <a class="reference external" href="https://www.ray.io/">Ray</a>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GPUs (with <a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a>, <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA/Numba</a>, and <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a>)</p></li>
 </ul>
-</div>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>We recommend that attendees have a working knowledge of the Unix shell (although this is not essential) and are proficient Python programmers. If you need to learn how to program in Python, please attend SWD1a: Introduction to Python programming. It is strongly recommended that you bring your own laptop to this workshop with some specific software installed. Further information will be provided when you are accepted onto the course.</p>
-</div>
-<div class="section" id="duration">
-<h2>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">¶</a></h2>
-<p>1 day</p>
-</div>
-<div class="section" id="frequency">
-<h2>Frequency<a class="headerlink" href="#frequency" title="Permalink to this headline">¶</a></h2>
-<p>This workshop usually runs once each academic year.<br />
-If you would like a bespoke version of this course run in your department, then please <a class="reference external" href="https://bit.ly/arc-help">contact us</a>.</p>
-</div>
-<div class="section" id="suitability">
-<h2>Suitability<a class="headerlink" href="#suitability" title="Permalink to this headline">¶</a></h2>
-<p>Research postgraduate students and above; teaching and lecturing staff.</p>
-</div>
-<div class="toctree-wrapper compound">
-</div>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand when to use each technique</p></li>
+</ol>
 </div>
 
     <script type="text/x-thebe-config">
@@ -340,13 +275,13 @@ If you would like a bespoke version of this course run in your department, then 
               
         
             <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="00_overview.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="06_GPUs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">GPUs</p>
+        </div>
     </a>
 </div>
         
