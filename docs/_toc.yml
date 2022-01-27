@@ -2,14 +2,14 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-article
-root: intro
+root: index
 sections:
 - file: 00_overview
   sections:
   - file: 01_profiling
-  - file: 02_built-in_functions
-  - file: 03_data_structures_and_algorithms
+  - file: 02_data_structures_algorithms_libraries
+  - file: 03_vectorisation
   - file: 04_compilers
   - file: 05_parallelisation
   - file: 06_GPUs
-  
+- file: 07_summary
