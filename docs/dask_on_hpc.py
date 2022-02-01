@@ -16,7 +16,7 @@ def weird_function(nums):
 def main():
     # dask cluster and client
     number_processes = 1
-    number_jobs = 35
+    number_jobs = 35 # ensure that this is the number of cores you need and will fully utilise
     number_workers = number_processes * number_jobs
 
     cluster = SGECluster(
