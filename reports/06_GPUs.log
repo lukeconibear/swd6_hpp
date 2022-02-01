@@ -45,7 +45,7 @@ def do_maths(x, y):
 During handling of the above exception, another exception occurred:
 
 [0;31mNvvmSupportError[0m                          Traceback (most recent call last)
-[0;32m/tmp/ipykernel_4316/1006741626.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_4269/1006741626.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;31m# For the GPU, need: types output(inputs) and target[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;34m@[0m[0mvectorize[0m[0;34m([0m[0;34m[[0m[0;34m'float32(float32, float32)'[0m[0;34m][0m[0;34m,[0m [0mtarget[0m[0;34m=[0m[0;34m'cuda'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 3[0;31m [0;32mdef[0m [0mdo_maths[0m[0;34m([0m[0mx[0m[0;34m,[0m [0my[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m

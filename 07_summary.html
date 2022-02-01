@@ -235,19 +235,55 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="summary">
 <h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
-<p>In this workshop, we aimed to cover:</p>
+<p>In this workshop, we covered:</p>
 <ol class="simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to profile Python code and identify bottlenecks (with <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">timeit</a>, <a class="reference external" href="https://github.com/pyutils/line_profiler">line_profiler</a>, and <a class="reference external" href="https://jiffyclub.github.io/snakeviz/">SnakeViz</a>)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to choose the most appropriate data structure, algorithm, and libraries for a problem</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Improve the execution time of Python code using:</p>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to profile Python code and identify bottlenecks</p>
 <ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Vectorisation (with <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy</a>)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Compilers (with <a class="reference external" href="http://numba.pydata.org/">Numba</a>)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Parallelisation (with <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a> and <a class="reference external" href="https://www.ray.io/">Ray</a>)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GPUs (with <a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a>, <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA/Numba</a>, and <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a>)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Measure the time of cells, functions, and programs to find bottlenecks e.g., using <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit"><code class="docutils literal notranslate"><span class="pre">timeit</span></code></a> and <a class="reference external" href="https://github.com/pyutils/line_profiler"><code class="docutils literal notranslate"><span class="pre">line_profiler</span></code></a>.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Visualise the profiled code e.g., using <a class="reference external" href="https://jiffyclub.github.io/snakeviz/"><code class="docutils literal notranslate"><span class="pre">SnakeViz</span></code></a> and <a class="reference external" href="https://github.com/joerick/pyinstrument/"><code class="docutils literal notranslate"><span class="pre">pyinstrument</span></code></a>.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Log profiling information e.g., using <a class="reference external" href="https://eliot.readthedocs.io/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">Eliot</span></code></a>.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Consider how fast the code could go e.g., Big O notation.</em></p></li>
 </ul>
 </li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand when to use each technique</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand how to choose the most appropriate data structure, algorithm, and libraries for a problem</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Make use of the built-in functions e.g, use <code class="docutils literal notranslate"><span class="pre">len</span></code> rather than counting the items in an object in a loop.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Use appropriate data structures e.g., append to lists rather than concatenating, use dictionaries as fast to search look-ups, cache results in dictionaries to reduce repeated calculations.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Make use of the standard library (optimised in C) e.g., the <code class="docutils literal notranslate"><span class="pre">math</span></code> module.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>See whether there is an algorithm or library that already optimally solves your problem e.g., faster sorting algorithms</em>.</p></li>
+</ul>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Improve the execution time of Python code using:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Vectorisation</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Make use of broadcasting and create your own vectorised functions e.g., with <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy</a> ufuncs.</em></p></li>
+</ul>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Compilers</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Speed up customs functions e.g., with <a class="reference external" href="http://numba.pydata.org/">Numba</a> <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>.</em></p></li>
+</ul>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Parallelisation</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Distribute work across a single machine or cores on a high-performance computer e.g., with <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a> arrays/dataframes/bags and <a class="reference external" href="https://www.ray.io/">Ray</a> tasks/actors/multiprocessing/joblib.</em></p></li>
+</ul>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GPUs</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Offload functions to the GPU e.g., with <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA/Numba</a> <code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></em>.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Accelerate data science workloads e.g., with <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a> cuPy for NumPy, cuDF for Pandas.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>…<a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a>…</em></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand when to use each technique</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> …</p></li>
+</ul>
+</li>
 </ol>
 </div>
 

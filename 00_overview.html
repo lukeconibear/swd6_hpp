@@ -290,13 +290,12 @@
 <li><p>Open source.</p></li>
 <li><p>Vast range of libraries.</p></li>
 <li><p>Huge number of users.</p></li>
-<li><p>etc…</p></li>
 </ul>
 <p>However, sometimes it can be slow. Often this isn’t an issue. Though when it is, it’s useful to know how to speed it up.</p>
 <p>That’s what this workshop is all about.</p>
 <div class="section" id="hang-on-don-t-optimise-too-early">
 <h2>Hang on, don’t optimise too early<a class="headerlink" href="#hang-on-don-t-optimise-too-early" title="Permalink to this headline">¶</a></h2>
-<p>There are trade-offs when you pursue faster code, for example, it may become more complex, use more memory, become less readable, etc. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:</p>
+<p>There are trade-offs when you pursue faster code. For example, it may become more complex, use more memory, become less readable. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:</p>
 <ul class="simple">
 <li><p>The code is correct (have you tested it?, does it have documentation?).</p></li>
 <li><p>Is optimisation really needed?</p>
@@ -309,10 +308,7 @@
 <p><em>Plot idea from <a class="reference external" href="https://ml.dask.org/">Dask-ML</a>.</em></p>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matplotlib is building the font cache; this may take a moment.
-</pre></div>
-</div>
-<img alt="_images/00_overview_3_1.png" src="_images/00_overview_3_1.png" />
+<img alt="_images/00_overview_3_0.png" src="_images/00_overview_3_0.png" />
 </div>
 </div>
 </div>
@@ -324,13 +320,13 @@
 <ul class="simple">
 <li><p>This means how many operations are needed as the number the elements gets bigger.</p></li>
 <li><p>The order of operations is called <a class="reference external" href="https://www.bigocheatsheet.com/">Big O notation</a>.</p></li>
-<li><p>The operations is given as the largest order of a polynomial, ignoring any constants.</p>
+<li><p>The operations are given as the largest order of a polynomial, ignoring any constants.</p>
 <ul>
 <li><p>For example, O(2n<sup>2</sup> + 3n) would just become O(n<sup>2</sup>).</p></li>
 </ul>
 </li>
 <li><p>This becomes important when the number of elements is large.</p></li>
-<li><p>It’s normally measured for a typical case.</p></li>
+<li><p>It’s often measured for a typical case.</p></li>
 <li><p>Constant time means per machine operation.</p></li>
 </ul>
 <p>A nice example from <a class="reference external" href="https://www.youtube.com/watch?v=duvZ-2UK0fc">Ned Batchelder’s</a> PyCon talk is for counting beans in a jar.</p>
@@ -341,6 +337,7 @@
 <p><img alt="counting_beans.png" src="_images/counting_beans.png" /></p>
 <p>Memory is measured in the same way.</p>
 <p>Both of these two measurements together represent the <em>time-space complexity</em> of your code.</p>
+<p>You can compare the lines for the different time-space complexities on the plot below:</p>
 <p><em>Plot idea from <a class="reference external" href="https://www.bigocheatsheet.com/">Big O Cheat Sheet</a></em>.</p>
 <div class="cell tag_remove_input docutils container">
 <div class="cell_output docutils container">

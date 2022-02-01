@@ -250,17 +250,29 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#timeit">
-   timeit
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     timeit
+    </span>
+   </code>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#line-profiler">
-   line_profiler
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     line_profiler
+    </span>
+   </code>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#snakeviz">
-   SnakeViz
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     SnakeViz
+    </span>
+   </code>
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -274,6 +286,24 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pyinstrument">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pyinstrument
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eliot">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Eliot
+    </span>
+   </code>
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise">
@@ -297,6 +327,11 @@
      </li>
     </ul>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources">
+     Resources
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -319,22 +354,22 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
 <span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> install line_profiler snakeviz
+    <span class="o">%</span><span class="k">pip</span> install line_profiler snakeviz pyinstrument eliot eliot-tree
 </pre></div>
 </div>
 </div>
 </div>
-<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/01.07-timing-and-profiling.html">Profiling</a> analyses your code in terms of speed and/or memory.</p>
-<p>This can help identify where the bottlenecks are and how much potential there is for improvement.</p>
-<p><em>Side note</em></p>
-<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html">IPython magic commands</a> are very useful for common problems in data analysis.</p>
+<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/01.07-timing-and-profiling.html">Profiling</a> analyses your code in terms of speed or memory.</p>
+<p>This helps identify where the bottlenecks are and how much potential there is for improvement.</p>
+<p><em>Side note</em>: <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/01.03-magic-commands.html">IPython magic commands</a> are useful, commonly used commands in Jupyter Notebooks.</p>
 <ul class="simple">
-<li><p>These have one <code class="docutils literal notranslate"><span class="pre">%</span></code> at the start for a single line.</p></li>
-<li><p>Or two <code class="docutils literal notranslate"><span class="pre">%%</span></code> at the start for a cell.</p></li>
+<li><p>They have one <code class="docutils literal notranslate"><span class="pre">%</span></code> at the start for use on a single line.</p></li>
+<li><p>Or two <code class="docutils literal notranslate"><span class="pre">%%</span></code> at the start for use over a whole cell.</p></li>
 </ul>
+<p>For example:</p>
 <div class="section" id="timeit">
-<h2><a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">timeit</a><a class="headerlink" href="#timeit" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">timeit</span></code> (a IPython magic command) measures the time execution of an expression.</p>
+<h2><a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit"><code class="docutils literal notranslate"><span class="pre">timeit</span></code></a><a class="headerlink" href="#timeit" title="Permalink to this headline">¶</a></h2>
+<p>A IPython magic command that measures the time execution of an expression.</p>
 <p>It runs a few times, depending on how intensive the expression is, and returns the best result with the uncertainty.</p>
 <p>It is useful for benchmarking a small code snippet.</p>
 <div class="cell docutils container">
@@ -344,7 +379,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120 ns ± 9.53 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>107 ns ± 0.0197 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
 </div>
 </div>
@@ -358,15 +393,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.13 µs ± 25.3 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.28 µs ± 2.73 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Another option is:</p>
 </div>
 <div class="section" id="line-profiler">
-<h2><a class="reference external" href="https://github.com/pyutils/line_profiler">line_profiler</a><a class="headerlink" href="#line-profiler" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> module measures the time spent in each line of a function.</p>
+<h2><a class="reference external" href="https://github.com/pyutils/line_profiler"><code class="docutils literal notranslate"><span class="pre">line_profiler</span></code></a><a class="headerlink" href="#line-profiler" title="Permalink to this headline">¶</a></h2>
+<p>A module that measures the time spent in each line of a function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> line_profiler
@@ -376,33 +412,53 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bottleneck</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-        <span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span> <span class="o">**</span> <span class="mi">2</span>
-        
-    <span class="k">return</span> <span class="n">nums</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
-<span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">relax</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">bottleneck</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">some_function</span><span class="p">():</span>
     <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1_000</span><span class="p">)]</span>
-    <span class="n">nums</span> <span class="o">=</span> <span class="n">bottleneck</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-    <span class="n">nums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1_001</span><span class="p">)</span>
+    <span class="n">bigger_nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>
+    <span class="n">bottleneck</span><span class="p">()</span>
+    <span class="n">bigger_nums</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">bigger_nums</span><span class="p">)</span>
+    <span class="n">relax</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Timer</span> <span class="pre">unit</span></code> is the conversion to seconds.</p></li>
+<li><p>The table shows the following columns for each line of the function (each row):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Line</span> <span class="pre">#</span></code>: The line number.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Hits</span></code>: The number of times that line was called.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Time</span></code>: The total time spent calling that line (in the <code class="docutils literal notranslate"><span class="pre">Timer</span> <span class="pre">units</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Per</span> <span class="pre">Hit</span></code>: The time spend for one call of that line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Time</span></code>: The percentage of total time spent on that line (this is the often the most useful column).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Line</span> <span class="pre">Contents</span></code>: The source code for that line.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">lprun</span> -f my_function my_function()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">lprun</span> -f some_function some_function()
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can see that most of the time was in the <code class="docutils literal notranslate"><span class="pre">bottleneck()</span></code> call, highlighting the potential here for possible improvements.</p>
 </div>
 <div class="section" id="snakeviz">
-<h2><a class="reference external" href="https://jiffyclub.github.io/snakeviz/">SnakeViz</a><a class="headerlink" href="#snakeviz" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">cProfile</span></code> is part of the Python standard library (like <a class="reference external" href="https://docs.python.org/3/library/profile.html#module-profile"><code class="docutils literal notranslate"><span class="pre">profile</span></code></a>).</p>
-<p>You can profiling longer functions and programs with it.</p>
-<p>However, the output isn’t very intuitive:</p>
+<h2><a class="reference external" href="https://jiffyclub.github.io/snakeviz/"><code class="docutils literal notranslate"><span class="pre">SnakeViz</span></code></a><a class="headerlink" href="#snakeviz" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SnakeViz</span></code> visualises the output from <code class="docutils literal notranslate"><span class="pre">cProfile</span></code> in nice interactive plots.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cProfile</span></code> is part of the Python standard library.</p>
+<p>It’s a deterministic profiler of wallclock time (giving the same output for the same input).</p>
+<p>However, the output has lots of tabular information that isn’t ideal. Every function call gets measured in seconds (each row).</p>
+<p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cProfile</span>
@@ -412,28 +468,55 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;my_function()&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;some_function()&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         7 function calls in 0.000 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         10 function calls in 0.001 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000    0.000    0.000 2904456555.py:1(bottleneck)
-        1    0.000    0.000    0.000    0.000 2904456555.py:7(my_function)
-        1    0.000    0.000    0.000    0.000 2904456555.py:8(&lt;listcomp&gt;)
-        1    0.000    0.000    0.000    0.000 &lt;string&gt;:1(&lt;module&gt;)
-        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
-        1    0.000    0.000    0.000    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+        1    0.000    0.000    0.000    0.000 572293778.py:10(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 572293778.py:11(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 572293778.py:3(relax)
+        1    0.000    0.000    0.001    0.001 572293778.py:6(bottleneck)
+        1    0.000    0.000    0.001    0.001 572293778.py:9(some_function)
+        1    0.000    0.000    0.001    0.001 &lt;string&gt;:1(&lt;module&gt;)
+        1    0.000    0.000    0.001    0.001 {built-in method builtins.exec}
+        1    0.001    0.001    0.001    0.001 {built-in method time.sleep}
         1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;extend&#39; of &#39;list&#39; objects}
 </pre></div>
 </div>
 </div>
 </div>
-<p>SnakeViz visualises this output from <code class="docutils literal notranslate"><span class="pre">cProfile</span></code> in nice interactive plots.</p>
+<p>Visualising this output in <code class="docutils literal notranslate"><span class="pre">SnakeViz</span></code> is nicer.</p>
+<p>You can switch between the two styles using the “Style” dropdown.</p>
+<div class="section" id="style-icicle">
+<h3>Style: Icicle<a class="headerlink" href="#style-icicle" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Functions are represented by rectangles.</p></li>
+<li><p>The root function is the <em>top-most rectangle</em>, with functions it calls below it, then the functions those call below them, and so on.</p></li>
+<li><p>The amount of time spent inside a function is represented by the width of the rectangle.</p>
+<ul>
+<li><p>A big rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a small rectangle represents a function that is using hardly any time at all.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="style-sunburst">
+<h3>Style: Sunburst<a class="headerlink" href="#style-sunburst" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Functions are represented by arcs.</p></li>
+<li><p>The root function is the <em>centre circle</em>, with functions it calls around, then the functions those functions call, and so on.</p></li>
+<li><p>The amount of time spent inside a function is represented by how far around the circle the arc goes.</p>
+<ul>
+<li><p>An big arc that wraps most of the way around the circle represents a function that is taking up most of the time of its calling function, while a small arc represents a function that is using hardly any time at all.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> snakeviz
@@ -443,7 +526,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3731</span><span class="o">/</span><span class="mf">578039455.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3680</span><span class="o">/</span><span class="mf">578039455.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;load_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;snakeviz&#39;</span><span class="p">)</span>
 
 <span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
@@ -501,37 +584,130 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">snakeviz</span>  
-my_function()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">snakeviz</span>
+some_function()
 </pre></div>
 </div>
 </div>
 </div>
-<p>Switch between the two styles using the “Style” dropdown.</p>
-<div class="section" id="style-icicle">
-<h3>Style: Icicle<a class="headerlink" href="#style-icicle" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Functions are represented by rectangles.</p></li>
-<li><p>The root function is the <em>top-most rectangle</em>, with functions it calls below it, then the functions those call below them, and so on.</p></li>
-<li><p>The amount of time spent inside a function is represented by the width of the rectangle.</p>
-<ul>
-<li><p>A rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a skinny rectangle represents a function that is using hardly any time at all.</p></li>
-</ul>
-</li>
-</ul>
+<p>Note, <code class="docutils literal notranslate"><span class="pre">SnakeViz</span></code> doesn’t currently work with Colab (<a class="reference external" href="https://github.com/jiffyclub/snakeviz/issues/164">issue</a>).</p>
 </div>
-<div class="section" id="style-sunburst">
-<h3>Style: Sunburst<a class="headerlink" href="#style-sunburst" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Functions are represented by arcs.</p></li>
-<li><p>The root function is the <em>centre circle</em>, with functions it calls around, then the functions those functions call, and so on.</p></li>
-<li><p>The amount of time spent inside a function is represented by the angular extent of the arc (how far around the circle it goes).</p>
-<ul>
-<li><p>An arc that wraps most of the way around the circle represents a function that is taking up most of the time of its calling function, while a skinny arc represents a function that is using hardly any time at all.</p></li>
-</ul>
-</li>
-</ul>
 </div>
+<div class="section" id="pyinstrument">
+<h2><a class="reference external" href="https://pyinstrument.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">pyinstrument</span></code></a><a class="headerlink" href="#pyinstrument" title="Permalink to this headline">¶</a></h2>
+<p>A statistical profiler of wall-clock time (recording the call stack every 1ms), lowering the overhead compared to tracing profilers (like <code class="docutils literal notranslate"><span class="pre">cProfile</span></code>).</p>
+<p>It hides library frames and fast functions, so you can focus on the slow parts of your code.</p>
+<p>The output shows a tree of actions of <em>how</em> the function executes, using a traffic light colour legend (i.e., red = slow).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> pyinstrument
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">pyinstrument</span>
+some_function()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="eliot">
+<h2><a class="reference external" href="https://eliot.readthedocs.io/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">Eliot</span></code></a><a class="headerlink" href="#eliot" title="Permalink to this headline">¶</a></h2>
+<p>Logs the performance information.</p>
+<p>It tracks each function called, its arguments, the return values, and any rasied exceptions.</p>
+<p>Hence, it can be helpful for profiling in real use cases.</p>
+<p>Note, that this logging has a higher overhead than <code class="docutils literal notranslate"><span class="pre">cProfile</span></code>.</p>
+<p>It works by using decorators, which are a nice way for functions to return other functions.</p>
+<p>For example, here is one that logs calls to a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_calls</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="vm">__name__</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Before </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> was called ...&#39;</span><span class="p">)</span>
+        <span class="n">function</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;After </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> was called ...&#39;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling this returns a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_calls</span><span class="p">(</span><span class="n">some_function</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, to execute it we add <code class="docutils literal notranslate"><span class="pre">()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_calls</span><span class="p">(</span><span class="n">some_function</span><span class="p">)()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;wrapper</span></code> syntax is a nice way to return this same result, where the outer function is placed above the inner function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@log_calls</span>
+<span class="k">def</span> <span class="nf">some_function_with_logging</span><span class="p">():</span>
+    <span class="n">some_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">some_function_with_logging</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, so now we can use the <code class="docutils literal notranslate"><span class="pre">&#64;eliot.log_call</span></code> decorator to profile a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">eliot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bottleneck</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="nd">@eliot</span><span class="o">.</span><span class="n">log_call</span>
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">bottleneck</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="nd">@eliot</span><span class="o">.</span><span class="n">log_call</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="c1"># tell eliot where to log the output messages</span>
+<span class="n">eliot</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;profiling_some_function.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>eliot-tree profiling_some_function.log
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://pythontutor.com/composingprograms.html#code=def%20multiply%28x,%20y%29%3A%0A%20%20%20%20return%20x%20*%20y%0A%0Adef%20add%28x,%20y%29%3A%0A%20%20%20%20return%20x%20%2B%20y%0A%0Amultiply%28add%283,%204%29,%20add%285,%206%29%29&amp;cumulative=true&amp;curInstr=0&amp;mode=display&amp;origin=composingprograms.js&amp;py=3&amp;rawInputLstJSON=%5B%5D">Aside: Visualising how functions work in Python</a></p>
 </div>
 <div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
@@ -542,28 +718,30 @@ my_function()
 <div class="section" id="other-options">
 <h3>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/gaogaotiantian/viztracer">VizTracer</a></p>
+<li><p><a class="reference external" href="https://github.com/gaogaotiantian/viztracer"><code class="docutils literal notranslate"><span class="pre">VizTracer</span></code></a></p>
 <ul>
 <li><p>A low-overhead logging/debugging/profiling tool that can trace and visualize your python code execution.</p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="https://pyinstrument.readthedocs.io/en/latest/">pyinstrument</a></p>
-<ul>
-<li><p>A statistical profiling module of wall-clock time (recording the call stack every 1ms), lowering the overhead compared to tracing profilers. It hides library frames, so you can focus on the slow parts of your code. The output shows <em>how</em> the function executes using a traffic light colour legend.</p></li>
-</ul>
-</li>
+<li><p><a class="reference external" href="https://eliot.readthedocs.io/en/stable/scientific-computing.html">Using <code class="docutils literal notranslate"><span class="pre">eliot</span></code> with Dask</a></p></li>
 <li><p><a class="reference external" href="https://docs.dask.org/en/latest/diagnostics-local.html#example">Profile parallel code with Dask</a></p></li>
 </ul>
 <div class="section" id="memory-profiling">
 <h4>Memory profiling<a class="headerlink" href="#memory-profiling" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/pythonprofilers/memory_profiler">memory_profiler</a></p>
+<li><p><a class="reference external" href="https://github.com/pythonprofilers/memory_profiler"><code class="docutils literal notranslate"><span class="pre">memory_profiler</span></code></a></p>
 <ul>
 <li><p>Measures the memory used by a function, at its peak and the overall increment.</p></li>
 </ul>
 </li>
 </ul>
 </div>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pythonspeed.com/articles/beyond-cprofile/">Beyond <code class="docutils literal notranslate"><span class="pre">cProfile</span></code>: Choosing the right tool for performance optimization</a></p></li>
+</ul>
 </div>
 </div>
 </div>
