@@ -12,7 +12,7 @@ Over the past few years, Python and the wider Python ecosystem have become inval
 
 At the end of this workshop, learners will be able to:
 
-1. [ ] Understand how to profile Python code and identify bottlenecks (with [timeit](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit), [line_profiler](https://github.com/pyutils/line_profiler), and [SnakeViz](https://jiffyclub.github.io/snakeviz/))
+1. [ ] Understand how to profile Python code and identify bottlenecks
 2. [ ] Understand how to choose the most appropriate data structure, algorithm, and libraries for a problem
 3. [ ] Improve the execution time of Python code using:  
     - [ ] Vectorisation (with [NumPy](https://numpy.org/doc/stable/reference/ufuncs.html))  
