@@ -319,7 +319,6 @@ dependencies:
     - pyasn1-modules==0.2.8
     - pyinstrument==4.1.1
     - pymars==0.7.5
-    - python-graphviz==0.19.1
     - ray==1.8.0
     - redis==4.0.1
     - rich==11.0.0
