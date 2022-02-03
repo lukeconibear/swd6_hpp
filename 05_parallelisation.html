@@ -254,6 +254,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#note">
+   Note
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallelising-a-python">
    Parallelising a Python?
   </a>
@@ -289,9 +294,43 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dask-on-hpc">
-     Dask on HPC
+    <a class="reference internal nav-link" href="#distributed">
+     Distributed
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#setup">
+       Setup
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#work-scripts">
+       Work scripts
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#profiling-and-diagnostics">
+     Profiling and diagnostics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualise-the-task-graph">
+       Visualise the task graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-diagnostics">
+       Local diagnostics
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#distributed-diagnostics">
+       Distributed diagnostics
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -348,6 +387,11 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#good-practises">
+     Good practises
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-options">
      Other options
     </a>
@@ -393,16 +437,31 @@
 <ul>
 <li><p>Useful for compute-bound problems.</p></li>
 <li><p>Overcomes the <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock, GIL</a> (prevents running the bytecode on mutliple threads simutaneously).</p></li>
-<li><p>Lower performance when need to exchange/aggregate data</p></li>
+<li><p>Lower performance when need to exchange/aggregate data.</p></li>
+<li><p>Suitable for text data and collections.</p></li>
 </ul>
 </li>
 <li><p>Multi-threading (parts of processes)</p>
 <ul>
 <li><p>Useful for memory-bound problems.</p></li>
+<li><p>Suitable for numeric data (e.g., NumPy).</p></li>
 </ul>
 </li>
 </ul>
 <p>Parallelised code often introduces overheads. So, the speed-up benefits are more pronounced with bigger jobs, rather than some of the small examples used in this tutorial.</p>
+</div>
+<div class="section" id="note">
+<h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h2>
+<p>create minimal example scripts for arc, bede, jade
+allocate large chunk of memory (large memory nodes)
+then create pool
+task can be a time.sleep
+qaact on the job</p>
+<p>conda create –name parallelisation_tests -c conda-forge python==3.8.* dask scikit-learn
+conda activate parallelisation_tests
+pip install -U ray</p>
+<p>conda env export –name parallelisation_tests &gt; parallelisation_tests.yml</p>
+<p><code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">GOMP_CPU_AFFINITY</span></code></p>
 </div>
 <div class="section" id="parallelising-a-python">
 <h2>Parallelising a Python?<a class="headerlink" href="#parallelising-a-python" title="Permalink to this headline">¶</a></h2>
@@ -416,8 +475,9 @@
 <span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
-<span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -432,20 +492,15 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
 <span class="kn">import</span> <span class="nn">math</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joblib</span><span class="o">.</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span>
-    <span class="n">joblib</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)(</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0]
 </pre></div>
 </div>
 </div>
@@ -465,33 +520,53 @@
 </div>
 <div class="section" id="dask">
 <h2><a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a><a class="headerlink" href="#dask" title="Permalink to this headline">¶</a></h2>
+<p>Dask has great features, helpful documentation, and a familiar API.</p>
+<p>It works through creating and computing <a class="reference external" href="https://docs.dask.org/en/stable/graphs.html">task graphs</a>.</p>
+<p>Task graphs have nodes (functions) and edges (objects).</p>
+<p>For example, the task graph might be:</p>
 <ul class="simple">
-<li><p>Great features.</p></li>
-<li><p>Helpful documentation.</p></li>
-<li><p>Familiar API.</p></li>
-<li><p>Under the hood for many libraries e.g. <a class="reference external" href="http://xarray.pydata.org/en/stable/dask.html">xarray</a>, <a class="reference external" href="https://scitools.org.uk/iris/docs/v2.4.0/userguide/real_and_lazy_data.html">iris</a>, <a class="reference external" href="https://ml.dask.org/">scikit-learn</a>.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">Embarrassingly parallel</a> (apply one function to many pieces of data independently)</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/MapReduce">MapReduce</a> (map a function to the data and reduce / summarise the output)</p></li>
 </ul>
+<p><img alt="dask-task-graphs.svg" src="images/dask-task-graphs.svg" /></p>
+<p><em><a class="reference external" href="https://docs.dask.org/en/stable/graphs.html">Image source</a></em></p>
+<p>These task graphs are executed by a <a class="reference external" href="https://docs.dask.org/en/stable/scheduling.html">scheduler</a>.</p>
+<p>The resources used by this scheduler are managed by a cluster.</p>
+<p><em>Note, this is separate to <a class="reference external" href="https://arcdocs.leeds.ac.uk/usage/start.html">ARC’s scheduler</a>.</em></p>
+<p>There are two main types of Dask scheduler which can <a class="reference external" href="https://docs.dask.org/en/stable/deploying.html">deploy jobs</a>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/deploying-python.html">Single machine</a></p>
+<ul>
+<li><p>Cluster manager: <a class="reference external" href="http://distributed.dask.org/en/stable/api.html#distributed.LocalCluster"><code class="docutils literal notranslate"><span class="pre">LocalCluster()</span></code></a></p></li>
+<li><p>Simpler.</p></li>
+<li><p>For your laptop or a local server.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/deploying-hpc.html">Distributed</a></p>
+<ul>
+<li><p>Cluster manager: <a class="reference external" href="http://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SGECluster.html"><code class="docutils literal notranslate"><span class="pre">SGECluster()</span></code></a>, <a class="reference external" href="http://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SLURMCluster.html"><code class="docutils literal notranslate"><span class="pre">SLURMCluster()</span></code></a></p></li>
+<li><p>More complex.</p></li>
+<li><p>For a cluster on a high performance computer (e.g., SGE, SLURM), Kubernetes, or cloud.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="dask-cluster-manager.svg" src="images/dask-cluster-manager.svg" /></p>
+<p><em><a class="reference external" href="https://docs.dask.org/en/stable/deploying.html">Image source</a></em></p>
+<p><a class="reference external" href="http://jobqueue.dask.org/en/latest/">Dask-Jobqueue</a></p>
+<ul class="simple">
+<li><p>More for interactive work.</p></li>
+<li><p>Adaptive, dynamic scaling of workers.</p></li>
+<li><p>A variety of resource managers (e.g., SGE, SLURM).</p></li>
+</ul>
+<p><span class="xref myst">Dask-MPI</span></p>
 <div class="section" id="single-machine">
-<h3><a class="reference external" href="https://docs.dask.org/en/latest/setup/single-distributed.html">Single machine</a><a class="headerlink" href="#single-machine" title="Permalink to this headline">¶</a></h3>
-<p>See the excellent video from Dask creator, Matthew Rocklin, below.</p>
-<div class="cell tag_remove_input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html">
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/ods97a5Pzw0"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
-</div>
+<h3><a class="reference external" href="https://docs.dask.org/en/stable/deploying-python.html">Single machine</a><a class="headerlink" href="#single-machine" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">LocalCluster</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">LocalCluster</span><span class="p">()</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
     <span class="n">client</span> 
 </pre></div>
 </div>
@@ -508,6 +583,7 @@
 </div>
 <div class="section" id="dask-behind-the-scenes">
 <h3>Dask behind the scenes<a class="headerlink" href="#dask-behind-the-scenes" title="Permalink to this headline">¶</a></h3>
+<p>Dask is under the hood for many libraries e.g. <a class="reference external" href="http://xarray.pydata.org/en/stable/dask.html">xarray</a>, <a class="reference external" href="https://scitools.org.uk/iris/docs/v2.4.0/userguide/real_and_lazy_data.html">iris</a>, <a class="reference external" href="https://ml.dask.org/">scikit-learn</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -887,7 +963,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-d7b8257a-ada4-422a-a62f-2d68b375eed3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d7b8257a-ada4-422a-a62f-2d68b375eed3' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-916e029c-2003-4ae5-9112-e50b2a9f9c15' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-916e029c-2003-4ae5-9112-e50b2a9f9c15' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-348fa20e-2a8f-40b4-a4f0-60d897ba85ea' class='xr-section-summary-in' type='checkbox'  checked><label for='section-348fa20e-2a8f-40b4-a4f0-60d897ba85ea' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-6e94cd8e-be77-4d0b-b905-b18090ca630e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6e94cd8e-be77-4d0b-b905-b18090ca630e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0f01000a-99dd-4ab5-a13c-d79873907d1d' class='xr-var-data-in' type='checkbox'><label for='data-0f01000a-99dd-4ab5-a13c-d79873907d1d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    air      float32 dask.array&lt;chunksize=(), meta=np.ndarray&gt;</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-16afcd38-3bf1-4bb5-82e2-66f67b7cf0dc' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-16afcd38-3bf1-4bb5-82e2-66f67b7cf0dc' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-37535f72-5309-4ac2-ac8f-307bf62a983d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-37535f72-5309-4ac2-ac8f-307bf62a983d' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-0ef840d8-50e9-4f4b-95ae-9d839b484328' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0ef840d8-50e9-4f4b-95ae-9d839b484328' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(), meta=np.ndarray&gt;</div><input id='attrs-8866522a-e472-4534-8591-2604ca5b94f8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8866522a-e472-4534-8591-2604ca5b94f8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-30db4db9-b64d-4a68-80d8-79cf5f2c900e' class='xr-var-data-in' type='checkbox'><label for='data-30db4db9-b64d-4a68-80d8-79cf5f2c900e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table>
@@ -928,7 +1004,7 @@ Data variables:
 
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-cecd20d9-48c8-405d-a033-d3f07d92473d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cecd20d9-48c8-405d-a033-d3f07d92473d' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-33b37025-e71b-4218-9f5e-7567ca0ddb17' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-33b37025-e71b-4218-9f5e-7567ca0ddb17' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1291,7 +1367,7 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  ()
 Data variables:
-    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-67d1133d-edff-4fce-8abf-354963152f29' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-67d1133d-edff-4fce-8abf-354963152f29' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ba99cbba-3379-40f1-9c07-40bc7312b7fc' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ba99cbba-3379-40f1-9c07-40bc7312b7fc' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d100c523-a4c3-4fcc-9f1f-846438513b42' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d100c523-a4c3-4fcc-9f1f-846438513b42' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-17f5b08c-e2d8-4c55-854f-76a63848a6ed' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-17f5b08c-e2d8-4c55-854f-76a63848a6ed' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6991bbfc-00cd-4992-af1c-edc17d5bd454' class='xr-var-data-in' type='checkbox'><label for='data-6991bbfc-00cd-4992-af1c-edc17d5bd454' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-528768c7-6972-406b-8332-dd2fbfa28ea3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-528768c7-6972-406b-8332-dd2fbfa28ea3' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    air      float32 281.3</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-6af3fa88-28e1-48ac-8c9e-00392cea830d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6af3fa88-28e1-48ac-8c9e-00392cea830d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-dd2ad151-32b8-442e-9d39-def21c67a248' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-dd2ad151-32b8-442e-9d39-def21c67a248' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-681e8daf-5a59-43dd-a7c7-1d72d931fe12' class='xr-section-summary-in' type='checkbox'  checked><label for='section-681e8daf-5a59-43dd-a7c7-1d72d931fe12' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>281.3</div><input id='attrs-7152942b-368c-43dd-8c0a-125bc958d97f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7152942b-368c-43dd-8c0a-125bc958d97f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a202513e-2e52-4410-8cd7-74945cf92006' class='xr-var-data-in' type='checkbox'><label for='data-a202513e-2e52-4410-8cd7-74945cf92006' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(281.25513, dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a24db5f0-c049-4d76-8d3e-040ef81d3d93' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a24db5f0-c049-4d76-8d3e-040ef81d3d93' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1602,7 +1678,7 @@ Dask Name: sqrt, 67 tasks
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([89, 43, 75, ..., 46, 58, 28])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([48, 77, 64, ..., 51,  3, 30])
 </pre></div>
 </div>
 </div>
@@ -1629,8 +1705,24 @@ Dask Name: sqrt, 67 tasks
 </div>
 </div>
 </div>
-<div class="section" id="dask-on-hpc">
-<h3><a class="reference external" href="https://docs.dask.org/en/latest/setup/hpc.html">Dask on HPC</a><a class="headerlink" href="#dask-on-hpc" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="distributed">
+<h3><a class="reference external" href="https://docs.dask.org/en/stable/deploying-hpc.html">Distributed</a><a class="headerlink" href="#distributed" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">dask_jobqueue</span> <span class="kn">import</span> <span class="n">SGECluster</span>
+
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">SGECluster</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="setup">
+<h4>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Add ( / update) the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code></a> file.</p></li>
+<li><p>Add ( / update) the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/distributed.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/distributed.yaml</span></code></a> file.</p></li>
+</ul>
+</div>
+<div class="section" id="work-scripts">
+<h4>Work scripts<a class="headerlink" href="#work-scripts" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Create/edit the <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.py"><code class="docutils literal notranslate"><span class="pre">dask_on_hpc.py</span></code></a> file.</p></li>
 <li><p>Submit to the queue using <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/dask_on_hpc.bash"><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">dask_on_hpc.bash</span></code></a>.</p></li>
@@ -1647,6 +1739,117 @@ Dask Name: sqrt, 67 tasks
 </ul>
 </div>
 </div>
+<div class="section" id="profiling-and-diagnostics">
+<h3><a class="reference external" href="https://docs.dask.org/en/stable/understanding-performance.html">Profiling and diagnostics</a><a class="headerlink" href="#profiling-and-diagnostics" title="Permalink to this headline">¶</a></h3>
+<p>Many of the profiling tools we looked at earlier don’t work well with parallel code.</p>
+<div class="section" id="visualise-the-task-graph">
+<h4><a class="reference external" href="https://docs.dask.org/en/stable/graphviz.html">Visualise the task graph</a><a class="headerlink" href="#visualise-the-task-graph" title="Permalink to this headline">¶</a></h4>
+<p>Before executing the computation, you could visualise the task graph.</p>
+<p>This can help find potential bottlenecks.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="nn">da</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+<span class="n">y</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;dask-transpose.svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="dask-transpose.svg" src="images/dask-transpose.svg" /></p>
+<p><em><a class="reference external" href="https://docs.dask.org/en/stable/graphviz.html">Image source</a></em></p>
+</div>
+<div class="section" id="local-diagnostics">
+<h4><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-local.html">Local diagnostics</a><a class="headerlink" href="#local-diagnostics" title="Permalink to this headline">¶</a></h4>
+<p>For work on your laptop or local server.</p>
+<p>Can use the</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-local.html#dask.diagnostics.Profiler"><code class="docutils literal notranslate"><span class="pre">Profiler()</span></code></a> for task execution.</p>
+<ul>
+<li><p>Each worker (rows on y-axis) has tasks (blocks) of different types (colours).</p></li>
+<li><p>Time duration (x-axis).</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-local.html#dask.diagnostics.ResourceProfiler"><code class="docutils literal notranslate"><span class="pre">ResourceProfiler()</span></code></a> for resource use.</p>
+<ul>
+<li><p>Percentage CPU usage (left y-axis) and memory usage (right y-axis).</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-local.html#dask.diagnostics.CacheProfiler"><code class="docutils literal notranslate"><span class="pre">CacheProfiler()</span></code></a> for scheduler cache.</p>
+<ul>
+<li><p>Cache size (y-axis) of different types (colours).</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="nn">da</span>
+<span class="kn">from</span> <span class="nn">dask.diagnostics</span> <span class="kn">import</span> <span class="n">Profiler</span><span class="p">,</span> <span class="n">ResourceProfiler</span><span class="p">,</span> <span class="n">CacheProfiler</span><span class="p">,</span> <span class="n">visualize</span>
+
+<span class="c1"># Example linear algebra (QR decomposition) with Dask Array to demonstrate diagnostics.</span>
+<span class="c1"># Taken from https://docs.dask.org/en/stable/diagnostics-local.html#example</span>
+<span class="n">random_array</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">),</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">))</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">random_array</span><span class="p">)</span>
+<span class="n">random_array_reconstructed</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="c1"># the profilers are just context managers</span>
+<span class="c1"># hence, can use many in a with block</span>
+<span class="k">with</span> <span class="n">Profiler</span><span class="p">()</span> <span class="k">as</span> <span class="n">prof</span><span class="p">,</span> <span class="n">ResourceProfiler</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span> <span class="k">as</span> <span class="n">rprof</span><span class="p">,</span> <span class="n">CacheProfiler</span><span class="p">()</span> <span class="k">as</span> <span class="n">cprof</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">random_array_reconstructed</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="n">visualize</span><span class="p">([</span><span class="n">prof</span><span class="p">,</span> <span class="n">rprof</span><span class="p">,</span> <span class="n">cprof</span><span class="p">],</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns local diagnostics that can viewed in the browser:</p>
+<ul class="simple">
+<li><p>Each array creation runs concurrently.</p></li>
+<li><p>Reduction step to combine the blocks (serial and held in cache).</p></li>
+<li><p>Released from cache.</p></li>
+<li><p>Parallel execution of <code class="docutils literal notranslate"><span class="pre">dot</span></code> and <code class="docutils literal notranslate"><span class="pre">sum</span></code>.</p></li>
+</ul>
+<div class="cell tag_remove_input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3944</span><span class="o">/</span><span class="mf">1786197442.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/dask_local_diagnostics.html&#39;</span><span class="p">))</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/IPython/core/display.py</span> in <span class="ni">__init__</span><span class="nt">(self, data, url, filename, metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">723</span>         <span class="k">if</span> <span class="n">warn</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">724</span>             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Consider using IPython.display.IFrame instead&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">725</span>         <span class="nb">super</span><span class="p">(</span><span class="n">HTML</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span> 
+<span class="g g-Whitespace">    </span><span class="mi">727</span>     <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/IPython/core/display.py</span> in <span class="ni">__init__</span><span class="nt">(self, data, url, filename, metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span>             <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="g g-Whitespace">    </span><span class="mi">636</span> 
+<span class="ne">--&gt; </span><span class="mi">637</span>         <span class="bp">self</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span> 
+
+<span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/IPython/core/display.py</span> in <span class="ni">reload</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">660</span>         <span class="sd">&quot;&quot;&quot;Reload the raw data from file or URL.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">661</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">662</span>             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flags</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">663</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">664</span>         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;images/dask_local_diagnostics.html&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="distributed-diagnostics">
+<h4><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-distributed.html">Distributed diagnostics</a><a class="headerlink" href="#distributed-diagnostics" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>…</p></li>
+</ul>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.dask.org/en/latest/diagnostics-local.html#example">Profile parallel code with Dask</a></p></li>
+</ul>
+</div>
+</div>
+</div>
 <div class="section" id="ray">
 <h2><a class="reference external" href="https://www.ray.io/">Ray</a><a class="headerlink" href="#ray" title="Permalink to this headline">¶</a></h2>
 <p>Ray will automatically detect the available GPUs and CPUs on the machine.</p>
@@ -1658,19 +1861,6 @@ Dask Name: sqrt, 67 tasks
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ray</span>
 <span class="n">ray</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;node_ip_address&#39;: &#39;10.1.0.7&#39;,
- &#39;raylet_ip_address&#39;: &#39;10.1.0.7&#39;,
- &#39;redis_address&#39;: &#39;10.1.0.7:6379&#39;,
- &#39;object_store_address&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-21_200939_3833/sockets/plasma_store&#39;,
- &#39;raylet_socket_name&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-21_200939_3833/sockets/raylet&#39;,
- &#39;webui_url&#39;: None,
- &#39;session_dir&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-21_200939_3833&#39;,
- &#39;metrics_export_port&#39;: 56456,
- &#39;node_id&#39;: &#39;7302ff6072c2670276376d7de4f09fd4b9760b87e8dfa5f260f1bd4a&#39;}
 </pre></div>
 </div>
 </div>
@@ -1696,11 +1886,6 @@ Dask Name: sqrt, 67 tasks
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># asynchronously run a task</span>
 <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">futures</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 4, 9]
 </pre></div>
 </div>
 </div>
@@ -1742,11 +1927,6 @@ Dask Name: sqrt, 67 tasks
 <span class="p">[</span><span class="n">counter</span><span class="o">.</span><span class="n">increment</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">counters</span><span class="p">]</span>
 <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">counter</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">counters</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">futures</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 1, 1, 1]
 </pre></div>
 </div>
 </div>
@@ -1803,11 +1983,6 @@ Dask Name: sqrt, 67 tasks
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">workers</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 9]
 </pre></div>
 </div>
 </div>
@@ -1887,15 +2062,15 @@ Dask dispatches tasks to Ray for scheduling and execution.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;node_ip_address&#39;: &#39;10.1.0.7&#39;,
- &#39;raylet_ip_address&#39;: &#39;10.1.0.7&#39;,
- &#39;redis_address&#39;: &#39;10.1.0.7:6379&#39;,
- &#39;object_store_address&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-25_667893_3833/sockets/plasma_store&#39;,
- &#39;raylet_socket_name&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-25_667893_3833/sockets/raylet&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;node_ip_address&#39;: &#39;129.11.87.102&#39;,
+ &#39;raylet_ip_address&#39;: &#39;129.11.87.102&#39;,
+ &#39;redis_address&#39;: &#39;129.11.87.102:6379&#39;,
+ &#39;object_store_address&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572/sockets/plasma_store&#39;,
+ &#39;raylet_socket_name&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572/sockets/raylet&#39;,
  &#39;webui_url&#39;: None,
- &#39;session_dir&#39;: &#39;/tmp/ray/session_2022-02-01_10-20-25_667893_3833&#39;,
- &#39;metrics_export_port&#39;: 60197,
- &#39;node_id&#39;: &#39;5cbee9d70f5204f3e13742908df92063acff9f53ab5c0a67d8f3a681&#39;}
+ &#39;session_dir&#39;: &#39;/tmp/ray/session_2021-12-20_11-47-12_888567_25572&#39;,
+ &#39;metrics_export_port&#39;: 63246,
+ &#39;node_id&#39;: &#39;e37649cbb30caaafbcfb5fdbe4645c1e07fbbc9c2a044468ebf0a02d&#39;}
 </pre></div>
 </div>
 </div>
@@ -1908,293 +2083,6 @@ Dask dispatches tasks to Ray for scheduling and execution.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>...</th>
-      <th>246</th>
-      <th>247</th>
-      <th>248</th>
-      <th>249</th>
-      <th>250</th>
-      <th>251</th>
-      <th>252</th>
-      <th>253</th>
-      <th>254</th>
-      <th>255</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>51</td>
-      <td>37</td>
-      <td>56</td>
-      <td>13</td>
-      <td>39</td>
-      <td>0</td>
-      <td>53</td>
-      <td>22</td>
-      <td>63</td>
-      <td>93</td>
-      <td>...</td>
-      <td>70</td>
-      <td>69</td>
-      <td>59</td>
-      <td>37</td>
-      <td>19</td>
-      <td>14</td>
-      <td>82</td>
-      <td>47</td>
-      <td>84</td>
-      <td>35</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>87</td>
-      <td>20</td>
-      <td>83</td>
-      <td>85</td>
-      <td>96</td>
-      <td>14</td>
-      <td>64</td>
-      <td>2</td>
-      <td>28</td>
-      <td>60</td>
-      <td>...</td>
-      <td>90</td>
-      <td>35</td>
-      <td>58</td>
-      <td>58</td>
-      <td>44</td>
-      <td>41</td>
-      <td>54</td>
-      <td>90</td>
-      <td>39</td>
-      <td>83</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>93</td>
-      <td>55</td>
-      <td>4</td>
-      <td>13</td>
-      <td>64</td>
-      <td>73</td>
-      <td>43</td>
-      <td>84</td>
-      <td>99</td>
-      <td>83</td>
-      <td>...</td>
-      <td>15</td>
-      <td>61</td>
-      <td>36</td>
-      <td>60</td>
-      <td>88</td>
-      <td>72</td>
-      <td>19</td>
-      <td>79</td>
-      <td>30</td>
-      <td>98</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>6</td>
-      <td>63</td>
-      <td>48</td>
-      <td>29</td>
-      <td>17</td>
-      <td>6</td>
-      <td>50</td>
-      <td>93</td>
-      <td>22</td>
-      <td>9</td>
-      <td>...</td>
-      <td>87</td>
-      <td>0</td>
-      <td>95</td>
-      <td>23</td>
-      <td>89</td>
-      <td>64</td>
-      <td>78</td>
-      <td>30</td>
-      <td>68</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>40</td>
-      <td>5</td>
-      <td>14</td>
-      <td>50</td>
-      <td>31</td>
-      <td>68</td>
-      <td>31</td>
-      <td>7</td>
-      <td>32</td>
-      <td>68</td>
-      <td>...</td>
-      <td>88</td>
-      <td>89</td>
-      <td>68</td>
-      <td>30</td>
-      <td>72</td>
-      <td>55</td>
-      <td>8</td>
-      <td>63</td>
-      <td>30</td>
-      <td>99</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>77</td>
-      <td>98</td>
-      <td>91</td>
-      <td>61</td>
-      <td>48</td>
-      <td>0</td>
-      <td>45</td>
-      <td>80</td>
-      <td>37</td>
-      <td>94</td>
-      <td>...</td>
-      <td>50</td>
-      <td>41</td>
-      <td>35</td>
-      <td>87</td>
-      <td>58</td>
-      <td>90</td>
-      <td>46</td>
-      <td>5</td>
-      <td>4</td>
-      <td>88</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>69</td>
-      <td>15</td>
-      <td>83</td>
-      <td>76</td>
-      <td>37</td>
-      <td>22</td>
-      <td>25</td>
-      <td>95</td>
-      <td>88</td>
-      <td>96</td>
-      <td>...</td>
-      <td>18</td>
-      <td>96</td>
-      <td>42</td>
-      <td>7</td>
-      <td>92</td>
-      <td>79</td>
-      <td>37</td>
-      <td>40</td>
-      <td>0</td>
-      <td>54</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>79</td>
-      <td>47</td>
-      <td>75</td>
-      <td>0</td>
-      <td>64</td>
-      <td>79</td>
-      <td>81</td>
-      <td>2</td>
-      <td>12</td>
-      <td>33</td>
-      <td>...</td>
-      <td>31</td>
-      <td>71</td>
-      <td>24</td>
-      <td>19</td>
-      <td>4</td>
-      <td>38</td>
-      <td>74</td>
-      <td>52</td>
-      <td>41</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>24</td>
-      <td>95</td>
-      <td>59</td>
-      <td>99</td>
-      <td>28</td>
-      <td>67</td>
-      <td>28</td>
-      <td>76</td>
-      <td>65</td>
-      <td>39</td>
-      <td>...</td>
-      <td>89</td>
-      <td>97</td>
-      <td>24</td>
-      <td>54</td>
-      <td>66</td>
-      <td>38</td>
-      <td>37</td>
-      <td>52</td>
-      <td>67</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>21</td>
-      <td>98</td>
-      <td>93</td>
-      <td>37</td>
-      <td>50</td>
-      <td>82</td>
-      <td>80</td>
-      <td>97</td>
-      <td>83</td>
-      <td>12</td>
-      <td>...</td>
-      <td>95</td>
-      <td>64</td>
-      <td>59</td>
-      <td>94</td>
-      <td>95</td>
-      <td>69</td>
-      <td>20</td>
-      <td>92</td>
-      <td>70</td>
-      <td>58</td>
-    </tr>
-  </tbody>
-</table>
-<p>10 rows × 256 columns</p>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2210,14 +2098,33 @@ Dask dispatches tasks to Ray for scheduling and execution.</p>
 </div>
 <div class="section" id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="good-practises">
+<h3>Good practises<a class="headerlink" href="#good-practises" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Start small.</p></li>
+<li><p>Avoid very large chunks / partitions / task graphs (a good first option is to allow auto-chunking).</p></li>
+<li><p>Only use parallelisation (e.g., Dask) when needed, then move back to normal Python ( / NumPy / Pandas).</p></li>
+<li><p>Persist data in memory (RAM) where can, as faster than accessing from disk.</p></li>
+<li><p>Load data with the parallel library (e.g., Dask), rather than just passing data to it to manage.</p></li>
+<li><p>Call compute once, on lots of computations.</p></li>
+<li><p>Avoid global state.</p></li>
+<li><p>Don’t modify the data in place.</p></li>
+<li><p>More information:</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.dask.org/en/stable/best-practices.html">Dask</a>, <a class="reference external" href="https://docs.dask.org/en/stable/array-best-practices.html">Dask Array</a>, <span class="xref myst">Dask DataFrame</span>
+<a class="reference external" href="https://docs.dask.org/en/stable/delayed-best-practices.html">Dask Delayed</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="other-options">
 <h3>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://modin.readthedocs.io/en/latest/">Modin</a></p>
 <ul>
 <li><p>Swap out the library import and use the same API.</p></li>
-<li><p>Uses Ray or Dask to easily speed up your Pandas code.<br />
-To use Modin, simply replace the import and use Pandas API as normal.</p></li>
+<li><p>Uses Ray or Dask to easily speed up your Pandas code.</p></li>
+<li><p>To use Modin, simply replace the import and use Pandas API as normal.</p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://docs.pymars.org/en/latest/">Mars</a></p>
@@ -2244,6 +2151,7 @@ To use Modin, simply replace the import and use Pandas API as normal.</p></li>
 <div class="section" id="resources">
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li><p><a class="reference external" href="https://eliot.readthedocs.io/en/stable/scientific-computing.html">Using <code class="docutils literal notranslate"><span class="pre">eliot</span></code> with Dask</a></p></li>
 <li><p><a class="reference external" href="https://ipyparallel.readthedocs.io/en/latest/">Using IPython for parallel computing</a></p></li>
 <li><p><a class="reference external" href="https://youtu.be/18B1pznaU1o">Concurrency</a> can also run different tasks together, but work is not done at the same time (<a class="reference external" href="https://youtu.be/MCs5OvhV9S4">concurrency from the ground up</a>).</p></li>
 <li><p><a class="reference external" href="https://youtu.be/iG6fr81xHKA">Asynchronous</a> (multi-threading), useful for massive scaling, threads controlled explicitly.</p></li>

@@ -297,11 +297,28 @@
 <h2>Hang on, don’t optimise too early<a class="headerlink" href="#hang-on-don-t-optimise-too-early" title="Permalink to this headline">¶</a></h2>
 <p>There are trade-offs when you pursue faster code. For example, it may become more complex, use more memory, become less readable. This is in addition to the optimisation process taking time and effort. So, before jumping into optimising code, check that:</p>
 <ul class="simple">
-<li><p>The code is correct (have you tested it?, does it have documentation?).</p></li>
+<li><p>The code is correct?</p>
+<ul>
+<li><p>Have you tested it?</p></li>
+<li><p>Does it have documentation?</p></li>
+</ul>
+</li>
 <li><p>Is optimisation really needed?</p>
 <ul>
-<li><p>If yes, then optimise the code and data.</p></li>
-<li><p>If that’s still not enough, then parallelise.</p></li>
+<li><p>Have you profiled the code?</p></li>
+<li><p>If optimisation is needed, then first:</p>
+<ul>
+<li><p>Have you tried more suitable algorithms and data structures?</p></li>
+<li><p>Have you tried vectorisation?</p></li>
+<li><p>Have you tried compiling the code?</p></li>
+</ul>
+</li>
+<li><p>If that’s still not enough, then:</p>
+<ul>
+<li><p>Try parallelisation.</p></li>
+<li><p>Try offloading the work to accelerators.</p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
