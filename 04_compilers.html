@@ -296,41 +296,40 @@
 <p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/05_compilers.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <div class="section" id="cpython">
 <h2><a class="reference external" href="https://www.python.org/">CPython</a><a class="headerlink" href="#cpython" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><em>Ahead-Of-Time (AOT) compiler.</em></p>
-<ul>
-<li><p>Statically compiled C extensions.</p></li>
-</ul>
-</li>
-<li><p>General purpose interpreter.</p>
-<ul>
-<li><p>Can work on a variety of problems.</p></li>
-</ul>
-</li>
-<li><p>Dynamically typed.</p>
-<ul>
-<li><p>Types can change e.g. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span></code>, then later <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">'gary'</span></code>.</p></li>
-</ul>
-</li>
-</ul>
+<p>The main Python distribution.</p>
+<p>Uses Ahead-Of-Time (AOT) compiler i.e., the code was compiled in advance.</p>
+<p>This was as an assortment of statically compiled C extensions.</p>
+<p>CPython is a general purpose interpreter, allowing it to work on a variety of problems.</p>
+<p>It is dynamically typed, so types can change as you go e.g., <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span></code>, then later <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">'gary'</span></code>.</p>
 </div>
 <div class="section" id="numba">
 <h2><a class="reference external" href="http://numba.pydata.org/">Numba</a><a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h2>
+<p>Uses JIT (just-in-time) compiler on functions i.e., compile the function at execution time.</p>
+<p>This converts to fast machine code (<a class="reference external" href="https://en.wikipedia.org/wiki/LLVM">LLVM</a>).</p>
+<p>Numba works with the default CPython.</p>
+<p>It uses decorators around functions.</p>
+<p>There are two main modes:</p>
 <ul class="simple">
-<li><p><em>Uses JIT compiler on functions.</em></p>
+<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">nopython</span></code></a> mode: <code class="docutils literal notranslate"><span class="pre">&#64;jit(nopython=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>, <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a></p>
 <ul>
-<li><p>Converts to fast machine code (LLVM).</p></li>
-<li><p>Uses decorators around functions.</p></li>
-<li><p>Use with the default CPython.</p></li>
-<li><p>Helpful when want to speed up numerical opterations in specific functions.</p></li>
-<li><p>Examples for <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#using-numba">Pandas</a>.</p></li>
+<li><p>Compiles code that does not access the CPython.</p></li>
+<li><p>Highest performance, but requires specific types (mainly numbers).</p></li>
+<li><p>Recommended.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-object-mode"><code class="docutils literal notranslate"><span class="pre">object</span></code></a> mode: <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a></p>
+<ul>
+<li><p>Compiles code that handles all values as Python objects and uses CPython to work on those objects.</p></li>
+<li><p>Main improvement over CPython is for loops.</p></li>
 </ul>
 </li>
 </ul>
+<p>Numba is helpful when want to speed up numerical opterations in specific functions.</p>
+<p>Here are some examples for <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#numba-jit-compilation">Pandas</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span><span class="p">,</span> <span class="n">vectorize</span>
 </pre></div>
 </div>
 </div>
@@ -360,7 +359,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.58 s ± 5.47 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.54 s ± 9.81 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -386,7 +385,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>318 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>254 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -400,7 +399,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.9 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.5 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>

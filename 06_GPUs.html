@@ -347,15 +347,13 @@
 <p>…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span><span class="p">,</span> <span class="n">vectorize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">vectorize</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Numba <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> on the CPU</p>
-<ul class="simple">
-<li><p>Can also use <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a></p></li>
-</ul>
+<p>Earlier we covered how Numba works on CPUs with <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a> or <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a>.</p>
+<p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@vectorize</span>
@@ -365,10 +363,8 @@
 </div>
 </div>
 </div>
-<p>Numba <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> on the GPU</p>
-<ul class="simple">
-<li><p>Can also use <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a></p></li>
-</ul>
+<p>Numba also works on GPUs using <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> or <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a>.</p>
+<p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the GPU, need: types output(inputs) and target </span>
@@ -436,6 +432,7 @@
 <li><p>Multiple GPUs</p>
 <ul>
 <li><p><a class="reference external" href="https://rapids.ai/dask.html">Dask with CUDA</a>, cuDF, cuML, and others.</p></li>
+<li><p><a class="reference external" href="http://mpi.dask.org/en/latest/gpu.html">Dask-MPI with GPUs</a></p></li>
 </ul>
 </li>
 </ul>
