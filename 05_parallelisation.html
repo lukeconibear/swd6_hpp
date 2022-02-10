@@ -305,38 +305,67 @@
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dask-mpi">
+       Dask-MPI
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#submission-script">
+         <strong>
+          Submission script
+         </strong>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#batch-job">
+         <strong>
+          Batch job
+         </strong>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#distributed-profiling-and-diagnostics">
+         <strong>
+          Distributed profiling and diagnostics
+         </strong>
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#dask-jobqueue">
        Dask-Jobqueue
       </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#setup-the-config">
-       Setup the config
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#create-the-submission-script">
-       Create the submission script
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#create-the-submission-job">
-       Create the submission job
-      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#setup-the-config">
+         <strong>
+          Setup the config
+         </strong>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id1">
+         <strong>
+          Submission script
+         </strong>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id2">
+         <strong>
+          Batch job
+         </strong>
+        </a>
+       </li>
+      </ul>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distributed-profiling-and-diagnostics">
+    <a class="reference internal nav-link" href="#id3">
      Distributed profiling and diagnostics
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#dask-mpi">
-       Dask-MPI
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -540,7 +569,7 @@
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-e70ed692-89d3-11ec-8fe9-000d3a6eb502</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-36aa9632-8a5e-11ec-9028-000d3ae5a16f</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -569,7 +598,7 @@
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">26690f96</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">46ad1bb1</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -606,11 +635,11 @@
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-b323ebee-99c0-4dae-b203-60143586d2c0</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-f113bc05-169e-4fbf-b377-17d2adb212fe</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:46281
+                        <strong>Comm:</strong> tcp://127.0.0.1:40355
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 2
@@ -652,7 +681,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:46435
+                            <strong>Comm: </strong> tcp://127.0.0.1:45297
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -660,7 +689,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43451/status" target="_blank">http://127.0.0.1:43451/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34359/status" target="_blank">http://127.0.0.1:34359/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 3.39 GiB
@@ -668,13 +697,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46567
+                            <strong>Nanny: </strong> tcp://127.0.0.1:44341
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-_7feu8fj
+                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-gh8cot9w
                         </td>
                     </tr>
 
@@ -697,7 +726,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37085
+                            <strong>Comm: </strong> tcp://127.0.0.1:36113
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -705,7 +734,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44931/status" target="_blank">http://127.0.0.1:44931/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36633/status" target="_blank">http://127.0.0.1:36633/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 3.39 GiB
@@ -713,13 +742,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37459
+                            <strong>Nanny: </strong> tcp://127.0.0.1:44511
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-h4lp86x1
+                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-m0bbvend
                         </td>
                     </tr>
 
@@ -824,7 +853,7 @@
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4073</span><span class="o">/</span><span class="mf">3756299828.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4136</span><span class="o">/</span><span class="mf">3756299828.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">random_array_reconstructed</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
 
 <span class="nn">/usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/dask/base.py</span> in <span class="ni">visualize</span><span class="nt">(self, filename, format, optimize_graph, **kwargs)</span>
@@ -1150,14 +1179,101 @@ Wall time: 66.4 ms
 </div>
 <div class="section" id="distributed">
 <h3><a class="reference external" href="https://docs.dask.org/en/stable/deploying-hpc.html">Distributed</a><a class="headerlink" href="#distributed" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dask-mpi">
+<h4><a class="reference external" href="http://mpi.dask.org/en/latest/">Dask-MPI</a><a class="headerlink" href="#dask-mpi" title="Permalink to this headline">¶</a></h4>
+<p>Uses the <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> package and MPI to distribute the workers (not communication).</p>
+<div class="section" id="submission-script">
+<h5><strong>Submission script</strong><a class="headerlink" href="#submission-script" title="Permalink to this headline">¶</a></h5>
+<p>Initialise a Dask MPI session and connect a client.</p>
+<p>The initialisation launches the Dask Scheduler on MPI rank 0, the user’s Client code on MPI rank 1, and the Dask Workers on MPI ranks 3 and above.</p>
+<p>So, for 8 processes, there will be 6 workers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dask_mpi</span> <span class="kn">import</span> <span class="n">initialize</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">initialize</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then add in your Dask work.</p>
+<p>Ensure to have the <code class="docutils literal notranslate"><span class="pre">.compute()</span></code> call within the <code class="docutils literal notranslate"><span class="pre">performance_report</span></code> context manager to capture the diagnostics.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="nn">da</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">performance_report</span>
+
+
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Example linear algebra with Dask Array to demonstrate diagnostics.</span>
+<span class="sd">    Taken from https://docs.dask.org/en/stable/diagnostics-local.html#example</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random_array</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">),</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">))</span>
+    <span class="c1"># take the QR decomposition: https://en.wikipedia.org/wiki/QR_decomposition</span>
+    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">random_array</span><span class="p">)</span>
+    <span class="n">random_array_reconstructed</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">performance_report</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;dask-report_example_mpi_sge.html&quot;</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">random_array_reconstructed</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">random_array</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">example_function</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The full script can be found in <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/example_dask_mpi_sge.py"><code class="docutils literal notranslate"><span class="pre">example_dask_mpi_sge.py</span></code></a>.</p>
+</div>
+<div class="section" id="batch-job">
+<h5><strong>Batch job</strong><a class="headerlink" href="#batch-job" title="Permalink to this headline">¶</a></h5>
+<p>Setup the resource request from the HPC scheduler:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+<span class="c1">#$ -cwd -V</span>
+<span class="c1">#$ -l h_rt=00:15:00</span>
+<span class="c1">#$ -pe ib 8</span>
+<span class="c1">#$ -l h_vmem=1G</span>
+</pre></div>
+</div>
+<p>Load an MPI module e.g.,:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module load intel openmpi
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Issues can arise from oversubscribing threads.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure linear algebra libraries using 1 thread</span>
+<span class="c1"># https://docs.dask.org/en/stable/array-best-practices.html#avoid-oversubscribing-threads</span>
+<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span> <span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span> <span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Load the conda environment e.g.,:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate swd6_hpp
+</pre></div>
+</div>
+<p>Ensure that number of cores match in the requested resources at the top and in the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> call e.g.,:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -pe ib 8</span>
+
+mpirun -np <span class="m">8</span> python example_dask_mpi_sge.py
+</pre></div>
+</div>
+<p>The full script can be found in <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/example_dask_mpi_sge.bash"><code class="docutils literal notranslate"><span class="pre">example_dask_mpi_sge.bash</span></code></a>.</p>
+</div>
+<div class="section" id="distributed-profiling-and-diagnostics">
+<h5><strong>Distributed profiling and diagnostics</strong><a class="headerlink" href="#distributed-profiling-and-diagnostics" title="Permalink to this headline">¶</a></h5>
+<p>View the Dask performance report <a class="reference external" href="https://gistcdn.githack.com/lukeconibear/08ec194c93797404baa19bce7539978d/raw/38f3c907e61ad83f70cfc68d14709c33d1283d24/dask-report_example_mpi_sge.html">here</a>.</p>
+<p>You can see the 6 workers, and the diagnostics look similar to that for the local machine.</p>
+<p>You could now increase the number of workers.</p>
+</div>
+</div>
 <div class="section" id="dask-jobqueue">
 <h4><a class="reference external" href="http://jobqueue.dask.org/en/latest/">Dask-Jobqueue</a><a class="headerlink" href="#dask-jobqueue" title="Permalink to this headline">¶</a></h4>
 <p>Dask-Jobqueue support a variety of resource managers (e.g., <a class="reference external" href="http://jobqueue.dask.org/en/latest/examples.html#sge-deployments">SGE</a>, <a class="reference external" href="http://jobqueue.dask.org/en/latest/examples.html#slurm-deployments">SLURM</a>).</p>
 <p>We recommend you use it for batch jobs on the HPC, rather than interactive jobs.</p>
 <p>Though it does have lots of nice features for interactive work e.g., adaptive dynamic scaling of workers.</p>
-</div>
 <div class="section" id="setup-the-config">
-<h4><a class="reference external" href="http://jobqueue.dask.org/en/latest/configuration.html">Setup the config</a><a class="headerlink" href="#setup-the-config" title="Permalink to this headline">¶</a></h4>
+<h5><strong><a class="reference external" href="http://jobqueue.dask.org/en/latest/configuration.html">Setup the config</a></strong><a class="headerlink" href="#setup-the-config" title="Permalink to this headline">¶</a></h5>
 <p>The example below is for an SGE scheduler (ARC).</p>
 <p>The full script can be found in <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/jobqueue.yaml"><code class="docutils literal notranslate"><span class="pre">~/.config/dask/jobqueue.yaml</span></code></a>.</p>
 <p><a class="reference external" href="http://jobqueue.dask.org/en/latest/configurations.html">Here</a> are examples for different HPC systems.</p>
@@ -1197,8 +1313,8 @@ Wall time: 66.4 ms
 </pre></div>
 </div>
 </div>
-<div class="section" id="create-the-submission-script">
-<h4>Create the submission script<a class="headerlink" href="#create-the-submission-script" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id1">
+<h5><strong>Submission script</strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
 <p>The distributed client and cluster are created within a Python script.</p>
 <p>The resource requirements per worker are defined, along with the number of workers.</p>
 <p>The full script can be found in <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/example_dask_jobqueue_sge.py"><code class="docutils literal notranslate"><span class="pre">example_dask_jobqueue_sge.py</span></code></a> file.</p>
@@ -1249,27 +1365,17 @@ Wall time: 66.4 ms
 </pre></div>
 </div>
 </div>
-<div class="section" id="create-the-submission-job">
-<h4>Create the submission job<a class="headerlink" href="#create-the-submission-job" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h5><strong>Batch job</strong><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
 <p>Submit this job to the queue.</p>
 <p>The full script can be found in <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/example_dask_jobqueue_sge.bash"><code class="docutils literal notranslate"><span class="pre">example_dask_jobqueue_sge.bash</span></code></a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Issues can arise from pinning processes to specific cores and oversubscribing threads.</p>
-</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
 <span class="c1">#$ -cwd -V</span>
 <span class="c1">#$ -l h_rt=00:15:00</span>
 <span class="c1">#$ -pe smp 1</span>
 <span class="c1">#$ -l h_vmem=1G</span>
 
-<span class="c1"># ensure processes not pinned</span>
-<span class="nb">unset</span> GOMP_CPU_AFFINITY
-<span class="c1"># ensure linear algebra libraries using 1 thread</span>
-<span class="c1"># https://docs.dask.org/en/stable/array-best-practices.html#avoid-oversubscribing-threads</span>
-<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">export</span> <span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">export</span> <span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+
 
 conda activate parallelisation_tests
 
@@ -1292,25 +1398,15 @@ python example_dask_jobqueue_sge.py
 </ul>
 </div>
 </div>
-<div class="section" id="distributed-profiling-and-diagnostics">
-<h3>Distributed profiling and diagnostics<a class="headerlink" href="#distributed-profiling-and-diagnostics" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id3">
+<h3>Distributed profiling and diagnostics<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Use the Dask performance report to save the dashboard to a <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, so can view after the work is complete.</p>
 <p>Use the Dask performance report to save the dashboard to a <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, so can view after the work is complete.</p>
 <p>Explain the outputs from the performance report, and how to share it</p>
 <p>…</p>
 <p><a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/images/dask-report_example_mpi_sge.html"><code class="docutils literal notranslate"><span class="pre">dask-report_example_mpi_sge.html</span></code></a><br />
 <a class="reference external" href="https://github.com/lukeconibear/swd6_hpp/blob/main/docs/images/dask-report_example_jobqueue_sge.html"><code class="docutils literal notranslate"><span class="pre">dask-report_example_jobqueue_sge.html</span></code></a></p>
-<div class="section" id="dask-mpi">
-<h4><a class="reference external" href="http://mpi.dask.org/en/latest/">Dask-MPI</a><a class="headerlink" href="#dask-mpi" title="Permalink to this headline">¶</a></h4>
-<p>Uses the <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> package and MPI to distribute the workers (not communication).</p>
-<ul class="simple">
-<li><p><a class="reference external" href="http://mpi.dask.org/en/latest/batch.html">Batch jobs</a> (recommended)</p>
-<ul>
-<li><p>Ensure that number of cores here match that in the requested resources at the top</p></li>
-</ul>
-</li>
-<li><p>Interactive jobs</p></li>
-</ul>
-</div>
 </div>
 </div>
 <div class="section" id="ray">
