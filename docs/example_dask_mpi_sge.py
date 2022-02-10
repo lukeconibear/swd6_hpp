@@ -17,10 +17,10 @@ def example_function():
     q, r = da.linalg.qr(random_array)
     random_array_reconstructed = q.dot(r)
 
-    with performance_report(filename="dask-report_example_mpi_sge.html"):
+    with performance_report(filename="dask-report.html"):
         result = random_array_reconstructed.compute()
 
-    np.testing.assert_allclose(random_array, result)
+    np.testing.assert_allclose(random_array, result, rtol=1e-5)
 
 
 if __name__ == "__main__":

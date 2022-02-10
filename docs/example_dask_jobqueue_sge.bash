@@ -3,7 +3,6 @@
 #$ -l h_rt=00:15:00
 #$ -pe smp 1
 #$ -l h_vmem=1G
-#$ -P admiralty
 
 # ensure linear algebra libraries using 1 thread
 # https://docs.dask.org/en/stable/array-best-practices.html#avoid-oversubscribing-threads
