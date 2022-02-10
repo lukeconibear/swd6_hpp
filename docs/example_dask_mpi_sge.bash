@@ -3,7 +3,6 @@
 #$ -l h_rt=00:15:00
 #$ -pe ib 8
 #$ -l h_vmem=1G
-#$ -P admiralty
 
 module load intel openmpi
 

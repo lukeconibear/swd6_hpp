@@ -1,9 +1,11 @@
+import numpy as np
 import dask.array as da
 from dask_mpi import initialize
 from dask.distributed import Client, performance_report
 
 initialize()
 client = Client()
+
 
 def example_function():
     """
@@ -18,5 +20,8 @@ def example_function():
     with performance_report(filename="dask-report_example_mpi_sge.html"):
         result = random_array_reconstructed.compute()
 
+    np.testing.assert_allclose(random_array, result)
 
-example_function()
+
+if __name__ == "__main__":
+    example_function()
