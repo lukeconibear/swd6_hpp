@@ -283,6 +283,11 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagnostics">
+   Diagnostics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise">
    Exercise
   </a>
@@ -292,6 +297,11 @@
    Further information
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#good-practises">
+     Good practises
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-options">
      Other options
@@ -438,12 +448,28 @@
 </ul>
 </div>
 </div>
+<div class="section" id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h2>
+<p>Similar to the Dask Dashboard, NVIDIA has a GPU Dashboard called <a class="reference external" href="https://github.com/rapidsai/jupyterlab-nvdashboard"><code class="docutils literal notranslate"><span class="pre">NVDashboard</span></code></a>.</p>
+<p>These real-time diagnostics are provided via a Bokeh server and a Jupyter Lab extension.</p>
+<p>They are a great way to manage your GPU utilisation, resources, throughput, and more.</p>
+<p>More information is <a class="reference external" href="https://developer.nvidia.com/blog/gpu-dashboards-in-jupyter-lab/">here</a>.</p>
+<p><img alt="SegmentLocal" src="_images/NVIDIA_GPUDashboard.gif" /></p>
+<p><em><a class="reference external" href="https://developer.nvidia.com/blog/gpu-dashboards-in-jupyter-lab/">Image source</a></em></p>
+</div>
 <div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>…</p>
 </div>
 <div class="section" id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="good-practises">
+<h3>Good practises<a class="headerlink" href="#good-practises" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Test out ideas on CPUs first, before moving to expensive GPUs.</p></li>
+<li><p>…</p></li>
+</ul>
+</div>
 <div class="section" id="other-options">
 <h3>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
