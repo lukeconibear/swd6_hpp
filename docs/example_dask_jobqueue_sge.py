@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+import os
+import numpy as np
 import dask.array as da
 from dask_jobqueue import SGECluster
 from dask.distributed import Client, performance_report
-from dask.diagnostics import Profiler, ResourceProfiler, CacheProfiler, visualize
 
 
 def setup_client_and_cluster(
@@ -9,9 +11,11 @@ def setup_client_and_cluster(
 ):
     """
     Setup Dask client and cluster.
-    Ensure that the number of workers is the right amount for your job and will be fully utilised.
+    Ensure that the number of workers is the right amount
+    for your job and will be fully utilised.
     """
     print("Setting up Dask client and cluster ...")
+    # number of workers used for number of partitions
     number_workers = number_processes * number_jobs
     # these are the requirements for a single worker
     cluster = SGECluster(
@@ -23,9 +27,11 @@ def setup_client_and_cluster(
         job_extra=[
             "-V",  # export all environment variables
             f"-pe smp {number_processes}",
-            f"-l disk={memory}G"
+            f"-l disk={memory}G",
         ],
-        local_directory=os.sep.join([os.environ.get("PWD"), "dask-worker-space"]),
+        local_directory=os.sep.join([
+            os.environ.get("PWD"),
+            "dask-worker-space"]),
     )
     client = Client(cluster)
     cluster.scale(jobs=number_jobs)
