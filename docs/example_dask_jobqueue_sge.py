@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import numpy as np
 import dask.array as da
 from dask_jobqueue import SGECluster
 from dask.distributed import Client, performance_report
@@ -41,27 +40,24 @@ def setup_client_and_cluster(
 
 
 def example_function():
-    """
-    Example linear algebra with Dask Array to demonstrate diagnostics.
-    Taken from https://docs.dask.org/en/stable/diagnostics-local.html#example
-    """
-    random_array = da.random.random(size=(10_000, 1_000), chunks=(1_000, 1_000))
-    # take the QR decomposition: https://en.wikipedia.org/wiki/QR_decomposition
-    q, r = da.linalg.qr(random_array)
-    random_array_reconstructed = q.dot(r)
+    x = da.random.random(
+        (100_000, 100_000, 10),
+        chunks=(10_000, 10_000, 5))
+    y = da.random.random(
+        (100_000, 100_000, 10),
+        chunks=(10_000, 10_000, 5))
+    z = (da.arcsin(x) + da.arccos(y)).sum(axis=(1, 2))
 
-    with performance_report(filename="dask-report.html"):
-        result = random_array_reconstructed.compute()
-
-    np.testing.assert_allclose(random_array, result, rtol=1e-5)
+    with performance_report(filename="dask-report_jobqueue.html"):
+        result = z.compute()
 
 
 def main():
     client, cluster = setup_client_and_cluster(
         number_processes=1,
         number_jobs=8,
-        walltime="00:10:00",
-        memory=1,
+        walltime="01:00:00",
+        memory=24,
     )
 
     print("Main processing ...")
