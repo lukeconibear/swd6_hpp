@@ -354,44 +354,67 @@
 <p>…</p>
 <div class="section" id="numba">
 <h3><a class="reference external" href="https://numba.pydata.org/numba-doc/latest/index.html">Numba</a><a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h3>
-<p>…</p>
+<p>Earlier we covered how Numba works on single or multiple CPUs with <a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code></a> and <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a>.</p>
+<p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">vectorize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">vectorize</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Earlier we covered how Numba works on CPUs with <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a> or <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a>.</p>
-<p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@vectorize</span>
-<span class="k">def</span> <span class="nf">do_maths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">add_ufunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Numba also works on GPUs using <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> or <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">add_ufunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>453 ns ± 0.343 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Numba also works on CUDA GPUs using <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> or <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a>.</p>
+<p>This is suitable for bigger data sizes (&gt; 1 MB) and high compute intensities.</p>
+<p>This adds additional overhead from moving data to and from GPUs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/memory.html">memory management</a>).</p>
 <p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the GPU, need: types output(inputs) and target </span>
-<span class="nd">@vectorize</span><span class="p">([</span><span class="s1">&#39;float32(float32, float32)&#39;</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">do_maths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="nd">@vectorize</span><span class="p">([</span><span class="s1">&#39;int64(int64, int64)&#39;</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add_ufunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><a class="reference external" href="http://numba.pydata.org/numba-doc/latest/cuda/ufunc.html#generalized-cuda-ufuncs"><code class="docutils literal notranslate"><span class="pre">guvectorize</span></code></a> on GPUs</p>
+<ul class="simple">
+<li><p>Working with arrays of different dimensions: can use <a class="reference external" href="https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html">generalized ufuncs</a> (NumPy), implemented in Numba as <code class="docutils literal notranslate"><span class="pre">guvectorize</span></code> on <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#the-guvectorize-decorator">CPUs</a> and <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/cuda/ufunc.html#generalized-cuda-ufuncs">GPUs</a>.</p></li>
+</ul>
 <p>Considerations and more information:</p>
 <ul class="simple">
-<li><p>Ensure inputs are not too small and the calculation is not too simple.</p></li>
-<li><p>Consider whether the calculation is worth the overhead of sending data to and from the GPU (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/memory.html">memory management</a>).</p></li>
-<li><p>Working with arrays of different dimensions: can use <a class="reference external" href="https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html">generalized ufuncs</a> (NumPy), implemented in Numba as <code class="docutils literal notranslate"><span class="pre">guvectorize</span></code> on <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#the-guvectorize-decorator">CPUs</a> and <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/cuda/ufunc.html#generalized-cuda-ufuncs">GPUs</a>.</p></li>
-<li><p>What data precision is required (i.e., is 64-bit needed?).</p></li>
-<li><p>Custom functions beyond ufuncs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/kernels.html">kernels</a>)</p></li>
+<li><p>Consider whether the calculation is worth the additional overhead of sending data to and from the GPU.</p></li>
 </ul>
 </div>
 </div>

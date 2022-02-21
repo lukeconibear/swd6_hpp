@@ -254,10 +254,20 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numpy-ufuncs-universal-functions">
-   NumPy ufuncs (universal functions)
+  <a class="reference internal nav-link" href="#id1">
+   Vectorisation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-your-own-ufunc">
+   Create your own ufunc
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalised-universal-functions-gufuncs">
+     Generalised universal functions (gufuncs)
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lazy-loading-and-execution">
      Lazy loading and execution
@@ -317,8 +327,12 @@
 </div>
 </div>
 </div>
-<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/02.03-computation-on-arrays-ufuncs.html">Vectorisation</a> effectively “parallelise” the code by operating on multiple array elements at once, rather than looping through them one at a time.</p>
-<p>Under the hood for NumPy arrays, functions, and aggregations (e.g., mean, sum).</p>
+<div class="section" id="broadcasting">
+<h2><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/02.05-computation-on-arrays-broadcasting.html">Broadcasting</a><a class="headerlink" href="#broadcasting" title="Permalink to this headline">¶</a></h2>
+<p>Broadcasting allows for operations with different shaped arrays.</p>
+<p>It’s implemented in many libraries, such as <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy</a> and <a class="reference external" href="https://xarray.pydata.org/en/v0.16.2/computation.html?highlight=Broadcasting#broadcasting-by-dimension-name">xarray</a>.</p>
+<p><img alt="broadcasting.png" src="_images/broadcasting.png" /></p>
+<p><em><a class="reference external" href="https://mathematica.stackexchange.com/questions/99171/how-to-implement-the-general-array-broadcasting-method-from-numpy">Image source</a></em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -326,57 +340,6 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
-<span class="p">[</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>193 ms ± 224 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
-<span class="n">nums</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1"># adds 2 to every elements by overloading the +</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>609 µs ± 792 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
-<span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>590 µs ± 521 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="broadcasting">
-<h2><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/02.05-computation-on-arrays-broadcasting.html">Broadcasting</a><a class="headerlink" href="#broadcasting" title="Permalink to this headline">¶</a></h2>
-<p>Operations with different shaped arrays (<a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy</a>, <a class="reference external" href="https://xarray.pydata.org/en/v0.16.2/computation.html?highlight=Broadcasting#broadcasting-by-dimension-name">xarray</a>).</p>
-<p><img alt="broadcasting.png" src="_images/broadcasting.png" /></p>
-<p><em><a class="reference external" href="https://mathematica.stackexchange.com/questions/99171/how-to-implement-the-general-array-broadcasting-method-from-numpy">Image source</a></em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -770,101 +733,111 @@ array([[ 0,  1,  2],
        [30, 31, 32]])
 Coordinates:
   * col      (col) int64 0 10 20 30
-  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-6cab5995-624a-4492-ba30-4eac27c84290' class='xr-array-in' type='checkbox' checked><label for='section-6cab5995-624a-4492-ba30-4eac27c84290' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
+  * row      (row) int64 0 1 2</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>col</span>: 4</li><li><span class='xr-has-index'>row</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-0b237145-af63-40b2-abd4-8f5fb377b62a' class='xr-array-in' type='checkbox' checked><label for='section-0b237145-af63-40b2-abd4-8f5fb377b62a' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0 1 2 10 11 12 20 21 22 30 31 32</span></div><div class='xr-array-data'><pre>array([[ 0,  1,  2],
        [10, 11, 12],
        [20, 21, 22],
-       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-10e00e7c-8725-43c7-9a53-0ffb472ad3f5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-10e00e7c-8725-43c7-9a53-0ffb472ad3f5' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-16be1163-9f85-4835-918d-1f206d75e895' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-16be1163-9f85-4835-918d-1f206d75e895' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f656e577-1032-4b76-aa4f-567727e314e8' class='xr-var-data-in' type='checkbox'><label for='data-f656e577-1032-4b76-aa4f-567727e314e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-5ba41486-c7fa-4ca0-87f5-cfb3b268618b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5ba41486-c7fa-4ca0-87f5-cfb3b268618b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4f2fb960-312a-4236-a765-7e5723897f22' class='xr-var-data-in' type='checkbox'><label for='data-4f2fb960-312a-4236-a765-7e5723897f22' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1f89f6a2-cc54-4559-a338-1d8843302b4d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-1f89f6a2-cc54-4559-a338-1d8843302b4d' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       [30, 31, 32]])</pre></div></div></li><li class='xr-section-item'><input id='section-9cc29190-e88c-4cd0-8dcc-acb5a0777c97' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9cc29190-e88c-4cd0-8dcc-acb5a0777c97' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>col</span></div><div class='xr-var-dims'>(col)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30</div><input id='attrs-cbafdb21-4747-49fb-b4bf-009b4bb40678' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cbafdb21-4747-49fb-b4bf-009b4bb40678' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6316fca0-7bbe-4cce-840c-4059a8bec568' class='xr-var-data-in' type='checkbox'><label for='data-6316fca0-7bbe-4cce-840c-4059a8bec568' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0, 10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>row</span></div><div class='xr-var-dims'>(row)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-bf6e5038-ab34-4712-bb43-e3a60eb3eb63' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bf6e5038-ab34-4712-bb43-e3a60eb3eb63' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-df5797ec-5424-4846-875c-763459677309' class='xr-var-data-in' type='checkbox'><label for='data-df5797ec-5424-4846-875c-763459677309' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-66887b56-487e-4f50-b97b-3c55ff3dd761' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-66887b56-487e-4f50-b97b-3c55ff3dd761' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
-<div class="section" id="numpy-ufuncs-universal-functions">
-<h2>NumPy <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a> (universal functions)<a class="headerlink" href="#numpy-ufuncs-universal-functions" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><em>Optimised in C (statically typed and compiled).</em></p></li>
-<li><p>Arbitrary Python function to NumPy ufunc:</p>
-<ul>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html"><code class="docutils literal notranslate"><span class="pre">np.frompyfunc</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html"><code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code></a> (keeps the documentation).</p></li>
-</ul>
-</li>
-</ul>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/02.03-computation-on-arrays-ufuncs.html">Vectorisation</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Vectorisation effectively “parallelises” the code by operating on multiple array elements at once, rather than looping through them one at a time.</p>
+<p>NumPy has many functions already vectorised for you, which have been optimised in C (i.e., they’ve been statically typed and compiled).</p>
+<p>These are known as the universal functions (<a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a>).</p>
+<p>For example, instead of using <code class="docutils literal notranslate"><span class="pre">+</span></code>, you can use the equivalent ufunc <code class="docutils literal notranslate"><span class="pre">np.add</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">random_array</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="p">[</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.24602263, 0.806695  , 0.40241963, 0.69804306, 0.15288147],
-       [0.87303034, 0.34241444, 0.68842152, 0.31861061, 0.23577893],
-       [0.73810012, 0.68582803, 0.40345021, 0.35592704, 0.35660085],
-       [0.62859783, 0.97787072, 0.74891916, 0.56700637, 0.37477508],
-       [0.3205553 , 0.47283439, 0.89337843, 0.81050576, 0.79313066]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>192 ms ± 147 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compare an array to a threshold.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">array</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">array</span> <span class="o">-</span> <span class="n">threshold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">array</span> <span class="o">+</span> <span class="n">threshold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">nums</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1"># adds 2 to every element by overloading the + (similar to broadcasting)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>550 µs ± 822 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frompyfunc_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frompyfunc</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>579 µs ± 6.96 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-your-own-ufunc">
+<h2>Create your own ufunc<a class="headerlink" href="#create-your-own-ufunc" title="Permalink to this headline">¶</a></h2>
+<p>You can vectorise any arbitrary Python function to a NumPy ufunc using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html"><code class="docutils literal notranslate"><span class="pre">np.frompyfunc</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">SQRT_2PI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the value of a Gaussian probability density function at x with given mean and sigma.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">SQRT_2PI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frompyfunc</span><span class="p">(</span>
     <span class="n">my_function</span><span class="p">,</span> 
-    <span class="mi">2</span><span class="p">,</span> <span class="c1"># number of input arguments </span>
-    <span class="mi">1</span><span class="p">)</span> <span class="c1"># number of returned objects</span>
-<span class="n">frompyfunc_function</span><span class="p">(</span><span class="n">random_array</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.7, 0.3, 0.9, 0.2, 0.7],
-       [0.4, 0.8, 0.2, 0.8, 0.7],
-       [0.2, 0.2, 0.9, 0.9, 0.9],
-       [0.1, 0.5, 0.2, 0.1, 0.9],
-       [0.8, 1.0, 0.4, 0.3, 0.3]], dtype=object)
+    <span class="n">nin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="c1"># number of input arguments </span>
+    <span class="n">nout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># number of returned objects</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frompyfunc_function</span><span class="o">.</span><span class="vm">__doc__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">vectorized_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;my_function (vectorized)(x1, x2, /, out=None, *, where=True, casting=&#39;same_kind&#39;, order=&#39;K&#39;, dtype=None, subok=True[, signature, extobj])\n\ndynamic ufunc based on a python function&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.35 s ± 6.45 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
-<span class="n">vectorized_function</span><span class="p">(</span><span class="n">random_array</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.7, 0.3, 0.9, 0.2, 0.7],
-       [0.4, 0.8, 0.2, 0.8, 0.7],
-       [0.2, 0.2, 0.9, 0.9, 0.9],
-       [0.1, 0.5, 0.2, 0.1, 0.9],
-       [0.8, 1. , 0.4, 0.3, 0.3]])
-</pre></div>
-</div>
-</div>
-</div>
+<p>However, <code class="docutils literal notranslate"><span class="pre">np.frompyfunc</span></code> removes any documentation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function</span><span class="o">.</span><span class="vm">__doc__</span>
@@ -872,13 +845,62 @@ Coordinates:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Compare an array to a threshold.&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;my_function (vectorized)(x1, x2, x3, /, out=None, *, where=True, casting=&#39;same_kind&#39;, order=&#39;K&#39;, dtype=None, subok=True[, signature, extobj])\n\ndynamic ufunc based on a python function&quot;
 </pre></div>
 </div>
 </div>
 </div>
+<p>To keep the documentation, instead use <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html"><code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function_with_docs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">vectorized_function_with_docs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.38 s ± 3.15 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vectorized_function_with_docs</span><span class="o">.</span><span class="vm">__doc__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Compute the value of a Gaussian probability density function at x with given mean and sigma.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Can you run <code class="docutils literal notranslate"><span class="pre">my_function</span></code> directly on the same inputs (i.e., x, 0.0, 1.0) without vectorising it?</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>No, a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> is returned.</p>
+<p>This is because the function has not yet been vectorised, so it cannot operate across arrays with more than 1 element.</p>
+<p>To check that it does work for 1 element, you could try: <code class="docutils literal notranslate"><span class="pre">my_function(x[0],</span> <span class="pre">0.0,</span> <span class="pre">1.0)</span></code>.</p>
+</div>
+<div class="section" id="generalised-universal-functions-gufuncs">
+<h3>Generalised universal functions (<a class="reference external" href="https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html">gufuncs</a>)<a class="headerlink" href="#generalised-universal-functions-gufuncs" title="Permalink to this headline">¶</a></h3>
+<p>Ufuncs apply the function element-by-element.</p>
+<p>Whereas the generalized version (gufuncs) supports “sub-array” by “sub-array” operations.</p>
+<p>Numba has a nice implementation of these, which we will explore in the next lesson.</p>
 <hr class="docutils" />
 <p>need to sort below …</p>
+</div>
 <div class="section" id="lazy-loading-and-execution">
 <h3><a class="reference external" href="https://xarray.pydata.org/en/v0.16.2/dask.html">Lazy loading</a> and <a class="reference external" href="https://tutorial.dask.org/01x_lazy.html">execution</a><a class="headerlink" href="#lazy-loading-and-execution" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -1263,17 +1285,17 @@ Attributes:
     title:        4x daily NMC reanalysis (1948)
     description:  Data is from NMC initialized reanalysis\n(4x/day).  These a...
     platform:     Model
-    references:   http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanaly...</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f45e90f2-cde1-47c1-9139-d4295e6e602b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f45e90f2-cde1-47c1-9139-d4295e6e602b' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>lat</span>: 25</li><li><span class='xr-has-index'>time</span>: 2920</li><li><span class='xr-has-index'>lon</span>: 53</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-054550fc-03ce-4957-9758-5bae47aff83e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-054550fc-03ce-4957-9758-5bae47aff83e' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>75.0 72.5 70.0 ... 20.0 17.5 15.0</div><input id='attrs-f501ebc6-51b1-4c2b-8b26-78e7565b76b6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f501ebc6-51b1-4c2b-8b26-78e7565b76b6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4eede652-60bd-4fe0-b1ae-d9d4cb23b3a0' class='xr-var-data-in' type='checkbox'><label for='data-4eede652-60bd-4fe0-b1ae-d9d4cb23b3a0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>axis :</span></dt><dd>Y</dd></dl></div><div class='xr-var-data'><pre>array([75. , 72.5, 70. , 67.5, 65. , 62.5, 60. , 57.5, 55. , 52.5, 50. , 47.5,
+    references:   http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanaly...</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-a86f86a2-7b61-4b84-8fab-6c168653817a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a86f86a2-7b61-4b84-8fab-6c168653817a' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>lat</span>: 25</li><li><span class='xr-has-index'>time</span>: 2920</li><li><span class='xr-has-index'>lon</span>: 53</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-f992d4e0-be2f-4fc8-b04d-17d2eb967946' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f992d4e0-be2f-4fc8-b04d-17d2eb967946' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>75.0 72.5 70.0 ... 20.0 17.5 15.0</div><input id='attrs-5aa74c0e-9f47-4202-a070-609f600eda44' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5aa74c0e-9f47-4202-a070-609f600eda44' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0e4445ab-e9f4-45bf-946e-877f3a5b76a3' class='xr-var-data-in' type='checkbox'><label for='data-0e4445ab-e9f4-45bf-946e-877f3a5b76a3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>axis :</span></dt><dd>Y</dd></dl></div><div class='xr-var-data'><pre>array([75. , 72.5, 70. , 67.5, 65. , 62.5, 60. , 57.5, 55. , 52.5, 50. , 47.5,
        45. , 42.5, 40. , 37.5, 35. , 32.5, 30. , 27.5, 25. , 22.5, 20. , 17.5,
-       15. ], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>200.0 202.5 205.0 ... 327.5 330.0</div><input id='attrs-fdb15084-eb9d-4f3b-88fb-2ed4d273b4b2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fdb15084-eb9d-4f3b-88fb-2ed4d273b4b2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c723137d-d88d-4b9d-b0ee-c095a8d60b1f' class='xr-var-data-in' type='checkbox'><label for='data-c723137d-d88d-4b9d-b0ee-c095a8d60b1f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>axis :</span></dt><dd>X</dd></dl></div><div class='xr-var-data'><pre>array([200. , 202.5, 205. , 207.5, 210. , 212.5, 215. , 217.5, 220. , 222.5,
+       15. ], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>200.0 202.5 205.0 ... 327.5 330.0</div><input id='attrs-b2989411-9246-456c-a6a8-8c3995fd7087' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b2989411-9246-456c-a6a8-8c3995fd7087' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9b57d806-1ddb-4a56-8a91-650bf21689a5' class='xr-var-data-in' type='checkbox'><label for='data-9b57d806-1ddb-4a56-8a91-650bf21689a5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>axis :</span></dt><dd>X</dd></dl></div><div class='xr-var-data'><pre>array([200. , 202.5, 205. , 207.5, 210. , 212.5, 215. , 217.5, 220. , 222.5,
        225. , 227.5, 230. , 232.5, 235. , 237.5, 240. , 242.5, 245. , 247.5,
        250. , 252.5, 255. , 257.5, 260. , 262.5, 265. , 267.5, 270. , 272.5,
        275. , 277.5, 280. , 282.5, 285. , 287.5, 290. , 292.5, 295. , 297.5,
        300. , 302.5, 305. , 307.5, 310. , 312.5, 315. , 317.5, 320. , 322.5,
-       325. , 327.5, 330. ], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-01-01 ... 2014-12-31T18:00:00</div><input id='attrs-c91d3803-7b28-4c64-9f20-392850b341a4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c91d3803-7b28-4c64-9f20-392850b341a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-310cebf0-2dc2-40f2-bb38-c83477a5da8e' class='xr-var-data-in' type='checkbox'><label for='data-310cebf0-2dc2-40f2-bb38-c83477a5da8e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>long_name :</span></dt><dd>Time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-01-01T00:00:00.000000000&#x27;, &#x27;2013-01-01T06:00:00.000000000&#x27;,
+       325. , 327.5, 330. ], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-01-01 ... 2014-12-31T18:00:00</div><input id='attrs-7ac2193e-ca9e-4e81-9f7c-b09662aa63ce' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7ac2193e-ca9e-4e81-9f7c-b09662aa63ce' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-91fcd85d-8eba-435c-a7ec-7a8740447047' class='xr-var-data-in' type='checkbox'><label for='data-91fcd85d-8eba-435c-a7ec-7a8740447047' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>long_name :</span></dt><dd>Time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-01-01T00:00:00.000000000&#x27;, &#x27;2013-01-01T06:00:00.000000000&#x27;,
        &#x27;2013-01-01T12:00:00.000000000&#x27;, ..., &#x27;2014-12-31T06:00:00.000000000&#x27;,
        &#x27;2014-12-31T12:00:00.000000000&#x27;, &#x27;2014-12-31T18:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-619ba798-dc97-41b2-be50-fa5b7b36c2a4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-619ba798-dc97-41b2-be50-fa5b7b36c2a4' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-db58ce7b-e7c1-48a5-939a-4361306106fe' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-db58ce7b-e7c1-48a5-939a-4361306106fe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4f31fdc8-3fda-467f-b76f-d0b3c82c6883' class='xr-var-data-in' type='checkbox'><label for='data-4f31fdc8-3fda-467f-b76f-d0b3c82c6883' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>4xDaily Air temperature at sigma level 995</dd><dt><span>units :</span></dt><dd>degK</dd><dt><span>precision :</span></dt><dd>2</dd><dt><span>GRIB_id :</span></dt><dd>11</dd><dt><span>GRIB_name :</span></dt><dd>TMP</dd><dt><span>var_desc :</span></dt><dd>Air temperature</dd><dt><span>dataset :</span></dt><dd>NMC Reanalysis</dd><dt><span>level_desc :</span></dt><dd>Surface</dd><dt><span>statistic :</span></dt><dd>Individual Obs</dd><dt><span>parent_stat :</span></dt><dd>Other</dd><dt><span>actual_range :</span></dt><dd>[185.16 322.1 ]</dd></dl></div><div class='xr-var-data'><pre>[3869000 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a11b6455-21b3-44f4-8c0a-c8a6ee4adbd5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a11b6455-21b3-44f4-8c0a-c8a6ee4adbd5' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>COARDS</dd><dt><span>title :</span></dt><dd>4x daily NMC reanalysis (1948)</dd><dt><span>description :</span></dt><dd>Data is from NMC initialized reanalysis
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-21a4347b-4c98-4887-ad91-991c38e7ce37' class='xr-section-summary-in' type='checkbox'  checked><label for='section-21a4347b-4c98-4887-ad91-991c38e7ce37' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>air</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-685a9fe1-ee91-4dff-8e07-27a3537c38ec' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-685a9fe1-ee91-4dff-8e07-27a3537c38ec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3361dfc6-be8d-4900-a63c-700b23dfe6e9' class='xr-var-data-in' type='checkbox'><label for='data-3361dfc6-be8d-4900-a63c-700b23dfe6e9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>4xDaily Air temperature at sigma level 995</dd><dt><span>units :</span></dt><dd>degK</dd><dt><span>precision :</span></dt><dd>2</dd><dt><span>GRIB_id :</span></dt><dd>11</dd><dt><span>GRIB_name :</span></dt><dd>TMP</dd><dt><span>var_desc :</span></dt><dd>Air temperature</dd><dt><span>dataset :</span></dt><dd>NMC Reanalysis</dd><dt><span>level_desc :</span></dt><dd>Surface</dd><dt><span>statistic :</span></dt><dd>Individual Obs</dd><dt><span>parent_stat :</span></dt><dd>Other</dd><dt><span>actual_range :</span></dt><dd>[185.16 322.1 ]</dd></dl></div><div class='xr-var-data'><pre>[3869000 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f38ae46f-eee9-4124-a4a1-ef65b1a22823' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f38ae46f-eee9-4124-a4a1-ef65b1a22823' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>COARDS</dd><dt><span>title :</span></dt><dd>4x daily NMC reanalysis (1948)</dd><dt><span>description :</span></dt><dd>Data is from NMC initialized reanalysis
 (4x/day).  These are the 0.9950 sigma level values.</dd><dt><span>platform :</span></dt><dd>Model</dd><dt><span>references :</span></dt><dd>http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanalysis.html</dd></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
@@ -1291,7 +1313,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>139 ms ± 599 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>136 ms ± 475 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -1306,7 +1328,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>126 ms ± 244 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>131 ms ± 1.24 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>

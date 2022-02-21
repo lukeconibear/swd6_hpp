@@ -18,7 +18,7 @@ In this workshop, we covered:
     - [x] Compilers
         - [x] _Speed up customs functions e.g., with [Numba](http://numba.pydata.org/) `@njit`._
     - [x] Parallelisation
-        - [x] _Distribute work across a single machine or cores on a high-performance computer e.g., with [Dask](https://docs.dask.org/en/latest/) arrays/dataframes/bags and [Ray](https://www.ray.io/) tasks/actors/multiprocessing/joblib._
+        - [x] _Distribute work across a single machine or cores on a high-performance computer e.g., with [Dask](https://docs.dask.org/en/latest/) and [Ray](https://www.ray.io/)._
     - [x] GPUs  
         - [x] _Offload functions to the GPU e.g., with [CUDA/Numba](https://developer.nvidia.com/how-to-cuda-python) `@vectorize`_.
         - [x] _Accelerate data science workloads e.g., with [RAPIDS](https://developer.nvidia.com/rapids) cuPy for NumPy, cuDF for Pandas._
