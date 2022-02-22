@@ -259,22 +259,52 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#njit">
+    <a class="reference internal nav-link" href="#object-mode-jit">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       object
+      </span>
+     </code>
+     mode (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @jit
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nopython-mode-njit">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       nopython
+      </span>
+     </code>
+     mode (
      <code class="docutils literal notranslate">
       <span class="pre">
        @njit
       </span>
      </code>
+     )
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vectorize">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       @vectorize
-      </span>
-     </code>
+    <a class="reference internal nav-link" href="#signatures">
+     Signatures
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vectorize">
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         @vectorize
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#guvectorize">
@@ -346,7 +376,7 @@
 <div class="section" id="cpython">
 <h2><a class="reference external" href="https://www.python.org/">CPython</a><a class="headerlink" href="#cpython" title="Permalink to this headline">¶</a></h2>
 <p>CPython is the main Python distribution.</p>
-<p>(Not to be confused with Cython, which I’ll touch on later).</p>
+<p>(<em>Not to be confused with Cython, which we’ll touch on later</em>).</p>
 <p>CPython uses an Ahead-Of-Time (AOT) compiler i.e., the code is compiled in advance.</p>
 <p>This is as an assortment of statically compiled C extensions.</p>
 <p>CPython is a general purpose interpreter, allowing it to work on a variety of problems.</p>
@@ -354,11 +384,11 @@
 <p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define x to be an integer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assign x to an integer</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="c1"># then define x to be a string</span>
+<span class="c1"># then assign x to a string</span>
 <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Gary&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
@@ -374,31 +404,26 @@ Gary
 </div>
 <div class="section" id="numba">
 <h2><a class="reference external" href="http://numba.pydata.org/">Numba</a><a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h2>
-<p>Numba uses a JIT (just-in-time) compiler on functions i.e., compiles the function at execution time.</p>
+<p>Numba uses a JIT (Just-In-Time) compiler on functions i.e., compiles the function at execution time.</p>
 <p>This converts the function to fast machine code (<a class="reference external" href="https://en.wikipedia.org/wiki/LLVM">LLVM</a>).</p>
 <p>Numba works with the default CPython.</p>
 <p>It works by adding decorators around functions.</p>
-<p>There are two main modes:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-object-mode"><code class="docutils literal notranslate"><span class="pre">object</span></code></a> mode: <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a></p>
-<ul>
-<li><p>Compiles code that handles all values as Python objects and uses CPython to work on those objects.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code> first tries to use <code class="docutils literal notranslate"><span class="pre">nopython</span></code> mode, and if it fails uses <code class="docutils literal notranslate"><span class="pre">object</span></code> mode.</p></li>
-<li><p>Main improvement over CPython is for <a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-loop-lifting">loops</a>.</p></li>
-</ul>
-</li>
-<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">nopython</span></code></a> mode: <code class="docutils literal notranslate"><span class="pre">&#64;jit(nopython=True)</span></code> aliased as <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>.</p>
-<ul>
-<li><p>Compiles code that does not access CPython.</p></li>
-<li><p>Highest performance.</p></li>
-<li><p>Requires <a class="reference external" href="https://numba.readthedocs.io/en/stable/reference/pysupported.html#pysupported">specific types</a> (mainly numbers), otherwise returns error.</p></li>
-</ul>
-</li>
-</ul>
 <p>Numba is helpful when you want to speed up numerical operations in specific functions.</p>
+<p>There are two main modes: <code class="docutils literal notranslate"><span class="pre">object</span></code> and <code class="docutils literal notranslate"><span class="pre">nopython</span></code>.</p>
+<div class="section" id="object-mode-jit">
+<h3><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-object-mode"><code class="docutils literal notranslate"><span class="pre">object</span></code></a> mode (<code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code>)<a class="headerlink" href="#object-mode-jit" title="Permalink to this headline">¶</a></h3>
+<p>Works by adding the <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/jit.html"><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code></a> decorator around the function.</p>
+<p>This then compiles code that handles all values as Python objects and uses CPython to work on those objects.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;jit</span></code> first tries to use <code class="docutils literal notranslate"><span class="pre">nopython</span></code> mode (covered next), and if it fails uses <code class="docutils literal notranslate"><span class="pre">object</span></code> mode.</p>
+<p>The main improvement over CPython is for <a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-loop-lifting">loops</a>.</p>
+</div>
+<div class="section" id="nopython-mode-njit">
+<h3><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">nopython</span></code></a> mode (<code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>)<a class="headerlink" href="#nopython-mode-njit" title="Permalink to this headline">¶</a></h3>
+<p>Works by adding the <code class="docutils literal notranslate"><span class="pre">&#64;jit(nopython=True)</span></code> decorator (aliased as <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>) around the function.</p>
+<p>This then compiles code that does not access CPython.</p>
+<p>This has higher performance than the <code class="docutils literal notranslate"><span class="pre">object</span></code> mode.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nopython</span></code> mode requires <a class="reference external" href="https://numba.readthedocs.io/en/stable/reference/pysupported.html#pysupported">specific types</a> (mainly numbers), otherwise returns a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <p>For example:</p>
-<div class="section" id="njit">
-<h3><a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code></a><a class="headerlink" href="#njit" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -434,7 +459,7 @@ Gary
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.53 s ± 7.43 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6 s ± 11.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -461,7 +486,7 @@ Gary
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>267 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>253 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -475,18 +500,18 @@ Gary
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.9 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.4 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="admonition-question admonition">
 <p class="admonition-title">Question</p>
-<p>For the function (<code class="docutils literal notranslate"><span class="pre">fast_add</span></code>) below, what will happen when it is called with: <code class="docutils literal notranslate"><span class="pre">fast_add(1,</span> <span class="pre">(2,))</span></code>?</p>
+<p>For the function below (<code class="docutils literal notranslate"><span class="pre">fast_add</span></code>), what will happen when it is called with: <code class="docutils literal notranslate"><span class="pre">fast_add(1,</span> <span class="pre">(2,))</span></code>?</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">fast_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
@@ -496,65 +521,98 @@ Gary
 <div class="dropdown admonition">
 <p class="admonition-title">Solution</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">TypingError</span></code> is returned.</p>
-<p>This is because Numba is trying to compile a function that adds a <code class="docutils literal notranslate"><span class="pre">int64</span></code> to a <code class="docutils literal notranslate"><span class="pre">tuple</span></code>.</p>
+<p>This is because Numba is trying to compile a function that adds an integer to a tuple.</p>
 <p>Take care with types.</p>
-<p>Ensure the function works without Numba first.</p>
+<p>Ensure that the function works first, before adding Numba to make it faster.</p>
 </div>
 </div>
-<div class="section" id="vectorize">
-<h3><a class="reference external" href="https://numba.readthedocs.io/en/stable/user/vectorize.html#vectorize"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a><a class="headerlink" href="#vectorize" title="Permalink to this headline">¶</a></h3>
-<p>Numba also simplifies the creation of a NumPy ufunc using <code class="docutils literal notranslate"><span class="pre">vectorize</span></code>.</p>
-<p>This works on one element at a time.</p>
-<p>They can be targeted to different hardware in the signature (i.e., the decorator arguments).</p>
-<p>The <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#dynamic-universal-functions">default</a> target is for a single CPU case (least overhead).</p>
-<p>This is suitable for smaller data sizes (&lt;1 KB) and low compute intensities.</p>
+<div class="section" id="signatures">
+<h3>Signatures<a class="headerlink" href="#signatures" title="Permalink to this headline">¶</a></h3>
+<p>The signature of the Numba function can limit it to specific input and output types, among other things.</p>
+<p>This can save time for Numba to infer the types, and is also useful for when we use GPUs later.</p>
+<p>These are added as arguments to the Numba decorator.</p>
 <p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">vectorize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">int32</span><span class="p">,</span> <span class="n">float32</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the output type is wrapped around the input types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">(</span><span class="n">float32</span><span class="p">(</span><span class="n">int32</span><span class="p">,</span> <span class="n">int32</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">fast_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SQRT_2PI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fast_add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="vectorize">
+<h4><a class="reference external" href="https://numba.readthedocs.io/en/stable/user/vectorize.html#vectorize"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a><a class="headerlink" href="#vectorize" title="Permalink to this headline">¶</a></h4>
+<p>Numba also simplifies the creation of a NumPy ufunc using the <code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code> decorator.</p>
+<p>They can be targeted to different hardware in the signature.</p>
+<p>The <a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#dynamic-universal-functions">default</a> target is for a single CPU case (which has the least overhead).</p>
+<p>This is suitable for smaller data sizes (&lt;1 KB) and low compute intensities.</p>
+<p>For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">vectorize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Don’t worry about what this function does, just focus on the vectorisation bit.</em></p>
+<p>You’ll notice that this it the same example as from the previous lesson on vectorisation, apart from that we’re now adding Numba’s <code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code> decorator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">SQRT_2PI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
 
-<span class="nd">@vectorize</span>
-<span class="k">def</span> <span class="nf">numba_my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="nd">@vectorize</span>  <span class="c1"># I&#39;m new</span>
+<span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute the value of a Gaussian probability density function at x with given mean and sigma.&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">SQRT_2PI</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>First call to compile:</p>
+<p>So, the first call to the function compiles it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it -n 1 -r 1
-<span class="n">numba_my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72.3 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69.8 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Second call to see how fast it goes:</p>
+<p>Then, all subsequent calls use the fast compiled version:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it -n 1 -r 1
-<span class="n">numba_my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -565,16 +623,23 @@ Gary
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="guvectorize">
 <h3><a class="reference external" href="http://numba.pydata.org/numba-doc/latest/user/vectorize.html#the-guvectorize-decorator"><code class="docutils literal notranslate"><span class="pre">&#64;guvectorize</span></code></a><a class="headerlink" href="#guvectorize" title="Permalink to this headline">¶</a></h3>
-<p>Extends <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> to work on many input elements (similar to NumPy’s gufuncs).</p>
-<p>The signature requires the types to be specified first in a list.</p>
-<p>For example: <code class="docutils literal notranslate"><span class="pre">[(int64[:],</span> <span class="pre">int64,</span> <span class="pre">int64[:])]</span></code> means an n-element one-dimensional array of <code class="docutils literal notranslate"><span class="pre">int64</span></code>, a scalar of <code class="docutils literal notranslate"><span class="pre">int64</span></code>, and another n-element one-dimensional array of <code class="docutils literal notranslate"><span class="pre">int64</span></code>.</p>
-<p>The signature also includes the input(s) and output(s) dimensions in symbolic form.</p>
-<p>For example: <code class="docutils literal notranslate"><span class="pre">'(n),()-&gt;(n)'</span></code> means input an n-element one-dimensional array (<code class="docutils literal notranslate"><span class="pre">(n)</span></code>) and a scalar (<code class="docutils literal notranslate"><span class="pre">()</span></code>), and output an n-element one-dimensional array (<code class="docutils literal notranslate"><span class="pre">(n)</span></code>).</p>
+<p>During our last lesson on vectorisation we also touched on generalised ufuncs (<a class="reference external" href="https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html">gufuncs</a>).</p>
+<p>These extend <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> to work on many input elements.</p>
+<p>Numba has a nice implementation of these using <code class="docutils literal notranslate"><span class="pre">guvectorize</span></code>.</p>
+<p>The signature also requires the types to be specified first in a list.</p>
+<ul class="simple">
+<li><p>For example: <code class="docutils literal notranslate"><span class="pre">[(int64[:],</span> <span class="pre">int64,</span> <span class="pre">int64[:])]</span></code> means an n-element one-dimensional array of <code class="docutils literal notranslate"><span class="pre">int64</span></code>, a scalar of <code class="docutils literal notranslate"><span class="pre">int64</span></code>, and another n-element one-dimensional array of <code class="docutils literal notranslate"><span class="pre">int64</span></code>.</p></li>
+</ul>
+<p>Then the signature includes the input(s) and output(s) dimensions in symbolic form.</p>
+<ul class="simple">
+<li><p>For example: <code class="docutils literal notranslate"><span class="pre">'(n),()-&gt;(n)'</span></code> means input an n-element one-dimensional array (<code class="docutils literal notranslate"><span class="pre">(n)</span></code>) and a scalar (<code class="docutils literal notranslate"><span class="pre">()</span></code>), and output an n-element one-dimensional array (<code class="docutils literal notranslate"><span class="pre">(n)</span></code>).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">guvectorize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">guvectorize</span><span class="p">,</span> <span class="n">int64</span>
 </pre></div>
 </div>
 </div>
@@ -582,26 +647,14 @@ Gary
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@guvectorize</span><span class="p">([(</span><span class="n">int64</span><span class="p">[:],</span> <span class="n">int64</span><span class="p">,</span> <span class="n">int64</span><span class="p">[:])],</span> <span class="s1">&#39;(n),()-&gt;(n)&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4189</span><span class="o">/</span><span class="mf">3399026752.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@guvectorize</span><span class="p">([(</span><span class="n">int64</span><span class="p">[:],</span> <span class="n">int64</span><span class="p">,</span> <span class="n">int64</span><span class="p">[:])],</span> <span class="s1">&#39;(n),()-&gt;(n)&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span>
-
-<span class="ne">NameError</span>: name &#39;int64&#39; is not defined
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>First, lets try the gufunc with 1D array and an integer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -627,6 +680,7 @@ Gary
 </div>
 </div>
 </div>
+<p>Okay. So, now how about a 2D array and an integer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -654,6 +708,7 @@ Gary
 </div>
 </div>
 </div>
+<p>And, what about a 2D array and a 1D array:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
@@ -670,23 +725,26 @@ Gary
 </div>
 <div class="section" id="parallel-true">
 <h3><a class="reference external" href="https://numba.readthedocs.io/en/stable/user/performance-tips.html#parallel-true"><code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">=</span> <span class="pre">True</span></code></a><a class="headerlink" href="#parallel-true" title="Permalink to this headline">¶</a></h3>
-<p>Another target is for a multi-core CPU.</p>
+<p>The next lesson covers parallelisation in detail. However, before that, let’s touch on a nice feature within Numba.</p>
+<p>Numba can target different hardware in the signature.</p>
+<p>Just now, we saw a Numba function for a single CPU, which is suitable for small data sizes.</p>
+<p>The next target is for a multi-core CPU.</p>
 <p>This has small additional overheads for threading.</p>
-<p>This suitable for medium data sizes (1 KB - 1 MB).</p>
+<p>This is suitable for medium data sizes (1 KB - 1 MB).</p>
 <p>If code contains operations that are parallelisable (and <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/parallel.html#numba-parallel-supported">supported</a>) Numba can compile a version that will run in parallel on multiple threads.</p>
 <p>This parallelisation is performed automatically and is enabled by simply adding the keyword agurment <code class="docutils literal notranslate"><span class="pre">parallel=True</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>.</p>
+<p>For example, let’s first use the function in serial (i.e., with <code class="docutils literal notranslate"><span class="pre">parallel=False</span></code> which is also the default):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.e7</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.e7</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>First, in serial (i.e., <code class="docutils literal notranslate"><span class="pre">parallel=False</span></code>, also the default):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">ident_serial</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">my_serial_function_for_cpu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 </pre></div>
 </div>
@@ -695,39 +753,36 @@ Gary
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
-<span class="n">ident_serial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">my_serial_function_for_cpu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>139 ms ± 1.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>273 ms ± 208 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
-<p>And now in parallel:</p>
+<p>Okay, so let’s now change that to run in parallel:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">ident_parallel</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">my_parallel_function_for_cpu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><em>Note, the timing of this parallel function depends on how many CPUs your machine has and how free their resources are.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
-<span class="n">ident_parallel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">my_parallel_function_for_cpu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/earlacoa/miniconda3/envs/swd6_hpp/lib/python3.9/site-packages/numba/np/ufunc/parallel.py:365: NumbaWarning: <span class=" -Color -Color-Bold">The TBB threading layer requires TBB version 2019.5 or later i.e., TBB_INTERFACE_VERSION &gt;= 11005. Found TBB_INTERFACE_VERSION = 10002. The TBB threading layer is disabled.</span>
-  warnings.warn(problem)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.1 ms ± 3.69 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>137 ms ± 1.75 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -737,6 +792,13 @@ Gary
 <div class="section" id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>…</p>
+<div class="admonition-key-points admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>Use Numba to speed up numerical functions.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">nopython</span></code> version with the <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code> decorator.</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
@@ -744,10 +806,10 @@ Gary
 <h3>More information and considerations<a class="headerlink" href="#more-information-and-considerations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Factor out the performance-critical part of the code for compilation in Numba.</p></li>
-<li><p>What data precision is required i.e., is 64-bit needed?</p></li>
-<li><p>Numba examples for <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#numba-jit-compilation">Pandas</a>.</p></li>
-<li><p>Custom functions beyond ufuncs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/kernels.html">kernels</a>).</p></li>
-<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/user/troubleshoot.html">Troubleshooting</a></p></li>
+<li><p>Consider what data precision is required i.e., is 64-bit needed?</p></li>
+<li><p><a class="reference external" href="https://numba.readthedocs.io/en/stable/user/troubleshoot.html">Debugging and troubleshooting</a></p></li>
+<li><p>Here are some more Numba examples for <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/reference/numpysupported.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html#numba-jit-compilation">Pandas</a>.</p></li>
+<li><p>Numba can also target CUDA GPUs, which we’ll cover in the final lesson.</p></li>
 </ul>
 </div>
 <div class="section" id="other-options">
@@ -755,21 +817,24 @@ Gary
 <ul class="simple">
 <li><p><a class="reference external" href="https://cython.org/">Cython</a></p>
 <ul>
-<li><p><em>Compiles to statically typed C/C++</em>.</p></li>
-<li><p>Use for any amount of code.</p></li>
-<li><p>Use with the default CPython.</p></li>
-<li><p>Helpful when need static typing and optimising libraries.</p></li>
-<li><p>Examples <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/quickstart/build.html#building-a-cython-module-using-setuptools">not using IPython</a>, <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html">NumPy</a>, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html">Pandas</a>.</p></li>
+<li><p>Compiles to statically typed C/C++.</p></li>
+<li><p>Can be used for any amount of code.</p></li>
+<li><p>Used with the default CPython.</p></li>
+<li><p>Cython is helpful when you need static typing e.g., when optimising libraries to release.</p></li>
+<li><p>Here are some examples for <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html">NumPy</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/enhancingperf.html">Pandas</a>.</p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://www.pypy.org/">PyPy</a></p>
 <ul>
-<li><p><em>Just−In−Time (JIT) compiler (written in Python).</em></p></li>
-<li><p>Enables optimisations at run time, especially for numerical tasks with repitition and loops.</p></li>
-<li><p>Replaces CPython.</p></li>
-<li><p>Faster, though overheads for start-up and memory.</p></li>
-<li><p>Helpful when want to speed up numerical opterations in all of code.</p></li>
-<li><p>May not be <a class="reference external" href="http://packages.pypy.org/">compatible</a> with the libraries you use.</p></li>
+<li><p>Also uses the JIT compiler (though is written in Python).</p></li>
+<li><p>PyPy enables optimisations at run time, especially for numerical tasks with repitition and loops.</p></li>
+<li><p>Completely replaces CPython.</p>
+<ul>
+<li><p>Cauation, it may not be <a class="reference external" href="http://packages.pypy.org/">compatible</a> with the libraries you use.</p></li>
+</ul>
+</li>
+<li><p>Generally fast, though there are overheads for start-up and memory.</p></li>
+<li><p>PyPy is helpful when want to speed up numerical opterations in all of the code.</p></li>
 </ul>
 </li>
 </ul>
