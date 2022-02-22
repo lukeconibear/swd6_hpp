@@ -20,8 +20,8 @@ In this workshop, we covered:
     - [x] Parallelisation
         - [x] _Distribute work across a single machine or cores on a high-performance computer e.g., with [Dask](https://docs.dask.org/en/latest/) and [Ray](https://www.ray.io/)._
     - [x] GPUs  
-        - [x] _Offload functions to the GPU e.g., with [CUDA/Numba](https://developer.nvidia.com/how-to-cuda-python) `@vectorize`_.
-        - [x] _Accelerate data science workloads e.g., with [RAPIDS](https://developer.nvidia.com/rapids) cuPy for NumPy, cuDF for Pandas._
+        - [x] _Offload functions to the GPU e.g., with [CUDA and Numba](https://developer.nvidia.com/how-to-cuda-python)_.
+        - [x] _Accelerate data science workloads e.g., with [RAPIDS](https://developer.nvidia.com/rapids)._
         - [x] _...[JAX](https://jax.readthedocs.io/en/latest/index.html)..._
 4. [x] Understand when to use each technique
     - [x] ...
