@@ -416,7 +416,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.7 ms ± 106 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.2 ms ± 122 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -429,7 +429,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.6 ns ± 0.916 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.8 ns ± 0.708 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
 </div>
 </div>
@@ -442,9 +442,7 @@
 <h3><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Lists</a><a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
 <p>A sequence of objects.</p>
 <p><strong><em>Tip</em>: Append to lists, rather than concatenating.</strong></p>
-<ul class="simple">
-<li><p><em>Lists are allocated twice the memory required, so appending fills this up in O(1) (long-term average), while concatenating creates a new list each time in O(n).</em></p></li>
-</ul>
+<p><em>Lists are allocated twice the memory required, so appending fills this up in O(1) (long-term average), while concatenating creates a new list each time in O(n).</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
@@ -455,7 +453,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56.2 µs ± 241 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43.7 µs ± 100 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -470,7 +468,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.6 µs ± 154 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.3 µs ± 108 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -479,10 +477,8 @@
 <div class="section" id="dictionaries">
 <h3><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a><a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h3>
 <p>A set of key: value pairs, where the keys are unique and immutable indicies.</p>
-<p><strong><em>Tip</em>: Use them as look-ups, as they’re fast to search, O(1).</strong></p>
-<ul class="simple">
-<li><p><em>Example from Luciano Ramalho, <a class="reference external" href="https://www.oreilly.com/library/view/fluent-python/9781491946237/">Fluent Python, Clear, Concise, and Effective Programming</a>, 2015. O’Reilly Media, Inc.</em></p></li>
-</ul>
+<p><strong><em>Tip</em>: Use dictionaries as look-ups, as they’re fast to search, O(1).</strong></p>
+<p><em>Example from Luciano Ramalho, <a class="reference external" href="https://www.oreilly.com/library/view/fluent-python/9781491946237/">Fluent Python, Clear, Concise, and Effective Programming</a>, 2015. O’Reilly Media, Inc.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -510,7 +506,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.17 ms ± 927 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>470 µs ± 619 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -526,15 +522,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>190 ns ± 0.556 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>147 ns ± 0.123 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong><em>Tip</em>: Reduce repeated calculations with <a class="reference external" href="https://realpython.com/lru-cache-python/">caching</a></strong></p>
-<ul class="simple">
-<li><p>e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci sequence</a> (each number is the sum of the two preceding ones starting from 0 and 1 e.g. 0, 1, 1, 2, 3, 5, 8, 13, 21, 34).</p></li>
-</ul>
+<p>For example, use caching with the <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci sequence</a> (each number is the sum of the two preceding ones starting from 0 and 1 e.g. 0, 1, 1, 2, 3, 5, 8, 13, 21, 34).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># time O(2^n) as 2 calls to the function n times (a balanced tree of repeated calls)</span>
@@ -555,7 +549,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.56 ms ± 1.77 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.15 ms ± 21.5 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -579,7 +573,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.82 µs ± 15.4 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.18 µs ± 20.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -590,6 +584,8 @@
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="math">
 <h3><a class="reference external" href="https://docs.python.org/3/library/math.html"><code class="docutils literal notranslate"><span class="pre">math</span></code></a><a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h3>
+<p>This module provides access to the mathematical functions.</p>
+<p>So, you could create your own function to calculate the hypotenuse of a triangle:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hypotenuse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -610,11 +606,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>478 ns ± 0.442 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>328 ns ± 2.1 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Though, <code class="docutils literal notranslate"><span class="pre">math</span></code> already has this implemented and optimised:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -629,7 +626,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87.5 ns ± 0.341 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.4 ns ± 0.201 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 </pre></div>
 </div>
 </div>
@@ -638,14 +635,9 @@
 </div>
 <div class="section" id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
-<p>The instructions to solve the problem.</p>
-<ul class="simple">
-<li><p>Many existing libraries are already optimised (computationally and algorithmically).</p>
-<ul>
-<li><p><a class="reference external" href="https://github.com/keon/algorithms">Minimal examples of data structures and algorithms in Python</a>.</p></li>
-</ul>
-</li>
-</ul>
+<p>An algortihm is the instructions (/ recipe) to solve the problem.</p>
+<p>Many existing libraries are already optimised (computationally and algorithmically).</p>
+<p>For example, the <a class="reference external" href="https://github.com/keon/algorithms"><code class="docutils literal notranslate"><span class="pre">algorithm</span></code></a> library has minimal examples of data structures and algorithms in Python e.g., breadth first search, depth first search, linked lists, etc.</p>
 <div class="section" id="sorting">
 <h3><a class="reference external" href="https://en.wikipedia.org/wiki/Sorting_algorithm">Sorting</a><a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -666,9 +658,9 @@
 <h4><a class="reference external" href="https://en.wikipedia.org/wiki/Selection_sort">Selection sort</a><a class="headerlink" href="#selection-sort" title="Permalink to this headline">¶</a></h4>
 <p><em>Time O(n^2), space O(1)</em></p>
 <ol class="simple">
-<li><p>Two arrays: one unsorted (original) and one sorted (can do in place to avoid extra memory).</p></li>
-<li><p>Find smallest number in the unsorted array and add to the sorted array.</p></li>
-<li><p>Repeat step 2 until final index is the largest number (i.e. sorted array).</p></li>
+<li><p>Have two arrays: one unsorted (original) and one sorted (can do in place to avoid extra memory).</p></li>
+<li><p>Find the smallest number in the unsorted array and add it to the sorted array.</p></li>
+<li><p>Repeat step 2 until the final index is the largest number (i.e. sorted array).</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -677,7 +669,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.7 ms ± 47.8 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.3 ms ± 330 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -687,10 +679,10 @@
 <h4><a class="reference external" href="https://en.wikipedia.org/wiki/Merge_sort">Merge sort</a><a class="headerlink" href="#merge-sort" title="Permalink to this headline">¶</a></h4>
 <p><em>Time O(nlgn), space O(n or nlgn, depending on implementation)</em></p>
 <ol class="simple">
-<li><p>Divide array in half.</p></li>
-<li><p>Recusively apply:<br />
+<li><p>Divide the array in half.</p></li>
+<li><p>Then recusively apply:<br />
 a. Step 1 to both halves, until hit the base case where both halves are length 1.<br />
-b. Merge the two length 1 arrays into sorted array of length 2.<br />
+b. Merge the two length 1 arrays into a sorted array of length 2.<br />
 c. Repeat b, all the way up for this half.</p></li>
 </ol>
 <div class="cell docutils container">
@@ -700,7 +692,7 @@ c. Repeat b, all the way up for this half.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.49 ms ± 11.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.21 ms ± 30.7 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -710,11 +702,11 @@ c. Repeat b, all the way up for this half.</p></li>
 <h4><a class="reference external" href="https://en.wikipedia.org/wiki/Timsort">Timsort</a><a class="headerlink" href="#timsort" title="Permalink to this headline">¶</a></h4>
 <p><em>Time O(nlgn = worst case, n = best case), space O(n)</em></p>
 <ul class="simple">
-<li><p>Default in Python.</p></li>
-<li><p>Combines merge sort with insertion sort (insert each element into new sorted list).</p></li>
-<li><p>Takes advantage of runs of consecutive ordered elements, to reduce comparisons (vs. merge sort).</p></li>
-<li><p>Merges when runs match criterion.</p></li>
-<li><p>Runs have minimum size (attained by insertion sort, if needed).</p></li>
+<li><p>Timsort is the default implementation of sorting in Python.</p></li>
+<li><p>It combines merge sort with insertion sort (where each element is inserted into a new sorted list).</p></li>
+<li><p>It takes advantage of runs of consecutive ordered elements to reduce comparisons (relative to merge sort).</p></li>
+<li><p>It merges when runs match a specified criterion.</p></li>
+<li><p>The runs have a minimum size (attained by insertion sort, if needed).</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">sorted(my_iterable)</span></code></p>
 <ul class="simple">
@@ -728,7 +720,7 @@ c. Repeat b, all the way up for this half.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56.1 µs ± 101 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.4 µs ± 1.37 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 </pre></div>
 </div>
 </div>
@@ -744,7 +736,7 @@ c. Repeat b, all the way up for this half.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.18 µs ± 4.11 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.44 µs ± 3.79 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -768,15 +760,12 @@ c. Repeat b, all the way up for this half.</p></li>
 <div class="section" id="other-options">
 <h3>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Data types/structures:</p>
-<ul>
-<li><p>Many more <a class="reference external" href="https://www.bigocheatsheet.com/">examples</a> e.g.:</p></li>
-<li><p>Generators save memory by yielding only the next iteration.</p></li>
-<li><p>Memory usage for floats/integers of 16 bit &lt; 32 bit &lt; 64 bit.</p></li>
+<li><p><a class="reference external" href="https://realpython.com/introduction-to-python-generators/">Generators</a> save memory by yielding only the next iteration.</p></li>
+<li><p>Reduce memory usage for floats/integers: 16 bit &lt; 32 bit &lt; 64 bit.</p></li>
 <li><p>For NetCDFs, using <a class="reference external" href="https://github.com/shoyer/h5netcdf"><code class="docutils literal notranslate"><span class="pre">engine='h5netcdf'</span></code></a> with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> can be faster, over than the default <a class="reference external" href="https://github.com/Unidata/netcdf4-python"><code class="docutils literal notranslate"><span class="pre">engine='netcdf4'</span></code></a>.</p></li>
 <li><p><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Compression</a></p>
 <ul>
-<li><p>If arrays are mostly 0, then can save memory using <a class="reference external" href="https://sparse.pydata.org/en/stable/quickstart.html">sparse arrays</a>.</p></li>
+<li><p>If arrays are mostly 0, then can save memory by using <a class="reference external" href="https://sparse.pydata.org/en/stable/quickstart.html">sparse arrays</a>.</p></li>
 <li><p>Try <a class="reference external" href="https://lz4.github.io/lz4/"><code class="docutils literal notranslate"><span class="pre">lz4</span></code></a>, <a class="reference external" href="https://github.com/google/snappy"><code class="docutils literal notranslate"><span class="pre">snappy</span></code></a>, and <a class="reference external" href="http://facebook.github.io/zstd/"><code class="docutils literal notranslate"><span class="pre">Z-Standard</span></code></a> over <code class="docutils literal notranslate"><span class="pre">gzip</span></code> and <code class="docutils literal notranslate"><span class="pre">bz2</span></code> for performance.</p></li>
 </ul>
 </li>
@@ -788,8 +777,6 @@ c. Repeat b, all the way up for this half.</p></li>
 <li><p><a class="reference external" href="https://youtu.be/8pFnrr0NnwY">Indexing</a></p>
 <ul>
 <li><p>If need a subset of the data, then can index (multi-index) to reduce memory and increase speed for queries: <a class="reference external" href="https://pythonspeed.com/articles/indexing-pandas-sqlite/">Pandas</a>, <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">SQLite</a>.</p></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><p>Suitable data types for parallel computing</p>
@@ -807,7 +794,7 @@ c. Repeat b, all the way up for this half.</p></li>
 <div class="section" id="resources">
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Free MIT course on ‘<em>Introduction to algorithms</em>’, <a class="reference external" href="https://youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb">video lectures</a></p></li>
+<li><p>MIT 6.006 ‘<em>Introduction to Algorithms</em>’, 2011: <a class="reference external" href="https://youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb">video lectures</a></p></li>
 <li><p><a class="reference external" href="https://leetcode.com">LeetCode</a>, <a class="reference external" href="https://www.algoexpert.io/product">AlgoExpert</a></p></li>
 </ul>
 </div>

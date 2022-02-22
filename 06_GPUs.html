@@ -332,7 +332,12 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="gpus">
 <h1>GPUs<a class="headerlink" href="#gpus" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/07_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re in COLAB or have a local CUDA GPU, you can follow along with this section (uncomment the code).</p>
+<p>For those in COLAB, ensure the session is using a GPU by going to: Runtime &gt; Change runtime type &gt; Hardware accelerator = GPU.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -383,7 +388,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>274 ms ± 1.01 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>179 ms ± 256 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -406,25 +411,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>138 ms ± 1.48 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>151 ms ± 233 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
 <p><em>Note, here we used <code class="docutils literal notranslate"><span class="pre">njit</span></code> as this automates the parallelisation process.</em></p>
 <p><em>This is in contrast to <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> where manual effort is required for parallelisation.</em></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you’re in COLAB or have a local CUDA GPU, you can follow along with this section (uncomment the code).</p>
-<p>For those in COLAB, ensure the session is using a GPU by going to: Runtime &gt; Change runtime type &gt; Hardware accelerator = GPU.</p>
-</div>
 <div class="section" id="vectorize-for-gpus">
 <h3><code class="docutils literal notranslate"><span class="pre">vectorize</span></code> for GPUs<a class="headerlink" href="#vectorize-for-gpus" title="Permalink to this headline">¶</a></h3>
 <p>Numba also works on <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a> GPUs using <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> or <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a>.</p>
 <p>This is suitable for bigger data sizes (&gt; 1 MB) and high compute intensities.</p>
 <p>This adds additional overhead due to moving data to and from GPUs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/memory.html">memory management</a>).</p>
 <p>Similar to our examples in the compiler lesson, we need to specify the types and target in the signature (i.e., the decorator arguments).</p>
-<p>Here, the types are specificed slightly differently i.e. output types(input types).</p>
+<p>Here, the types are specificed slightly differently i.e., output types(input types).</p>
 <p><em>Note, not all NumPy code will work on the GPU (<a class="reference external" href="https://numba.pydata.org/numba-doc/latest/reference/numpysupported.html">supported</a>). In the following example, we will need to use the <code class="docutils literal notranslate"><span class="pre">math</span></code> library instead.</em></p>
 <p>For example:</p>
 <div class="cell docutils container">
@@ -464,9 +464,9 @@
 <div class="section" id="custom-cuda-kernels">
 <h3>Custom CUDA kernels<a class="headerlink" href="#custom-cuda-kernels" title="Permalink to this headline">¶</a></h3>
 <p>Kernel functions are GPU functions called from CPU code.</p>
-<p>Kernels cannot explicitly return a value. Instead, all result data must be written to an array passed to the function (e.g., called <code class="docutils literal notranslate"><span class="pre">out</span></code>). This array can then be transferred back.</p>
-<p>Kernels work over a grid of threads. This grid needs to be defined in terms of the number of blocks in the grid and the number of threads per block. The indices of this grid are used to add values to the <code class="docutils literal notranslate"><span class="pre">out</span></code> array. The indices can be found using <code class="docutils literal notranslate"><span class="pre">cuda.grid(1)</span></code> for a 1D grid.</p>
-<p>CUDA kernels are compiled using the <code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code> decorator.</p>
+<p>Kernels cannot explicitly return a value. Instead, all result data must be written to an array passed to the function (e.g., called <code class="docutils literal notranslate"><span class="pre">out</span></code>). This array can then be transferred back to the CPU.</p>
+<p>Kernels work over a grid of threads. This grid needs to be defined in terms of the number of blocks in the grid and the number of threads per block. The indices of this grid are used to add values to the <code class="docutils literal notranslate"><span class="pre">out</span></code> array. The indices can be found using <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda-reference/kernel.html#numba.cuda.grid"><code class="docutils literal notranslate"><span class="pre">cuda.grid()</span></code></a>.</p>
+<p>CUDA kernels are compiled using the <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda-reference/kernel.html#numba.cuda.jit"><code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code></a> decorator.</p>
 <p><em>Note, <code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code> is different to <code class="docutils literal notranslate"><span class="pre">numba.jit</span></code>, which is for CPUs.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -482,7 +482,8 @@
 </div>
 </div>
 </div>
-<p>This should return a message similar to: &lt;Managed Device 0&gt;.</p>
+<p>This should return a message similar to:<br />
+&lt;Managed Device 0&gt;.</p>
 <p>You can also run the bash command <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> within the IPython cell:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -528,8 +529,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># n = 4096</span>
-<span class="c1"># x = np.arange(n).astype(np.int32) # [0...4095] on the host</span>
-<span class="c1"># y = np.ones_like(x)               # [1...1] on the host</span>
+<span class="c1"># x = np.arange(n).astype(np.int32) # [0...4095] on the host (CPU)</span>
+<span class="c1"># y = np.ones_like(x)               # [1...1] on the host (CPU)</span>
 </pre></div>
 </div>
 </div>
@@ -546,6 +547,8 @@
 </div>
 <p>Now, we <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/cuda/kernels.html#choosing-the-block-size">choose the block size</a>, by defining how many blocks are in the grid and how many threads are in each of those blocks.</p>
 <p>These two numbers multipled together is the size of the grid (for our 1D example).</p>
+<p><img alt="cuda_grid.png" src="_images/cuda_grid.png" /></p>
+<p><em><a class="reference external" href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">Image source</a></em></p>
 <p>Some rules of thumb are:</p>
 <ul class="simple">
 <li><p>Blocks per grid should be a multiple of 32.</p></li>
@@ -637,7 +640,19 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">)</span>
 <span class="n">y_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
 <span class="n">z_cpu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_cpu</span><span class="p">,</span> <span class="n">y_cpu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.1 ms ± 124 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -654,6 +669,13 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x_gpu = cp.random.rand(1_000, 1_000)</span>
 <span class="c1"># y_gpu = cp.random.rand(1_000, 1_000)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %%timeit</span>
 <span class="c1"># z_gpu = cp.dot(x_gpu, y_gpu)</span>
 </pre></div>
 </div>
@@ -662,14 +684,14 @@
 <p>You can move arrays between the CPU and GPU as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># z_cpu = cp.asnumpy(z_gpu)  # from gpu to cpu</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># z_gpu = cp.asarray(z_cpu)  # from cpu to gpu</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># z_gpu = cp.asarray(z_cpu)  # from cpu to gpu</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># z_cpu = cp.asnumpy(z_gpu)  # from gpu to cpu</span>
 </pre></div>
 </div>
 </div>
@@ -700,7 +722,7 @@
 <p class="admonition-title">Key Points</p>
 <ul class="simple">
 <li><p>Use Numba to write custom code for CUDA GPUs.</p></li>
-<li><p>Use RAPIDS libraries for move your data science code to GPUs.</p></li>
+<li><p>Use the RAPIDS libraries for data science code on GPUs.</p></li>
 </ul>
 </div>
 </div>
