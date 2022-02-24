@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import dask.array as da
 from dask_mpi import initialize
 from dask.distributed import Client, performance_report

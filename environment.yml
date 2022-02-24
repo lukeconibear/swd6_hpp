@@ -346,4 +346,3 @@ dependencies:
     - tomli==1.2.3
     - wrapt==1.13.3
     - yarl==1.7.2
-prefix: /home/earlacoa/miniconda3/envs/swd6_hpp
