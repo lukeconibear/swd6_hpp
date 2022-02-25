@@ -57,7 +57,7 @@ def main():
         number_processes=1,
         number_jobs=8,
         walltime="01:00:00",
-        memory=24,
+        memory=48,
     )
 
     print("Main processing ...")

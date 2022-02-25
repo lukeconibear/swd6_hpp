@@ -2,7 +2,7 @@
 #$ -cwd -V
 #$ -l h_rt=01:00:00
 #$ -pe smp 8
-#$ -l h_vmem=24G
+#$ -l h_vmem=48G
 
 module load intel openmpi
 
