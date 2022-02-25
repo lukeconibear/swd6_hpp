@@ -14,14 +14,16 @@ In this workshop, we covered:
     - [x] _See whether there is an algorithm or library that already optimally solves your problem e.g., faster sorting algorithms_.
 3. [x] Improve the execution time of Python code using:  
     - [x] Vectorisation
-        - [x] _Make use of broadcasting and create your own vectorised functions e.g., with [NumPy](https://numpy.org/doc/stable/reference/ufuncs.html) ufuncs._
+        - [x] _Take advantage of broadcasting for different shaped arrays._
+        - [x] _Use vectorised functions where you can e.g., [NumPy ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html)._
     - [x] Compilers
-        - [x] _Speed up customs functions e.g., with [Numba](http://numba.pydata.org/) `@njit`._
+        - [x] _Speed up numerical functions with the [Numba](http://numba.pydata.org/) `@njit` (nopython) compiler._
     - [x] Parallelisation
-        - [x] _Distribute work across a single machine or cores on a high-performance computer e.g., with [Dask](https://docs.dask.org/en/latest/) and [Ray](https://www.ray.io/)._
+        - [x] _Use [Dask](https://docs.dask.org/en/latest/) or [Ray](https://www.ray.io/) to parallelise your numerical work._
+        - [x] _Test locally (single machine) first before moving to a distributed machine (high-performance computer), ensuring that the code is parallelising correctly._
+        - [x] _Use diagnostics to understand your parallel code (e.g., Dask's dashboard, `qacct`)._
     - [x] GPUs  
-        - [x] _Offload functions to the GPU e.g., with [CUDA and Numba](https://developer.nvidia.com/how-to-cuda-python)_.
-        - [x] _Accelerate data science workloads e.g., with [RAPIDS](https://developer.nvidia.com/rapids)._
-        - [x] _...[JAX](https://jax.readthedocs.io/en/latest/index.html)..._
+        - [x] _Use [CUDA/Numba](https://developer.nvidia.com/how-to-cuda-python), [RAPIDS](https://developer.nvidia.com/rapids), and [JAX](https://jax.readthedocs.io/en/latest/index.html) to write custom data science code for CUDA GPUs._
 4. [x] Understand when to use each technique
-    - [x] ...
+    - [x] _Try out, explore, and practise with these options for yourself._
+    - [x] _Read the documentation for more information on things you're interested in._

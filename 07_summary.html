@@ -266,31 +266,33 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="contains-task-list simple">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Vectorisation</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Make use of broadcasting and create your own vectorised functions e.g., with <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy</a> ufuncs.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Take advantage of broadcasting for different shaped arrays.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Use vectorised functions where you can e.g., <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy ufuncs</a>.</em></p></li>
 </ul>
 </li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Compilers</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Speed up customs functions e.g., with <a class="reference external" href="http://numba.pydata.org/">Numba</a> <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code>.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Speed up numerical functions with the <a class="reference external" href="http://numba.pydata.org/">Numba</a> <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code> (nopython) compiler.</em></p></li>
 </ul>
 </li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Parallelisation</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Distribute work across a single machine or cores on a high-performance computer e.g., with <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a> and <a class="reference external" href="https://www.ray.io/">Ray</a>.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Use <a class="reference external" href="https://docs.dask.org/en/latest/">Dask</a> or <a class="reference external" href="https://www.ray.io/">Ray</a> to parallelise your numerical work.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Test locally (single machine) first before moving to a distributed machine (high-performance computer), ensuring that the code is parallelising correctly.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Use diagnostics to understand your parallel code (e.g., Dask’s dashboard, <code class="docutils literal notranslate"><span class="pre">qacct</span></code>).</em></p></li>
 </ul>
 </li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GPUs</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Offload functions to the GPU e.g., with <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA and Numba</a></em>.</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Accelerate data science workloads e.g., with <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a>.</em></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>…<a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a>…</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Use <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA/Numba</a>, <a class="reference external" href="https://developer.nvidia.com/rapids">RAPIDS</a>, and <a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">JAX</a> to write custom data science code for CUDA GPUs.</em></p></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Understand when to use each technique</p>
 <ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> …</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Try out, explore, and practise with these options for yourself.</em></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> <em>Read the documentation for more information on things you’re interested in.</em></p></li>
 </ul>
 </li>
 </ol>
