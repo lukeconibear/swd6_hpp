@@ -10,6 +10,7 @@ dependencies:
   - argon2-cffi=21.3.0=pyhd8ed1ab_0
   - argon2-cffi-bindings=21.2.0=py39h3811e60_1
   - asttokens=2.0.5=pyhd8ed1ab_0
+  - atk-1.0=2.36.0=h3371d22_4
   - attrs=21.4.0=pyhd8ed1ab_0
   - babel=2.9.1=pyh44b312d_0
   - backcall=0.2.0=pyh9f0ad1d_0
@@ -22,6 +23,7 @@ dependencies:
   - brotlipy=0.7.0=py39h3811e60_1003
   - bzip2=1.0.8=h7f98852_4
   - ca-certificates=2021.10.8=ha878542_0
+  - cairo=1.16.0=ha00ac49_1009
   - certifi=2021.10.8=py39hf3d152e_1
   - cffi=1.15.0=py39h4bc2ebd_0
   - charset-normalizer=2.0.12=pyhd8ed1ab_0
@@ -48,14 +50,30 @@ dependencies:
   - eliot-tree=18.1.1=py_0
   - entrypoints=0.4=pyhd8ed1ab_0
   - executing=0.8.2=pyhd8ed1ab_0
+  - expat=2.4.6=h27087fc_0
   - fastrlock=0.8=py39he80948d_1
   - flit-core=3.7.1=pyhd8ed1ab_0
+  - font-ttf-dejavu-sans-mono=2.37=hab24e00_0
+  - font-ttf-inconsolata=3.000=h77eed37_0
+  - font-ttf-source-code-pro=2.038=h77eed37_0
+  - font-ttf-ubuntu=0.83=hab24e00_0
+  - fontconfig=2.13.96=ha180cfb_0
+  - fonts-conda-ecosystem=1=0
+  - fonts-conda-forge=1=0
   - freetype=2.10.4=h0708190_1
+  - fribidi=1.0.10=h36c2ea0_0
   - fsspec=2022.2.0=pyhd8ed1ab_0
+  - gdk-pixbuf=2.42.6=h04a7f16_0
+  - gettext=0.19.8.1=h73d1719_1008
   - giflib=5.2.1=h36c2ea0_2
   - gitdb=4.0.9=pyhd8ed1ab_0
   - gitpython=3.1.27=pyhd8ed1ab_0
+  - graphite2=1.3.13=h58526e2_1001
+  - graphviz=2.50.0=h8e749b2_2
   - greenlet=1.1.2=py39he80948d_1
+  - gtk2=2.24.33=h90689f9_2
+  - gts=0.7.6=h64030ff_2
+  - harfbuzz=3.4.0=hb4a5f5f_0
   - heapdict=1.0.1=py_0
   - icu=69.1=h9c3ff4c_0
   - idna=3.3=pyhd8ed1ab_0
@@ -97,22 +115,28 @@ dependencies:
   - libdeflate=1.10=h7f98852_0
   - libffi=3.4.2=h7f98852_5
   - libgcc-ng=11.2.0=h1d223b6_12
+  - libgd=2.3.3=h3cfcdeb_1
   - libgfortran-ng=11.2.0=h69a702a_12
   - libgfortran5=11.2.0=h5c6108e_12
+  - libglib=2.70.2=h174f98d_4
   - libgomp=11.2.0=h1d223b6_12
+  - libiconv=1.16=h516909a_0
   - liblapack=3.9.0=13_linux64_openblas
   - libllvm11=11.1.0=hf817b99_3
   - libnsl=2.0.0=h7f98852_0
   - libopenblas=0.3.18=pthreads_h8fe5266_0
   - libpng=1.6.37=h21135ba_2
+  - librsvg=2.52.5=h0a9e6e8_2
   - libsodium=1.0.18=h36c2ea0_1
   - libstdcxx-ng=11.2.0=he4da1e4_12
   - libtiff=4.3.0=h542a066_3
+  - libtool=2.4.6=h9c3ff4c_1008
   - libuuid=2.32.1=h7f98852_1000
   - libuv=1.43.0=h7f98852_0
   - libwebp=1.2.2=h3452ae3_0
   - libwebp-base=1.2.2=h7f98852_1
   - libxcb=1.13=h7f98852_1004
+  - libxml2=2.9.12=h885dcf4_1
   - libzlib=1.2.11=h36c2ea0_1013
   - linkify-it-py=1.0.3=pyhd8ed1ab_0
   - llvmlite=0.38.0=py39h1bbdace_0
@@ -147,13 +171,16 @@ dependencies:
   - pandas=1.4.1=py39hde0f152_0
   - pandoc=2.17.1.1=ha770c72_0
   - pandocfilters=1.5.0=pyhd8ed1ab_0
+  - pango=1.50.3=h9967ed3_0
   - parso=0.8.3=pyhd8ed1ab_0
   - partd=1.2.0=pyhd8ed1ab_0
   - pathspec=0.9.0=pyhd8ed1ab_0
+  - pcre=8.45=h9c3ff4c_0
   - pexpect=4.8.0=pyh9f0ad1d_2
   - pickleshare=0.7.5=py_1003
   - pillow=9.0.1=py39hae2aec6_2
   - pip=22.0.3=pyhd8ed1ab_0
+  - pixman=0.40.0=h36c2ea0_0
   - platformdirs=2.5.1=pyhd8ed1ab_0
   - prometheus_client=0.13.1=pyhd8ed1ab_0
   - prompt-toolkit=3.0.27=pyha770c72_0
@@ -172,6 +199,7 @@ dependencies:
   - pysocks=1.7.1=py39hf3d152e_4
   - python=3.9.10=hc74c709_2_cpython
   - python-dateutil=2.8.2=pyhd8ed1ab_0
+  - python-graphviz=0.19.1=pyhaef67bd_0
   - python_abi=3.9=2_cp39
   - pytz=2021.3=pyhd8ed1ab_0
   - pyyaml=6.0=py39h3811e60_3
@@ -228,8 +256,17 @@ dependencies:
   - wheel=0.37.1=pyhd8ed1ab_0
   - widgetsnbextension=3.5.2=py39hf3d152e_1
   - xarray=0.21.1=pyhd8ed1ab_0
+  - xorg-kbproto=1.0.7=h7f98852_1002
+  - xorg-libice=1.0.10=h7f98852_0
+  - xorg-libsm=1.2.3=hd9c2040_1000
+  - xorg-libx11=1.7.2=h7f98852_0
   - xorg-libxau=1.0.9=h7f98852_0
   - xorg-libxdmcp=1.1.3=h7f98852_0
+  - xorg-libxext=1.3.4=h7f98852_1
+  - xorg-libxrender=0.9.10=h7f98852_1003
+  - xorg-renderproto=0.11.1=h7f98852_1002
+  - xorg-xextproto=7.3.0=h7f98852_1002
+  - xorg-xproto=7.0.31=h7f98852_1007
   - xz=5.2.5=h516909a_1
   - yaml=0.2.5=h7f98852_2
   - zeromq=4.3.4=h9c3ff4c_1
@@ -262,7 +299,6 @@ dependencies:
     - protobuf==3.19.4
     - pyinstrument==4.1.1
     - pynvml==11.4.1
-    - python-graphviz==0.19.1
     - ray==1.10.0
     - redis==4.1.4
     - scipy==1.8.0
