@@ -319,8 +319,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -442,8 +442,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -530,7 +530,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>179 ms ± 97 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>229 ms ± 5.72 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -553,13 +553,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>149 ms ± 119 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>152 ms ± 2.22 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
 </div>
-<p><em>Note, here we used <code class="docutils literal notranslate"><span class="pre">njit</span></code> as this automates the parallelisation process.</em></p>
-<p><em>This is in contrast to <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> where manual effort is required for parallelisation.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here we used <code class="docutils literal notranslate"><span class="pre">njit</span></code> as this automates the parallelisation process.</p>
+<p>This is in contrast to <code class="docutils literal notranslate"><span class="pre">vectorize</span></code> where manual effort is required for parallelisation.</p>
+</div>
 <div class="section" id="vectorize-for-gpus">
 <h3><code class="docutils literal notranslate"><span class="pre">vectorize</span></code> for GPUs<a class="headerlink" href="#vectorize-for-gpus" title="Permalink to this headline">¶</a></h3>
 <p>Numba also works on <a class="reference external" href="https://developer.nvidia.com/how-to-cuda-python">CUDA</a> GPUs using <a class="reference external" href="https://numba.pydata.org/numba-doc/latest/user/vectorize.html"><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></a> or <a class="reference external" href="https://numba.readthedocs.io/en/stable/cuda/kernels.html"><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></a>.</p>
@@ -567,8 +570,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>This adds additional overhead due to moving data to and from GPUs (<a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda/memory.html">memory management</a>).</p>
 <p>Similar to our examples in the compiler lesson, we need to specify the types and target in the signature (i.e., the decorator arguments).</p>
 <p>Here, the types are specificed slightly differently i.e., output types(input types).</p>
-<p><em>Note, not all NumPy code will work on the GPU (<a class="reference external" href="https://numba.pydata.org/numba-doc/latest/reference/numpysupported.html">supported</a>). In the following example, we will need to use the <code class="docutils literal notranslate"><span class="pre">math</span></code> library instead.</em></p>
-<p>For example:</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Not all NumPy code will work on the GPU. In the following example, we will need to use the <code class="docutils literal notranslate"><span class="pre">math</span></code> library instead.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -609,7 +614,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Kernels cannot explicitly return a value. Instead, all result data must be written to an array passed to the function (e.g., called <code class="docutils literal notranslate"><span class="pre">out</span></code>). This array can then be transferred back to the CPU.</p>
 <p>Kernels work over a grid of threads. This grid needs to be defined in terms of the number of blocks in the grid and the number of threads per block. The indices of this grid are used to add values to the <code class="docutils literal notranslate"><span class="pre">out</span></code> array. The indices can be found using <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda-reference/kernel.html#numba.cuda.grid"><code class="docutils literal notranslate"><span class="pre">cuda.grid()</span></code></a>.</p>
 <p>CUDA kernels are compiled using the <a class="reference external" href="https://numba.pydata.org/numba-doc/dev/cuda-reference/kernel.html#numba.cuda.jit"><code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code></a> decorator.</p>
-<p><em>Note, <code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code> is different to <code class="docutils literal notranslate"><span class="pre">numba.jit</span></code>, which is for CPUs.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">numba.cuda.jit</span></code> is different to <code class="docutils literal notranslate"><span class="pre">numba.jit</span></code>, which is for CPUs.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from numba import cuda</span>
@@ -794,7 +802,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.1 ms ± 80.6 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.8 ms ± 1.32 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -987,7 +995,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>605 ms ± 1.89 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>486 ms ± 13.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -999,7 +1007,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>568 ms ± 1.05 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>399 ms ± 4.83 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1027,7 +1035,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>567 ms ± 997 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>420 ms ± 10.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1068,7 +1076,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.48 ms ± 5.21 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.29 ms ± 60.6 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -1089,7 +1097,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.8 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.3 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1103,7 +1111,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>881 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>696 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1153,7 +1161,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.03 ms ± 2.16 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.94 ms ± 38.9 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -1174,7 +1182,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>321 µs ± 1.88 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>677 µs ± 17.9 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1196,7 +1204,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.6 µs ± 27.9 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.8 µs ± 559 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1204,9 +1212,20 @@ const thebe_selector_output = ".output, .cell_output"
 <p>There is lots more useful information in the <a class="reference external" href="https://jax.readthedocs.io/en/latest/index.html">documentation</a>, such as <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax-101/index.html">a range of tutorials</a>.</p>
 </div>
 </div>
-<div class="section" id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-exercise-1 admonition">
+<p class="admonition-title">Exercise 1</p>
 <p>…</p>
+</div>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>…</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>…</p>
+</div>
 </div>
 <div class="section" id="key-points">
 <h2>Key Points<a class="headerlink" href="#key-points" title="Permalink to this headline">¶</a></h2>

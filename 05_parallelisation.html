@@ -400,8 +400,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -609,8 +609,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise">
-   Exercise
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -718,7 +718,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p><img alt="dask-task-graphs.svg" src="_images/dask-task-graphs.svg" /></p>
 <p><em><a class="reference external" href="https://docs.dask.org/en/stable/graphs.html">Image source</a></em></p>
 <p>These task graphs are executed by a <a class="reference external" href="https://docs.dask.org/en/stable/scheduling.html">scheduler</a>.</p>
-<p><em>Note, this is separate to <a class="reference external" href="https://arcdocs.leeds.ac.uk/usage/start.html">ARC’s scheduler</a>.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is separate to the HPC’s scheduler.</p>
+</div>
 <p>The resources used by this scheduler are managed by a cluster.</p>
 <p>There are two main types of Dask scheduler which can <a class="reference external" href="https://docs.dask.org/en/stable/deploying.html">deploy jobs</a>:</p>
 <ul class="simple">
@@ -766,7 +769,7 @@ const thebe_selector_output = ".output, .cell_output"
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-38938d98-9669-11ec-9052-00224846c28c</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-e22f294e-998b-11ec-9121-000d3af6c2e7</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -795,7 +798,7 @@ const thebe_selector_output = ".output, .cell_output"
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">48df2602</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">1cad6eff</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -810,7 +813,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <strong>Total threads:</strong> 2
                 </td>
                 <td style="text-align: left;">
-                    <strong>Total memory:</strong> 7.77 GiB
+                    <strong>Total memory:</strong> 6.78 GiB
                 </td>
             </tr>
 
@@ -832,11 +835,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-e1af3716-cd08-45c3-b0bc-99caa303548e</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-e0bdc2f0-1ee8-4ee6-a795-d390aa55b5eb</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:33023
+                        <strong>Comm:</strong> tcp://127.0.0.1:35081
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 2
@@ -855,7 +858,7 @@ const thebe_selector_output = ".output, .cell_output"
                         <strong>Started:</strong> Just now
                     </td>
                     <td style="text-align: left;">
-                        <strong>Total memory:</strong> 7.77 GiB
+                        <strong>Total memory:</strong> 6.78 GiB
                     </td>
                 </tr>
             </table>
@@ -878,7 +881,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42883
+                            <strong>Comm: </strong> tcp://127.0.0.1:46471
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -886,21 +889,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40885/status" target="_blank">http://127.0.0.1:40885/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44847/status" target="_blank">http://127.0.0.1:44847/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 3.88 GiB
+                            <strong>Memory: </strong> 3.39 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41771
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43815
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-gjozqsey
+                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-knt3gn6x
                         </td>
                     </tr>
 
@@ -923,7 +926,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:46779
+                            <strong>Comm: </strong> tcp://127.0.0.1:44405
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -931,21 +934,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40845/status" target="_blank">http://127.0.0.1:40845/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43869/status" target="_blank">http://127.0.0.1:43869/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 3.88 GiB
+                            <strong>Memory: </strong> 3.39 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:42823
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43697
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-jpdhb96f
+                            <strong>Local directory: </strong> /home/runner/work/swd6_hpp/swd6_hpp/docs/dask-worker-space/worker-1nukel41
                         </td>
                     </tr>
 
@@ -975,7 +978,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">threads_per_worker</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>Note (important!), always need to close down the client and cluster at the end:</em></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Always close down the client and cluster at the end.</p>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -1110,7 +1116,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.333945 to fit
 </pre></div>
 </div>
-<img alt="_images/05_parallelisation_23_1.png" src="_images/05_parallelisation_23_1.png" />
+<img alt="_images/05_parallelisation_26_1.png" src="_images/05_parallelisation_26_1.png" />
 </div>
 </div>
 <p>These can often be too large for the Jupyter cell.</p>
@@ -1174,7 +1180,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Shows the CPU percentage use (also per worker).</p></li>
 <li><p>Shows the memory percentage use (also per worker).</p></li>
 </ul>
-<p><em>Remember, this is Dask’s view of the world, so it may be different to the view from your laptop or HPC.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember, this is Dask’s view of the world, so it may be different to the view from your laptop or HPC.</p>
+</div>
 <p>There is lots of other useful information, such as (<a class="reference external" href="https://www.youtube.com/watch?v=N_GqzcuGLCY">video demonstration</a>):</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://distributed.dask.org/en/stable/diagnosing-performance.html#statistical-profiling">Profiler</a></p>
@@ -1203,6 +1212,77 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>distributed.nanny - WARNING - Restarting worker
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">result</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/dask/base.py:288,</span> in <span class="ni">DaskMethodsMixin.compute</span><span class="nt">(self, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span> <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span>     <span class="sd">&quot;&quot;&quot;Compute this dask collection</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span><span class="sd">     This turns a lazy Dask collection into its in-memory equivalent.</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span><span class="sd">     dask.base.compute</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="p">(</span><span class="n">result</span><span class="p">,)</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">traverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/dask/base.py:570,</span> in <span class="ni">compute</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">567</span>     <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">__dask_keys__</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span>     <span class="n">postcomputes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">__dask_postcompute__</span><span class="p">())</span>
+<span class="ne">--&gt; </span><span class="mi">570</span> <span class="n">results</span> <span class="o">=</span> <span class="n">schedule</span><span class="p">(</span><span class="n">dsk</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nn">    571 return repack([f(r, *a) for r, (f, a)</span> in <span class="ni">zip</span><span class="nt">(results, postcomputes)])</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/distributed/client.py:2693,</span> in <span class="ni">Client.get</span><span class="nt">(self, dsk, keys, workers, allow_other_workers, resources, sync, asynchronous, direct, retries, priority, fifo_timeout, actors, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2691</span>         <span class="n">should_rejoin</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">   </span><span class="mi">2692</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2693</span>     <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">packed</span><span class="p">,</span> <span class="n">asynchronous</span><span class="o">=</span><span class="n">asynchronous</span><span class="p">,</span> <span class="n">direct</span><span class="o">=</span><span class="n">direct</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2694</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2695</span>     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">futures</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/distributed/client.py:1969,</span> in <span class="ni">Client.gather</span><span class="nt">(self, futures, errors, direct, asynchronous)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1967</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1968</span>     <span class="n">local_worker</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1969</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1970</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_gather</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1971</span>     <span class="n">futures</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1972</span>     <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1973</span>     <span class="n">direct</span><span class="o">=</span><span class="n">direct</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1974</span>     <span class="n">local_worker</span><span class="o">=</span><span class="n">local_worker</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1975</span>     <span class="n">asynchronous</span><span class="o">=</span><span class="n">asynchronous</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1976</span> <span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/distributed/client.py:865,</span> in <span class="ni">Client.sync</span><span class="nt">(self, func, asynchronous, callback_timeout, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span>     <span class="k">return</span> <span class="n">future</span>
+<span class="g g-Whitespace">    </span><span class="mi">864</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">865</span>     <span class="k">return</span> <span class="n">sync</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">866</span>         <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">callback_timeout</span><span class="o">=</span><span class="n">callback_timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">867</span>     <span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/site-packages/distributed/utils.py:324,</span> in <span class="ni">sync</span><span class="nt">(loop, func, callback_timeout, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span>     <span class="k">while</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">324</span>         <span class="n">e</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span> <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>     <span class="n">typ</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/threading.py:574,</span> in <span class="ni">Event.wait</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="n">signaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flag</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">signaled</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">574</span>     <span class="n">signaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cond</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span> <span class="k">return</span> <span class="n">signaled</span>
+
+<span class="nn">File /usr/share/miniconda/envs/swd6_hpp/lib/python3.9/threading.py:316,</span> in <span class="ni">Condition.wait</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>     <span class="k">if</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">316</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -1248,53 +1328,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>All workers were full with numerical tasks (i.e., no white/red blocks).</p></li>
 <li><p>This utilises the CPU cores well.</p></li>
 <li><p>Also, the CPU percentage for the workers increased to ~100 % during the computation.</p></li>
-</ul>
-</div>
-<div class="admonition-exercise admonition">
-<p class="admonition-title">Exercise</p>
-<p>Which is of the 3 examples below is most efficient and why?</p>
-</div>
-<div class="dropdown admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">%%time</span></code>.</p>
-</div>
-<p><strong>Example 1</strong></p>
-<p>Many, small chunks</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,))</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Example 2</strong></p>
-<p>Fewer, large chunks</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">100_000</span><span class="p">,))</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Example 3</strong></p>
-<p>Use NumPy</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="dropdown admonition">
-<p class="admonition-title">Solution</p>
-<ul class="simple">
-<li><p>Dask introduces overhead to parallelise work (i.e., the scheduler and client).</p></li>
-<li><p>Hence, Dask is inefficient (i.e., the workers are under-utilised) when doing lots of very small computations.</p></li>
-<li><p>Consider using fewer, larger chunks to reduce this overhead.</p></li>
-<li><p>Consider if parallelisation is really needed.</p></li>
 </ul>
 </div>
 <p>If you want a shareable report of this interactive dashboard, you can use the <a class="reference external" href="http://distributed.dask.org/en/latest/diagnosing-performance.html#performance-reports">performance report</a> context manager.</p>
@@ -1434,7 +1467,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><a class="reference external" href="https://docs.dask.org/en/stable/diagnostics-local.html#dask.diagnostics.CacheProfiler"><code class="docutils literal notranslate"><span class="pre">CacheProfiler()</span></code></a> for scheduler cache.</p></li>
 </ul>
 <p>When you’re happy that everything is correct on a single machine, you can move over to distributed.</p>
-<p><strong>Remember</strong>, close down the local client and cluster.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Remember to close down the local client and cluster when you’re finished.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>   
@@ -1515,7 +1551,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="batch-job">
 <h5><strong>Batch job</strong><a class="headerlink" href="#batch-job" title="Permalink to this headline">¶</a></h5>
 <p>First, setup the resource request from the HPC scheduler.</p>
-<p><em>Remember, this is separate to the Dask scheduler.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember, this is separate to the Dask scheduler.</p>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
 <span class="c1">#$ -cwd -V</span>
 <span class="c1">#$ -l h_rt=01:00:00</span>
@@ -2130,7 +2169,10 @@ E0225 15:57:14.715875414 1690940 fork_posix.cc:70]           Fork support is onl
 </div>
 </div>
 </div>
-<p>When finished, <strong>remember</strong> to shut down the Ray connection.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>When finished, remember to shut down the Ray connection.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ray</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
@@ -2151,13 +2193,56 @@ E0225 15:57:14.715875414 1690940 fork_posix.cc:70]           Fork support is onl
 </ul>
 </div>
 </div>
-<div class="section" id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
-<p>…</p>
-<p>get them to check the efficiency of a job</p>
-<p>…</p>
-<div class="admonition-question admonition">
-<p class="admonition-title">Question</p>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-exercise-1 admonition">
+<p class="admonition-title">Exercise 1</p>
+<p>Which is of the 3 examples below is most efficient and why?</p>
+</div>
+<p><strong>Example 1</strong></p>
+<p>Many, small chunks.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Example 2</strong></p>
+<p>Fewer, large chunks.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">100_000</span><span class="p">,))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Example 3</strong></p>
+<p>Use NumPy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10_000_000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">%%timeit</span></code>.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Dask introduces overhead to parallelise work (i.e., the scheduler and client).<br />
+Hence, Dask is inefficient (i.e., the workers are under-utilised) when doing lots of very small computations.<br />
+Consider using fewer, larger chunks to reduce this overhead.<br />
+Consider if parallelisation is really needed.</p>
+<p>For this example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">%%timeit</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">da.random.random(10_000_000,</span> <span class="pre">chunks=(1_000,))</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x.sum().compute()</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">12.4</span> <span class="pre">s</span> <span class="pre">±</span> <span class="pre">2.04</span> <span class="pre">s</span> <span class="pre">per</span> <span class="pre">loop</span> <span class="pre">(mean</span> <span class="pre">±</span> <span class="pre">std.</span> <span class="pre">dev.</span> <span class="pre">of</span> <span class="pre">7</span> <span class="pre">runs,</span> <span class="pre">1</span> <span class="pre">loop</span> <span class="pre">each)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">%%timeit</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">da.random.random(10_000_000,</span> <span class="pre">chunks=(100_000,))</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x.sum().compute()</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">129</span> <span class="pre">ms</span> <span class="pre">±</span> <span class="pre">4.96</span> <span class="pre">ms</span> <span class="pre">per</span> <span class="pre">loop</span> <span class="pre">(mean</span> <span class="pre">±</span> <span class="pre">std.</span> <span class="pre">dev.</span> <span class="pre">of</span> <span class="pre">7</span> <span class="pre">runs,</span> <span class="pre">10</span> <span class="pre">loops</span> <span class="pre">each)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">%%timeit</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.random.random(10_000_000)</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x.sum()</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">76.2</span> <span class="pre">ms</span> <span class="pre">±</span> <span class="pre">11.2</span> <span class="pre">ms</span> <span class="pre">per</span> <span class="pre">loop</span> <span class="pre">(mean</span> <span class="pre">±</span> <span class="pre">std.</span> <span class="pre">dev.</span> <span class="pre">of</span> <span class="pre">7</span> <span class="pre">runs,</span> <span class="pre">10</span> <span class="pre">loops</span> <span class="pre">each)</span></code></p>
+</div>
+<div class="admonition-exercise-2 admonition">
+<p class="admonition-title">Exercise 2</p>
 <p>How well did the job below use the HPC resources?</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qacct -j <span class="nv">3524073</span>
@@ -2210,7 +2295,7 @@ category     -U admiralty,feps-cpu,feps-gpu -l <span class="nv">env</span><span 
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">Solution</p>
-<p><code class="docutils literal notranslate"><span class="pre">qacct</span></code> tells us that:</p>
+<p><code class="docutils literal notranslate"><span class="pre">qacct</span> <span class="pre">-j</span> <span class="pre">JOBID</span></code> tells us that:</p>
 <p><code class="docutils literal notranslate"><span class="pre">slots</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">8</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">ru_wallclock</span> <span class="pre">21s</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">cpu</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">146.665s</span></code></p>
@@ -2218,7 +2303,75 @@ category     -U admiralty,feps-cpu,feps-gpu -l <span class="nv">env</span><span 
 <p><code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">*</span> <span class="pre">cpu</span> <span class="pre">/</span> <span class="pre">(ru_wallclock</span> <span class="pre">*</span> <span class="pre">slots)</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">*</span> <span class="pre">147</span> <span class="pre">/</span> <span class="pre">(21</span> <span class="pre">*</span> <span class="pre">8)</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">88</span> <span class="pre">%</span></code></p>
-<p>Not too bad.</p>
+<p>That’s good.</p>
+</div>
+<div class="admonition-exercise-3 admonition">
+<p class="admonition-title">Exercise 3</p>
+<p>What about how well did this job used the HPC resources?<br />
+What went wrong and what might fix it?</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qacct -j <span class="nv">3524046</span>
+<span class="o">==============================================================</span>
+qname        feps-cpu.q          
+hostname     d9s9b4.arc4.leeds.ac.uk
+group        EAR                 
+owner        earlacoa            
+project      feps-cpu            
+department   defaultdepartment   
+jobname      example_bodo_mpi_sge.bash
+jobnumber    <span class="m">3524046</span>             
+taskid       undefined
+account      sge                 
+priority     <span class="m">0</span>                   
+qsub_time    Thu Feb <span class="m">24</span> <span class="m">12</span>:34:54 <span class="m">2022</span>
+start_time   Thu Feb <span class="m">24</span> <span class="m">12</span>:35:08 <span class="m">2022</span>
+end_time     Thu Feb <span class="m">24</span> <span class="m">12</span>:37:14 <span class="m">2022</span>
+granted_pe   smp                 
+slots        <span class="m">8</span>                   
+failed       <span class="m">0</span>    
+exit_status  <span class="m">0</span>                   
+ru_wallclock 126s
+ru_utime     <span class="m">125</span>.250s
+ru_stime     <span class="m">6</span>.542s
+ru_maxrss    <span class="m">1</span>.689MB
+ru_ixrss     <span class="m">0</span>.000B
+ru_ismrss    <span class="m">0</span>.000B
+ru_idrss     <span class="m">0</span>.000B
+ru_isrss     <span class="m">0</span>.000B
+ru_minflt    <span class="m">758663</span>              
+ru_majflt    <span class="m">2</span>                   
+ru_nswap     <span class="m">0</span>                   
+ru_inblock   <span class="m">0</span>                   
+ru_oublock   <span class="m">80</span>                  
+ru_msgsnd    <span class="m">0</span>                   
+ru_msgrcv    <span class="m">0</span>                   
+ru_nsignals  <span class="m">0</span>                   
+ru_nvcsw     <span class="m">35039</span>               
+ru_nivcsw    <span class="m">30366</span>               
+cpu          <span class="m">131</span>.792s
+mem          <span class="m">102</span>.207GBs
+io           <span class="m">166</span>.212MB
+iow          <span class="m">0</span>.000s
+maxvmem      <span class="m">13</span>.432GB
+arid         undefined
+ar_sub_time  undefined
+category     -U admiralty,feps-cpu,feps-gpu -l <span class="nv">env</span><span class="o">=</span>centos7,h_rt<span class="o">=</span><span class="m">600</span>,h_vmem<span class="o">=</span>24G,node_type<span class="o">=</span>40core-192G,project<span class="o">=</span>feps-cpu -pe smp <span class="m">8</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p><code class="docutils literal notranslate"><span class="pre">qacct</span> <span class="pre">-j</span> <span class="pre">JOBID</span></code> tells us that:</p>
+<p><code class="docutils literal notranslate"><span class="pre">slots</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">8</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">ru_wallclock</span> <span class="pre">126s</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">cpu</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">131.792s</span></code></p>
+<p>Hence, the efficiency is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">*</span> <span class="pre">cpu</span> <span class="pre">/</span> <span class="pre">(ru_wallclock</span> <span class="pre">*</span> <span class="pre">slots)</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">*</span> <span class="pre">131</span> <span class="pre">/</span> <span class="pre">(126</span> <span class="pre">*</span> <span class="pre">8)</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">Efficiency</span> <span class="pre">=</span> <span class="pre">13</span> <span class="pre">%</span></code></p>
+<p>That’s very low.</p>
+<p>The likely cause of this low efficiency is that all of the work is being pinned to one process, instead of being distributed across all 8.</p>
+<p>(There are other ways to check this e.g., using <code class="docutils literal notranslate"><span class="pre">top</span></code> on the compute nodes, using <code class="docutils literal notranslate"><span class="pre">ps</span></code>.)</p>
+<p>One solution to try is to set an environment variable that stops processes being pinned (remember, we saw this earlier). To do this, add the following command to the submission bash script <code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">GOMP_CPU_AFFINITY</span></code>.</p>
 </div>
 </div>
 <div class="section" id="key-points">
