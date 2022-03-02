@@ -487,12 +487,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p><a class="reference external" href="https://colab.research.google.com/github/lukeconibear/swd6_hpp/blob/main/docs/06_GPUs.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you’re in COLAB or have a local CUDA GPU, you can follow along with this section (uncomment the code).</p>
+<p>If you’re in COLAB or have a local CUDA GPU, you can follow along with this section (i.e., uncomment the GPU code bits).</p>
 <p>For those in COLAB, ensure the session is using a GPU by going to: Runtime &gt; Change runtime type &gt; Hardware accelerator = GPU.</p>
 </div>
-<p>GPUs (Graphics Processing Units) are optimised for numerical operations, while CPUs (central processing units) perform general computation.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs (Graphics Processing Units)</a> are optimised for numerical operations, while <a class="reference external" href="https://en.wikipedia.org/wiki/Central_processing_unit">CPUs (central processing units)</a> perform general computation.</p>
+<p>Originally, GPUs handled computer graphics. However, they are now used to do a wide range of computations too. Hence, the term <a class="reference external" href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">General Purpose GPU (GPGPU)</a>.</p>
 <p>GPU hardware is designed for data parallelism, where high throughputs are achieved when the GPU is computing the same operations on many different elements at once.</p>
-<p>You could use other types of accelerators too, though we’re not going to cover those here.</p>
+<p>You could use other <a class="reference external" href="https://en.wikipedia.org/wiki/Hardware_acceleration">types of accelerators</a> too, though we’re not going to cover those here.</p>
 <div class="section" id="numba-for-cuda-gpus">
 <h2><a class="reference external" href="http://numba.pydata.org/numba-doc/latest/cuda/index.html">Numba for CUDA GPUs</a><a class="headerlink" href="#numba-for-cuda-gpus" title="Permalink to this headline">¶</a></h2>
 <p>Earlier we covered how Numba works on single CPUs with <a class="reference external" href="https://numba.readthedocs.io/en/stable/glossary.html#term-nopython-mode"><code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code></a> and multiple CPUs with <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
@@ -530,7 +531,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>229 ms ± 5.72 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>324 ms ± 5.54 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -553,7 +554,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>152 ms ± 2.22 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>155 ms ± 3.57 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -802,7 +803,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.8 ms ± 1.32 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.2 ms ± 430 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -995,7 +996,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>486 ms ± 13.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>241 ms ± 1.89 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1007,7 +1008,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>399 ms ± 4.83 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>230 ms ± 6.92 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1035,7 +1036,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>420 ms ± 10.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>222 ms ± 6.99 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1076,7 +1077,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.29 ms ± 60.6 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.95 ms ± 38.3 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1097,7 +1098,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.3 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1111,7 +1112,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>696 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.01 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1161,7 +1162,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.94 ms ± 38.9 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.41 ms ± 43.9 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1182,7 +1183,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>677 µs ± 17.9 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>485 µs ± 9.02 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1204,7 +1205,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.8 µs ± 559 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31.9 µs ± 848 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1216,15 +1217,61 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <div class="admonition-exercise-1 admonition">
 <p class="admonition-title">Exercise 1</p>
-<p>…</p>
-</div>
-<div class="dropdown admonition hint">
-<p class="admonition-title">Hint</p>
-<p>…</p>
+<p>In general, what kind of tasks are GPUs faster than CPUs for, and why?</p>
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">Solution</p>
-<p>…</p>
+<p>Generally, GPUs are faster than CPUs for numerical operations, because they were optimised for this purpose using data parallelism where the same computation is done across many elements at once.</p>
+</div>
+<div class="admonition-exercise-2 admonition">
+<p class="admonition-title">Exercise 2</p>
+<p>What Numba decorators can you use to offload a function to GPUs?</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code></p></li>
+</ul>
+</div>
+<div class="admonition-exercise-3 admonition">
+<p class="admonition-title">Exercise 3</p>
+<p>How would you vectorize the the following function for GPUs?</p>
+<p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">my_serial_function_for_gpu(x):</span></code><br />
+<code class="docutils literal notranslate">&#160;&#160;&#160; <span class="pre">return</span> <span class="pre">math.cos(x)</span> <span class="pre">**</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">math.sin(x)</span> <span class="pre">**</span> <span class="pre">2</span></code></p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>You could add the <code class="docutils literal notranslate"><span class="pre">&#64;vectorize</span></code> decorator with a signature to target CUDA.</p>
+<p>In the example below, the input and output types are specified as <code class="docutils literal notranslate"><span class="pre">float32</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;vectorize(['float32(float32)'],</span> <span class="pre">target='cuda')</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">my_serial_function_for_gpu(x):</span></code><br />
+<code class="docutils literal notranslate">&#160;&#160;&#160; <span class="pre">return</span> <span class="pre">math.cos(x)</span> <span class="pre">**</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">math.sin(x)</span> <span class="pre">**</span> <span class="pre">2</span></code></p>
+</div>
+<div class="admonition-exercise-4 admonition">
+<p class="admonition-title">Exercise 4</p>
+<p>What are ways you can check if your Python environment has access to a GPU?</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>You could use Numba via:</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">numba</span> <span class="pre">import</span> <span class="pre">cuda</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">print(cuda.gpus)</span></code></p>
+<p>Or in an IPython cell, you could use:</p>
+<p><code class="docutils literal notranslate"><span class="pre">!nvidia-smi</span></code></p>
+<p>There are other ways too. This is an important step to check.</p>
+</div>
+<div class="admonition-exercise-5 admonition">
+<p class="admonition-title">Exercise 5</p>
+<p>If you wanted to do NumPy style work on GPUs, could you use:</p>
+<ul class="simple">
+<li><p>cuPy</p></li>
+<li><p>JAX</p></li>
+</ul>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>You could use either cuPy or JAX for NumPy work on GPUs.</p>
 </div>
 </div>
 <div class="section" id="key-points">
